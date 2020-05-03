@@ -1,0 +1,672 @@
+html {
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style:none;
+  /*火狐下隐藏滚动条*/
+  overflow:-moz-scrollbars-none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  moz-user-select: -moz-none; 
+  -moz-user-select: none; 
+  -o-user-select:none; 
+  -khtml-user-select:none; 
+  -webkit-user-select:none; 
+  -ms-user-select:none; 
+  user-select:none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+#root{
+  width: 100%;
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* pages for frame */
+.page-root {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.page-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* pages active */
+.page-active {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  width: 100%;
+  height: 100%;
+
+  transition: opacity 3s;
+}
+
+.page-active-rel {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+
+.page-active-content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+/* widget for frame */
+.widget-root {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+.widget-view {
+  position: relative;
+  
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+/* widget active */
+.widget-active {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: auto
+}
+
+.widget-content {
+  width: 100%;
+  height: 100%;
+}
+
+.bar-line-y {
+width: 1px;
+height: 100%;
+background: rgb(44,45,47);
+}
+
+.avater {
+  border-radius: 50%;
+}
+
+.fit-content-flex-column {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.font-p12-main {
+width: fit-content;
+height: fit-content;
+font-size: 12px;
+color: #cca352;
+}
+
+.font-p12-sub {
+  width: fit-content;
+  height: fit-content;
+  font-size: 12px;
+  color: gainsboro;
+}
+
+.font-p14-sub {
+  width: fit-content;
+  height: fit-content;
+  font-size: 14px;
+  color: gainsboro;
+}
+
+.min-center-flex {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 内在波纹点击效果 */
+.click_in_ripple {
+  position: relative;
+  overflow: hidden; /* 隐藏溢出的径向渐变背景 */
+}
+
+/* 最优波纹 */
+.click_in_ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(0,0,0) 8%, transparent 8%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .4s, opacity .6s;
+}
+
+/* 设置初始状态 */
+.click_in_ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+/* 溢出波纹点击效果 */
+.click_out_ripple {
+  position: relative;
+}
+
+.click_out_ripple:focus{
+  outline: none;
+}
+
+.click_out_ripple:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -15px; /*扩大伪类元素4个方向各15px*/
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  pointer-events: none;
+  background-color: rgb(0,0,0);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  opacity: 0;
+  border-radius: inherit;
+  transition: all .3s;
+}
+
+/* 设置初始状态 */
+.click_out_ripple:active:after {
+  opacity: .2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0s;
+}
+
+.rotate {
+  -webkit-animation:myRotate 0.5s linear infinite;
+  animation:myRotate 0.5s linear infinite;
+}
+
+@-webkit-keyframes myRotate{
+  0%{ -webkit-transform: rotate(0deg);}
+  50%{ -webkit-transform: rotate(180deg);}
+  100%{ -webkit-transform: rotate(360deg);}
+}
+
+@keyframes myRotate{
+  0%{ -webkit-transform: rotate(0deg);}
+  50%{ -webkit-transform: rotate(180deg);}
+  100%{ -webkit-transform: rotate(360deg);}
+}
+
+.card-glass {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 30em;
+  border-radius: 0.3em;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 20%, 0.3) inset,
+  0 .5em 1em rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 1px hsla(0, 0%, 20%, 0.3);
+  background: hsla(0, 0%, 20%, 0.3);
+}
+
+.radius-glass {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 30em;
+  border-radius: 0.3em;
+  box-shadow: 0 0 0 1px hsla(0, 0%, 20%, 0.3) inset,
+  0 .5em 1em rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 1px hsla(0, 0%, 20%, 0.3);
+  background: hsla(0, 0%, 20%, 0.3);
+}
+
+.display-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.display-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.display-warp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-warp-start {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  text-align: center;
+}
+
+.display-warp-around {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end
+}
+
+.display-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.display-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.text-singleline {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.input-text-none {
+  color: #B0B0B0;
+  outline: medium;
+  border: none;
+  background: transparent
+}
+
+/* active切换动画样式 */
+.active-router-enter {
+  transform: translateX(100%);
+}
+
+.active-router-enter.active-router-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease;
+}
+
+.active-router-leave {
+  transform: translateX(0);
+}
+
+.active-router-leave.active-router-leave-active {
+  transform: translateX(100%);
+  transition: transform 300ms ease;
+}
+
+.active-router-appear {
+  opacity: 0.01;
+}
+
+.active-router-appear.active-router-appear-active {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+/* 通用动画样式 */
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+.iframe-game {
+  width: 100%;
+  height: 100%;
+  border-color: transparent;
+  overflow: hidden;
+}
+
+.pos-relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pos-absolute {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.size-fit {
+  width: fit-content;
+  height: fit-content;
+}
+
+.solid-fixed-maincolor {
+  width: 15.5%;
+  height: 26px;
+  background: '';
+  border-radius: 16px;
+  border: 1px solid #cca352;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #cca352;
+}
+
+select{
+	padding-left: 15px;
+	padding-right: 15px;
+
+	background: rgba(0, 0, 0, 0);
+
+	font-size: 12;
+	color: silver;
+	text-align: center;
+	
+	outline: none;
+	
+	border: 1px rgb(110, 134, 174) solid;
+	border-radius: 2px;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.background-hover {
+  background: rgba(0, 0, 0, 0);
+}
+
+.background-hover:hover {
+  background: rgba(200, 168, 100, 0.4);
+}
+
+.scale-max-hover {
+  transform: scale(1)
+}
+
+.scale-max-hover:hover {
+  transform: scale(1.026)
+}
+
+.scale-mmax-hover {
+  transform: scale(1)
+}
+
+.scale-mmax-hover:hover {
+  transform: scale(1.016)
+}
+
+.scale-hover {
+  transform: scale(1)
+}
+
+.scale-hover:hover {
+  transform: scale(1.08)
+}
+
+.border-hover {
+  border: '';
+}
+
+.border-hover:hover {
+  border: 1px solid #cca352;
+}
+
+.spin-90 {
+	transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+}
+
+.lottery-bull {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:18px;
+  height:18px;
+  font-size:10px;
+  color:white;
+  border-radius:100%
+}
+
+.modal-root {
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.jackpot-num {
+  font-size: 28px;
+  font-family: wxcH;
+  color: #cca352;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+}
+input[type="number"]{
+    -moz-appearance:textfield;
+}
+
+.spline-x-black {
+  width: 100%;
+  height: 12px;  
+  background: rgb(29,29,29) 
+}
+
+.spline-x-text {
+  width: 100%;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(29,29,29);
+  font-size: 14;
+  color: #cca352;
+}
+
+.common-input {
+  border-width: 0;
+  outline: none;
+  border-radius: 6px;
+  background: rgb(31,31,31);
+  font-size: 12px;
+  text-align: center;
+  color: rgb(204, 204, 204);
+}
+
+.common-spline {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+}
+
+.overflow-y {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.common-solid-input {
+  padding: 0px 12px 0px 12px;
+  text-align: left;
+  background: rgba(0, 0, 0, 0);
+  border-style: solid;
+  border-color: rgb(94,94,94);
+  border-width: 1px;
+  border-radius: 12px;
+  color: rgb(255,255,255);
+  font-size: 12px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* page frame css */
+.page-content-root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* toolbar 根视图 */
+.page-content-toolbar {
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  background: white;
+}
+
+/* toolbar 默认视图 */
+.page-content-toolbar-view {
+  width: 100%;
+  height: 100%;
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 16px;
+  color: black;
+  box-sizing: border-box;
+}
+
+/* toolbar 默认视图 元素 */
+.page-content-toolbar-ele {
+  width: 45px;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.page-content-view {
+  width: 100%;
+  height: 100%;
+  padding-top: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+}
