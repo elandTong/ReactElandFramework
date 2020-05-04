@@ -9,7 +9,7 @@ const _LANGUAGE = require('./assets/json/language.json')
 
 const _APP_ID = window._APP_ID ? window._APP_ID : 'ig'
 const _APP_NAME = window._APP_NAME ? window._APP_NAME : 'IG彩票'
-const _APP_VERSION = window._APP_VERSION ? window._APP_VERSION : 100
+const _APP_VERSION = window._APP_VERSION ? window._APP_VERSION : 101
 const _APP_DOMAIN = window._APP_DOMAIN ? window._APP_DOMAIN : '16898YH.COM'
 
 const _RELEASE = window._RELEASE_SERVER ? false : false
