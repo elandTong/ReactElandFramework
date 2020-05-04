@@ -1,6 +1,7 @@
 import React from 'react'
 import BaseWindow from '../router/BaseWindow'
 import Tool from '../tool/Tool'
+import { WindowPage } from '../router/Page'
 
 class Popup extends BaseWindow {
     static _path = '/popup'
@@ -196,46 +197,48 @@ class Popup extends BaseWindow {
 
     render() {
         return (
-            <div className={'pos-relative'} onClick={(e) => {
-                if (this.state.outClose) {
-                    this.close(e)
-                }
-            }}>
-                <div style={{
-                    position: 'absolute',
-                    width: this.state.width,
-                    height: this.state.height,
-                    top: this.state.pos.top,
-                    left: this.state.pos.left,
-                    transform: this.state.pos.translate
-                }} onClick={(e) => {
-                    e.stopPropagation()
+            <WindowPage>
+                <div className={'pos-relative'} onClick={(e) => {
+                    if (this.state.outClose) {
+                        this.close(e)
+                    }
                 }}>
-                    <div className={'pos-relative'}>
-                        <div style={{
-                            position: 'absolute',
-                            top: 0,
-                            left: 0,
-                            width: '100%',
-                            height: '100%'
-                        }}>
-                            {this.state.comp}
-                        </div>
-
-                        {this.state.angleClose === true ? (
+                    <div style={{
+                        position: 'absolute',
+                        width: this.state.width,
+                        height: this.state.height,
+                        top: this.state.pos.top,
+                        left: this.state.pos.left,
+                        transform: this.state.pos.translate
+                    }} onClick={(e) => {
+                        e.stopPropagation()
+                    }}>
+                        <div className={'pos-relative'}>
                             <div style={{
                                 position: 'absolute',
-                                top: -this.state.close.height,
-                                right: -this.state.close.height
-                            }} onClick={(e) => {
-                                this.close(e)
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%'
                             }}>
-                                <img src={require('../assets/res/icon/ic_close.png')} width={this.state.close.height} alt={''} />
+                                {this.state.comp}
                             </div>
-                        ) : (null)}
+
+                            {this.state.angleClose === true ? (
+                                <div style={{
+                                    position: 'absolute',
+                                    top: -this.state.close.height,
+                                    right: -this.state.close.height
+                                }} onClick={(e) => {
+                                    this.close(e)
+                                }}>
+                                    <img src={require('../assets/res/icon/ic_close.png')} width={this.state.close.height} alt={''} />
+                                </div>
+                            ) : (null)}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </WindowPage>
         )
     }
 }

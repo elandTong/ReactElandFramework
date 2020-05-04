@@ -1,9 +1,9 @@
 import React from 'react'
 import Config from '../config'
 import Tool from '../tool/Tool'
-import Toolbar from './Toolbar'
+import Toolbar from '../widget/Toolbar'
 
-class Page extends React.Component {
+class ActivePage extends React.Component {
     _opts = {
         toolbar: null,
         toolbarComp: null,
@@ -68,4 +68,23 @@ class Page extends React.Component {
     }
 }
 
-export default Page
+class WindowPage extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+        }
+    }
+
+    render() {
+        return (
+            <div className={'widget-content-view'} style={this.props.style}>
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
+export default ActivePage
+
+export { ActivePage, WindowPage }

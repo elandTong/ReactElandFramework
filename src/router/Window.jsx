@@ -24,8 +24,7 @@ class WindowRoot extends React.Component {
 
         return (
             <div className={'widget-active'} style={{
-                zIndex: this._opts.zIndex,
-                background: this._opts.background
+                zIndex: this._opts.zIndex, background: this._opts.background
             }}>
                 {this.props.children}
             </div>

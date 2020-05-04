@@ -1,6 +1,7 @@
 import React from 'react'
 import Config from '../config'
 import BaseWindow from '../router/BaseWindow'
+import { WindowPage } from '../router/Page'
 
 class Toast extends BaseWindow {
     static _path = '/toast'
@@ -41,13 +42,15 @@ class Toast extends BaseWindow {
         }
 
         return (
-            <div className={'display-center'} style={_style.root} onClick={(e) => {
-                this.close()
-            }}>
-                <div className={'display-center'} style={_style.cont} dangerouslySetInnerHTML={{
-                    __html: this.state.text
-                }} />
-            </div>
+            <WindowPage>
+                <div className={'display-center'} style={_style.root} onClick={(e) => {
+                    this.close()
+                }}>
+                    <div className={'display-center'} style={_style.cont} dangerouslySetInnerHTML={{
+                        __html: this.state.text
+                    }} />
+                </div>
+            </WindowPage>
         )
     }
 }

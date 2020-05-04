@@ -79,16 +79,13 @@ div {
   position: absolute;
   left: 0px;
   top: 0px;
-
   width: 100%;
   height: 100%;
-
   transition: opacity 3s;
 }
 
 .page-active-rel {
   position: relative;
-
   width: 100%;
   height: 100%;
 }
@@ -97,11 +94,56 @@ div {
   position: absolute;
   top: 0px;
   left: 0px;
-
   width: 100%;
   height: 100%;
-
   overflow: hidden;
+}
+
+/* page frame css */
+.page-content-root {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: rgba(0, 0, 0, 0);
+}
+
+/* toolbar 根视图 */
+.page-content-toolbar {
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  background: white;
+}
+
+/* toolbar 默认视图 */
+.page-content-toolbar-view {
+  width: 100%;
+  height: 100%;
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 16px;
+  color: black;
+  box-sizing: border-box;
+}
+
+/* toolbar 默认视图 元素 */
+.page-content-toolbar-ele {
+  width: 45px;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.page-content-view {
+  width: 100%;
+  height: 100%;
+  padding-top: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
 }
 
 /* widget for frame */
@@ -110,19 +152,15 @@ div {
   left: 0px;
   top: 0px;
   z-index: 2;
-
   width: 100%;
   height: 100%;
-
   pointer-events: none;
 }
 
 .widget-view {
   position: relative;
-  
   width: 100%;
   height: 100%;
-
   pointer-events: none;
 }
 
@@ -131,18 +169,24 @@ div {
   position: absolute;
   left: 0px;
   top: 0px;
-  
   width: 100%;
   height: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
-  pointer-events: auto
+  pointer-events: auto;
 }
 
 .widget-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.widget-content-view {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
 }
@@ -622,51 +666,4 @@ input[type="number"]{
   font-size: 12px;
   outline: none;
   box-sizing: border-box;
-}
-
-/* page frame css */
-.page-content-root {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background: rgba(0, 0, 0, 0);
-}
-
-/* toolbar 根视图 */
-.page-content-toolbar {
-  width: 100%;
-  height: 45px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 2;
-  background: white;
-}
-
-/* toolbar 默认视图 */
-.page-content-toolbar-view {
-  width: 100%;
-  height: 100%;
-  padding-left: 3px;
-  padding-right: 3px;
-  font-size: 16px;
-  color: black;
-  box-sizing: border-box;
-}
-
-/* toolbar 默认视图 元素 */
-.page-content-toolbar-ele {
-  width: 45px;
-  height: 100%;
-  border-radius: 50%;
-}
-
-.page-content-view {
-  width: 100%;
-  height: 100%;
-  padding-top: 45px;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 1;
 }

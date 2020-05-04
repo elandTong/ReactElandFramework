@@ -1,11 +1,15 @@
-import Testing from './testing'
+import('./testing').then(testing => {
+    window._ReactTesting = testing.default
+
+    console.error('import testing then', testing)
+})
 
 const _APITIPS = require('./assets/json/tipsmessage.json')
 const _LANGUAGE = require('./assets/json/language.json')
 
-const _APP_ID = window._APP_ID ? window._APP_ID : 'yinhe'
-const _APP_NAME = window._APP_NAME ? window._APP_NAME : '澳门银河'
-const _APP_VERSION = window._APP_VERSION ? window._APP_VERSION : 231
+const _APP_ID = window._APP_ID ? window._APP_ID : 'ig'
+const _APP_NAME = window._APP_NAME ? window._APP_NAME : 'IG彩票'
+const _APP_VERSION = window._APP_VERSION ? window._APP_VERSION : 100
 const _APP_DOMAIN = window._APP_DOMAIN ? window._APP_DOMAIN : '16898YH.COM'
 
 const _RELEASE = window._RELEASE_SERVER ? false : false
@@ -136,4 +140,3 @@ class Config {
 export default Config
 
 window._ReatConfig = Config
-window._ReactTesting = Testing

@@ -1,12 +1,13 @@
 import React from 'react';
+import ReactPullToRefresh from 'react-pull-to-refresh';
 import BaseActived from '../router/BaseActived';
+import { ActivePage } from '../router/Page';
 import Tool from '../tool/Tool';
 import MessageNotice from '../widget/MessageNotice';
 import Navbar from '../widget/Navbar';
-import Page from '../widget/Page';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import Popup from '../window/Popup';
-import Toast from '../window/Toast';
+import Login from './Login';
 
 class Test extends BaseActived {
     static _path = '/test'
@@ -26,7 +27,7 @@ class Test extends BaseActived {
 
     render() {
         return (
-            <Page opts={{
+            <ActivePage opts={{
                 toolbar: {
                     title: 'TestTitle',
                     hideBack: false,
@@ -47,7 +48,7 @@ class Test extends BaseActived {
                 }}>
                     {'test1 active ...'}
                 </div>
-            </Page>
+            </ActivePage>
         )
     }
 }
@@ -70,7 +71,7 @@ class Test2 extends BaseActived {
 
     render() {
         return (
-            <Page opts={{
+            <ActivePage opts={{
                 toolbar: {
                     title: 'Test2Title',
                     hideBack: false,
@@ -79,8 +80,8 @@ class Test2 extends BaseActived {
                         this.finish()
                     },
                     onMenu: (e) => {
-                        this.navigationWindow(Toast._path, (comp) => {
-                            comp.setText(this._indata)
+                        this.navigationActive(Login._path, (comp) => {
+                            comp.onData(this._indata)
                         })
                     }
                 }
@@ -89,9 +90,27 @@ class Test2 extends BaseActived {
                     width: '100%',
                     height: '100%'
                 }}>
-                    {'test2 active ...'}
+                    <ReactPullToRefresh
+                        onRefresh={(e) => {
+                        }}
+                        className="your-own-class-if-you-want"
+                        style={{
+                            color: 'black',
+                            textAlign: 'center'
+                        }}>
+
+                        <h3>Pull down to refresh</h3>
+                        <div>
+                            <div>{'1'}</div>
+                            <div>{'1'}</div>
+                            <div>{'1'}</div>
+                            <div>{'1'}</div>
+                        </div>
+
+                        <div>etc.</div>
+                    </ReactPullToRefresh>
                 </div>
-            </Page>
+            </ActivePage>
         )
     }
 }
@@ -147,7 +166,7 @@ class Main extends BaseActived {
 
     render() {
         return (
-            <Page opts={{
+            <ActivePage opts={{
                 toolbar: {
                     title: 'MainTitle',
                     hideBack: true,
@@ -155,10 +174,14 @@ class Main extends BaseActived {
                     onBack: (e) => {
                     },
                     onMenu: (e) => {
+                        this.navigationActive(Test._path, (comp) => {
+                            comp.onData('home active click menu')
+                        })
+
                         this.navigationWindow(Popup._path, (comp) => {
                             comp.onComp((
                                 <MessageNotice opts={{
-                                    title: '提示',
+                                    title: '标题',
                                     content: '你好我是SPA框架',
                                     onSure: (e) => {
                                         comp.close()
@@ -182,23 +205,12 @@ class Main extends BaseActived {
                                 }
                             })
                         })
-
-                        this.navigationActive(Test._path, (comp) => {
-                            comp.onData('home active click menu')
-                        })
                     }
                 },
                 hideToolbar: false,
                 viewBackground2: '',
                 toolBackground2: '',
-                toolbarComp2: (
-                    <div style={{
-                        width: '100%',
-                        height: '100%',
-                        background: 'red'
-                    }}>
-                    </div>
-                )
+                toolbarComp2: null
             }}>
                 <div style={{
                     width: '100%',
@@ -263,7 +275,7 @@ class Main extends BaseActived {
                         </TabSlide>
                     </TabSwiper>
                 </div>
-            </Page>
+            </ActivePage>
         )
     }
 }

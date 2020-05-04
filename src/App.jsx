@@ -5,6 +5,7 @@ import Tool from './tool/Tool';
 import Popup from './window/Popup';
 import Spiner from './window/Spiner';
 import Toast from './window/Toast';
+import Login from './actived/Login';
 
 class Application extends React.Component {
   _frame = null
@@ -12,7 +13,6 @@ class Application extends React.Component {
   constructor(props) {
     super(props)
 
-    // activeds.component for type is Actived
     this.state = {
       param: {
         actives: [{
@@ -32,6 +32,13 @@ class Application extends React.Component {
         }, {
           component: Test2,
           path: Test2._path,
+          opts: {
+            props: {
+            }
+          }
+        }, {
+          component: Login,
+          path: Login._path,
           opts: {
             props: {
             }

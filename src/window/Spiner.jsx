@@ -3,6 +3,7 @@ import GridLoader from 'react-spinners/GridLoader'
 import Config from '../config'
 import BaseWindow from '../router/BaseWindow'
 import Tool from '../tool/Tool'
+import { WindowPage } from '../router/Page'
 
 class Spiner extends BaseWindow {
     static _path = '/spiner'
@@ -47,20 +48,22 @@ class Spiner extends BaseWindow {
         }
 
         return (
-            <div className='display-center' style={_style.root}>
-                <div className='display-column' style={_style.cont}>
-                    <GridLoader
-                        size={Tool.toscale(25)}
-                        margin={0}
-                        color={this.state.color}
-                        loading={this.state.loading}
-                    />
+            <WindowPage>
+                <div className='display-center' style={_style.root}>
+                    <div className='display-column' style={_style.cont}>
+                        <GridLoader
+                            size={Tool.toscale(25)}
+                            margin={0}
+                            color={this.state.color}
+                            loading={this.state.loading}
+                        />
 
-                    <div style={{ marginTop: 10 }}>
-                        {this.state.text.name}
+                        <div style={{ marginTop: 10 }}>
+                            {this.state.text.name}
+                        </div>
                     </div>
                 </div>
-            </div>
+            </WindowPage>
         )
     }
 }

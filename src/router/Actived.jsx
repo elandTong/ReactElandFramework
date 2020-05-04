@@ -26,8 +26,7 @@ class ActivedRoot extends React.Component {
 
         return (
             <div className={'page-active'} style={{
-                background: this._opts.background,
-                zIndex: this._opts.zIndex
+                zIndex: this._opts.zIndex, background: this._opts.background
             }}>
                 <div className={'page-active-rel'}>
                     {this.props.children}
