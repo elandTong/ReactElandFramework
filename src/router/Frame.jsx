@@ -149,6 +149,9 @@ class Frame extends React.Component {
                     compHandle: handle
                 }, item))
 
+                // eslint-disable-next-line react/no-direct-mutation-state
+                this.state.activeStack = _stack
+
                 this.setState({ activeStack: _stack })
 
                 break
@@ -194,6 +197,9 @@ class Frame extends React.Component {
                     zIndex: ++this._windowZIndex,
                     compHandle: handle
                 }, item))
+
+                // eslint-disable-next-line react/no-direct-mutation-state
+                this.state.windowStack = _stack
 
                 this.setState({ windowStack: _stack })
 
