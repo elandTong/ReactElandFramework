@@ -39,7 +39,7 @@ class MessageNotice extends React.Component {
 
                 <div className={'common-spline'} />
 
-                <div className={'display-center click_out_ripple comp-message-notice-bottom'} onClick={(e) => {
+                <div className={'display-center click-out-ripple comp-message-notice-bottom'} onClick={(e) => {
                     if (this._opts.onSure) {
                         this._opts.onSure(e)
                     }

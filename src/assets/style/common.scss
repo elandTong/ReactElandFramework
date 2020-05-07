@@ -2,6 +2,10 @@
 width: 100%; height: 100%;
 }
 
+.common-boxsize-full-number {
+width: calc(100vw);height: calc(100vh);
+}
+
 .common-boxsize-fit {
 width: fit-content; height: fit-content;
 }

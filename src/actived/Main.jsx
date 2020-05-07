@@ -1,4 +1,5 @@
 import React from 'react';
+import Config from '../config';
 import BaseActived from '../router/BaseActived';
 import { ActivePage } from '../router/Page';
 import Tool from '../tool/Tool';
@@ -7,10 +8,12 @@ import Button from '../widget/Button';
 import ListButton from '../widget/ListButton';
 import MarqueeBar from '../widget/MarqueeBar';
 import Minirefresh from '../widget/Minirefresh';
+import Modal from '../widget/Modal';
 import Navbar from '../widget/Navbar';
 import Preblock from '../widget/Preblock';
 import SearchBar from '../widget/SearchBar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
+import ToolbarMenu from '../widget/ToolbarMenu';
 import Login from './Login';
 
 class Test extends BaseActived {
@@ -145,7 +148,6 @@ class Test2 extends BaseActived {
 
 class Main extends BaseActived {
     static _path = '/main'
-    static _onupdate = 'MAIN_UPDATE'
 
     _swiperCompRef = null
 
@@ -154,38 +156,32 @@ class Main extends BaseActived {
     constructor(props) {
         super(props)
 
-        Tool._mainAct = this
-
         this.state = {
         }
 
-        Tool.onEmit(Main._onupdate, (data) => {
-            switch (data.type) {
-                case 'login': {
-                    this.onUpdateStatus()
-                    break
-                }
-                default: {
-                    break
-                }
-            }
+        this.onBroadcast((data) => {
         })
 
-        this.pushPopup({
-            id: 'testpopupid1',
-            x: 100, y: 100
-        }, (
-            <div style={{
-                width: 100,
-                height: 100,
-                background: 'blue'
-            }} onClick={(e) => {
-                this.closePopup('testpopupid1')
-            }} />
-        ))
-    }
-
-    onUpdateStatus() {
+        this.pushPopups([{
+            pame: {
+                id: 'toolbarmenu',
+                // x: 0, y: 0,
+                // className: '' // 作用于弹出壳
+            },
+            comp: (
+                <Modal className={'common-boxsize-full-number'} onClick={(e) => {
+                    this.closePopup('toolbarmenu')
+                }}>
+                    <ToolbarMenu className={'pos-absolute-nosize'} style={{
+                        left: Tool.getScreenSize().w - 101, top: 46
+                    }} onItemClick={(item, key, e) => {
+                        e.stopPropagation()
+                        Config.setAppTheme(item.key)
+                        this.closePopup('toolbarmenu')
+                    }} />
+                </Modal>
+            )
+        }])
     }
 
     render() {
@@ -198,11 +194,13 @@ class Main extends BaseActived {
                     onBack: (e) => {
                     },
                     onMenu: (e) => {
-                        this.navigationActive(Test._path, (comp) => {
-                            comp.onData('home active click menu')
-                        })
+                        this.showPopup('toolbarmenu')
 
-                        this.showPopup('testpopupid1')
+                        return
+
+                        this.navigationActive(Test._path, (comp) => {
+                            comp.onData({})
+                        })
                     }
                 },
                 hideToolbar: false
@@ -297,7 +295,7 @@ class Main extends BaseActived {
                                     height: 100
                                 }} />
 
-                                <MarqueeBar text={'哈哈哈哈睡觉啊不信你看下阿克肖年科就安心叫阿卡哈哈哈哈睡觉啊不信你看下阿克肖年科就安心叫阿卡哈哈哈哈睡觉啊不信你看下阿克肖年科就安心叫阿卡'} />
+                                <MarqueeBar text={'哈哈哈哈睡觉啊不信你看下阿克肖年科就安心叫阿卡哈哈哈哈睡觉啊不'} />
 
                                 <SearchBar className={'_test_search_classname'} style={{
                                     marginTop: 20

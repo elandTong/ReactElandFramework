@@ -251,13 +251,12 @@ div {
 }
 
 /* 内在波纹点击效果 */
-.click_in_ripple {
+.click-in-ripple {
   position: relative;
   overflow: hidden; /* 隐藏溢出的径向渐变背景 */
 }
 
-/* 最优波纹 */
-.click_in_ripple:after {
+.click-in-ripple:after {
   content: "";
   display: block;
   position: absolute;
@@ -283,23 +282,22 @@ div {
   transition: transform .4s, opacity .6s;
 }
 
-/* 设置初始状态 */
-.click_in_ripple:active:after {
+.click-in-ripple:active:after {
   transform: scale(0, 0);
   opacity: .3;
   transition: 0s;
 }
 
 /* 溢出波纹点击效果 */
-.click_out_ripple {
+.click-out-ripple {
   position: relative;
 }
 
-.click_out_ripple:focus{
+.click-out-ripple:focus{
   outline: none;
 }
 
-.click_out_ripple:after {
+.click-out-ripple:after {
   content: '';
   display: block;
   position: absolute;
@@ -325,8 +323,7 @@ div {
   transition: all .3s;
 }
 
-/* 设置初始状态 */
-.click_out_ripple:active:after {
+.click-out-ripple:active:after {
   opacity: .2;
   top: 0;
   left: 0;
@@ -462,6 +459,12 @@ div {
   left: 0px;
   width: 100%;
   height: 100%;
+}
+
+.pos-absolute-nosize {
+position: absolute;
+top: 0px;
+left: 0px;
 }
 
 select {

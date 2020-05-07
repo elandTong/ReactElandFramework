@@ -33,7 +33,7 @@ class Tool {
     static _frame = null
     static _mainAct = null
     static _apiMiddlewareHandle = null
-    static eventBus = new EventBus()
+    static eventbus = new EventBus()
 
     static hasTouch = 'ontouchstart' in window
     static startEvent = this.hasTouch ? 'touchstart' : 'mousedown'
@@ -768,16 +768,16 @@ class Tool {
         return s.join('')
     }
 
-    static onEmit(theme, han) {
-        return this.eventBus.subscribeForce(theme, han)
+    static onEmit(theme, handle) {
+        return this.eventbus.onemit(theme, handle)
     }
 
     static emit(event) {
-        return this.eventBus.emit(event)
+        return this.eventbus.emit(event)
     }
 
-    static emitList(eventList) {
-        return this.eventBus.emits(eventList)
+    static removeEmit(handle) {
+        return this.eventbus.remove(handle)
     }
 
     static timeout_rotate = null
@@ -1200,7 +1200,14 @@ class Tool {
     }
 
     static getActContHeight() {
-        return window.document.body.clientHeight - Config.Theme.toolbar.height
+        return this.getScreenSize().h - Config.Theme.toolbar.height
+    }
+
+    static getScreenSize() {
+        return {
+            w: window.document.body.clientWidth,
+            h: window.document.body.clientHeight
+        }
     }
 }
 

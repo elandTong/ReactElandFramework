@@ -19,12 +19,12 @@ class Sorry extends React.Component {
 
     _keep_opts = {
         icon: require('../assets/res/icon/ic_sorry.png'),
-        title: Config.LanguageUse.sorry,
-        tips: Config.LanguageUse.nodata,
+        title: Config.LANGUAGE_USE.sorry,
+        tips: Config.LANGUAGE_USE.nodata,
         button: {
             active: false,
             width: 100, height: 34,
-            name: Config.LanguageUse.retry,
+            name: Config.LANGUAGE_USE.retry,
             onClick: null
         }
     }

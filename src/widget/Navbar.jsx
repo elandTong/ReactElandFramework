@@ -39,7 +39,7 @@ class Navbar extends React.Component {
         let _items_jsx = this._opts.items.map((item, key) => {
             let _classname = this.state.currIndex === key ? 'comp-navbar-select' : 'comp-navbar-unsele'
             return (
-                <div key={key} className={`display-center click_out_ripple ${_classname}`} style={{
+                <div key={key} className={`display-center click-out-ripple ${_classname}`} style={{
                     width: `${100 / this._opts.items.length}%`
                 }} onClick={(e) => {
                     this.onSelect(key, e)

@@ -51,9 +51,13 @@ class Config {
 
     static SERVER_DM = this.getServerAddress()
 
-    static LanguageUse = this.LANGUAGE.cn
+    static LANGUAGE_USE = this.LANGUAGE.cn
 
     static GLOBAL_EVENT = './_BASE_GLOBAL_THEME/'
+
+    static GLOBAL_EVENT_TYPE = {
+        STYLE_THEME_CHANGE: 'STYLE_THEME_CHANGE'
+    }
 
     static Theme = {
         toolbar: {
@@ -121,7 +125,7 @@ class Config {
         let _broadcast = () => {
             Tool.emit({
                 theme: this.GLOBAL_EVENT,
-                type: 'STYLE_THEME_CHANGE',
+                type: this.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE,
                 name: this.getAppTheme()
             })
         }
@@ -156,7 +160,7 @@ class Config {
     }
 
     static setLanguage(name) {
-        this.LanguageUse = this.getLanguage(name || _QUERY('language'))
+        this.LANGUAGE_USE = this.getLanguage(name || _QUERY('language'))
     }
 }
 

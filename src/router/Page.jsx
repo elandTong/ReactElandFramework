@@ -34,7 +34,7 @@ class Toolbar extends React.Component {
 
         return (
             <div className={'display-space page-content-toolbar-view'}>
-                <div className={`${this._opts.hideBack ? '' : 'click_out_ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
+                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
                     if (!this._opts.hideBack) {
                         if (this.state.timeoutclick <= 0) {
                             if (this._opts.onBack) {
@@ -56,7 +56,7 @@ class Toolbar extends React.Component {
 
                 <span> {this._opts.title} </span>
 
-                <div className={`${this._opts.hideMenu ? '' : 'click_out_ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
+                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
                     if (!this._opts.hideMenu) {
                         if (this.state.timeoutclick <= 0) {
                             if (this._opts.onMenu) {

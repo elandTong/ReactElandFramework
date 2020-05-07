@@ -16,6 +16,8 @@ class BaseWindow extends React.Component {
 
     _broadcastData = {}
 
+    _globalEventHandle = null
+
     constructor(props) {
         super(props)
 
@@ -25,23 +27,21 @@ class BaseWindow extends React.Component {
 
         this._initPame = props.initPame
 
-        Tool.onEmit(BaseWindow._BASE_GLOBAL_THEME, (data) => {
+        this._globalEventHandle = (data) => {
             this._broadcastData = data
-
             if (this._broadcastHandle) {
                 this._broadcastHandle(data)
             }
-        })
+        }
 
-        console.error('base window constructor window', this._window, ' router', this._router, ' initpame', this._initPame)
+        Tool.onEmit(BaseWindow._BASE_GLOBAL_THEME, this._globalEventHandle)
     }
 
     componentDidMount() {
-        console.log('base window component did mount')
     }
 
     componentWillUnmount() {
-        console.log('base window component will unmount')
+        Tool.removeEmit(this._globalEventHandle)
     }
 
     onData(data) {

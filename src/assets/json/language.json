@@ -1,8 +1,11 @@
 {
     "cn": {
         "retry": "重试",
-        "nodata": "nodata",
-        "sorry": "sorry"
+        "nodata": "没有数据!",
+        "sorry": "很抱歉!",
+        "darkmode": "黑夜模式",
+        "lightmode": "高亮模式",
+        "usermode": "用户模式"
     },
     "en": {}
 }

@@ -44,7 +44,7 @@ class Button extends React.Component {
         let _classname = this._opts.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
 
         let _jsx = (
-            <div className={`click_in_ripple display-center ${_classname} ${this.props.className || ''}`} style={Object.assign({
+            <div className={`click-in-ripple display-center ${_classname} ${this.props.className || ''}`} style={Object.assign({
                 width: this._opts.width, height: this._opts.height
             }, this.props.style || {})} onClick={(e) => {
                 if (this.state.timeoutclick <= 0) {

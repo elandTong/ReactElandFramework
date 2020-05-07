@@ -71,7 +71,7 @@ class SearchBar extends React.Component {
                         this.onSearchChanged(e.target.value)
                     }} />
 
-                <div className={'click_out_ripple comp-search-submit-root'} onClick={(e) => {
+                <div className={'click-out-ripple comp-search-submit-root'} onClick={(e) => {
                     this.onSearchClick(e)
                 }}> {this.getIcon()} </div>
             </div>

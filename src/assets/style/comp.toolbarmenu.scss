@@ -1,0 +1,36 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-toolbarmenu-root {
+    width: 100px;
+    height: fit-content;
+    background: $light-color-toolbar-background;
+    font-size: 12px;
+    color: $light-color-toolbar-font;
+    .theme-light & {
+        background: $light-color-toolbar-background;
+        color: $light-color-toolbar-font;
+    }
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+        color: $dark-color-toolbar-font;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+        color: $user-color-toolbar-font;
+    }
+}
+
+.comp-toolbarmenu-item {
+    width: 100%;
+    height: 40px;
+}
+
+.comp-toolbarmenu-item-select {
+    background: rgba(0,0,0,0.1);
+}
+
+.comp-toolbarmenu-item-unsele {
+    background: rgba(0,0,0,0);
+}
