@@ -8,7 +8,7 @@ import './assets/style/index.scss';
 import './assets/style/common.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Application from './App';
 import Config from './config';
 import * as serviceWorker from './serviceWorker';
 import NetApi from './tool/NetApi';
@@ -60,7 +60,7 @@ NetApi.sub('i18n/getMapKeyLangs', {}, (data) => {
     return true
 }, 3000)
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<Application />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
