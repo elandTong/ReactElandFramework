@@ -1,0 +1,28 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-spiner-root {
+    width: 100%;
+    height: 100%;
+}
+
+.comp-spiner-cont {
+    width: fit-content;
+    height: fit-content;
+    font-size: 18px;
+    color: $light-color-spiner-font;
+    .theme-light & {
+        color: $light-color-spiner-font;
+    }
+    .theme-dark & {
+        color: $dark-color-spiner-font;
+    }
+    .theme-user & {
+        color: $user-color-spiner-font;
+    }
+}
+
+.comp-spiner-text {
+    margin-top: 10px;
+}

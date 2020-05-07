@@ -1,0 +1,34 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-marquee-root {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.2);
+}
+
+.comp-marquee-cont {
+    width: 94%;
+    font-size: 12px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        color: $user-color-theme-font;
+    }
+}
+
+.comp-marquee-imag {
+    height: 55%;
+}

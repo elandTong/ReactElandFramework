@@ -1,0 +1,22 @@
+
+.comp-preblock-last {
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.comp-preblock-mid {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    z-index: 2
+}
+
+.comp-preblock-fast {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    z-index: 3
+}

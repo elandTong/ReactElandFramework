@@ -1,7 +1,7 @@
 import React from 'react'
-import Config from '../config'
 import BaseWindow from '../router/BaseWindow'
 import { WindowPage } from '../router/Page'
+import '../assets/style/comp.message.scss'
 
 class Toast extends BaseWindow {
     static _path = '/toast'
@@ -25,28 +25,12 @@ class Toast extends BaseWindow {
     }
 
     render() {
-        let _style = {
-            root: {
-                width: '100%',
-                height: '100%'
-            },
-            cont: {
-                width: 'fit-content',
-                height: 'fit-content',
-                padding: 20,
-                borderRadius: 16,
-                background: 'rgba(80,80,80,0.65)',
-                fontSize: 14,
-                color: Config.Theme.color.font
-            }
-        }
-
         return (
             <WindowPage>
-                <div className={'display-center'} style={_style.root} onClick={(e) => {
+                <div className={'display-center comp-message-toast-root'} onClick={(e) => {
                     this.close()
                 }}>
-                    <div className={'display-center'} style={_style.cont} dangerouslySetInnerHTML={{
+                    <div className={'display-center comp-message-toast-cont'} dangerouslySetInnerHTML={{
                         __html: this.state.text
                     }} />
                 </div>

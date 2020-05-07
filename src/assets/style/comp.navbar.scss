@@ -1,0 +1,71 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-navbar-root {
+    width: 100%;
+    height: 45px;
+    background: $light-color-navbar-background;
+    font-size: 14px;
+    .theme-light & {
+        background: $light-color-navbar-background;
+    }
+    .theme-dark & {
+        background: $dark-color-navbar-background;
+    }
+    .theme-user & {
+        background: $user-color-navbar-background;
+    }
+}
+
+.comp-navbar-select {
+    height: 100%;
+    border-bottom-style: solid;
+    border-bottom-color: $light-color-navbar-select-unline;
+    border-bottom-width: 2px;
+    color: $light-color-navbar-select-font;
+    .theme-light & {
+        border-bottom-style: solid;
+        border-bottom-color: $light-color-navbar-select-unline;
+        border-bottom-width: 2px;
+        color: $light-color-navbar-select-font;
+    }
+    .theme-dark & {
+        border-bottom-style: solid;
+        border-bottom-color: $dark-color-navbar-select-unline;
+        border-bottom-width: 2px;
+        color: $dark-color-navbar-select-font;
+    }
+    .theme-user & {
+        border-bottom-style: solid;
+        border-bottom-color: $user-color-navbar-select-unline;
+        border-bottom-width: 2px;
+        color: $user-color-navbar-select-font;
+    }
+}
+
+.comp-navbar-unsele {
+    height: 100%;
+    border-bottom-style: solid;
+    border-bottom-color:  $light-color-navbar-unsele-unline;
+    border-bottom-width: 2px;
+    color: $light-color-navbar-unsele-font;
+    .theme-light & {
+        border-bottom-style: solid;
+        border-bottom-color:  $light-color-navbar-unsele-unline;
+        border-bottom-width: 2px;
+        color: $light-color-navbar-unsele-font;
+    }
+    .theme-dark & {
+        border-bottom-style: solid;
+        border-bottom-color:  $dark-color-navbar-unsele-unline;
+        border-bottom-width: 2px;
+        color: $dark-color-navbar-unsele-font;
+    }
+    .theme-user & {
+        border-bottom-style: solid;
+        border-bottom-color:  $user-color-navbar-unsele-unline;
+        border-bottom-width: 2px;
+        color: $user-color-navbar-unsele-font;
+    }
+}

@@ -1,0 +1,70 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-message-notice-root {
+    width: calc(84vw);
+    height: calc(40vh);
+    border-radius: 12px;
+    background: $light-color-message-background;
+    font-size: 18px;
+    color: $light-color-theme;
+    .theme-light & {
+        background: $light-color-message-background;
+        color: $light-color-theme;
+    }
+    .theme-dark & {
+        background: $dark-color-message-background;
+        color: $dark-color-theme;
+    }
+    .theme-user & {
+        background: $user-color-message-background;
+        color: $user-color-theme;
+    }
+}
+
+.comp-message-notice-head {
+    width: 100%;
+    height: 45px;
+}
+
+.comp-message-notice-bottom {
+    width: 100%;
+    height: 45px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.comp-message-notice-cont {
+    width: 100%;
+    height: calc(40vh - 91px);
+    padding: 12px;
+    line-height: 1.5;
+}
+
+.comp-message-toast-root {
+    width: 100%;
+    height: 100%;
+}
+
+.comp-message-toast-cont {
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 16px;
+    background: $light-color-toast-background;
+    font-size: 14px;
+    color: $light-color-toast-font;
+    .theme-light & {
+        background: $light-color-toast-background;
+        color: $light-color-toast-font;
+    }
+    .theme-dark & {
+        background: $dark-color-toast-background;
+        color: $dark-color-toast-font;
+    }
+    .theme-user & {
+        background: $user-color-toast-background;
+        color: $user-color-toast-font;
+    }
+}

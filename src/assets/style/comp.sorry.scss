@@ -1,0 +1,44 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-sorry-imag {
+    width: 100px;
+}
+
+.comp-sorry-title {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 20px;
+    color: $light-color-theme;
+    .theme-light & {
+        color: $light-color-theme;
+    }
+    .theme-dark & {
+        color: $dark-color-theme;
+    }
+    .theme-user & {
+        color: $user-color-theme;
+    }
+}
+
+.comp-sorry-tips {
+    text-align: center;
+    font-size: 18px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        color: $user-color-theme-font;
+    }
+}
+
+.comp-sorry-retry-button {
+    margin-top: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}

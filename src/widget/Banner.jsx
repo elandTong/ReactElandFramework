@@ -1,56 +1,69 @@
 import React from 'react';
 import Swiper from 'swiper';
-import Config from '../config';
+import '../assets/style/comp.swiper.scss';
 import Tool from '../tool/Tool';
 
 class Banner extends React.Component {
+    _opts = {
+        items: [],
+        effect: 'slide',
+        nested: false,
+        navActive: true,
+        pagActive: true,
+        onActiveIndex: null,
+        onItemClick: null
+    }
+
+    _keep_opts = {
+        items: [],
+        effect: 'slide', // cube
+        nested: false,
+        navActive: true,
+        pagActive: true,
+        onActiveIndex: null,
+        onItemClick: null
+    }
+
     _swiper = null
 
     _swiper_dom = null
-
     _swiper_pag_dom = null
-
     _swiper_pre_dom = null
-
     _swiper_nex_dom = null
 
     constructor(props) {
         super(props)
 
-        this.state = {
-            effect: Tool.isMobile() || Tool.isIE() ? 'slide' : 'cube'
-        }
-
-        if (this.props.onRef) {
-            this.props.onRef(this)
-        }
+        this.state = {}
     }
 
     componentDidMount() {
         this._swiper = new Swiper(this._swiper_dom, {
             observer: true,
-            effect: this.state.effect,
-            nested: this.props.nested === true ? true : false,
+            effect: this._opts.effect,
+            nested: this._opts.nested,
             autoplay: {
-                disableOnInteraction: false,
+                disableOnInteraction: false
             },
             navigation: {
                 nextEl: this._swiper_nex_dom,
                 prevEl: this._swiper_pre_dom
             },
             pagination: {
-                el: this._swiper_pag_dom,
+                el: this._swiper_pag_dom
             },
             on: {
                 slideChange: () => {
-                    if (this.props.onActiveIndex) {
-                        this.props.onActiveIndex(this._swiper.activeIndex)
-                    }
-
-                    console.log('banner slide change:' + this._swiper.activeIndex)
+                    this.onChange()
                 }
             }
         })
+    }
+
+    onChange() {
+        if (this._opts.onActiveIndex) {
+            this._opts.onActiveIndex(this._swiper.activeIndex)
+        }
     }
 
     slideTo(index = 0) {
@@ -64,58 +77,43 @@ class Banner extends React.Component {
     }
 
     render() {
-        let pagination = this.props.pagination ? this.props.pagination : {}
-
-        let _style = {
-            root: {
-                width: this.props.width ? this.props.width : '100%',
-                height: this.props.height ? this.props.height : 'auto'
-            },
-            imag: {
-                height: '100%',
-                maxWidth: '100%',
-                objectFit: 'cover'
-            },
-            pagination: {
-                bottom: pagination.bottom ? pagination.bottom : ''
-            }
-        }
-
-        let items = this.props.items.map((item, key) => {
-            return (
-                <div key={key} className='swiper-slide display-center' onClick={(e) => {
-                    if (this.props.onItemClick) {
-                        this.props.onItemClick(item, key, e)
-                    }
-                }}>
-                    <img src={item.src} style={_style.imag} alt={''} />
-                </div>
-            )
-        })
+        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
         return (
-            <div className='swiper-container' style={_style.root} ref={(comp) => {
+            <div className={`swiper-container comp-swiper-banner-root ${this.props.className || ''}`} style={this.props.style} ref={(comp) => {
                 this._swiper_dom = comp
             }}>
-                <div className='swiper-wrapper'> {items} </div>
+                <div className={'swiper-wrapper'}>
+                    {this._opts.items.map((item, key) => {
+                        return (
+                            <div key={key} className={'swiper-slide display-center'} onClick={(e) => {
+                                if (this._opts.onItemClick) {
+                                    this._opts.onItemClick(item, key, e)
+                                }
+                            }}>
+                                <img className={'comp-swiper-banner-image'} src={item.src} alt={'banner'} />
+                            </div>
+                        )
+                    })}
+                </div>
 
-                <div class="swiper-button-prev" style={{
-                    color: Config.Theme.color.font_deep
-                }} ref={(comp) => {
-                    this._swiper_pre_dom = comp
-                }}></div>
+                {this._opts.navActive ? (
+                    <div className={'swiper-button-prev comp-swiper-banner-button'} ref={(comp) => {
+                        this._swiper_pre_dom = comp
+                    }} />
+                ) : (null)}
 
-                <div class="swiper-button-next" style={{
-                    color: Config.Theme.color.font_deep
-                }} ref={(comp) => {
-                    this._swiper_nex_dom = comp
-                }}></div>
+                {this._opts.navActive ? (
+                    <div className={'swiper-button-next comp-swiper-banner-button'} ref={(comp) => {
+                        this._swiper_nex_dom = comp
+                    }} />
+                ) : (null)}
 
-                {pagination.active === true ? (
-                    <div className='swiper-pagination' style={_style.pagination} ref={(comp) => {
+                {this._opts.pagActive ? (
+                    <div className={'swiper-pagination'} ref={(comp) => {
                         this._swiper_pag_dom = comp
-                    }}></div>
-                ) : null}
+                    }} />
+                ) : (null)}
             </div>
         )
     }

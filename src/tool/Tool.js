@@ -1,8 +1,8 @@
-import React from 'react';
-import Config from '../config.js';
-import Spiner from '../window/Spiner';
-import Toast from '../window/Toast';
-import EventBus from './EventBus.js';
+import React from 'react'
+import Config from '../config.js'
+import Spiner from '../window/Spiner'
+import Toast from '../window/Toast'
+import EventBus from './EventBus.js'
 
 // eslint-disable-next-line no-extend-native
 Date.prototype.format = function (fmt) {
@@ -17,12 +17,12 @@ Date.prototype.format = function (fmt) {
     }
 
     if (/(y+)/.test(fmt)) {
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
     }
 
     for (let k in o) {
         if (new RegExp('(' + k + ')').test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
         }
     }
 
@@ -171,7 +171,7 @@ class Tool {
     }
 
     static saveLocalStorage(key, val) {
-        if (key == null || key === '') {
+        if (key === null || key === '') {
             return
         }
 
@@ -231,7 +231,7 @@ class Tool {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             headers: {
                 'Accept': '*/*',
-                'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Content-type': 'application/x-www-form-urlencoded charset=UTF-8'
             },
             body: (pam),  // must match 'Content-Type' header
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -355,7 +355,7 @@ class Tool {
 
         _htp.setRequestHeader('Accept', '*/*')
 
-        _htp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=UTF-8')
+        _htp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded charset=UTF-8')
 
         if (params instanceof Object) {
             let _join = []
@@ -791,7 +791,7 @@ class Tool {
             dom = this.o(idOrDom)
         }
 
-        dom.className = 'rotate'
+        dom.className = 'common-rotate'
 
         clearTimeout(this.timeout_rotate)
 
@@ -832,15 +832,15 @@ class Tool {
      * _newopts : 属性赋值对象
      */
     static structureAssignment(_opts, _newopts, identical = false) {
-        if (_newopts == null) { return _opts }
+        if (_newopts === null) { return _opts }
 
         if (_newopts instanceof Array) { return _opts } else if (_newopts instanceof Object) {
             Object.keys(_newopts).forEach((key) => {
                 if (key in _opts) { // 判断是否存在该属性
                     if (identical) {
-                        if (_opts[key] == null) {
+                        if (_opts[key] === null) {
                             _opts[key] = _newopts[key]
-                        } else if (typeof (_opts[key]) == typeof (_newopts[key])) {
+                        } else if (typeof (_opts[key]) === typeof (_newopts[key])) {
                             _opts[key] = _newopts[key]
                         }
                     } else {
@@ -865,15 +865,11 @@ class Tool {
     }
 
     static secondToDate(result, len) {
-        let h = Math.floor(result / 3600) < 10 ? '0' + Math.floor(result / 3600) : Math.floor(result / 3600);
-        let m = Math.floor((result / 60 % 60)) < 10 ? '0' + Math.floor((result / 60 % 60)) : Math.floor((result / 60 % 60));
-        let s = Math.floor((result % 60)) < 10 ? '0' + Math.floor((result % 60)) : Math.floor((result % 60));
-        m = parseInt(m) + parseInt(h * 60);
-        return result = this.numberAdd(m, len) + ' : ' + this.numberAdd(s, len);
-    }
-
-    static getFilterHeight(length = 1) {
-        return Config.Theme.filter.height * length + ((length - 1) * Config.Theme.filter.margin) + (Config.Theme.filter.padding * 2)
+        let h = Math.floor(result / 3600) < 10 ? '0' + Math.floor(result / 3600) : Math.floor(result / 3600)
+        let m = Math.floor((result / 60 % 60)) < 10 ? '0' + Math.floor((result / 60 % 60)) : Math.floor((result / 60 % 60))
+        let s = Math.floor((result % 60)) < 10 ? '0' + Math.floor((result % 60)) : Math.floor((result % 60))
+        m = parseInt(m) + parseInt(h * 60)
+        return result = this.numberAdd(m, len) + ' : ' + this.numberAdd(s, len)
     }
 
     static checkURL(url) {
@@ -912,8 +908,6 @@ class Tool {
     }
 
     static toTimeDistance(time) {
-        // time = new Date().getTime() + 1000 * 60 * 60 * 24 * 100 + (1000 * 60 * 60 * 10) + (1000 * 60 * 20)
-
         let target = this.getTimeZoneE8(8, time).getTime()
 
         let now = this.getTimeZoneE8(8, new Date().getTime()).getTime()
@@ -941,8 +935,8 @@ class Tool {
 
     static importSplitline(items, opts = {}) {
         let { selIndex = -1,
-            selColor = '',
-            noneColor = Config.Theme.color.font_deep,
+            selColor = Config.Theme.color.theme,
+            noneColor = 'rgba(0,0,0,0.2)',
             boundary = false,
             direction = 'x',
             thickness = 1,
@@ -1089,7 +1083,7 @@ class Tool {
             }
 
             try {
-                let serve = window.Components.classes['@mozilla.org/preferences-service;1']
+                let serve = window.Components.classes['@mozilla.org/preferences-service1']
                 let prefs = serve.getService(window.Components.interfaces.nsIPrefBranch)
                 prefs.setCharPref('browser.startup.homepage', url)
             } catch (e) {
@@ -1177,22 +1171,10 @@ class Tool {
         }
     }
 
-    static checkUrl(url) {
-        let _reg = '/((http|ftp|https|file):\/\/([\w\-]+\.)+[\w\-]+(\/[\w\u4e00-\u9fa5\-\.\/?\@\%\!\&=\+\~\:\#\;\,]*)?)/ig'
-
-        let re = new RegExp(_reg)
-
-        if (!re.test(url)) {
-            return false
-        } else {
-            return true
-        }
-    }
-
     static changedBankcardno(no) {
         return no.replace(/\s+/g, '').split('').map((_it, key) => {
             if ((key + 1) % 4 === 0) {
-                return `${_it}&nbsp;&nbsp;`
+                return `${_it}&nbsp&nbsp`
             } else {
                 return _it
             }

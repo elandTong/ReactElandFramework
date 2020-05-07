@@ -1,11 +1,11 @@
 import React from 'react';
+import Login from './actived/Login';
 import Main, { Test, Test2 } from './actived/Main';
 import Frame from './router/Frame';
 import Tool from './tool/Tool';
 import Popup from './window/Popup';
 import Spiner from './window/Spiner';
 import Toast from './window/Toast';
-import Login from './actived/Login';
 
 class Application extends React.Component {
   _frame = null

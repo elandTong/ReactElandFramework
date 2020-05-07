@@ -1,19 +1,8 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group/index';
-import Config from '../config';
 import Tool from '../tool/Tool';
 
 class ActivedRoot extends React.Component {
-    _opts = {
-        zIndex: 1,
-        background: null
-    }
-
-    _keep_opts = {
-        zIndex: 1,
-        background: null
-    }
-
     constructor(props) {
         super(props)
 
@@ -22,12 +11,8 @@ class ActivedRoot extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
-
         return (
-            <div className={'page-active'} style={{
-                zIndex: this._opts.zIndex, background: this._opts.background
-            }}>
+            <div className={'page-active color-active-background'} style={{ zIndex: this.props.zIndex }}>
                 <div className={'page-active-rel'}>
                     {this.props.children}
                 </div>
@@ -60,7 +45,6 @@ class Actived extends React.Component {
         super(props)
 
         this.state = {
-            background: Config.Theme.color.background,
             popup: { // 弹窗配置
                 items: [{
                     active: false,
@@ -237,9 +221,7 @@ class Actived extends React.Component {
         })
 
         return (
-            <ActivedRoot opts={{
-                zIndex: this.props.zIndex, background: this.state.background
-            }}>
+            <ActivedRoot zIndex={this.props.zIndex}>
                 {/* content */}
                 <ActivedContent>
                     {this.getComp()}

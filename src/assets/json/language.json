@@ -1,4 +1,8 @@
 {
-    "cn": {},
+    "cn": {
+        "retry": "重试",
+        "nodata": "nodata",
+        "sorry": "sorry"
+    },
     "en": {}
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Swiper from 'swiper';
+import '../assets/style/comp.swiper.scss';
 
 export class TabSlide extends React.Component {
     constructor(props) {
@@ -10,14 +11,8 @@ export class TabSlide extends React.Component {
     }
 
     render() {
-        let style = {
-            height: '100%',
-            overflowX: 'hidden',
-            overflowY: 'auto'
-        }
-
         return (
-            <div className='swiper-slide' style={style}>
+            <div className={'swiper-slide comp-swiper-view-slide'}>
                 {this.props.children}
             </div>
         )
@@ -85,13 +80,11 @@ export class TabSwiper extends React.Component {
     }
 
     render() {
-        let style = {
-            width: this.props.width ? this.props.width : '100%',
-            height: this.props.height ? this.props.height : 'auto'
-        }
-
         return (
-            <div className={'swiper-container'} style={style} ref={(comp) => {
+            <div className={'swiper-container comp-swiper-view-root'} style={{
+                width: this.props.width ? this.props.width : '100%',
+                height: this.props.height ? this.props.height : 'auto'
+            }} ref={(comp) => {
                 this._swiper_dom = comp
             }}>
                 <div className={'swiper-wrapper'}> {this.props.children} </div>

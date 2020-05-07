@@ -1,0 +1,38 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.comp-swiper-view-root {
+    width: 100%;
+    height: auto;
+}
+
+.comp-swiper-view-slide {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.comp-swiper-banner-root {
+    width: 100%;
+    height: auto;
+}
+
+.comp-swiper-banner-image {
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover
+}
+
+.comp-swiper-banner-button {
+    color: $light-color-theme;
+    .theme-light & {
+        color: $light-color-theme;
+    }
+    .theme-dark & {
+        color: $dark-color-theme;
+    }
+    .theme-user & {
+        color: $user-color-theme;
+    }
+}

@@ -1,0 +1,107 @@
+.common-boxsize-full {
+width: 100%; height: 100%;
+}
+
+.common-boxsize-fit {
+width: fit-content; height: fit-content;
+}
+
+.common-solid-input {
+padding: 0px 12px 0px 12px;
+text-align: left;
+background: rgba(0, 0, 0, 0);
+border-style: solid;
+border-color: rgb(94,94,94);
+border-width: 1px;
+border-radius: 12px;
+color: rgb(255,255,255);
+font-size: 12px;
+outline: none;
+box-sizing: border-box;
+}
+
+.common-spline {
+width: 100%;
+height: 1px;
+background: rgba(0,0,0,0.2);
+}
+
+.common-input {
+border-width: 0;
+outline: none;
+border-radius: 6px;
+background: rgb(31,31,31);
+font-size: 12px;
+text-align: center;
+color: rgb(204, 204, 204);
+}
+
+.common-overflow-y {
+overflow-x: hidden;
+overflow-y: auto;
+}
+
+.common-lottery-bull {
+display:flex;
+justify-content:center;
+align-items:center;
+width:18px;
+height:18px;
+font-size:10px;
+color:white;
+border-radius:100%
+}
+
+.common-underline {
+text-decoration: underline;
+}
+
+.common-spin-90 {
+transform: rotate(-90deg);
+-ms-transform: rotate(-90deg);
+-moz-transform: rotate(-90deg);
+-webkit-transform: rotate(-90deg);
+-o-transform: rotate(-90deg);
+}
+
+@-webkit-keyframes commonRotate{
+0%{ -webkit-transform: rotate(0deg);}
+50%{ -webkit-transform: rotate(180deg);}
+100%{ -webkit-transform: rotate(360deg);}
+}
+
+@keyframes commonRotate{
+0%{ -webkit-transform: rotate(0deg);}
+50%{ -webkit-transform: rotate(180deg);}
+100%{ -webkit-transform: rotate(360deg);}
+}
+
+.common-rotate {
+-webkit-animation:commonRotate 0.5s linear infinite;
+animation:commonRotate 0.5s linear infinite;
+}
+
+// 阴影效果
+.common-card-glass {
+margin: 0 auto;
+padding: 1em;
+max-width: 30em;
+border-radius: 0.3em;
+box-shadow: 0 0 0 1px hsla(0, 0%, 20%, 0.3) inset,
+0 .5em 1em rgba(0, 0, 0, 0.6);
+text-shadow: 0 1px 1px hsla(0, 0%, 20%, 0.3);
+background: hsla(0, 0%, 20%, 0.3);
+}
+
+.common-text-singleline {
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap
+}
+
+.common-input-text-none {
+color: #B0B0B0;
+outline: medium;
+border: none;
+background: transparent
+}

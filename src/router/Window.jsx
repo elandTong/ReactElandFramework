@@ -1,17 +1,6 @@
 import React from 'react';
-import Tool from '../tool/Tool';
 
 class WindowRoot extends React.Component {
-    _opts = {
-        zIndex: null,
-        background: null
-    }
-
-    _keep_opts = {
-        zIndex: null,
-        background: null
-    }
-
     constructor(props) {
         super(props)
 
@@ -20,12 +9,8 @@ class WindowRoot extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
-
         return (
-            <div className={'widget-active'} style={{
-                zIndex: this._opts.zIndex, background: this._opts.background
-            }}>
+            <div className={'widget-active'} style={{ zIndex: this.props.zIndex }}>
                 {this.props.children}
             </div>
         )
@@ -56,7 +41,6 @@ class Window extends React.Component {
         super(props)
 
         this.state = {
-            background: 'rgba(0,0,0,0)'
         }
     }
 
@@ -97,9 +81,7 @@ class Window extends React.Component {
 
     render() {
         return (
-            <WindowRoot opts={{
-                zIndex: this.props.zIndex, background: this.state.background
-            }}>
+            <WindowRoot zIndex={this.props.zIndex}>
                 <WindowContent>
                     {this.getComp()}
                 </WindowContent>

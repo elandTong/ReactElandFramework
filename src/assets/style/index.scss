@@ -1,3 +1,7 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
 html {
   /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
   -ms-overflow-style:none;
@@ -82,6 +86,16 @@ div {
   width: 100%;
   height: 100%;
   transition: opacity 3s;
+  background: $light-color-active-background;
+  .theme-light & {
+    background: $light-color-active-background;
+  }
+  .theme-dark & {
+    background: $dark-color-active-background;
+  }
+  .theme-user & {
+    background: $user-color-active-background;
+  }
 }
 
 .page-active-rel {
@@ -115,7 +129,16 @@ div {
   top: 0px;
   left: 0px;
   z-index: 2;
-  background: white;
+  background: $light-color-toolbar-background;
+  .theme-light & {
+    background: $light-color-toolbar-background;
+  }
+  .theme-dark & {
+    background: $dark-color-toolbar-background;
+  }
+  .theme-user & {
+    background: $user-color-toolbar-background;
+  }
 }
 
 /* toolbar 默认视图 */
@@ -124,9 +147,18 @@ div {
   height: 100%;
   padding-left: 3px;
   padding-right: 3px;
-  font-size: 16px;
-  color: black;
   box-sizing: border-box;
+  font-size: 16px;
+  color: $light-color-toolbar-font;
+  .theme-light & {
+    color: $light-color-toolbar-font;
+  }
+  .theme-dark & {
+    color: $dark-color-toolbar-font;
+  }
+  .theme-user & {
+    color: $user-color-toolbar-font;
+  }
 }
 
 /* toolbar 默认视图 元素 */
@@ -139,11 +171,28 @@ div {
 .page-content-view {
   width: 100%;
   height: 100%;
-  padding-top: 45px;
   position: absolute;
   top: 0px;
   left: 0px;
   z-index: 1;
+  color: $light-color-active-font;
+  .theme-light & {
+    color: $light-color-active-font;
+  }
+  .theme-dark & {
+    color: $dark-color-active-font;
+  }
+  .theme-user & {
+    color: $user-color-active-font;
+  }
+}
+
+.page-content-view-have-toolbar {
+  padding-top: 45px;
+}
+
+.page-content-view-no-toolbar {
+  padding-top: 0px;
 }
 
 /* widget for frame */
@@ -175,6 +224,16 @@ div {
   justify-content: center;
   align-items: center;
   pointer-events: auto;
+  background: $light-color-window-background;
+  .theme-light & {
+    background: $light-color-window-background;
+  }
+  .theme-dark & {
+    background: $dark-color-window-background;
+  }
+  .theme-user & {
+    background: $user-color-window-background;
+  }
 }
 
 .widget-content {
@@ -189,55 +248,6 @@ div {
   left: 0px;
   width: 100%;
   height: 100%;
-}
-
-.bar-line-y {
-width: 1px;
-height: 100%;
-background: rgb(44,45,47);
-}
-
-.avater {
-  border-radius: 50%;
-}
-
-.fit-content-flex-column {
-  width: fit-content;
-  height: fit-content;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.font-p12-main {
-width: fit-content;
-height: fit-content;
-font-size: 12px;
-color: #cca352;
-}
-
-.font-p12-sub {
-  width: fit-content;
-  height: fit-content;
-  font-size: 12px;
-  color: gainsboro;
-}
-
-.font-p14-sub {
-  width: fit-content;
-  height: fit-content;
-  font-size: 14px;
-  color: gainsboro;
-}
-
-.min-center-flex {
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* 内在波纹点击效果 */
@@ -256,7 +266,16 @@ color: #cca352;
   top: 0;
   left: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgb(0,0,0) 8%, transparent 8%);
+  background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+  .theme-light & {
+    background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+  }
+  .theme-dark & {
+    background-image: radial-gradient(circle, $dark-color-click-ripple-background 8%, transparent 8%);
+  }
+  .theme-user & {
+    background-image: radial-gradient(circle, $user-color-click-ripple-background 8%, transparent 8%);
+  }
   background-repeat: no-repeat;
   background-position: 50%;
   transform: scale(10, 10);
@@ -289,7 +308,16 @@ color: #cca352;
   right: -15px;
   bottom: -15px;
   pointer-events: none;
-  background-color: rgb(0,0,0);
+  background-color: $light-color-click-ripple-background;
+  .theme-light & {
+    background-color: $light-color-click-ripple-background;
+  }
+  .theme-dark & {
+    background-color: $dark-color-click-ripple-background;
+  }
+  .theme-user & {
+    background-color: $user-color-click-ripple-background;
+  }
   background-repeat: no-repeat;
   background-position: 50%;
   opacity: 0;
@@ -305,45 +333,6 @@ color: #cca352;
   right: 0;
   bottom: 0;
   transition: 0s;
-}
-
-.rotate {
-  -webkit-animation:myRotate 0.5s linear infinite;
-  animation:myRotate 0.5s linear infinite;
-}
-
-@-webkit-keyframes myRotate{
-  0%{ -webkit-transform: rotate(0deg);}
-  50%{ -webkit-transform: rotate(180deg);}
-  100%{ -webkit-transform: rotate(360deg);}
-}
-
-@keyframes myRotate{
-  0%{ -webkit-transform: rotate(0deg);}
-  50%{ -webkit-transform: rotate(180deg);}
-  100%{ -webkit-transform: rotate(360deg);}
-}
-
-.card-glass {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 30em;
-  border-radius: 0.3em;
-  box-shadow: 0 0 0 1px hsla(0, 0%, 20%, 0.3) inset,
-  0 .5em 1em rgba(0, 0, 0, 0.6);
-  text-shadow: 0 1px 1px hsla(0, 0%, 20%, 0.3);
-  background: hsla(0, 0%, 20%, 0.3);
-}
-
-.radius-glass {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 30em;
-  border-radius: 0.3em;
-  box-shadow: 0 0 0 1px hsla(0, 0%, 20%, 0.3) inset,
-  0 .5em 1em rgba(0, 0, 0, 0.6);
-  text-shadow: 0 1px 1px hsla(0, 0%, 20%, 0.3);
-  background: hsla(0, 0%, 20%, 0.3);
 }
 
 .display-center {
@@ -405,19 +394,6 @@ color: #cca352;
   align-items: center;
 }
 
-.text-singleline {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap
-}
-
-.input-text-none {
-  color: #B0B0B0;
-  outline: medium;
-  border: none;
-  background: transparent
-}
-
 /* active切换动画样式 */
 .active-router-enter {
   transform: translateX(100%);
@@ -474,13 +450,6 @@ color: #cca352;
   transition: opacity .2s ease-in;
 }
 
-.iframe-game {
-  width: 100%;
-  height: 100%;
-  border-color: transparent;
-  overflow: hidden;
-}
-
 .pos-relative {
   position: relative;
   width: 100%;
@@ -495,117 +464,16 @@ color: #cca352;
   height: 100%;
 }
 
-.size-fit {
-  width: fit-content;
-  height: fit-content;
-}
-
-.solid-fixed-maincolor {
-  width: 15.5%;
-  height: 26px;
-  background: '';
-  border-radius: 16px;
-  border: 1px solid #cca352;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  color: #cca352;
-}
-
-select{
+select {
 	padding-left: 15px;
 	padding-right: 15px;
-
 	background: rgba(0, 0, 0, 0);
-
 	font-size: 12;
 	color: silver;
 	text-align: center;
-	
 	outline: none;
-	
 	border: 1px rgb(110, 134, 174) solid;
 	border-radius: 2px;
-}
-
-.underline {
-  text-decoration: underline;
-}
-
-.background-hover {
-  background: rgba(0, 0, 0, 0);
-}
-
-.background-hover:hover {
-  background: rgba(200, 168, 100, 0.4);
-}
-
-.scale-max-hover {
-  transform: scale(1)
-}
-
-.scale-max-hover:hover {
-  transform: scale(1.026)
-}
-
-.scale-mmax-hover {
-  transform: scale(1)
-}
-
-.scale-mmax-hover:hover {
-  transform: scale(1.016)
-}
-
-.scale-hover {
-  transform: scale(1)
-}
-
-.scale-hover:hover {
-  transform: scale(1.08)
-}
-
-.border-hover {
-  border: '';
-}
-
-.border-hover:hover {
-  border: 1px solid #cca352;
-}
-
-.spin-90 {
-	transform: rotate(-90deg);
-	-ms-transform: rotate(-90deg);
-	-moz-transform: rotate(-90deg);
-	-webkit-transform: rotate(-90deg);
-	-o-transform: rotate(-90deg);
-}
-
-.lottery-bull {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  width:18px;
-  height:18px;
-  font-size:10px;
-  color:white;
-  border-radius:100%
-}
-
-.modal-root {
-  position: fixed;
-  width: fit-content;
-  height: fit-content;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-.jackpot-num {
-  font-size: 28px;
-  font-family: wxcH;
-  color: #cca352;
 }
 
 input::-webkit-outer-spin-button,
@@ -614,56 +482,4 @@ input::-webkit-inner-spin-button{
 }
 input[type="number"]{
     -moz-appearance:textfield;
-}
-
-.spline-x-black {
-  width: 100%;
-  height: 12px;  
-  background: rgb(29,29,29) 
-}
-
-.spline-x-text {
-  width: 100%;
-  height: 26px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(29,29,29);
-  font-size: 14;
-  color: #cca352;
-}
-
-.common-input {
-  border-width: 0;
-  outline: none;
-  border-radius: 6px;
-  background: rgb(31,31,31);
-  font-size: 12px;
-  text-align: center;
-  color: rgb(204, 204, 204);
-}
-
-.common-spline {
-  width: 100%;
-  height: 1px;
-  background: rgba(0,0,0,0.2);
-}
-
-.overflow-y {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.common-solid-input {
-  padding: 0px 12px 0px 12px;
-  text-align: left;
-  background: rgba(0, 0, 0, 0);
-  border-style: solid;
-  border-color: rgb(94,94,94);
-  border-width: 1px;
-  border-radius: 12px;
-  color: rgb(255,255,255);
-  font-size: 12px;
-  outline: none;
-  box-sizing: border-box;
 }

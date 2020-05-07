@@ -138,6 +138,21 @@ class Frame extends React.Component {
     navigationActive(path, handle) {
         let _stack = this.state.activeStack
 
+        if (path === this.props.index) { // 如果导航到首页则退栈
+            let _index = _stack[0]
+
+            _index.compHandle = handle
+
+            _stack = [_index]
+
+            // eslint-disable-next-line react/no-direct-mutation-state
+            this.state.activeStack = _stack
+
+            this.setState({ activeStack: _stack })
+
+            return
+        }
+
         for (let item of this._param.actives) {
             if (item.path === path) {
                 _stack = _stack.filter((_it) => { return !(_it.path === item.path) }) // 过滤重复项
@@ -217,6 +232,8 @@ class Frame extends React.Component {
     }
 
     render() {
+        this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
+
         let actives = this.state.activeStack.filter((item) => {
             return item.component ? true : false
         }).map((item, key) => {

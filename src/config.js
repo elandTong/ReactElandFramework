@@ -1,130 +1,105 @@
+import Tool from './tool/Tool'
+
 import('./testing').then(testing => {
     window._ReactTesting = testing.default
-
-    console.error('import testing then', testing)
 })
 
 const _APITIPS = require('./assets/json/tipsmessage.json')
 const _LANGUAGE = require('./assets/json/language.json')
 
-const _APP_ID = window._APP_ID ? window._APP_ID : 'ig'
-const _APP_NAME = window._APP_NAME ? window._APP_NAME : 'IG彩票'
-const _APP_VERSION = window._APP_VERSION ? window._APP_VERSION : 101
-const _APP_DOMAIN = window._APP_DOMAIN ? window._APP_DOMAIN : '16898YH.COM'
+const _APP_ID = 'ig'
+const _APP_NAME = 'IG彩票'
+const _APP_VERSION = 101
 
-const _RELEASE = window._RELEASE_SERVER ? false : false
-const _RELEASE_DOMAIN = window._RELEASE_DOMAIN ? window._RELEASE_DOMAIN : 'yinhe.pjd111.com'
-const _TEST_DOMAIN = window._TEST_DOMAIN ? window._TEST_DOMAIN : 'pjd.bctt.cc'
-const _DOMAIN_PORT = window._DOMAIN_PORT ? window._DOMAIN_PORT : ''
+const _RELEASE = false
+const _RELEASE_DOMAIN = 'pjd.bctt.cc'
+const _TEST_DOMAIN = 'pjd.bctt.cc'
+
+const _INAPP = function () {
+    let name = window.location.hostname
+    if (name === '127.0.0.1' || name === 'localhost') {
+        return true
+    }
+    return false
+}
+
+const _QUERY = function (name) {
+    let searchIndex = 0, url = window.location.href
+    for (let i = 0; i < url.length; i++) {
+        if (url[i] === '?') {
+            searchIndex = i
+            break
+        }
+    }
+    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+    let r = url.substr(searchIndex).substr(1).match(reg)
+    if (r != null) return unescape(r[2])
+    return null
+}
 
 class Config {
     static APITIPS = _APITIPS
-    // app
-    static APP_ID = _APP_ID // APP ID
+    static LANGUAGE = _LANGUAGE
 
-    static APP_VERSION = _APP_VERSION // 版本号
-
-    static APP_DOMAIN = _APP_DOMAIN
-
+    static APP_ID = _APP_ID
+    static APP_VERSION = _APP_VERSION
     static APP_NAME = _APP_NAME
 
-    static isInApp() {
-        let name = window.location.hostname
+    static RELEASE = _RELEASE
+    static RELEASE_DOMAIN = _RELEASE_DOMAIN
+    static TEST_DOMAIN = _TEST_DOMAIN
 
-        if (name === '127.0.0.1' || name === 'localhost') {
-            return true
-        }
+    static SERVER_DM = this.getServerAddress()
 
-        return false
-    }
+    static LanguageUse = this.LANGUAGE.cn
 
-    static queryParameForURL(name, url) {
-        let searchIndex = 0
-        for (let i = 0; i < url.length; i++) {
-            if (url[i] === '?') {
-                searchIndex = i
-
-                break
-            }
-        }
-
-        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-
-        let r = url.substr(searchIndex).substr(1).match(reg)
-
-        if (r != null) return unescape(r[2])
-
-        return null
-    }
-
-    // server
-    static SERVER_XY = this.getSerProtocol() // 协议
-    static getSerProtocol() {
-        if (this.isInApp()) {
-            return 'https:'
-        } else {
-            return window.location.protocol
-        }
-    }
-
-    static SERVER_PT = this.getSerPort() // 端口
-    static getSerPort() {
-        if (this.isInApp()) {
-            return _DOMAIN_PORT
-        } else {
-            return window.location.port
-        }
-    }
-
-    static SERVER_HS = this.getSerHost() // 域名
-    static getSerHost() {
-        if (this.isInApp()) {
-            return _RELEASE ? _RELEASE_DOMAIN : _TEST_DOMAIN + ':' + this.SERVER_PT
-        } else {
-            return window.location.host
-        }
-    }
-
-    static SERVER_DM = this.SERVER_XY + '//' + this.SERVER_HS + '/' // API 地址
-
-    static getLanguage() {
-        switch (this.queryParameForURL('language', window.location.href)) {
-            case 'en': {
-                return _LANGUAGE.en
-            }
-            case 'cn': {
-                return _LANGUAGE.cn
-            }
-            default: {
-                return _LANGUAGE.cn
-            }
-        }
-    }
-
-    static LanguageUse = this.getLanguage()
+    static GLOBAL_EVENT = './_BASE_GLOBAL_THEME/'
 
     static Theme = {
         toolbar: {
             height: 45
         },
-        filter: {
-            height: 26,
-            margin: 4,
-            padding: 10
-        },
         color: {
-            theme: '#090909',
-            main: '#cca352',
-            main_easy: 'rgb(149,126,76)',
-            sub: '#00BFFF',
-            sub_deep: '#FF4500',
-            sub_dk: 'rgb(104,137,183)',
-            font: '#F5F5F5',
-            font_deep: '#A9A9A9',
-            font_dk: 'rgb(0,0,0)',
-            background: 'rgb(205,205,205)',
-            background_dk: 'rgb(0,0,0)',
-            toolbar: 'white'
+            theme: 'rgb(204,163,82)',
+            font: 'rgb(0,0,0)',
+            font_anti: 'rgb(205,205,205)' // 反差抵抗字体
+        },
+        light: {
+            theme: 'rgb(204,163,82)',
+            font: 'rgb(0,0,0)',
+            font_anti: 'rgb(205,205,205)'
+        },
+        dark: {
+            theme: 'rgb(204,163,82)',
+            font: 'rgb(245,245,245)',
+            font_anti: 'rgb(0,0,0)'
+        },
+        user: {
+            theme: 'rgb(204,163,82)',
+            font: 'rgb(0,0,0)',
+            font_anti: 'rgb(205,205,205)'
+        }
+    }
+
+    static getServerAddress() {
+        if (_INAPP()) {
+            return this.RELEASE ? this.RELEASE_DOMAIN : this.TEST_DOMAIN
+        } else {
+            return window.location.protocol + '//' + window.location.host + '/'
+        }
+    }
+
+    static getLanguage(name) {
+        switch (name) {
+            case 'en': {
+                return this.LANGUAGE.en
+            }
+            case 'cn': {
+                return this.LANGUAGE.cn
+            }
+            default: {
+                return this.LANGUAGE.cn
+            }
         }
     }
 
@@ -134,6 +109,54 @@ class Config {
 
     static setApiTips(data) {
         this.APITIPS = data
+    }
+
+    static setAppTheme(name) {
+        let _currname = this.getAppTheme()
+
+        if (_currname === name) {
+            return
+        }
+
+        let _broadcast = () => {
+            Tool.emit({
+                theme: this.GLOBAL_EVENT,
+                type: 'STYLE_THEME_CHANGE',
+                name: this.getAppTheme()
+            })
+        }
+
+        switch (name) {
+            case 'light': {
+                window.document.body.className = 'theme-light'
+                this.Theme.color = Object.assign({}, this.Theme.light)
+                _broadcast()
+                break
+            }
+            case 'dark': {
+                window.document.body.className = 'theme-dark'
+                this.Theme.color = Object.assign({}, this.Theme.dark)
+                _broadcast()
+                break
+            }
+            case 'user': {
+                window.document.body.className = 'theme-user'
+                this.Theme.color = Object.assign({}, this.Theme.user)
+                _broadcast()
+                break
+            }
+            default: {
+                break
+            }
+        }
+    }
+
+    static getAppTheme() {
+        return window.document.body.className.replace('theme-', '')
+    }
+
+    static setLanguage(name) {
+        this.LanguageUse = this.getLanguage(name || _QUERY('language'))
     }
 }
 

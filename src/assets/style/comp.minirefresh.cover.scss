@@ -1,0 +1,73 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.minirefresh-root-safety {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.minirefresh-root-safety-content {
+    width: 100%;
+}
+
+.downwrap-tips {
+    color: $light-color-minirefresh-font !important;
+    .theme-light & {
+        color: $light-color-minirefresh-font !important;
+    }
+    .theme-dark & {
+        color: $dark-color-minirefresh-font !important;
+    }
+    .theme-user & {
+        color: $user-color-minirefresh-font !important;
+    }
+}
+
+.downwrap-progress {
+    border: 1px solid $light-color-minirefresh-font !important;
+    border-bottom-color: transparent !important;
+    .theme-light & {
+        border: 1px solid $light-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+    .theme-dark & {
+        border: 1px solid $dark-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+    .theme-user & {
+        border: 1px solid $user-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+}
+
+.upwrap-tips {
+    color: $light-color-minirefresh-font !important;
+    .theme-light & {
+        color: $light-color-minirefresh-font !important;
+    }
+    .theme-dark & {
+        color: $dark-color-minirefresh-font !important;
+    }
+    .theme-user & {
+        color: $user-color-minirefresh-font !important;
+    }
+}
+
+.upwrap-progress {
+    border: 1px solid $light-color-minirefresh-font !important;
+    border-bottom-color: transparent !important;
+    .theme-light & {
+        border: 1px solid $light-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+    .theme-dark & {
+        border: 1px solid $dark-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+    .theme-user & {
+        border: 1px solid $user-color-minirefresh-font !important;
+        border-bottom-color: transparent !important;
+    }
+}

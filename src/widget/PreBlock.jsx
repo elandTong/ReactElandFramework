@@ -1,122 +1,58 @@
 import React from 'react';
 import GridLoader from 'react-spinners/GridLoader';
-import Config from '../config';
+import '../assets/style/comp.preblock.scss';
 import Tool from '../tool/Tool';
 import Sorry from './Sorry';
+import Config from '../config';
 
-class PreBlock extends React.Component {
+class Preblock extends React.Component {
     _opts = {
-        height: '100%',
-        loading: true,
-        comp: null,
-        sorry: {
-            active: false,
-            background: 'rgba(0,0,0,0.6)',
-            icon: {
-                width: 100
-            },
-            text: {
-                cont: null
-            },
-            button: {
-                active: false,
-                width: 100,
-                name: Config.LanguageUse.retry,
-                onClick: null
-            }
-        }
+        loadStatus: true,
+        loadComp: null,
+        sorryStatus: false,
+        sorryComp: null,
+        sorryOpts: null
     }
 
     _keep_opts = {
-        height: '100%',
-        loading: true,
-        comp: null,
-        sorry: {
-            active: false,
-            background: 'rgba(0,0,0,0.6)',
-            icon: {
-                width: 100
-            },
-            text: {
-                cont: null
-            },
-            button: {
-                active: false,
-                width: 100,
-                name: Config.LanguageUse.retry,
-                onClick: null
-            }
-        }
+        loadStatus: true,
+        loadComp: null,
+        sorryStatus: false,
+        sorryComp: null,
+        sorryOpts: null
     }
 
     constructor(props) {
         super(props)
 
         this.state = {
+            color: Config.Theme.color.theme
         }
     }
 
     render() {
-        let opts = this.props.opts ? this.props.opts : {}
-        opts.sorry = opts.sorry ? opts.sorry : {}
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), opts)
-        this._opts.sorry = Tool.structureAssignment(Object.assign({}, this._keep_opts.sorry), opts.sorry)
-        this._opts.sorry.icon = Tool.structureAssignment(Object.assign({}, this._keep_opts.sorry.icon), opts.sorry.icon)
-        this._opts.sorry.text = Tool.structureAssignment(Object.assign({}, this._keep_opts.sorry.text), opts.sorry.text)
-        this._opts.sorry.button = Tool.structureAssignment(Object.assign({}, this._keep_opts.sorry.button), opts.sorry.button)
-
-        let _style = {
-            root: {
-                width: '100%',
-                height: this._opts.height
-            },
-            last: {
-                width: '100%',
-                height: '100%',
-                zIndex: 1,
-                overflowX: 'hidden',
-                overflowY: 'auto'
-            },
-            mid: {
-                width: '100%',
-                height: '100%',
-                background: this._opts.sorry.background,
-                zIndex: 2
-            },
-            fast: {
-                width: '100%',
-                height: '100%',
-                background: 'rgba(0,0,0,0.4)',
-                zIndex: 3
-            }
-        }
-
-        _style.last = Object.assign(_style.last, this.props.style)
+        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
         return (
-            <div className='pos-relative' style={_style.root}>
-                <div className='pos-absolute' style={_style.last}>
-                    <div style={{ width: '100%' }}>
-                        {this.props.children}
-                    </div>
+            <div className={`pos-relative common-boxsize-full`}>
+                <div className={`pos-absolute comp-preblock-last ${this.props.className || ''}`} style={this.props.style}>
+                    {this.props.children}
                 </div>
 
-                {this._opts.sorry.active === true ? (
-                    <div className='pos-absolute' style={_style.mid}>
-                        <Sorry opts={{
-                            width: '100%',
-                            height: '100%',
-                            icon: this._opts.sorry.icon,
-                            text: this._opts.sorry.text,
-                            button: this._opts.sorry.button
-                        }} />
+                {/* sorry视图 */}
+                {this._opts.sorryStatus ? (
+                    <div className={'pos-absolute comp-preblock-mid'}>
+                        {this._opts.sorryComp ? (this._opts.sorryComp) : (
+                            <Sorry opts={this._opts.sorryOpts} />
+                        )}
                     </div>
                 ) : (null)}
 
-                {this._opts.loading === true ? (
-                    <div className='pos-absolute display-center' style={_style.fast}>
-                        {this._opts.comp ? (this._opts.comp) : (
-                            <GridLoader size={Tool.toscale(25)} margin={0} color={Config.Theme.color.main} loading={this._opts.loading} />
+                {/* loading视图 */}
+                {this._opts.loadStatus ? (
+                    <div className={'pos-absolute display-center comp-preblock-fast'}>
+                        {this._opts.loadComp ? (this._opts.loadComp) : (
+                            <GridLoader size={22} margin={0} loading={this._opts.loadStatus} color={this.state.color} />
                         )}
                     </div>
                 ) : (null)}
@@ -125,4 +61,4 @@ class PreBlock extends React.Component {
     }
 }
 
-export default PreBlock
+export default Preblock
