@@ -1,6 +1,5 @@
 import React from 'react'
 import '../assets/style/comp.button.scss'
-import Config from '../config'
 import Tool from '../tool/Tool'
 
 class ListButton extends React.Component {
@@ -18,7 +17,7 @@ class ListButton extends React.Component {
         super(props)
 
         this.state = {
-            currIndex: this.props.initIndex
+            currIndex: this.props.initIndex || 0
         }
     }
 
@@ -57,9 +56,9 @@ class ListButton extends React.Component {
             )
         })
 
-        _items_jsx = Tool.importSplitline(_items_jsx, {
-            selIndex: this.state.currIndex,
-            direction: 'y'
+        _items_jsx = Tool.insertSplitline(_items_jsx, {
+            select: this.state.currIndex,
+            orientation: 'y'
         })
 
         return (

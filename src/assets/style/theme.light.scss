@@ -4,6 +4,10 @@ $light-color-theme: rgb(204,163,82);
 $light-color-theme-font: black;
 $light-color-theme-font-anit: white;
 
+// 半透明
+$light-color-translucent:rgba(0,0,0,0.2);
+$light-color-translucent-low:rgba(0,0,0,0.1);
+
 // active
 $light-color-active-background: rgb(205,205,205);
 $light-color-active-font: black;

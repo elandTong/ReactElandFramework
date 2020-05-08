@@ -933,72 +933,46 @@ class Tool {
         }
     }
 
-    static importSplitline(items, opts = {}) {
-        let { selIndex = -1,
-            selColor = Config.Theme.color.theme,
-            noneColor = 'rgba(0,0,0,0.2)',
-            boundary = false,
-            direction = 'x',
-            thickness = 1,
-            scale = '100%' } = opts
+    static insertSplitline(items = [], opts = {}) {
+        let {
+            select = -1,
+            selectClassName = 'common-spline-select',
+            side = false,
+            orientation = 'x',
+            className = null
+        } = opts
 
-        let new_items = []
+        let _classname = orientation === 'x' ? 'common-spline-x' : 'common-spline-y'
 
-        let _getscale = (i) => {
-            if (i === selIndex || i === (selIndex - 1)) {
-                return '100%'
-            } else {
-                return scale
-            }
+        let _selectClassName = (i, s = false) => {
+            if (s) { return i === select ? selectClassName : '' }
+            return (i === select || i === select - 1) ? selectClassName : ''
         }
 
-        let _getcolor = (i) => {
-            if (i === selIndex || i === (selIndex - 1)) {
-                return selColor
-            } else {
-                return noneColor
-            }
-        }
-
+        let _result = []
         for (let i = 0; i < items.length; i++) {
-            let _it = items[i]
-
-            if (boundary === true) {
+            let _item = items[i]
+            if (side) {
                 if (i === 0) {
-                    new_items.push((
-                        <div key={items.length + i} style={{
-                            width: direction === 'x' ? _getscale(i) : thickness,
-                            height: direction === 'x' ? thickness : _getscale(i),
-                            background: _getcolor(i)
-                        }}></div>
+                    _result.push((
+                        <div key={items.length + i} className={`${_classname} ${className || ''} ${_selectClassName(i, true)}`} />
                     ))
                 }
-
-                new_items.push(_it)
-
-                new_items.push((
-                    <div key={items.length + i + 1} style={{
-                        width: direction === 'x' ? _getscale(i) : thickness,
-                        height: direction === 'x' ? thickness : _getscale(i),
-                        background: _getcolor(i)
-                    }}></div>
+                _result.push(_item)
+                _result.push((
+                    <div key={items.length + i + 1} className={`${_classname} ${className || ''} ${_selectClassName(i)}`} />
                 ))
             } else {
-                new_items.push(_it)
-
+                _result.push(_item)
                 if (i !== items.length - 1) {
-                    new_items.push((
-                        <div key={items.length + i} style={{
-                            width: direction === 'x' ? _getscale(i) : thickness,
-                            height: direction === 'x' ? thickness : _getscale(i),
-                            background: _getcolor(i)
-                        }}></div>
+                    _result.push((
+                        <div key={items.length + i} className={`${_classname} ${className || ''} ${_selectClassName(i)}`} />
                     ))
                 }
             }
         }
 
-        return new_items
+        return _result
     }
 
     static getWeekDay(day) {

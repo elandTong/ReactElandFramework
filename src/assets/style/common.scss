@@ -1,5 +1,9 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
 .common-boxsize-full {
-width: 100%; height: 100%;
+    width: 100%; height: 100%;
 }
 
 .common-boxsize-full-number {
@@ -24,10 +28,47 @@ outline: none;
 box-sizing: border-box;
 }
 
-.common-spline {
-width: 100%;
-height: 1px;
-background: rgba(0,0,0,0.2);
+.common-spline-x {
+    width: 100%;
+    height: 1px;
+    background: $light-color-translucent-low;
+    .theme-light & {
+        background: $light-color-translucent-low;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent-low;
+    }
+    .theme-user & {
+        background: $user-color-translucent-low;
+    }
+}
+
+.common-spline-y {
+    width: 1px;
+    height: 100%;
+    background: $light-color-translucent-low;
+    .theme-light & {
+        background: $light-color-translucent-low;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent-low;
+    }
+    .theme-user & {
+        background: $user-color-translucent-low;
+    }
+}
+
+.common-spline-select {
+    background: $light-color-theme;
+    .theme-light & {
+        background: $light-color-theme;
+    }
+    .theme-dark & {
+        background: $dark-color-theme;
+    }
+    .theme-user & {
+        background: $user-color-theme;
+    }
 }
 
 .common-input {

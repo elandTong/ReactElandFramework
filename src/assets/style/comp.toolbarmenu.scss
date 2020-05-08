@@ -28,7 +28,16 @@
 }
 
 .comp-toolbarmenu-item-select {
-    background: rgba(0,0,0,0.1);
+    background: $light-color-translucent-low;
+    .theme-light & {
+        background: $light-color-translucent-low;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent-low;
+    }
+    .theme-user & {
+        background: $user-color-translucent-low;
+    }
 }
 
 .comp-toolbarmenu-item-unsele {

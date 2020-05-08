@@ -1,6 +1,6 @@
 import React from 'react';
 import Login from './actived/Login';
-import Main, { Test, Test2 } from './actived/Main';
+import Main from './actived/Main';
 import Frame from './router/Frame';
 import Tool from './tool/Tool';
 import Popup from './window/Popup';
@@ -18,20 +18,6 @@ class Application extends React.Component {
         actives: [{
           component: Main,
           path: Main._path,
-          opts: {
-            props: {
-            }
-          }
-        }, {
-          component: Test,
-          path: Test._path,
-          opts: {
-            props: {
-            }
-          }
-        }, {
-          component: Test2,
-          path: Test2._path,
           opts: {
             props: {
             }

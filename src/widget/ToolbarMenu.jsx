@@ -66,7 +66,7 @@ class ToolbarMenu extends React.Component {
 
         return (
             <div className={`display-column comp-toolbarmenu-root ${this.props.className || ''}`} style={this.props.style}>
-                {Tool.importSplitline(_items_jsx)}
+                {Tool.insertSplitline(_items_jsx)}
             </div>
         )
     }

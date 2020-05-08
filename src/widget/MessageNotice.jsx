@@ -37,7 +37,7 @@ class MessageNotice extends React.Component {
                     {this._opts.content ? (<span>{this._opts.content}</span>) : (this.props.children)}
                 </div>
 
-                <div className={'common-spline'} />
+                <div className={'common-spline-x'} />
 
                 <div className={'display-center click-out-ripple comp-message-notice-bottom'} onClick={(e) => {
                     if (this._opts.onSure) {

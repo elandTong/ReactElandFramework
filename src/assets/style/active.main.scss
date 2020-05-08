@@ -1,0 +1,16 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.active-main-slide-background {
+    background: $light-color-toolbar-background;
+    .theme-light & {
+        background: $light-color-toolbar-background;
+    }
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+    }
+}
