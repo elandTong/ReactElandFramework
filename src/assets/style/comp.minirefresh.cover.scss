@@ -71,3 +71,16 @@
         border-bottom-color: transparent !important;
     }
 }
+
+.comp-minirefresh-scroll {
+    background: $light-color-active-background;
+    .theme-light & {
+        background: $light-color-active-background;
+    }
+    .theme-dark & {
+        background: $dark-color-active-background;
+    }
+    .theme-user & {
+        background: $user-color-active-background;
+    }
+}

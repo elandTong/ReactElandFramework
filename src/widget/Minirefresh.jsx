@@ -61,7 +61,7 @@ class Minirefresh extends React.Component {
                 <div id={'minirefresh'} className={'minirefresh-wrap'} ref={(comp) => {
                     this._miniRefreshComp = comp
                 }}>
-                    <div className={'minirefresh-scroll'}>
+                    <div className={`minirefresh-scroll ${this.props.className || 'comp-minirefresh-scroll'}`}>
                         <div className={'minirefresh-root-safety-content'}>
                             {this.props.children}
                         </div>
