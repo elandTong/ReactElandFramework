@@ -10,6 +10,7 @@
     "css-vars-ponyfill": "^2.2.1",
     "less": "^3.11.1",
     "less-loader": "^6.0.0",
+    "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
     "postcss-pxtorem": "^5.1.1",
     "react": "^16.13.1",

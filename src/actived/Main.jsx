@@ -9,6 +9,7 @@ import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ListButton from '../widget/ListButton';
 import ToolbarMenu from '../widget/ToolbarMenu';
+import Login from './Login';
 
 class Main extends BaseActived {
     static _path = '/main'
@@ -60,6 +61,17 @@ class Main extends BaseActived {
                     },
                     onMenu: (e) => {
                         this.showPopup('toolbarmenu')
+
+                        this.startActive({
+                            component: Login,
+                            path: Login._path,
+                            opts: {
+                                props: {
+                                }
+                            }
+                        }, (comp) => {
+                            comp.onData('test start active ondata')
+                        })
                     }
                 },
                 hideToolbar: false

@@ -1,5 +1,6 @@
 import React from 'react';
 import Tool from '../tool/Tool';
+import Frame from './Frame';
 
 class BaseWindow extends React.Component {
     static _BASE_GLOBAL_THEME = './_BASE_GLOBAL_THEME/'
@@ -53,19 +54,41 @@ class BaseWindow extends React.Component {
     }
 
     navigationActive(name, handle) {
-        this._router.navigationActive(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
+        if (this._router instanceof Frame) {
+            this._router.navigationActive(name, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
+    }
+
+    startActive(intent, handle) {
+        if (this._router instanceof Frame) {
+            this._router.startActive(intent, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
     }
 
     navigationWindow(name, handle) {
-        this._router.navigationWindow(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
+        if (this._router instanceof Frame) {
+            this._router.navigationWindow(name, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
+    }
+
+    startWindow(intent, handle) {
+        if (this._router instanceof Frame) {
+            this._router.startWindow(intent, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
     }
 
     finish() {
-        this._router.finishWindow(this._window)
+        if (this._router instanceof Frame) {
+            this._router.finishWindow(this._window)
+        }
     }
 }
 

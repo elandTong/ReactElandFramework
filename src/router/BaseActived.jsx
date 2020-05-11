@@ -1,6 +1,7 @@
 import React from 'react';
 import Tool from '../tool/Tool';
 import Actived from './Actived';
+import Frame from './Frame';
 
 class BaseActived extends React.Component {
     static _BASE_GLOBAL_THEME = './_BASE_GLOBAL_THEME/'
@@ -55,19 +56,41 @@ class BaseActived extends React.Component {
 
     // router
     navigationActive(name, handle) {
-        this._router.navigationActive(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
+        if (this._router instanceof Frame) {
+            this._router.navigationActive(name, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
+    }
+
+    startActive(intent, handle) {
+        if (this._router instanceof Frame) {
+            this._router.startActive(intent, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
     }
 
     navigationWindow(name, handle) {
-        this._router.navigationWindow(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
+        if (this._router instanceof Frame) {
+            this._router.navigationWindow(name, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
+    }
+
+    startWindow(intent, handle) {
+        if (this._router instanceof Frame) {
+            this._router.startWindow(intent, (comp) => {
+                if (handle) { handle(comp) }
+            })
+        }
     }
 
     finish() {
-        this._router.finishActive(this._actived)
+        if (this._router instanceof Frame) {
+            this._router.finishActive(this._actived)
+        }
     }
 
     // popup

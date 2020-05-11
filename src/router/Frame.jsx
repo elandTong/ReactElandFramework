@@ -174,6 +174,50 @@ class Frame extends React.Component {
         }
     }
 
+    startActive(intent = {
+        component: null,
+        path: null,
+        opts: {
+            props: {
+            }
+        }
+    }, handle) {
+        if (!intent || !intent.component || Tool.isEmpty(intent.path)) {
+            return
+        }
+
+        let _stack = this.state.activeStack
+
+        if (intent.path === this.props.index) { // 如果导航到首页则退栈
+            let _index = _stack[0]
+
+            _index.compHandle = handle
+
+            _stack = [_index]
+
+            // eslint-disable-next-line react/no-direct-mutation-state
+            this.state.activeStack = _stack
+
+            this.setState({ activeStack: _stack })
+
+            return
+        }
+
+        _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
+
+        _stack.push(Object.assign({
+            active: null,
+            compref: null,
+            zIndex: ++this._activeZIndex,
+            compHandle: handle
+        }, intent))
+
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.activeStack = _stack
+
+        this.setState({ activeStack: _stack })
+    }
+
     getActive(path) {
         for (let it of this._param.actives) {
             if (it.path === path) { return it.compref }
@@ -221,6 +265,35 @@ class Frame extends React.Component {
                 break
             }
         }
+    }
+
+    startWindow(intent = {
+        component: null,
+        path: null,
+        opts: {
+            props: {
+            }
+        }
+    }, handle) {
+        if (!intent || !intent.component || Tool.isEmpty(intent.path)) {
+            return
+        }
+
+        let _stack = this.state.windowStack
+
+        _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
+
+        _stack.push(Object.assign({
+            window: null,
+            compref: null,
+            zIndex: ++this._windowZIndex,
+            compHandle: handle
+        }, intent))
+
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.windowStack = _stack
+
+        this.setState({ windowStack: _stack })
     }
 
     getWindow(path) {
