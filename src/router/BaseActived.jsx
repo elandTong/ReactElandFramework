@@ -18,8 +18,6 @@ class BaseActived extends React.Component {
 
     _broadcastData = {}
 
-    _globalEventHandle = null
-
     constructor(props) {
         super(props)
 
@@ -29,21 +27,22 @@ class BaseActived extends React.Component {
 
         this._initPame = props.initPame
 
-        this._globalEventHandle = (data) => {
-            this._broadcastData = data
-            if (this._broadcastHandle) {
-                this._broadcastHandle(data)
-            }
-        }
+        this.onGlobalEvent = this.onGlobalEvent.bind(this)
 
-        Tool.onEmit(BaseActived._BASE_GLOBAL_THEME, this._globalEventHandle)
+        Tool.onEmit(BaseActived._BASE_GLOBAL_THEME, this.onGlobalEvent)
+    }
+
+    onGlobalEvent(data) {
+        this._broadcastData = data
+
+        if (this._broadcastHandle) { this._broadcastHandle(data) }
     }
 
     componentDidMount() {
     }
 
     componentWillUnmount() {
-        Tool.removeEmit(this._globalEventHandle)
+        Tool.removeEmit(this.onGlobalEvent)
     }
 
     onData(data) {
