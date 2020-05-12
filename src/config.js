@@ -9,7 +9,7 @@ const _LANGUAGE = require('./assets/json/language.json')
 
 const _APP_ID = 'ig'
 const _APP_NAME = 'IG彩票'
-const _APP_VERSION = 112
+const _APP_VERSION = 120001001
 
 const _RELEASE = false
 const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
