@@ -15,6 +15,12 @@ class Login extends BaseActived {
         }
     }
 
+    onBroadcast(data) {
+        super.onBroadcast(data)
+
+        console.log('on broadcast for login', data)
+    }
+
     onData(data) {
         super.onData(data)
     }

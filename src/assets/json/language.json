@@ -8,7 +8,8 @@
         "lightmode": "高亮模式",
         "usermode": "用户模式",
         "ctcname": "传统彩",
-        "gfcname": "官方彩"
+        "gfcname": "官方彩",
+        "enter": "进入"
     },
     "en": {
         "appname": "IGLottery",
@@ -19,6 +20,7 @@
         "lightmode": "Light mode",
         "usermode": "User mode",
         "ctcname": "tradition lottery",
-        "gfcname": "official lottery"
+        "gfcname": "official lottery",
+        "enter": "enter"
     }
 }

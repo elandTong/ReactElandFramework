@@ -2,11 +2,10 @@
 import React from 'react'
 import '../assets/style/comp.toolbarmenu.scss'
 import Config from '../config'
+import Emit from '../tool/EventBus'
 import Tool from '../tool/Tool'
 
 class ToolbarMenu extends React.Component {
-    _globalEventHandle = null
-
     constructor(props) {
         super(props)
 
@@ -24,21 +23,24 @@ class ToolbarMenu extends React.Component {
             currname: Config.getAppTheme()
         }
 
-        this._globalEventHandle = (data) => {
-            if (data.type === Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE) {
-                this.setState({ currname: data.name })
-            }
-            console.error('toolbarmenu on global event for data', data)
+        this.onBroadcast = this.onBroadcast.bind(this)
+
+        Emit.on(Config.GLOBAL_EVENT, this.onBroadcast)
+    }
+
+    onBroadcast(data) {
+        if (data.type === Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE) {
+            this.setState({ currname: data.name })
         }
 
-        Tool.onEmit(Config.GLOBAL_EVENT, this._globalEventHandle)
+        console.error('toolbarmenu on global event for data', data)
     }
 
     componentDidMount() {
     }
 
     componentWillUnmount() {
-        Tool.removeEmit(this._globalEventHandle)
+        Emit.remove(this.onBroadcast)
     }
 
     onItemClick(item, key, e) {

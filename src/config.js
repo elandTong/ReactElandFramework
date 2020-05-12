@@ -1,4 +1,4 @@
-import Tool from './tool/Tool'
+import Emit from './tool/EventBus'
 
 import('./testing').then(testing => {
     window._ReactTesting = testing.default
@@ -12,8 +12,8 @@ const _APP_NAME = 'IG彩票'
 const _APP_VERSION = 109
 
 const _RELEASE = false
-const _RELEASE_DOMAIN = 'pjd.bctt.cc'
-const _TEST_DOMAIN = 'pjd.bctt.cc'
+const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
+const _TEST_DOMAIN = 'https://pjd.bctt.cc/'
 
 const _INAPP = function () {
     let name = window.location.hostname
@@ -123,7 +123,7 @@ class Config {
         }
 
         let _broadcast = () => {
-            Tool.emit({
+            Emit.exe({
                 theme: this.GLOBAL_EVENT,
                 type: this.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE,
                 name: this.getAppTheme()

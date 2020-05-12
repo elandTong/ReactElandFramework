@@ -2,7 +2,6 @@ import React from 'react'
 import Config from '../config.js'
 import Spiner from '../window/Spiner'
 import Toast from '../window/Toast'
-import EventBus from './EventBus.js'
 
 // eslint-disable-next-line no-extend-native
 Date.prototype.format = function (fmt) {
@@ -31,15 +30,7 @@ Date.prototype.format = function (fmt) {
 
 class Tool {
     static _frame = null
-    static _mainAct = null
     static _apiMiddlewareHandle = null
-    static eventbus = new EventBus()
-
-    static hasTouch = 'ontouchstart' in window
-    static startEvent = this.hasTouch ? 'touchstart' : 'mousedown'
-    static moveEvent = this.hasTouch ? 'touchmove' : 'mousemove'
-    static endEvent = this.hasTouch ? 'touchend' : 'mouseup'
-    static cancelEvent = this.hasTouch ? 'touchcancel' : 'mouseup'
 
     static MountFrame(comp) {
         this._frame = comp
@@ -194,10 +185,6 @@ class Tool {
 
     static postRequest(api, params, succHandle, errHandle, opts) {
         if (!api) { return }
-
-        this.postRequestXML(api, params, succHandle, errHandle, opts)
-
-        return
 
         let url
 
@@ -510,228 +497,6 @@ class Tool {
         return new Date(utcTime + 3600000 * _tz)
     }
 
-    static setBtnOnTouchEventNoColor(dom, endHandle, startHandle, isStopEvent = false) {
-        let startX, startY
-
-        // 开始
-        dom.on(this.startEvent, function (e) {
-            let x
-            let y
-
-            if (e.touches) {
-                x = Number(e.touches[0].clientX)
-                y = Number(e.touches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            startX = x
-            startY = y
-
-            if (startHandle) {
-                startHandle(this)
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-        })
-
-        // 结束
-        dom.on(this.endEvent, function (e) {
-            let x
-            let y
-
-            if (e.changedTouches) {
-                x = Number(e.changedTouches[0].clientX)
-                y = Number(e.changedTouches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            if ((Math.abs(startX - x) < 10) && (Math.abs(startY - y) < 10)) {
-                if (endHandle) {
-                    endHandle(this)
-                }
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-
-            e.preventDefault()
-
-            return true
-        })
-
-        // 移动
-        dom.on(this.moveEvent, function (e) { })
-
-        if (this.startEvent === 'mousedown') {
-            dom.on('click', function (e) {
-                e.stopPropagation()
-            })
-        }
-    }
-
-    static setBtnOnTouchEvent(dom, endHandle, pressColor = '', endColor = '', startHandle, isStopEvent = false) {
-        let startX, startY
-
-        let isEnd = false
-
-        // 开始
-        dom.on(this.startEvent, function (e) {
-            let x
-            let y
-
-            if (e.touches) {
-                x = Number(e.touches[0].clientX)
-                y = Number(e.touches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            startX = x
-            startY = y
-
-            dom.css('background', pressColor)
-
-            if (startHandle) {
-                startHandle(this)
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-        })
-
-        // 结束
-        dom.on(this.endEvent, function (e) {
-            isEnd = true
-
-            dom.css('background', endColor)
-
-            let x
-            let y
-
-            if (e.changedTouches) {
-                x = Number(e.changedTouches[0].clientX)
-                y = Number(e.changedTouches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            if ((Math.abs(startX - x) < 10) && (Math.abs(startY - y) < 10)) {
-                if (endHandle) {
-                    endHandle(this)
-                }
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-
-            e.preventDefault()
-
-            return true
-        })
-
-        // 移动
-        dom.on(this.moveEvent, function (e) {
-            if (!isEnd) {
-                dom.css('background', endColor)
-            }
-        })
-
-        if (this.startEvent === 'mousedown') {
-            dom.on('click', function (e) {
-                e.stopPropagation()
-            })
-        }
-    }
-
-    static setBtnOnTouchEventForScale(dom, scale = 0.9, endHandle, startHandle, isStopEvent = false) {
-        let startX, startY
-
-        let isEnd = false
-
-        // 开始
-        dom.on(this.startEvent, function (e) {
-            let x
-            let y
-
-            if (e.touches) {
-                x = Number(e.touches[0].clientX)
-                y = Number(e.touches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            startX = x
-            startY = y
-
-            dom.css('transform', 'scale(' + scale + ')')
-
-            if (startHandle) {
-                startHandle(this)
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-        })
-
-        // 结束
-        dom.on(this.endEvent, function (e) {
-            isEnd = true
-
-            dom.css('transform', '')
-
-            let x
-            let y
-
-            if (e.changedTouches) {
-                x = Number(e.changedTouches[0].clientX)
-                y = Number(e.changedTouches[0].clientY)
-            } else {
-                x = Number(e.clientX)
-                y = Number(e.clientY)
-            }
-
-            if ((Math.abs(startX - x) < 10) && (Math.abs(startY - y) < 10)) {
-                if (endHandle) {
-                    endHandle(this)
-                }
-            }
-
-            if (isStopEvent) {
-                e.stopPropagation()
-            }
-
-            e.preventDefault()
-
-            return true
-        })
-
-        // 移动
-        dom.on(this.moveEvent, function (e) {
-            if (!isEnd) {
-                dom.css('transform', '')
-            }
-        })
-
-        if (this.startEvent === 'mousedown') {
-            dom.on('click', function (e) {
-                e.stopPropagation()
-            })
-        }
-    }
-
     static queryParameForURL(name, url) {
         let searchIndex = 0
         for (let i = 0; i < url.length; i++) {
@@ -768,20 +533,6 @@ class Tool {
         return s.join('')
     }
 
-    static onEmit(theme, handle) {
-        return this.eventbus.onemit(theme, handle)
-    }
-
-    static emit(event) {
-        return this.eventbus.emit(event)
-    }
-
-    static removeEmit(handle) {
-        return this.eventbus.remove(handle)
-    }
-
-    static timeout_rotate = null
-
     static rotate(idOrDom, times = 2000) {
         let dom = idOrDom
 
@@ -793,9 +544,9 @@ class Tool {
 
         dom.className = 'common-rotate'
 
-        clearTimeout(this.timeout_rotate)
+        clearTimeout(window._timeout_rotate)
 
-        this.timeout_rotate = setTimeout(() => {
+        window._timeout_rotate = setTimeout(() => {
             dom.className = ''
         }, times)
     }

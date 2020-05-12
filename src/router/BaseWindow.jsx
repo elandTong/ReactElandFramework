@@ -1,5 +1,5 @@
 import React from 'react';
-import Tool from '../tool/Tool';
+import Emit from '../tool/EventBus';
 import Frame from './Frame';
 
 class BaseWindow extends React.Component {
@@ -13,8 +13,6 @@ class BaseWindow extends React.Component {
 
     _indata = {}
 
-    _broadcastHandle = null
-
     _broadcastData = {}
 
     constructor(props) {
@@ -26,30 +24,24 @@ class BaseWindow extends React.Component {
 
         this._initPame = props.initPame
 
-        this.onGlobalEvent = this.onGlobalEvent.bind(this)
+        this.onBroadcast = this.onBroadcast.bind(this)
 
-        Tool.onEmit(BaseWindow._BASE_GLOBAL_THEME, this.onGlobalEvent)
-    }
-
-    onGlobalEvent(data) {
-        this._broadcastData = data
-
-        if (this._broadcastHandle) { this._broadcastHandle(data) }
+        Emit.on(BaseWindow._BASE_GLOBAL_THEME, this.onBroadcast)
     }
 
     componentDidMount() {
     }
 
     componentWillUnmount() {
-        Tool.removeEmit(this.onGlobalEvent)
+        Emit.remove(this.onBroadcast)
     }
 
     onData(data) {
         this._indata = data
     }
 
-    onBroadcast(han) {
-        this._broadcastHandle = han
+    onBroadcast(data) {
+        this._broadcastData = data
     }
 
     navigationActive(name, handle) {
@@ -62,9 +54,7 @@ class BaseWindow extends React.Component {
 
     startActive(intent, handle) {
         if (this._router instanceof Frame) {
-            this._router.startActive(intent, (comp) => {
-                if (handle) { handle(comp) }
-            })
+            this._router.startActive(intent, handle)
         }
     }
 
@@ -78,9 +68,7 @@ class BaseWindow extends React.Component {
 
     startWindow(intent, handle) {
         if (this._router instanceof Frame) {
-            this._router.startWindow(intent, (comp) => {
-                if (handle) { handle(comp) }
-            })
+            this._router.startWindow(intent, handle)
         }
     }
 

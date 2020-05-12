@@ -259,7 +259,7 @@ class NetApi {
         }
 
         if (carrier instanceof Carrier) {
-            Tool.postRequest(carrier.api, carrier.pame, (data) => {
+            Tool.postRequestXML(carrier.api, carrier.pame, (data) => {
                 let _result = data
 
                 if (this.monitor.onhttpresult) {

@@ -1,7 +1,7 @@
 import React from 'react'
+import '../assets/style/comp.message.scss'
 import BaseWindow from '../router/BaseWindow'
 import { WindowPage } from '../router/Page'
-import '../assets/style/comp.message.scss'
 
 class Toast extends BaseWindow {
     static _path = '/toast'

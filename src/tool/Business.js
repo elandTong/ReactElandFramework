@@ -121,7 +121,7 @@ class Business {
     static getAesKey(handle) { // 获取 aes key
         if (!handle) { return }
 
-        Tool.postRequest('user/getAeskey', null, (data) => {
+        Tool.postRequestXML('user/getAeskey', null, (data) => {
             if (data.result) {
                 handle(this.decrypt(data.result))
             } else {
@@ -149,7 +149,7 @@ class Business {
                 rand: Tool.randomString()
             }
 
-            Tool.postRequest('user/login', pame, (data) => {
+            Tool.postRequestXML('user/login', pame, (data) => {
                 if (data.code === 0) {
                     this._status = 1
 
@@ -196,7 +196,7 @@ class Business {
 
             pame.rand = Tool.randomString()
 
-            Tool.postRequest('user/register', pame, (data) => {
+            Tool.postRequestXML('user/register', pame, (data) => {
                 if (data.code === 0) {
                     this._status = 1
 
@@ -225,7 +225,7 @@ class Business {
     }
 
     static UserinfoApi(succHandle, errHandle) {
-        Tool.postRequest('user/userInfo', {
+        Tool.postRequestXML('user/userInfo', {
             requestType: 'json'
         }, (data) => {
             if (data.code === 0) {
@@ -255,7 +255,7 @@ class Business {
     }
 
     static AccountsApi(succHandle, errHandle) {
-        Tool.postRequest('account/getAccounts', {
+        Tool.postRequestXML('account/getAccounts', {
             requestType: 'json'
         }, (data) => {
             if (data.code === 0) {
@@ -305,7 +305,7 @@ class Business {
         pame.requestType = 'json'
 
         Tool.showLoading((comp) => {
-            Tool.postRequest('gameApi/login', pame, (data) => {
+            Tool.postRequestXML('gameApi/login', pame, (data) => {
                 comp.close()
 
                 let link = null
@@ -331,7 +331,7 @@ class Business {
             requestType: 'json'
         }
 
-        Tool.postRequest('gameApi/enter', pame, (data) => {
+        Tool.postRequestXML('gameApi/enter', pame, (data) => {
             if (data.code === 0) {
                 switch (data.result) {
                     case 'OK': {
@@ -396,7 +396,7 @@ class Business {
     }
 
     static LogoutApi(succHandle, errHandel) {
-        Tool.postRequest('user/logout', {
+        Tool.postRequestXML('user/logout', {
         }, (data) => {
             if (succHandle) { succHandle(data) }
         }, (err) => {

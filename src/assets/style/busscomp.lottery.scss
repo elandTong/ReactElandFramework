@@ -1,0 +1,75 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.busscomp-lottery-root {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.busscomp-lottery-cont-root {
+    width: calc(100vw - 48px - 50px);
+    margin-left: 16px;
+}
+
+.busscomp-lottery-imag {
+    width: 50px;
+}
+
+.busscomp-lottery-item-root {
+    width: 23.5%;
+    height: 42px;
+    border-radius: 6px;
+    background: $light-color-translucent-low;
+    font-size: 12px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        background: $light-color-translucent-low;
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent-low;
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        background: $user-color-translucent-low;
+        color: $user-color-theme-font;
+    }
+}
+
+.busscomp-lottery-item-name {
+    font-weight: bold;
+}
+
+.busscomp-lottery-item-tips-fp {
+    color: steelblue;
+}
+
+.busscomp-lottery-item-tips-gp {
+    color: gray;
+}
+
+.busscomp-lottery-item-tips-sj {
+    color: $light-color-theme;
+    .theme-light & {
+        color: $light-color-theme;
+    }
+    .theme-dark & {
+        color: $dark-color-theme;
+    }
+    .theme-user & {
+        color: $user-color-theme;
+    }
+}
+
+.busscomp-lottery-item-tips {
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+.busscomp-lottery-item-margin {
+    margin-top: 6px;
+}

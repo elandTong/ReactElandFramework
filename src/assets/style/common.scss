@@ -14,6 +14,19 @@ width: calc(100vw);height: calc(100vh);
 width: fit-content; height: fit-content;
 }
 
+.common-boxsize-background {
+    background: $light-color-translucent-low;
+    .theme-light & {
+        background: $light-color-translucent-low;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent-low;
+    }
+    .theme-user & {
+        background: $user-color-translucent-low;
+    }
+}
+
 .common-solid-input {
 padding: 0px 12px 0px 12px;
 text-align: left;

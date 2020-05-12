@@ -3,14 +3,15 @@
 @import "theme.user";
 
 .active-main-slide-background {
-    background: $light-color-toolbar-background;
+    padding-top: 10px;
+    background: $light-color-toolbar-background !important;
     .theme-light & {
-        background: $light-color-toolbar-background;
+        background: $light-color-toolbar-background !important;
     }
     .theme-dark & {
-        background: $dark-color-toolbar-background;
+        background: $dark-color-toolbar-background !important;
     }
     .theme-user & {
-        background: $user-color-toolbar-background;
+        background: $user-color-toolbar-background !important;
     }
 }

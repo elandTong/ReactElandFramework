@@ -3,13 +3,14 @@ import '../assets/style/active.main.scss';
 import Config from '../config';
 import BaseActived from '../router/BaseActived';
 import { ActivePage } from '../router/Page';
+import NetApi from '../tool/NetApi';
 import Tool from '../tool/Tool';
+import LotteryGame from '../widget/business/LotteryGame';
+import Minirefresh from '../widget/Minirefresh';
 import Modal from '../widget/Modal';
 import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
-import ListButton from '../widget/ListButton';
 import ToolbarMenu from '../widget/ToolbarMenu';
-import Login from './Login';
 
 class Main extends BaseActived {
     static _path = '/main'
@@ -18,11 +19,32 @@ class Main extends BaseActived {
 
     _navbarCompRef = null
 
+    _jsondata = require('../assets/json/lotterys.json')
+
     constructor(props) {
         super(props)
 
         this.state = {
-            title: Config.LANGUAGE_USE.appname
+            title: Config.LANGUAGE_USE.appname,
+            refresh: {
+                up: {
+                    isLock: true,
+                    isAuto: true,
+                    loadFull: {
+                        isEnable: true,
+                    }
+                },
+                down: {
+                    isAuto: false,
+                    loadFull: {
+                        isEnable: true,
+                    }
+                }
+            },
+            data: {
+                ctc: this._jsondata.ctc,
+                gfc: this._jsondata.gfc
+            }
         }
 
         this.pushPopups([{
@@ -32,7 +54,7 @@ class Main extends BaseActived {
                 // className: '' // 作用于弹出壳
             },
             comp: (
-                <Modal className={'common-boxsize-full-number'} onClick={(e) => {
+                <Modal className={'common-boxsize-full-number common-boxsize-background'} onClick={(e) => {
                     this.closePopup('toolbarmenu')
                 }}>
                     <ToolbarMenu className={'pos-absolute-nosize'} style={{
@@ -43,11 +65,101 @@ class Main extends BaseActived {
                 </Modal>
             )
         }])
-
-        this.init()
     }
 
-    init() {
+    onBroadcast(data) {
+        super.onBroadcast(data)
+
+        console.log('on broadcast for main', data)
+    }
+
+    onTab1ItemClick(item, key, e) {
+        console.error('tab1 click item', item, ' key', key)
+    }
+
+    onTab2ItemClick(item, key, e) {
+        console.error('tab2 click item', item, ' key', key)
+    }
+
+    setCtcData(games = []) {
+        let _data = this.state.data
+
+        for (let _it of _data.ctc) {
+            _it.games = games.filter((_gt) => {
+                return _it.id === _gt.class
+            })
+        }
+
+        return _data.ctc
+    }
+
+    setGfcData(games = []) {
+        let _data = this.state.data
+
+        for (let _it of _data.gfc) {
+            _it.games = games.filter((_gt) => {
+                return _it.id === _gt.class
+            })
+        }
+
+        return _data.gfc
+    }
+
+    setData(games = []) {
+        let _data = this.state.data
+
+        let _hkgs = []
+
+        for (let _it of games) {
+            switch (_it.apicode) {
+                case 'lottery': {
+                    _data.ctc = this.setCtcData(_it.games)
+                    break
+                }
+                case 'gfc': {
+                    _data.gfc = this.setGfcData(_it.games)
+                    break
+                }
+                case 'lotto': {
+                    _hkgs = _it.games
+                    break
+                }
+                default: {
+                    break
+                }
+            }
+        }
+
+        for (let _it of _data.ctc) {
+            if (_it.id === 'hk6') {
+                _it.games = _it.games.concat(_hkgs)
+            }
+        }
+
+        this.setState({ data: _data })
+
+        console.error('main update setdata', _data)
+    }
+
+    update(comp) {
+        NetApi.call('game/getGames', {}, (data) => {
+            if (data.code === 0) {
+                for (let _item of data.result) {
+                    if (_item.no === 10) {
+                        this.setData(_item.games)
+                        break
+                    }
+                }
+
+                if (comp instanceof Minirefresh) {
+                    comp.endDownLoading(true)
+                }
+            }
+        }, (err) => {
+            if (comp instanceof Minirefresh) {
+                comp.endDownLoading(false)
+            }
+        })
     }
 
     render() {
@@ -61,17 +173,6 @@ class Main extends BaseActived {
                     },
                     onMenu: (e) => {
                         this.showPopup('toolbarmenu')
-
-                        this.startActive({
-                            component: Login,
-                            path: Login._path,
-                            opts: {
-                                props: {
-                                }
-                            }
-                        }, (comp) => {
-                            comp.onData('test start active ondata')
-                        })
                     }
                 },
                 hideToolbar: false
@@ -111,15 +212,40 @@ class Main extends BaseActived {
                             }
                         }}>
                         <TabSlide>
-                            <div className={'common-boxsize-full active-main-slide-background'}>
-                                <ListButton opts={{
-                                    items: [{ name: '1111' }, { name: '2222' }, { name: '3333' }]
-                                }} />
+                            <div className={'common-boxsize-full'}>
+                                <Minirefresh className={'active-main-slide-background'} options={this.state.refresh}
+                                    pullDown={(comp) => {
+                                        this.update(comp)
+                                    }}>
+                                    {Tool.insertSplitline(this.state.data.ctc.filter((item) => {
+                                        return item.games && item.games.length > 0
+                                    }).map((item, key) => {
+                                        return (
+                                            <LotteryGame key={key} data={item} onItemClick={(subitem, subkey, e) => {
+                                                this.onTab1ItemClick(subitem, subkey, e)
+                                            }} />
+                                        )
+                                    }))}
+                                </Minirefresh>
                             </div>
                         </TabSlide>
 
                         <TabSlide>
-                            <div className={'common-boxsize-full active-main-slide-background'}>
+                            <div className={'common-boxsize-full'}>
+                                <Minirefresh className={'active-main-slide-background'} options={this.state.refresh}
+                                    pullDown={(comp) => {
+                                        this.update(comp)
+                                    }}>
+                                    {Tool.insertSplitline(this.state.data.gfc.filter((item) => {
+                                        return item.games.length > 0
+                                    }).map((item, key) => {
+                                        return (
+                                            <LotteryGame key={key} data={item} onItemClick={(subitem, subkey, e) => {
+                                                this.onTab2ItemClick(subitem, subkey, e)
+                                            }} />
+                                        )
+                                    }))}
+                                </Minirefresh>
                             </div>
                         </TabSlide>
                     </TabSwiper>

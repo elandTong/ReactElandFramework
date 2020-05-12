@@ -1,5 +1,4 @@
-
-export default class EventBus {
+class EventBus {
     subs = []
 
     constructor() {
@@ -7,46 +6,83 @@ export default class EventBus {
     }
 
     emit(event) {
-        if (!event) { return false }
+        if (!event) {
+            return false
+        }
+
         event.theme = event.theme || 'all'
-        let succ = false
+
+        let _succ = false
+
         for (let i = 0; i < this.subs.length; i++) {
             let _it = this.subs[i]
-            if (_it.theme === event.theme && _it.callBack) {
-                _it.callBack(event)
-                succ = true
+
+            if (_it.theme === event.theme && _it.handle) {
+                _it.handle(event)
+
+                _succ = true
             }
         }
-        return succ
+
+        return _succ
     }
 
     onemit(theme = 'all', handle) {
-        if (!handle) { return false }
+        if (!handle) {
+            return false
+        }
+
         this.subs.push({
             theme: theme,
-            callBack: handle
+            handle: handle
         })
+
         return true
     }
 
     remove(handle) {
-        if (!handle) { return false }
-        let i = this.check(handle)
-        if (i === -1) {
+        if (!handle) {
+            return false
+        }
+
+        let _startlen = this.subs.length
+
+        this.subs = this.subs.filter((item) => {
+            return !(item.handle === handle)
+        })
+
+        if (this.subs.length === _startlen) {
             return false
         } else {
-            this.subs.splice(i, 1)
             return true
         }
     }
+}
 
-    check(handle) {
-        for (let i = 0; i < this.subs.length; i++) {
-            if (this.subs[i].callBack === handle) {
-                return i
-            }
-        }
+class Emit {
+    static _eventbus = new EventBus()
 
-        return -1
+    static on(theme, handle) {
+        return this._eventbus.onemit(theme, handle)
+    }
+
+    static exe(event) {
+        return this._eventbus.emit(event)
+    }
+
+    static remove(handle) {
+        return this._eventbus.remove(handle)
+    }
+
+    /**
+     * 危险方法
+     * 将清除所有事件监听
+    */
+    static reset() {
+        this._eventbus = new EventBus()
     }
 }
+
+export { EventBus, Emit }
+
+export default Emit

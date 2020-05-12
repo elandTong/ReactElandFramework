@@ -2,6 +2,7 @@ import MiniRefreshTools from 'minirefresh';
 import 'minirefresh/dist/debug/minirefresh.css';
 import React from 'react';
 import '../assets/style/comp.minirefresh.cover.scss';
+import Tool from '../tool/Tool';
 
 class Minirefresh extends React.Component {
     _miniRefresh = null
@@ -14,6 +15,7 @@ class Minirefresh extends React.Component {
         super(props)
 
         this.state = {
+            id: `minirefresh-${Tool.uuid()}`
         }
     }
 
@@ -58,7 +60,7 @@ class Minirefresh extends React.Component {
     render() {
         return (
             <div className={'minirefresh-root-safety'}>
-                <div id={'minirefresh'} className={'minirefresh-wrap'} ref={(comp) => {
+                <div id={this.state.id} className={'minirefresh-wrap'} ref={(comp) => {
                     this._miniRefreshComp = comp
                 }}>
                     <div className={`minirefresh-scroll ${this.props.className || 'comp-minirefresh-scroll'}`}>
