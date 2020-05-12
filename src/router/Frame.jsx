@@ -5,10 +5,8 @@ import Actived from './Actived';
 import Window from './Window';
 
 /**
- * 基础SPA路由框架
- * <br>
- * 基于DOM结构的渲染控制路由框架
- * 作者: Eland.Tong 
+ * @description: 基础SPA路由框架,该框架是基于DOM结构的实时渲染控制路由
+ * @author: Eland.Tong
  */
 
 class ActivedAnimation extends React.Component {
@@ -105,7 +103,6 @@ class Frame extends React.Component {
                     compref: null,
                     zIndex: ++this._activeZIndex,
                     compHandle: (comp) => {
-                        console.error('index active comp ref', comp)
                     }
                 }, item))
             }
