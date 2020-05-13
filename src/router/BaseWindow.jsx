@@ -109,6 +109,18 @@ class BaseWindow extends React.Component {
     }
 
     /**
+     * @description: 判断window视窗是否处于路由栈顶部
+     * @param {Object} window 视图对象 或 CLASS
+     * @return: boole
+     */
+    isStackTop(window) {
+        if (this._router instanceof Frame) {
+            return this._router.isWindowStackTop(window || this)
+        }
+        return false
+    }
+
+    /**
      * @description: 关闭视窗并退栈
      */
     finish() {

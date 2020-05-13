@@ -2,6 +2,8 @@ import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import Tool from '../tool/Tool';
 import Actived from './Actived';
+import BaseActive from './BaseActived';
+import BaseWindow from './BaseWindow';
 import Window from './Window';
 
 /**
@@ -85,7 +87,7 @@ class Frame extends React.Component {
     constructor(props) {
         super(props)
 
-        this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
+        this.updateOpts()
 
         this.state = {
             index: {
@@ -107,6 +109,19 @@ class Frame extends React.Component {
                 }, item))
             }
         }
+    }
+
+    updateOpts() {
+        this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
+
+        // 过滤非法项
+        this._param.actives = this._param.actives.filter((item) => {
+            return Object.getPrototypeOf(item.component) === BaseActive && !Tool.isEmpty(item.path)
+        })
+
+        this._param.windows = this._param.windows.filter((item) => {
+            return Object.getPrototypeOf(item.component) === BaseWindow && !Tool.isEmpty(item.path)
+        })
     }
 
     componentDidMount() {
@@ -179,7 +194,10 @@ class Frame extends React.Component {
             }
         }
     }, handle) {
-        if (!intent || !intent.component || Tool.isEmpty(intent.path)) {
+        if (!intent || !intent.component
+            || Object.getPrototypeOf(intent.component) !== BaseActive
+            || Tool.isEmpty(intent.path)) {
+            console.error('router frame start active error please check the configuration parameters!')
             return
         }
 
@@ -221,6 +239,20 @@ class Frame extends React.Component {
         }
 
         return null
+    }
+
+    isActiveStackTop(active) {
+        if (this.state.activeStack.length < 1) {
+            return false
+        }
+
+        let _top = this.state.activeStack[this.state.activeStack.length - 1]
+
+        if (active instanceof _top.component || active === _top.component) {
+            return true
+        }
+
+        return false
     }
 
     // widget
@@ -272,7 +304,10 @@ class Frame extends React.Component {
             }
         }
     }, handle) {
-        if (!intent || !intent.component || Tool.isEmpty(intent.path)) {
+        if (!intent || !intent.component
+            || Object.getPrototypeOf(intent.component) !== BaseWindow
+            || Tool.isEmpty(intent.path)) {
+            console.error('router frame start window error please check the configuration parameters!')
             return
         }
 
@@ -301,8 +336,22 @@ class Frame extends React.Component {
         return null
     }
 
+    isWindowStackTop(window) {
+        if (this.state.windowStack.length < 1) {
+            return false
+        }
+
+        let _top = this.state.windowStack[this.state.windowStack.length - 1]
+
+        if (window instanceof _top.component || window === _top.component) {
+            return true
+        }
+
+        return false
+    }
+
     render() {
-        this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
+        this.updateOpts()
 
         let actives = this.state.activeStack.filter((item) => {
             return item.component ? true : false

@@ -11,6 +11,9 @@ import Modal from '../widget/Modal';
 import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
+import Toast from '../window/Toast';
+import Login from './Login';
+import Spiner from '../window/Spiner';
 
 class Main extends BaseActived {
     static _path = '/main'
@@ -74,10 +77,32 @@ class Main extends BaseActived {
     }
 
     onTab1ItemClick(item, key, e) {
+        this.startWindow({ // 意图跳转 不会改变 内置路由池
+            component: Login,
+            path: Toast._path,
+            opts: { props: {} }
+        }, (comp) => {
+            comp.setText('哈哈哈哈!')
+        })
+
+        // 如果 Toast 在内置路由池内 则可以:
+        this.navigationWindow(Toast._path, (comp) => { comp.setText('哈哈哈哈------') })
+
         console.error('tab1 click item', item, ' key', key)
     }
 
     onTab2ItemClick(item, key, e) {
+        this.startActive({
+            component: Toast,
+            path: Login._path,
+            opts: { props: {} }
+        }, (comp) => {
+            comp.onData({})
+        })
+
+        // 如果 Login 在内置路由池内 则可以:
+        this.navigationActive(Login._path, (comp) => { comp.onData({}) })
+
         console.error('tab2 click item', item, ' key', key)
     }
 

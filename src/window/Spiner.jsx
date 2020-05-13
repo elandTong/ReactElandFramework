@@ -1,10 +1,9 @@
 import React from 'react'
 import GridLoader from 'react-spinners/GridLoader'
+import '../assets/style/comp.spiner.scss'
 import Config from '../config'
 import BaseWindow from '../router/BaseWindow'
 import { WindowPage } from '../router/Page'
-import Tool from '../tool/Tool'
-import '../assets/style/comp.spiner.scss'
 
 class Spiner extends BaseWindow {
     static _path = '/spiner'

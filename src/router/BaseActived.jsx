@@ -110,6 +110,19 @@ class BaseActived extends React.Component {
     }
 
     /**
+     * @description: 判断active页面是否处于路由栈顶部
+     * @param {Object} active 页面对象 或 CLASS
+     * @return: boole
+     */
+    isStackTop(active) {
+        if (this._router instanceof Frame) {
+            return this._router.isActiveStackTop(active || this)
+        }
+
+        return false
+    }
+
+    /**
      * @description: 关闭页面并退栈
      */
     finish() {
