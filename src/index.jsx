@@ -18,9 +18,13 @@ cssVars()
 
 document.title = Config.APP_NAME
 
+// 绑定属性到 window 对象
+Config.bindWindow()
+
 // 主题设置
 Config.setAppTheme(Tool.queryParameForURL('theme', window.location.href))
 
+// 语言设置
 Config.setLanguage(Tool.queryParameForURL('language', window.location.href))
 
 NetApi.create({

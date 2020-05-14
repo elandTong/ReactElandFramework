@@ -6,16 +6,65 @@ import { WindowPage } from '../router/Page'
 class Toast extends BaseWindow {
     static _path = '/toast'
 
-    constructor(props) {
-        super(props)
+    static LONG = 3000
+
+    static SHORT = 1500
+
+    timeout = null
+
+    onCreate(props) {
+        super.onCreate(props)
 
         this.state = {
+            showTime: 0,
             text: 'Toast show'
+        }
+
+        console.warn('window toast on create!')
+    }
+
+    componentDidUpdate() {
+        clearTimeout(this.timeout)
+
+        if (this.state.showTime > 0) {
+            this.timeout = setTimeout(() => {
+                this.state.showTime = 0
+                this.close()
+            }, this.state.showTime)
         }
     }
 
-    setText(txt) {
+    onStart() {
+        console.warn('window toast on start!')
+    }
+
+    onResume() {
+        console.warn('window toast on resume!')
+    }
+
+    onPause() {
+        console.warn('window toast on pause!')
+    }
+
+    onStop() {
+        clearTimeout(this.timeout)
+
+        console.warn('window toast on stop!')
+    }
+
+    onNativeBack(data) {
+        super.onNativeBack(data)
+    }
+
+    onData(data) {
+        super.onData(data)
+
+        console.warn('window toast on data', data)
+    }
+
+    setText(txt, showTime = 0) {
         this.setState({
+            showTime: showTime,
             text: txt
         })
     }

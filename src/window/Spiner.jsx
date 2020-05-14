@@ -8,18 +8,54 @@ import { WindowPage } from '../router/Page'
 class Spiner extends BaseWindow {
     static _path = '/spiner'
 
-    constructor(props) {
-        super(props)
+    touchclose = false
+
+    onData(data) {
+        super.onData(data)
+
+        console.warn('window spiner on data', data)
+    }
+
+    onCreate(props) {
+        super.onCreate(props)
 
         this.state = {
             loading: true,
             theme: Config.Theme.color.theme,
             text: 'hello spiner!'
         }
+
+        console.warn('window spiner on create!')
     }
 
-    setText(text) {
-        this.setState({ text: text || 'hello spiner!' })
+    onStart() {
+        console.warn('window spiner on start!')
+    }
+
+    onResume() {
+        console.warn('window spiner on resume!')
+    }
+
+    onPause() {
+        console.warn('window spiner on pause!')
+    }
+
+    onStop() {
+        console.warn('window spiner on stop!')
+    }
+
+    onAppThemeChange(name, data) {
+        super.onAppThemeChange(name, data)
+
+        this.setState({
+            theme: Config.Theme.color.theme
+        })
+    }
+
+    setText(text, touchclose = false) {
+        this.touchclose = touchclose
+
+        this.setState({ text: text || this.state.text })
     }
 
     close() {
@@ -29,7 +65,11 @@ class Spiner extends BaseWindow {
     render() {
         return (
             <WindowPage>
-                <div className={'display-center comp-spiner-root'}>
+                <div className={'display-center comp-spiner-root'} onClick={(e) => {
+                    if (this.touchclose) {
+                        this.close()
+                    }
+                }}>
                     <div className={'display-column comp-spiner-cont'}>
                         <GridLoader
                             size={20}

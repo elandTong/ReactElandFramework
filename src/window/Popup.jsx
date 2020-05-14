@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseWindow from '../router/BaseWindow'
-import Tool from '../tool/Tool'
 import { WindowPage } from '../router/Page'
+import Tool from '../tool/Tool'
 
 class Popup extends BaseWindow {
     static _path = '/popup'
@@ -34,8 +34,8 @@ class Popup extends BaseWindow {
 
     _isshow = false
 
-    constructor(props) {
-        super(props)
+    onCreate(props) {
+        super.onCreate(props)
 
         this.state = {
             comp: null,
@@ -52,6 +52,12 @@ class Popup extends BaseWindow {
                 height: 32
             }
         }
+    }
+
+    onData(data) {
+        super.onData(data)
+
+        console.warn('window popup on data', data)
     }
 
     getPosition(_pame = {}) {
@@ -184,7 +190,7 @@ class Popup extends BaseWindow {
 
                 this._pames.splice(0, 1)
 
-                this.navigationWindow(Popup._path, (comp) => {
+                this.navigationWindow(Popup._path, null, (comp) => {
                     if (_fast.type === 'comp') {
                         comp.onComp(_fast.target, _fast.pame)
                     } else {

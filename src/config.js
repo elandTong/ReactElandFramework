@@ -9,7 +9,7 @@ const _LANGUAGE = require('./assets/json/language.json')
 
 const _APP_ID = 'ig'
 const _APP_NAME = 'IG彩票'
-const _APP_VERSION = 121001001
+const _APP_VERSION = 120001001
 
 const _RELEASE = false
 const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
@@ -56,7 +56,8 @@ class Config {
     static GLOBAL_EVENT = './_BASE_GLOBAL_THEME/'
 
     static GLOBAL_EVENT_TYPE = {
-        STYLE_THEME_CHANGE: 'STYLE_THEME_CHANGE'
+        STYLE_THEME_CHANGE: 'STYLE_THEME_CHANGE',
+        NATIVE_BACK_EVENT: 'NATIVE_BACK_EVENT'
     }
 
     static Theme = {
@@ -64,12 +65,12 @@ class Config {
             height: 45
         },
         color: {
-            theme: 'rgb(204,163,82)',
+            theme: 'rgb(218,128,88)',
             font: 'rgb(0,0,0)',
             font_anti: 'rgb(205,205,205)' // 反差抵抗字体
         },
         light: {
-            theme: 'rgb(204,163,82)',
+            theme: 'rgb(218,128,88)',
             font: 'rgb(0,0,0)',
             font_anti: 'rgb(205,205,205)'
         },
@@ -162,8 +163,17 @@ class Config {
     static setLanguage(name) {
         this.LANGUAGE_USE = this.getLanguage(name || _QUERY('language'))
     }
+
+    static bindWindow() {
+        window._NativeBackEventHandle = () => {
+            Emit.exe({
+                theme: this.GLOBAL_EVENT,
+                type: this.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT
+            })
+        }
+
+        window._ReatConfig = Config
+    }
 }
 
 export default Config
-
-window._ReatConfig = Config

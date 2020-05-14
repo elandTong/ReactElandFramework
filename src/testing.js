@@ -1,21 +1,26 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-22 17:38:57
+ * @LastEditTime: 2020-05-14 16:30:34
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /LG-LOTTERY-APP/src/testing.js
+ */
 import React from 'react'
+import { RouterTool } from './tool/Tool'
+import MessageNotice from './widget/MessageNotice'
 import Popup from "./window/Popup"
 import Spiner from "./window/Spiner"
-import MessageNotice from './widget/MessageNotice'
 
 class Testing {
     static Test1() {
-        this.navigationWindow(Spiner._path, (comp) => {
-            comp.setText('你好!哈哈')
-
-            setTimeout(() => { comp.close() }, 3000)
+        RouterTool.navigationWindow(Spiner._path, {}, (comp) => {
+            comp.setText('你好!哈哈', true)
         })
-
-        return this
     }
 
     static Test2() {
-        this.navigationWindow(Popup._path, (comp) => {
+        RouterTool.navigationWindow(Popup._path, {}, (comp) => {
             comp.onComp((
                 <MessageNotice opts={{
                     title: '标题',

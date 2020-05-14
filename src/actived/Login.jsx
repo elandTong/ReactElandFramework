@@ -1,28 +1,42 @@
 import React from 'react';
 import BaseActived from "../router/BaseActived";
-import MessageNotice from '../widget/MessageNotice';
 import { ActivePage } from "../router/Page";
+import MessageNotice from '../widget/MessageNotice';
 import Popup from '../window/Popup';
 import Toast from '../window/Toast';
 
 class Login extends BaseActived {
     static _path = './Login'
 
-    constructor(props) {
-        super(props)
+    onCreate(props) {
+        super.onCreate(props)
 
         this.state = {
         }
+
+        console.warn('active login on create!')
     }
 
-    onBroadcast(data) {
-        super.onBroadcast(data)
+    onStart() {
+        console.warn('active login on start!')
+    }
 
-        console.log('on broadcast for login', data)
+    onResume() {
+        console.warn('active login on resume!')
+    }
+
+    onPause() {
+        console.warn('active login on pause!')
+    }
+
+    onStop() {
+        console.warn('active login on stop!')
     }
 
     onData(data) {
         super.onData(data)
+
+        console.warn('active login on data', data)
     }
 
     render() {
@@ -36,7 +50,7 @@ class Login extends BaseActived {
                         this.finish()
                     },
                     onMenu: (e) => {
-                        this.navigationWindow(Popup._path, (comp) => {
+                        this.navigationWindow(Popup._path, null, (comp) => {
                             comp.onComp((
                                 <MessageNotice opts={{
                                     title: '标题',
@@ -64,7 +78,7 @@ class Login extends BaseActived {
                             })
                         })
 
-                        this.navigationWindow(Toast._path, (comp) => {
+                        this.navigationWindow(Toast._path, null, (comp) => {
                             comp.setText(this._indata)
                         })
                     }

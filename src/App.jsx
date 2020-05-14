@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './actived/Login';
 import Main from './actived/Main';
 import Frame from './router/Frame';
-import Tool from './tool/Tool';
+import { RouterTool } from './tool/Tool';
 import Popup from './window/Popup';
 import Spiner from './window/Spiner';
 import Toast from './window/Toast';
@@ -65,16 +65,20 @@ class Application extends React.Component {
   onCompRef(comp) {
     this._frame = comp
 
-    Tool.MountFrame(comp)
+    RouterTool.MountFrame(comp)
 
     console.error('app routing frame on ref...')
   }
 
   render() {
     return (
-      <Frame param={this.state.param} index={Main._path} ref={(comp) => {
-        this.onCompRef(comp)
-      }} />
+      <Frame param={this.state.param}
+        index={Main._path}
+        classNameActiveAnimation={null}
+        classNameWindowAnimation={null}
+        ref={(comp) => {
+          this.onCompRef(comp)
+        }} />
     )
   }
 }

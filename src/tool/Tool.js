@@ -1,5 +1,6 @@
 import React from 'react'
 import Config from '../config.js'
+import Frame from '../router/Frame.jsx'
 import Spiner from '../window/Spiner'
 import Toast from '../window/Toast'
 
@@ -28,37 +29,9 @@ Date.prototype.format = function (fmt) {
     return fmt
 }
 
-class Tool {
-    static _frame = null
-    static _apiMiddlewareHandle = null
-
-    static MountFrame(comp) {
-        this._frame = comp
-    }
-
-    // 框架工具
-    static navigationActive(name, handle) {
-        this._frame.navigationActive(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
-    }
-
-    static navigationWindow(name, handle) {
-        this._frame.navigationWindow(name, (comp) => {
-            if (handle) { handle(comp) }
-        })
-    }
-
-    static finishActive(comp) {
-        this._frame.finishActive(comp)
-    }
-
-    static finishWindow(comp) {
-        this._frame.finishWindow(comp)
-    }
-
+class WindowTool {
     static showToast(txt, handle) {
-        this._frame.navigationWindow(Toast._path, (comp) => {
+        RouterTool.navigationWindow(Toast._path, null, (comp) => {
             comp.setText(txt)
             if (handle) {
                 handle(comp)
@@ -67,10 +40,59 @@ class Tool {
     }
 
     static showLoading(handle) {
-        this._frame.navigationWindow(Spiner._path, (comp) => {
+        RouterTool.navigationWindow(Spiner._path, null, (comp) => {
             if (handle) { handle(comp) }
         })
     }
+}
+
+class RouterTool {
+    static _frame = null
+
+    static MountFrame(comp) {
+        this._frame = comp
+    }
+
+    // 框架工具
+    static startActive(intent, data, handle) {
+        if (this._frame instanceof Frame) {
+            this._frame.startActive(intent, data, handle)
+        }
+    }
+
+    static navigationActive(name, data, handle) {
+        if (this._frame instanceof Frame) {
+            this._frame.navigationActive(name, data, handle)
+        }
+    }
+
+    static startWindow(intent, data, handle) {
+        if (this._frame instanceof Frame) {
+            this._frame.startWindow(intent, data, handle)
+        }
+    }
+
+    static navigationWindow(name, data, handle) {
+        if (this._frame instanceof Frame) {
+            this._frame.navigationWindow(name, data, handle)
+        }
+    }
+
+    static finishActive(comp) {
+        if (this._frame instanceof Frame) {
+            this._frame.finishActive(comp)
+        }
+    }
+
+    static finishWindow(comp) {
+        if (this._frame instanceof Frame) {
+            this._frame.finishWindow(comp)
+        }
+    }
+}
+
+class Tool {
+    static _apiMiddlewareHandle = null
 
     // 功能工具
     static LoadHTML(opts) {
@@ -937,3 +959,5 @@ class Tool {
 }
 
 export default Tool
+
+export { WindowTool, RouterTool, Tool }

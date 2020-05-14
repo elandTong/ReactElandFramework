@@ -4,16 +4,16 @@ import Config from '../config';
 import BaseActived from '../router/BaseActived';
 import { ActivePage } from '../router/Page';
 import NetApi from '../tool/NetApi';
-import Tool from '../tool/Tool';
+import Tool, { WindowTool } from '../tool/Tool';
 import LotteryGame from '../widget/business/LotteryGame';
 import Minirefresh from '../widget/Minirefresh';
 import Modal from '../widget/Modal';
 import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
+import Spiner from '../window/Spiner';
 import Toast from '../window/Toast';
 import Login from './Login';
-import Spiner from '../window/Spiner';
 
 class Main extends BaseActived {
     static _path = '/main'
@@ -22,10 +22,12 @@ class Main extends BaseActived {
 
     _navbarCompRef = null
 
-    _jsondata = require('../assets/json/lotterys.json')
+    _jsondata = null
 
-    constructor(props) {
-        super(props)
+    onCreate(props) {
+        super.onCreate(props)
+
+        this._jsondata = require('../assets/json/lotterys.json')
 
         this.state = {
             title: Config.LANGUAGE_USE.appname,
@@ -68,40 +70,71 @@ class Main extends BaseActived {
                 </Modal>
             )
         }])
+
+        console.warn('active main on create!')
     }
 
-    onBroadcast(data) {
-        super.onBroadcast(data)
+    onStart() {
+        console.warn('active main on start!')
+    }
 
-        console.log('on broadcast for main', data)
+    onResume() {
+        console.warn('active main on resume!')
+    }
+
+    onPause() {
+        console.warn('active main on pause!')
+    }
+
+    onStop() {
+        console.warn('active main on stop!')
+    }
+
+    onData(data) {
+        super.onData(data)
+
+        console.warn('active main on data', data)
+    }
+
+    onNativeBack(data) {
+        super.onNativeBack(data)
     }
 
     onTab1ItemClick(item, key, e) {
         this.startWindow({ // 意图跳转 不会改变 内置路由池
-            component: Login,
-            path: Toast._path,
-            opts: { props: {} }
+            component: Spiner,
+            path: Spiner._path,
+            opts: {
+                props: {
+                }
+            }
+        }, {
+            message: '这是main页面传递的Spiner数据'
         }, (comp) => {
-            comp.setText('哈哈哈哈!')
+            comp.setText('你好,SpaRouter世界!', true)
+        })
+
+        WindowTool.showToast(null, (comp) => {
+            comp.setText('你好,SpaRouter世界', Toast.LONG)
         })
 
         // 如果 Toast 在内置路由池内 则可以:
-        this.navigationWindow(Toast._path, (comp) => { comp.setText('哈哈哈哈------') })
+        // this.navigationWindow(Toast._path, null, (comp) => { comp.setText('哈哈哈哈😄------') })
 
         console.error('tab1 click item', item, ' key', key)
     }
 
     onTab2ItemClick(item, key, e) {
         this.startActive({
-            component: Toast,
+            component: Login,
             path: Login._path,
-            opts: { props: {} }
-        }, (comp) => {
-            comp.onData({})
+            opts: {
+                props: {
+                }
+            }
+        }, {
+            message: '这是main页面传递的数据'
         })
-
-        // 如果 Login 在内置路由池内 则可以:
-        this.navigationActive(Login._path, (comp) => { comp.onData({}) })
 
         console.error('tab2 click item', item, ' key', key)
     }
