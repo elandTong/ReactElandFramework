@@ -1,10 +1,7 @@
 /*
- * @Author: your name
+ * @Author: Eland.Tong
  * @Date: 2020-04-22 17:38:57
- * @LastEditTime: 2020-05-14 16:30:34
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /LG-LOTTERY-APP/src/testing.js
+ * @Description: comp testing
  */
 import React from 'react'
 import { RouterTool } from './tool/Tool'
