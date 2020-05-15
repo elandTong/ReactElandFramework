@@ -7,9 +7,9 @@ import('./testing').then(testing => {
 const _APITIPS = require('./assets/json/tipsmessage.json')
 const _LANGUAGE = require('./assets/json/language.json')
 
-const _APP_ID = 'ig'
-const _APP_NAME = 'IG彩票'
-const _APP_VERSION = 120001001
+const _APP_ID = 'routertest'
+const _APP_NAME = 'RouterTest'
+const _APP_VERSION = 121001001
 
 const _RELEASE = false
 const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
