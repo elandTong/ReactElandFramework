@@ -89,7 +89,6 @@ class Actived extends React.Component {
     componentWillUnmount() {
     }
 
-    // popup
     pushPopups(list = []) {
         for (let _it of list) {
             if (!_it || !_it.comp || !_it.pame) { continue }
@@ -104,18 +103,11 @@ class Actived extends React.Component {
 
         let _pops = this.state.popup
 
-        let _indx = -1
+        _pops.items = _pops.items.filter((item) => {
+            return !(item.id === pame.id)
+        })
 
-        for (let i = 0; i < _pops.items.length; i++) {
-            let _it = _pops.items[i]
-            if (_it.id === pame.id) {
-                _indx = i
-
-                break
-            }
-        }
-
-        let _comp_opts = {
+        _pops.items.push({
             active: false,
             id: pame.id,
             className: pame.className,
@@ -123,17 +115,12 @@ class Actived extends React.Component {
                 zIndex: 0, top: pame.y, left: pame.x
             },
             comp: comp
-        }
+        })
 
-        if (_indx === -1) {
-            _pops.items.push(_comp_opts)
-        } else {
-            _pops.items[_indx] = _comp_opts
-        }
+        // eslint-disable-next-line react/no-direct-mutation-state
+        this.state.popup = _pops
 
         this.setState({ popup: _pops })
-
-        return pame.id
     }
 
     showPopup(id, pos = {}) {
@@ -141,10 +128,9 @@ class Actived extends React.Component {
 
         for (let _it of _pops.items) {
             if (_it.id === id) {
-                _pops.topping = _pops.topping + 1
-
                 _it.active = true
-                _it.style.zIndex = _pops.topping
+
+                _it.style.zIndex = ++_pops.topping
                 _it.style.top = pos.y || _it.style.top
                 _it.style.left = pos.x || _it.style.left
 
@@ -181,7 +167,6 @@ class Actived extends React.Component {
         this.setState({ popup: _pops })
     }
 
-    // comp ref
     getCompRef() {
         return this._compRef
     }
