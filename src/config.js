@@ -9,7 +9,7 @@ const _LANGUAGE = require('./assets/json/language.json')
 
 const _APP_ID = 'routertest'
 const _APP_NAME = 'RouterTest'
-const _APP_VERSION = 121001001
+const _APP_VERSION = 121002001
 
 const _RELEASE = false
 const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
