@@ -120,7 +120,7 @@ div {
   background: rgba(0, 0, 0, 0);
 }
 
-/* toolbar 根视图 */
+/* active toolbar 根视图 */
 .page-active-container-toolbar {
   width: 100%;
   height: 45px;
@@ -144,7 +144,7 @@ div {
   }
 }
 
-/* toolbar 默认视图 */
+/* active toolbar 默认视图 */
 .page-active-container-toolbar-view {
   width: 100%;
   height: 100%;
@@ -164,7 +164,7 @@ div {
   }
 }
 
-/* toolbar 默认视图 元素 */
+/* active toolbar 默认视图 元素 */
 .page-active-container-toolbar-ele {
   width: 45px;
   height: 100%;
