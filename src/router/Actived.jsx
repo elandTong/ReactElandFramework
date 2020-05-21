@@ -37,7 +37,7 @@ class ActivedRoot extends React.Component {
     render() {
         return (
             <div className={'page-active-container color-active-background'} style={{ zIndex: this.props.zIndex }}>
-                <div className={'page-active-container-rel'}>
+                <div className={'page-active-container-pack'}>
                     {this.props.children}
                 </div>
             </div>

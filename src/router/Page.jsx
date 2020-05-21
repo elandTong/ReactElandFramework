@@ -113,7 +113,7 @@ class ActivePage extends React.Component {
         let _view_classname = this._opts.hideToolbar ? 'page-active-container-view-no-toolbar' : 'page-active-container-view-have-toolbar'
 
         return (
-            <div className={'page-active-container-root'}>
+            <div className={'page-active-container-pack'}>
                 {this._opts.hideToolbar === true ? (null) : (
                     <div className={'page-active-container-toolbar'}>
                         {this._opts.toolbarComp || (<Toolbar opts={this._opts.toolbar} />)}

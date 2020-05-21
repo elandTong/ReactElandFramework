@@ -27,7 +27,7 @@ class WindowContent extends React.Component {
 
     render() {
         return (
-            <div className={'page-window-container-rel'}>
+            <div className={'page-window-container-pack'}>
                 {this.props.children}
             </div>
         )
