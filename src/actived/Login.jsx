@@ -54,7 +54,7 @@ class Login extends BaseActived {
                             comp.onComp((
                                 <MessageNotice opts={{
                                     title: '标题',
-                                    content: this._indata,
+                                    content: this._indata.message,
                                     onSure: (e) => {
                                         comp.close()
                                     }
@@ -79,7 +79,7 @@ class Login extends BaseActived {
                         })
 
                         this.navigationWindow(Toast._path, null, (comp) => {
-                            comp.setText(this._indata)
+                            comp.setText(this._indata.message)
                         })
                     }
                 },

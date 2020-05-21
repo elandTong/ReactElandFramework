@@ -36,8 +36,8 @@ class ActivedRoot extends React.Component {
 
     render() {
         return (
-            <div className={'page-active color-active-background'} style={{ zIndex: this.props.zIndex }}>
-                <div className={'page-active-rel'}>
+            <div className={'page-active-container color-active-background'} style={{ zIndex: this.props.zIndex }}>
+                <div className={'page-active-container-rel'}>
                     {this.props.children}
                 </div>
             </div>
@@ -55,7 +55,7 @@ class ActivedContent extends React.Component {
 
     render() {
         return (
-            <div className={'page-active-content'}>
+            <div className={'page-active-container-safety'}>
                 {this.props.children}
             </div>
         )
@@ -204,7 +204,6 @@ class Actived extends React.Component {
     render() {
         return (
             <ActivedRoot zIndex={this.props.zIndex}>
-                {/* content */}
                 <ActivedContent>
                     {this.getComp()}
                 </ActivedContent>

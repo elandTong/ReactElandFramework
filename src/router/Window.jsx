@@ -10,7 +10,7 @@ class WindowRoot extends React.Component {
 
     render() {
         return (
-            <div className={'widget-active'} style={{ zIndex: this.props.zIndex }}>
+            <div className={'page-window-container'} style={{ zIndex: this.props.zIndex }}>
                 {this.props.children}
             </div>
         )
@@ -27,7 +27,7 @@ class WindowContent extends React.Component {
 
     render() {
         return (
-            <div className={'widget-content'}>
+            <div className={'page-window-container-rel'}>
                 {this.props.children}
             </div>
         )

@@ -33,8 +33,8 @@ class Toolbar extends React.Component {
         this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
         return (
-            <div className={'display-space page-content-toolbar-view'}>
-                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
+            <div className={'display-space page-active-container-toolbar-view'}>
+                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-active-container-toolbar-ele`} onClick={(e) => {
                     if (!this._opts.hideBack) {
                         if (this.state.timeoutclick <= 0) {
                             if (this._opts.onBack) {
@@ -56,7 +56,7 @@ class Toolbar extends React.Component {
 
                 <span> {this._opts.title} </span>
 
-                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-content-toolbar-ele`} onClick={(e) => {
+                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-active-container-toolbar-ele`} onClick={(e) => {
                     if (!this._opts.hideMenu) {
                         if (this.state.timeoutclick <= 0) {
                             if (this._opts.onMenu) {
@@ -110,17 +110,17 @@ class ActivePage extends React.Component {
     render() {
         this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
-        let _view_classname = this._opts.hideToolbar ? 'page-content-view-no-toolbar' : 'page-content-view-have-toolbar'
+        let _view_classname = this._opts.hideToolbar ? 'page-active-container-view-no-toolbar' : 'page-active-container-view-have-toolbar'
 
         return (
-            <div className={'page-content-root'}>
+            <div className={'page-active-container-root'}>
                 {this._opts.hideToolbar === true ? (null) : (
-                    <div className={'page-content-toolbar'}>
+                    <div className={'page-active-container-toolbar'}>
                         {this._opts.toolbarComp || (<Toolbar opts={this._opts.toolbar} />)}
                     </div>
                 )}
 
-                <div className={`page-content-view ${_view_classname}`}>
+                <div className={`page-active-container-view ${_view_classname}`}>
                     {this.props.children}
                 </div>
             </div>
@@ -138,7 +138,7 @@ class WindowPage extends React.Component {
 
     render() {
         return (
-            <div className={'widget-content-view'} style={this.props.style}>
+            <div className={'page-window-container-view'} style={this.props.style}>
                 {this.props.children}
             </div>
         )

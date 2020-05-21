@@ -571,8 +571,8 @@ class Frame extends React.Component {
         return (
             <div className={'app'}>
                 {/* activity stack */}
-                <div className={'page-root'}>
-                    <div className={'page-view'}>
+                <div className={'page-active-root'}>
+                    <div className={'page-active-view'}>
                         <ActivedAnimation className={this.props.classNameActiveAnimation}>
                             {actives}
                         </ActivedAnimation>
@@ -580,8 +580,8 @@ class Frame extends React.Component {
                 </div>
 
                 {/* widget stack */}
-                <div className={'widget-root'}>
-                    <div className={'widget-view'}>
+                <div className={'page-window-root'}>
+                    <div className={'page-window-view'}>
                         <WindowAnimation className={this.props.classNameWindowAnimation}>
                             {windows}
                         </WindowAnimation>
