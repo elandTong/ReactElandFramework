@@ -85,9 +85,7 @@ class Login extends BaseActived {
                 },
                 hideToolbar: false
             }}>
-                <div style={{ width: '100%', height: '100%', background: 'red' }}>
-                    {'Login page'}
-                </div>
+                <span> {'Login page'} </span>
             </ActivePage>
         )
     }
