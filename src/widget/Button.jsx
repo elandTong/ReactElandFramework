@@ -34,6 +34,20 @@ class Button extends React.Component {
         this.state = {
             timeoutclick: 160
         }
+
+        this.onClick = this.onClick.bind(this)
+    }
+
+    onClick(e) {
+        if (e instanceof Event) { e.stopPropagation() }
+
+        if (this.state.timeoutclick <= 0) {
+            if (this._opts.onClick) { this._opts.onClick(e) }
+        } else {
+            setTimeout(() => {
+                if (this._opts.onClick) { this._opts.onClick(e) }
+            }, this.state.timeoutclick)
+        }
     }
 
     render() {
@@ -46,19 +60,7 @@ class Button extends React.Component {
         let _jsx = (
             <div className={`click-in-ripple display-center ${_classname} ${this.props.className || ''}`} style={Object.assign({
                 width: this._opts.width, height: this._opts.height
-            }, this.props.style || {})} onClick={(e) => {
-                if (this.state.timeoutclick <= 0) {
-                    if (this._opts.onClick) {
-                        this._opts.onClick(e)
-                    }
-                } else {
-                    setTimeout(() => {
-                        if (this._opts.onClick) {
-                            this._opts.onClick(e)
-                        }
-                    }, this.state.timeoutclick)
-                }
-            }}>
+            }, this.props.style || {})} onClick={this.onClick}>
                 {this._opts.name || this.props.children}
             </div>
         )

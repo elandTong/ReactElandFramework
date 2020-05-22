@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseActived from "../router/BaseActived";
 import { ActivePage } from "../router/Page";
+import Button from '../widget/Button';
 import MessageNotice from '../widget/MessageNotice';
 import Popup from '../window/Popup';
 import Toast from '../window/Toast';
@@ -85,6 +86,12 @@ class Login extends BaseActived {
                 },
                 hideToolbar: false
             }}>
+                <Button opts={{
+                    width: 120,
+                    name: '按钮1号',
+                    onClick: (e) => {
+                    }
+                }} />
                 <span> {'Login page'} </span>
             </ActivePage>
         )
