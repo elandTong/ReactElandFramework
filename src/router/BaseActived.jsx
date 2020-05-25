@@ -48,6 +48,8 @@ class BaseActived extends React.Component {
         this.onStop()
     }
 
+    // ------ 生命周期回调方法 ------
+
     /**
      * @description: 组件创建回调
      * @param {Object} props 外部入口参数
@@ -84,6 +86,8 @@ class BaseActived extends React.Component {
         console.warn('base active on stop!')
     }
 
+    // ------ 生命周期回调方法 ------
+
     /**
      * @description: 用于路由时数据传递,启动方调用,接收方覆盖
      * @param {Object} data 数据对象
@@ -93,22 +97,23 @@ class BaseActived extends React.Component {
     }
 
     /**
-     * @description: 全局广播接收, 覆盖警告: 子类覆盖该方法 必须调用 父类该方法
+     * @description: 全局广播接收回调
+     * 覆盖警告<!不建议子类覆盖该方法,请覆盖广播分支方法!>: 子类覆盖该方法 必须调用 父类该方法 以保证广播接收正常
      * @param {Object} data 事件对象
      */
     onBroadcast(data = {}) {
         this._broadcastData = data
 
         switch (data.type) {
-            case Config.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT: {
-                this.onNativeBack(data)
+            case Config.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT: { // 原生返回按钮点击广播
+                this.onNativeBack(this.isStackTop(), data)
                 break
             }
-            case Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE: {
+            case Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE: { // 主题变更广播
                 this.onAppThemeChange(data.name, data)
                 break
             }
-            default: {
+            default: { // 普通广播
                 this.onNotice(data)
                 break
             }
@@ -130,6 +135,15 @@ class BaseActived extends React.Component {
      */
     onAppThemeChange(name, event) {
         console.warn('base active app theme change event!')
+    }
+
+    /**
+     * @description: 原生返回事件,需要原生提供支持
+     * @param {Boolean} isStacktop 当前active页面是否处于路由栈顶
+     * @param {Object} event 广播事件对象
+     */
+    onNativeBack(isStacktop, event) {
+        console.warn('base active native back event!')
     }
 
     /**
@@ -210,11 +224,14 @@ class BaseActived extends React.Component {
     }
 
     /**
-     * @description: 原生返回事件,需要原生提供支持
-     * @param {Object} event 广播事件对象
+     * @description: 发送广播
+     * @param {Object} data 广播对象
+     * @return: bool 是否发送成功
      */
-    onNativeBack(event) {
-        console.warn('base active native back event!')
+    sendBroadcast(data) {
+        return Emit.exe(Object.assign(data, {
+            theme: BaseActived._BASE_GLOBAL_THEME
+        }))
     }
 
     /**
