@@ -3,6 +3,11 @@ import Config from '../config';
 import Emit from '../tool/EventBus';
 import Frame from './Frame';
 
+/**
+ * @description: 基础window视窗页面抽象类,覆盖该类方法时必须要调用父类方法
+ * @author: Eland.Tong
+ */
+
 class BaseWindow extends React.Component {
     static _BASE_GLOBAL_THEME = Config.GLOBAL_EVENT
 

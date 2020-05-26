@@ -5,7 +5,7 @@ import Actived from './Actived';
 import Frame from './Frame';
 
 /**
- * @description: 基础active页面类,覆盖该类方法时必须要调用父类方法
+ * @description: 基础active活动页面抽象类,覆盖该类方法时必须要调用父类方法
  * @author: Eland.Tong
  */
 
