@@ -96,8 +96,8 @@ class Main extends BaseActived {
         console.warn('active main on data', data)
     }
 
-    onNativeBack(data) {
-        super.onNativeBack(data)
+    onNativeBack(isStacktop, data) {
+        super.onNativeBack(isStacktop, data)
     }
 
     onTab1ItemClick(item, key, e) {

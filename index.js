@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-19 15:40:02
- * @LastEditTime: 2020-05-19 15:49:28
+ * @LastEditTime: 2020-05-27 14:40:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ReactElandFramework/index.js
@@ -30,6 +30,9 @@ import Sorry from './src/widget/Sorry'
 import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
 
+import Config from './src/config'
+
 export { Frame, Actived, BaseActived, Window, BaseWindow, Page }
 export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, Modal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
 export { Tool, Emit, NetApi }
+export { Config }

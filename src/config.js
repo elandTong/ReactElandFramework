@@ -4,7 +4,8 @@ import('./testing').then(testing => {
     window._ReactTesting = testing.default
 })
 
-const _APITIPS = require('./assets/json/tipsmessage.json')
+const _APITIPS = require('./assets/json/tips.json')
+
 const _LANGUAGE = require('./assets/json/language.json')
 
 const _APP_ID = 'routertest'
