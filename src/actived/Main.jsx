@@ -1,4 +1,5 @@
 import React from 'react';
+import APPContext from '../APPContext';
 import '../assets/style/active.main.scss';
 import Config from '../config';
 import BaseActived from '../router/BaseActived';
@@ -24,13 +25,15 @@ class Main extends BaseActived {
 
     _jsondata = null
 
-    onCreate(props) {
-        super.onCreate(props)
+    constructor(props) {
+        super(props)
+
+        this.renderContent = this.renderContent.bind(this)
 
         this._jsondata = require('../assets/json/lotterys.json')
 
         this.state = {
-            title: Config.LANGUAGE_USE.appname,
+            title: Config.LANGUAG_USE.appname,
             refresh: {
                 up: {
                     isLock: true,
@@ -51,6 +54,10 @@ class Main extends BaseActived {
                 gfc: this._jsondata.gfc
             }
         }
+    }
+
+    onCreate(props) {
+        super.onCreate(props)
 
         this.pushPopups([{
             pame: {
@@ -220,7 +227,7 @@ class Main extends BaseActived {
         })
     }
 
-    render() {
+    renderContent({ theme, language, getapp }) {
         return (
             <ActivePage opts={{
                 toolbar: {
@@ -241,9 +248,9 @@ class Main extends BaseActived {
                 }}>
                     <Navbar initIndex={0} opts={{
                         items: [{
-                            name: Config.LANGUAGE_USE.ctcname
+                            name: Config.LANGUAG_USE.ctcname
                         }, {
-                            name: Config.LANGUAGE_USE.gfcname
+                            name: Config.LANGUAG_USE.gfcname
                         }],
                         onSelect: (key, e) => {
                         }
@@ -309,6 +316,14 @@ class Main extends BaseActived {
                     </TabSwiper>
                 </div>
             </ActivePage>
+        )
+    }
+
+    render() {
+        return (
+            <APPContext.Consumer>
+                {this.renderContent}
+            </APPContext.Consumer>
         )
     }
 }

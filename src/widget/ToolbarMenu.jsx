@@ -12,13 +12,13 @@ class ToolbarMenu extends React.Component {
         this.state = {
             items: [{
                 key: 'light',
-                name: Config.LANGUAGE_USE.lightmode
+                name: Config.LANGUAG_USE.lightmode
             }, {
                 key: 'dark',
-                name: Config.LANGUAGE_USE.darkmode
+                name: Config.LANGUAG_USE.darkmode
             }, {
                 key: 'user',
-                name: Config.LANGUAGE_USE.usermode
+                name: Config.LANGUAG_USE.usermode
             }],
             currname: Config.getAppTheme()
         }

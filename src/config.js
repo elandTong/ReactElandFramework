@@ -1,61 +1,27 @@
 import Emit from './tool/EventBus'
 
-import('./testing').then(testing => {
-    window._ReactTesting = testing.default
-})
+window._APP_ID = 'routertest'
 
+const _CHANNEL = require('./assets/json/channel.json')
 const _APITIPS = require('./assets/json/tips.json')
-
-const _LANGUAGE = require('./assets/json/language.json')
-
-const _APP_ID = 'routertest'
-const _APP_NAME = 'RouterTest'
-const _APP_VERSION = 121004005
-
-const _RELEASE = false
-const _RELEASE_DOMAIN = 'https://pjd.bctt.cc/'
-const _TEST_DOMAIN = 'https://pjd.bctt.cc/'
-
-const _INAPP = function () {
-    let name = window.location.hostname
-    if (name === '127.0.0.1' || name === 'localhost') {
-        return true
-    }
-    return false
-}
-
-const _QUERY = function (name) {
-    let searchIndex = 0, url = window.location.href
-    for (let i = 0; i < url.length; i++) {
-        if (url[i] === '?') {
-            searchIndex = i
-            break
-        }
-    }
-    let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-    let r = url.substr(searchIndex).substr(1).match(reg)
-    if (r != null) return unescape(r[2])
-    return null
-}
+const _LANGUAG = require('./assets/json/language.json')
 
 class Config {
+    static APPCONFIG = {
+        APP_ID: window._APP_ID, APP_NAME: 'RouterTest', APP_VERSION: 121004005,
+        RELEASE: false,
+        RELEASE_DOMAIN: 'https://pjd.bctt.cc/',
+        TEST_DOMAIN: 'https://pjd.bctt.cc/'
+    }
+
+    static CHANNEL = _CHANNEL
     static APITIPS = _APITIPS
-    static LANGUAGE = _LANGUAGE
+    static LANGUAG = _LANGUAG
+    static LANGUAG_USE = _LANGUAG.cn
 
-    static APP_ID = _APP_ID
-    static APP_VERSION = _APP_VERSION
-    static APP_NAME = _APP_NAME
-
-    static RELEASE = _RELEASE
-    static RELEASE_DOMAIN = _RELEASE_DOMAIN
-    static TEST_DOMAIN = _TEST_DOMAIN
-
-    static SERVER_DM = this.getServerAddress()
-
-    static LANGUAGE_USE = this.LANGUAGE.cn
+    static SERVER_API = null
 
     static GLOBAL_EVENT = './_BASE_GLOBAL_THEME/'
-
     static GLOBAL_EVENT_TYPE = {
         STYLE_THEME_CHANGE: 'STYLE_THEME_CHANGE',
         NATIVE_BACK_EVENT: 'NATIVE_BACK_EVENT'
@@ -87,34 +53,24 @@ class Config {
         }
     }
 
-    static getServerAddress() {
-        if (_INAPP()) {
-            return this.RELEASE ? this.RELEASE_DOMAIN : this.TEST_DOMAIN
+    static getServerApi() {
+        if (this.isInapp()) {
+            return this.APPCONFIG.RELEASE ? this.APPCONFIG.RELEASE_DOMAIN : this.APPCONFIG.TEST_DOMAIN
         } else {
             return window.location.protocol + '//' + window.location.host + '/'
         }
     }
 
-    static getLanguage(name) {
-        switch (name) {
-            case 'en': {
-                return this.LANGUAGE.en
-            }
-            case 'cn': {
-                return this.LANGUAGE.cn
-            }
-            default: {
-                return this.LANGUAGE.cn
-            }
-        }
-    }
-
-    static getZHTips(code) {
-        return this.APITIPS[code] ? this.APITIPS[code].zh : code
+    static getApiTips(code, type) {
+        return this.APITIPS[code] ? this.APITIPS[code][type || 'zh'] : code
     }
 
     static setApiTips(data) {
         this.APITIPS = data
+    }
+
+    static getAppTheme() {
+        return window.document.body.className.replace('theme-', '')
     }
 
     static setAppTheme(name) {
@@ -157,12 +113,32 @@ class Config {
         }
     }
 
-    static getAppTheme() {
-        return window.document.body.className.replace('theme-', '')
+    static getLanguage(name) {
+        switch (name) {
+            case 'en': {
+                return this.LANGUAG.en
+            }
+            case 'cn': {
+                return this.LANGUAG.cn
+            }
+            default: {
+                return this.LANGUAG.cn
+            }
+        }
     }
 
     static setLanguage(name) {
-        this.LANGUAGE_USE = this.getLanguage(name || _QUERY('language'))
+        this.LANGUAG_USE = this.getLanguage(name || this.getParam('language'))
+    }
+
+    static setAppConfig(name) {
+        let _data = this.CHANNEL[name || window._APP_ID]
+
+        if (_data) {
+            this.APPCONFIG = Object.assign(this.APPCONFIG, _data)
+        }
+
+        this.SERVER_API = this.getServerApi()
     }
 
     static bindWindow() {
@@ -175,6 +151,38 @@ class Config {
 
         window._ReatConfig = Config
     }
+
+    static isInapp() {
+        let name = window.location.hostname
+
+        if (name === '127.0.0.1' || name === 'localhost') {
+            return true
+        }
+
+        return false
+    }
+
+    static getParam(name) {
+        let searchIndex = 0, url = window.location.href
+
+        for (let i = 0; i < url.length; i++) {
+            if (url[i] === '?') {
+                searchIndex = i
+                break
+            }
+        }
+
+        let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+        let r = url.substr(searchIndex).substr(1).match(reg)
+
+        if (r != null) return unescape(r[2])
+
+        return null
+    }
 }
+
+import('./testing').then(data => {
+    window._ReactTesting = data.default
+})
 
 export default Config

@@ -213,7 +213,7 @@ class Tool {
         if (this.checkURL(api)) {
             url = api
         } else {
-            url = Config.SERVER_DM + api
+            url = Config.SERVER_API + api
         }
 
         let fromData = new FormData()
@@ -265,7 +265,7 @@ class Tool {
         if (this.checkURL(api)) {
             url = api
         } else {
-            url = Config.SERVER_DM + api
+            url = Config.SERVER_API + api
         }
 
         let _htp = new XMLHttpRequest()
@@ -478,7 +478,7 @@ class Tool {
         if (this.checkURL(api)) {
             url = api
         } else {
-            url = Config.SERVER_DM + api
+            url = Config.SERVER_API + api
         }
 
         fetch(url, {
@@ -806,9 +806,9 @@ class Tool {
 
     static addFavorite() {
         if (window.external && window.external.addFavorite) {
-            window.external.addFavorite(window.location.href, Config.APP_NAME)
+            window.external.addFavorite(window.location.href, Config.APPCONFIG.APP_NAME)
         } else if (window.sidebar && window.sidebar.addPanel) {
-            window.sidebar.addPanel(window.location.href, Config.APP_NAME, '')
+            window.sidebar.addPanel(window.location.href, Config.APPCONFIG.APP_NAME, '')
         } else {
             alert('当前浏览器无法自动加入收藏,请使用 Ctrl+D 进行添加!')
         }

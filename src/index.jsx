@@ -2,21 +2,25 @@
 import cssVars from 'css-vars-ponyfill';
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
-import './assets/style/normalize.css';
+
+import './assets/style/_.normalize.scss';
+import './assets/style/_.index.scss';
+import './assets/style/_.common.scss';
 import '../node_modules/swiper/css/swiper.min.css';
-import './assets/style/index.scss';
-import './assets/style/common.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './App';
 import Config from './config';
-import * as serviceWorker from './serviceWorker';
 import NetApi from './tool/NetApi';
 import Tool from './tool/Tool';
+import * as serviceWorker from './serviceWorker';
 
 cssVars()
 
-document.title = Config.APP_NAME
+Config.setAppConfig()
+
+document.title = Config.APPCONFIG.APP_NAME
 
 // 绑定属性到 window 对象
 Config.bindWindow()
@@ -25,7 +29,7 @@ Config.bindWindow()
 Config.setAppTheme(Tool.queryParameForURL('theme', window.location.href))
 
 // 语言设置
-Config.setLanguage(Tool.queryParameForURL('language', window.location.href))
+Config.setLanguage()
 
 NetApi.create({
     onhttppre: (carr) => {

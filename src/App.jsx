@@ -1,6 +1,8 @@
 import React from 'react';
 import Login from './actived/Login';
 import Main from './actived/Main';
+import APPContext from './APPContext';
+import Config from './config';
 import Frame from './router/Frame';
 import { RouterTool } from './tool/Tool';
 import Popup from './window/Popup';
@@ -52,6 +54,13 @@ class Application extends React.Component {
             }
           }
         }]
+      },
+      appcontext: {
+        theme: Config.Theme,
+        language: Config.LANGUAG_USE,
+        getapp: () => {
+          return this
+        }
       }
     }
   }
@@ -60,6 +69,26 @@ class Application extends React.Component {
   }
 
   componentWillUnmount() {
+  }
+
+  updateContextForTheme(data) {
+    let _appcontext = this.state.appcontext
+
+    _appcontext.theme = data || _appcontext.theme
+
+    this.setState({
+      appcontext: _appcontext
+    })
+  }
+
+  updateContextForLanguage(data) {
+    let _appcontext = this.state.appcontext
+
+    _appcontext.language = data || _appcontext.language
+
+    this.setState({
+      appcontext: _appcontext
+    })
   }
 
   onCompRef(comp) {
@@ -72,13 +101,15 @@ class Application extends React.Component {
 
   render() {
     return (
-      <Frame param={this.state.param}
-        index={Main._path}
-        classNameActiveAnimation={null}
-        classNameWindowAnimation={null}
-        ref={(comp) => {
-          this.onCompRef(comp)
-        }} />
+      <APPContext.Provider value={this.state.appcontext}>
+        <Frame param={this.state.param}
+          index={Main._path}
+          classNameActiveAnimation={null}
+          classNameWindowAnimation={null}
+          ref={(comp) => {
+            this.onCompRef(comp)
+          }} />
+      </APPContext.Provider>
     )
   }
 }

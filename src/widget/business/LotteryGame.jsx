@@ -40,7 +40,7 @@ class LotteryGameItem extends React.Component {
                     </span>
 
                     <span className={`common-text-singleline busscomp-lottery-item-tips ${this.getStatusClassname()}`}>
-                        {this.props.data.tips || Config.LANGUAGE_USE.enter}
+                        {this.props.data.tips || Config.LANGUAG_USE.enter}
                     </span>
                 </div>
             </div>

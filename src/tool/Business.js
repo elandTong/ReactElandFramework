@@ -101,11 +101,11 @@ class Business {
             date: new Date().getTime()
         }
 
-        Tool.saveLocalStorage(Config.APP_ID + '_LoginInfo', JSON.stringify(pam))
+        Tool.saveLocalStorage(Config.APPCONFIG.APP_ID + '_LoginInfo', JSON.stringify(pam))
     }
 
     static getLoginInfo() {
-        let pam = Tool.getLocalStorage(Config.APP_ID + '_LoginInfo')
+        let pam = Tool.getLocalStorage(Config.APPCONFIG.APP_ID + '_LoginInfo')
 
         pam = pam ? JSON.parse(pam) : null
 
@@ -349,7 +349,7 @@ class Business {
                             errHandel({
                                 code: 900,
                                 tips: 'MAINTENANCE',
-                                errorMesage: Config.getZHTips('tip.error.game.maintenance')
+                                errorMesage: Config.getApiTips('tip.error.game.maintenance')
                             })
                         }
 
@@ -360,7 +360,7 @@ class Business {
                             errHandel({
                                 code: 130,
                                 tips: 'PLAY_LIMIT',
-                                errorMesage: Config.getZHTips('tip.error.stopplay')
+                                errorMesage: Config.getApiTips('tip.error.stopplay')
                             })
                         }
 
