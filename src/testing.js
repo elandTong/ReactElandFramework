@@ -4,20 +4,20 @@
  * @Description: comp testing
  */
 import React from 'react'
-import { RouterTool } from './tool/Tool'
+import Popup from './modal/Popup'
+import Spiner from './modal/Spiner'
+import { RouterTool } from './utils/Tool'
 import MessageNotice from './widget/MessageNotice'
-import Popup from "./window/Popup"
-import Spiner from "./window/Spiner"
 
 class Testing {
     static Test1() {
-        RouterTool.navigationWindow(Spiner._path, {}, (comp) => {
+        RouterTool.navigationModal(Spiner._path, {}, (comp) => {
             comp.setText('你好!哈哈', true)
         })
     }
 
     static Test2() {
-        RouterTool.navigationWindow(Popup._path, {}, (comp) => {
+        RouterTool.navigationModal(Popup._path, {}, (comp) => {
             comp.onComp((
                 <MessageNotice opts={{
                     title: '标题',

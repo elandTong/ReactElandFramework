@@ -1,5 +1,5 @@
 import React from 'react'
-import Tool from '../tool/Tool'
+import Tool from '../utils/Tool'
 import '../assets/style/comp.navbar.scss'
 
 class Navbar extends React.Component {

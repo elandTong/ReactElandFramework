@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../assets/style/busscomp.lottery.scss'
 import Config from '../../config'
-import Tool from '../../tool/Tool'
+import Tool from '../../utils/Tool'
 
 class LotteryGameItem extends React.Component {
     constructor(props) {

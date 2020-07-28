@@ -1,4 +1,4 @@
-import Emit from './tool/EventBus'
+import Emit from './utils/EventBus'
 
 window._APP_ID = 'routertest'
 

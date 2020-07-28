@@ -1,5 +1,5 @@
 import React from 'react'
-import Tool from '../tool/Tool'
+import Tool from '../utils/Tool'
 
 class Toolbar extends React.Component {
     _opts = {
@@ -65,8 +65,8 @@ class Toolbar extends React.Component {
         this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
         return (
-            <div className={'display-space page-active-container-toolbar-view'}>
-                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-active-container-toolbar-ele`} onClick={this.onFinishClick}>
+            <div className={'display-space page-screen-container-toolbar-view'}>
+                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
                     {this._opts.hideBack ? (null) : (
                         <img src={require('../assets/res/icon/ic_back.png')} height={this.state.icon.height} alt={'ic_back'} />
                     )}
@@ -74,7 +74,7 @@ class Toolbar extends React.Component {
 
                 <span> {this._opts.title} </span>
 
-                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-active-container-toolbar-ele`} onClick={this.onMenuClick}>
+                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
                     {this._opts.hideMenu ? (null) : (
                         <img src={require('../assets/res/icon/ic_menu.png')} height={this.state.icon.height} alt={'ic_menu'} />
                     )}
@@ -84,7 +84,7 @@ class Toolbar extends React.Component {
     }
 }
 
-class ActivePage extends React.Component {
+class ScreenPage extends React.Component {
     _opts = {
         toolbar: null,
         toolbarComp: null,
@@ -106,17 +106,17 @@ class ActivePage extends React.Component {
     render() {
         this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
 
-        let _view_classname = this._opts.hideToolbar ? 'page-active-container-view-no-toolbar' : 'page-active-container-view-have-toolbar'
+        let _view_classname = this._opts.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
 
         return (
-            <div className={'page-active-container-pack'}>
+            <div className={'page-screen-container-pack'}>
                 {this._opts.hideToolbar ? (null) : (
-                    <div className={'page-active-container-toolbar'}>
+                    <div className={'page-screen-container-toolbar'}>
                         {this._opts.toolbarComp || (<Toolbar opts={this._opts.toolbar} />)}
                     </div>
                 )}
 
-                <div className={`page-active-container-view ${_view_classname}`}>
+                <div className={`page-screen-container-view ${_view_classname}`}>
                     {this.props.children}
                 </div>
             </div>
@@ -124,7 +124,7 @@ class ActivePage extends React.Component {
     }
 }
 
-class WindowPage extends React.Component {
+class ModalPage extends React.Component {
     constructor(props) {
         super(props)
 
@@ -133,13 +133,13 @@ class WindowPage extends React.Component {
 
     render() {
         return (
-            <div className={'page-window-container-view'} style={this.props.style}>
+            <div className={'page-modal-container-view'} style={this.props.style}>
                 {this.props.children}
             </div>
         )
     }
 }
 
-export default ActivePage
+export default ScreenPage
 
-export { ActivePage, WindowPage }
+export { ScreenPage, ModalPage }

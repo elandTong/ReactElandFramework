@@ -2,7 +2,7 @@ import MiniRefreshTools from 'minirefresh';
 import 'minirefresh/dist/debug/minirefresh.css';
 import React from 'react';
 import '../assets/style/comp.minirefresh.cover.scss';
-import Tool from '../tool/Tool';
+import Tool from '../utils/Tool';
 
 class Minirefresh extends React.Component {
     _miniRefresh = null

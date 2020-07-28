@@ -2,8 +2,8 @@
 import React from 'react'
 import '../assets/style/comp.toolbarmenu.scss'
 import Config from '../config'
-import Emit from '../tool/EventBus'
-import Tool from '../tool/Tool'
+import Emit from '../utils/EventBus'
+import Tool from '../utils/Tool'
 
 class ToolbarMenu extends React.Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Swiper from 'swiper';
 import '../assets/style/comp.swiper.scss';
-import Tool from '../tool/Tool';
+import Tool from '../utils/Tool';
 
 class Banner extends React.Component {
     _opts = {

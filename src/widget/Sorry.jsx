@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/style/comp.sorry.scss';
 import Config from '../config';
-import Tool from '../tool/Tool';
+import Tool from '../utils/Tool';
 import Button from './Button';
 
 class Sorry extends React.Component {

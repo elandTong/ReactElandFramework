@@ -1,6 +1,6 @@
 import React from 'react'
 import '../assets/style/comp.button.scss'
-import Tool from '../tool/Tool'
+import Tool from '../utils/Tool'
 
 class ListButton extends React.Component {
     _opts = {

@@ -1,13 +1,13 @@
 import React from 'react';
-import Login from './actived/Login';
-import Main from './actived/Main';
+import Login from './screen/Login';
+import Main from './screen/Main';
 import APPContext from './APPContext';
 import Config from './config';
 import Frame from './router/Frame';
-import { RouterTool } from './tool/Tool';
-import Popup from './window/Popup';
-import Spiner from './window/Spiner';
-import Toast from './window/Toast';
+import { RouterTool } from './utils/Tool';
+import Popup from './modal/Popup';
+import Spiner from './modal/Spiner';
+import Toast from './modal/Toast';
 
 class Application extends React.Component {
   _frame = null
@@ -17,7 +17,7 @@ class Application extends React.Component {
 
     this.state = {
       param: {
-        actives: [{
+        screens: [{
           component: Main,
           path: Main._path,
           opts: {
@@ -32,7 +32,7 @@ class Application extends React.Component {
             }
           }
         }],
-        windows: [{
+        modals: [{
           component: Toast,
           path: Toast._path,
           opts: {
@@ -104,8 +104,8 @@ class Application extends React.Component {
       <APPContext.Provider value={this.state.appcontext}>
         <Frame param={this.state.param}
           index={Main._path}
-          classNameActiveAnimation={null}
-          classNameWindowAnimation={null}
+          classNameScreenAnimation={null}
+          classNameModalAnimation={null}
           ref={(comp) => {
             this.onCompRef(comp)
           }} />

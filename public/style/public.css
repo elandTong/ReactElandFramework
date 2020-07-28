@@ -61,7 +61,7 @@
     box-sizing: border-box
 }
 
-@-webkit-keyframes  shineRed {
+@-webkit-keyframes shineRed {
 from { -webkit-box-shadow: 0 0 5px #bbb; }
 50% { -webkit-box-shadow: 0 0 10px red; }
 to { -webkit-box-shadow: 0 0 5px #bbb; }

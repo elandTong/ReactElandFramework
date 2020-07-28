@@ -3,17 +3,17 @@ import cssVars from 'css-vars-ponyfill';
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
-import './assets/style/_.normalize.scss';
-import './assets/style/_.index.scss';
-import './assets/style/_.common.scss';
+import './assets/style/app.normalize.scss';
+import './assets/style/app.index.scss';
+import './assets/style/app.common.scss';
 import '../node_modules/swiper/css/swiper.min.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Application from './App';
 import Config from './config';
-import NetApi from './tool/NetApi';
-import Tool from './tool/Tool';
+import NetApi from './utils/NetApi';
+import Tool from './utils/Tool';
 import * as serviceWorker from './serviceWorker';
 
 cssVars()
@@ -26,7 +26,7 @@ document.title = Config.APPCONFIG.APP_NAME
 Config.bindWindow()
 
 // 主题设置
-Config.setAppTheme(Tool.queryParameForURL('theme', window.location.href))
+Config.setAppTheme(Tool.getParameForURL('theme', window.location.href))
 
 // 语言设置
 Config.setLanguage()

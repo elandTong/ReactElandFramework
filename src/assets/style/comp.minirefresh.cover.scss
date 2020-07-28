@@ -73,14 +73,14 @@
 }
 
 .comp-minirefresh-scroll {
-    background: $light-color-active-background !important;
+    background: $light-color-screen-background !important;
     .theme-light & {
-        background: $light-color-active-background !important;
+        background: $light-color-screen-background !important;
     }
     .theme-dark & {
-        background: $dark-color-active-background !important;
+        background: $dark-color-screen-background !important;
     }
     .theme-user & {
-        background: $user-color-active-background !important;
+        background: $user-color-screen-background !important;
     }
 }

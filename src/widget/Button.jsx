@@ -1,7 +1,7 @@
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../assets/style/comp.button.scss';
-import Tool from '../tool/Tool';
+import Tool from '../utils/Tool';
 
 class Button extends React.Component {
     _opts = {

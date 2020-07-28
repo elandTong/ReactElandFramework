@@ -1,5 +1,5 @@
 /*
- * @Author: your name
+ * @Author: Eland.Tong
  * @Date: 2020-05-19 15:40:02
  * @LastEditTime: 2020-05-27 14:40:57
  * @LastEditors: Please set LastEditors
@@ -7,22 +7,23 @@
  * @FilePath: /ReactElandFramework/index.js
  */
 
-import Actived from './src/router/Actived'
-import BaseActived from './src/router/BaseActived'
-import BaseWindow from './src/router/BaseWindow'
+import Config from './src/config'
+import BaseModal from './src/router/BaseModal'
+import BaseScreen from './src/router/BaseScreen'
 import Frame from './src/router/Frame'
+import ModalFrame from './src/router/ModalFrame'
 import Page from './src/router/Page'
-import Window from './src/router/Window'
-import Emit from './src/tool/EventBus'
-import NetApi from './src/tool/NetApi'
-import Tool from './src/tool/Tool'
+import ScreenFrame from './src/router/ScreenFrame'
+import Emit from './src/utils/EventBus'
+import NetApi from './src/utils/NetApi'
+import Tool from './src/utils/Tool'
 import Banner from './src/widget/Banner'
 import Button from './src/widget/Button'
+import FixedModal from './src/widget/FixedModal'
 import ListButton from './src/widget/ListButton'
 import MarqueeBar from './src/widget/MarqueeBar'
 import MessageNotice from './src/widget/MessageNotice'
 import Minirefresh from './src/widget/Minirefresh'
-import Modal from './src/widget/Modal'
 import Navbar from './src/widget/Navbar'
 import Preblock from './src/widget/Preblock'
 import SearchBar from './src/widget/SearchBar'
@@ -30,9 +31,8 @@ import Sorry from './src/widget/Sorry'
 import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
 
-import Config from './src/config'
 
-export { Frame, Actived, BaseActived, Window, BaseWindow, Page }
-export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, Modal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
+export { Frame, ScreenFrame, BaseScreen, ModalFrame, BaseModal, Page }
+export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
 export { Tool, Emit, NetApi }
 export { Config }

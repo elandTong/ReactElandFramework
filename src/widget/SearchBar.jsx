@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/style/comp.search.scss';
-import Tool from '../tool/Tool';
+import Tool from '../utils/Tool';
 
 class SearchBar extends React.Component {
     _props = {

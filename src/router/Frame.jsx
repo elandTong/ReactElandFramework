@@ -1,17 +1,17 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group/index';
-import Tool from '../tool/Tool';
-import Actived from './Actived';
-import BaseActived from './BaseActived';
-import BaseWindow from './BaseWindow';
-import Window from './Window';
+import Tool from '../utils/Tool';
+import BaseModal from './BaseModal';
+import BaseScreen from './BaseScreen';
+import ModalFrame from './ModalFrame';
+import ScreenFrame from './ScreenFrame';
 
 /**
- * @description: 基础SPA路由框架,该框架是基于DOM结构的实时渲染控制路由,
+ * @description: 基础SPA路由框架,该框架是基于DOM结构的实时渲染控制路由!
  * @author: Eland.Tong
  */
 
-class ActivedAnimation extends React.Component {
+class ScreenAnimation extends React.Component {
     constructor(props) {
         super(props)
 
@@ -24,7 +24,7 @@ class ActivedAnimation extends React.Component {
             return (this.props.children)
         } else {
             return (
-                <CSSTransitionGroup transitionName={`${this.props.className || 'active-router'}`}
+                <CSSTransitionGroup transitionName={`${this.props.className || 'screen-router'}`}
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}
                     transitionAppear={true}
@@ -36,7 +36,7 @@ class ActivedAnimation extends React.Component {
     }
 }
 
-class WindowAnimation extends React.Component {
+class ModalAnimation extends React.Component {
     constructor(props) {
         super(props)
 
@@ -63,22 +63,22 @@ class WindowAnimation extends React.Component {
 
 class Frame extends React.Component {
     _param = {
-        actives: [],
-        windows: []
+        screens: [],
+        modals: []
     }
 
     _keep_param = {
-        actives: [],
-        windows: []
+        screens: [],
+        modals: []
     }
 
-    _activeZIndex = 100
+    _screenZIndex = 100
 
-    _windowZIndex = 100
+    _modalZIndex = 100
 
     __stack_temp = {
-        active: null,
-        window: null,
+        screen: null,
+        modal: null,
         compref: null,
         zIndex: 0,
         compHandle: null
@@ -97,19 +97,19 @@ class Frame extends React.Component {
             index: {
                 path: props.index
             },
-            activeStack: [],
-            windowStack: []
+            screenStack: [],
+            modalStack: []
         }
 
-        let _index = this.getActiveIntent(this.props.index)
+        let _index = this.getScreenIntent(this.props.index)
 
         if (_index) { // 初始化页面
-            this.state.activeStack.push(Object.assign({
-                active: null,
+            this.state.screenStack.push(Object.assign({
+                screen: null,
                 compref: null,
-                zIndex: ++this._activeZIndex,
+                zIndex: ++this._screenZIndex,
                 compHandle: (comp) => {
-                    if (comp instanceof BaseActived) {
+                    if (comp instanceof BaseScreen) {
                         comp.onResume()
                         comp.onData({
                             message: 'This data is constructed by the routing framework',
@@ -130,12 +130,12 @@ class Frame extends React.Component {
         this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
 
         // 过滤非法项
-        this._param.actives = this._param.actives.filter((item) => {
-            return Object.getPrototypeOf(item.component) === BaseActived && !Tool.isEmpty(item.path)
+        this._param.screens = this._param.screens.filter((item) => {
+            return Object.getPrototypeOf(item.component) === BaseScreen && !Tool.isEmpty(item.path)
         })
 
-        this._param.windows = this._param.windows.filter((item) => {
-            return Object.getPrototypeOf(item.component) === BaseWindow && !Tool.isEmpty(item.path)
+        this._param.modals = this._param.modals.filter((item) => {
+            return Object.getPrototypeOf(item.component) === BaseModal && !Tool.isEmpty(item.path)
         })
     }
 
@@ -156,12 +156,12 @@ class Frame extends React.Component {
      * @param {Function} 内容组件回调
      */
     gohome(handle) {
-        let _stack = this.state.activeStack
+        let _stack = this.state.screenStack
 
         _stack = _stack.filter((item) => {
             if (item.path === this.props.index) {
                 item.compHandle = (comp) => {
-                    if (comp instanceof BaseActived) {
+                    if (comp instanceof BaseScreen) {
                         comp.onResume()
                     }
 
@@ -169,7 +169,7 @@ class Frame extends React.Component {
                 }
                 return true
             } else {
-                if (item.compref instanceof BaseActived) {
+                if (item.compref instanceof BaseScreen) {
                     item.compref.onPause()
                 }
                 return false
@@ -177,25 +177,25 @@ class Frame extends React.Component {
         })
 
         // eslint-disable-next-line react/no-direct-mutation-state
-        this.state.activeStack = _stack
+        this.state.screenStack = _stack
 
-        this.setState({ activeStack: _stack })
+        this.setState({ screenStack: _stack })
     }
 
     /**
-     * @description: active页面退栈, router frame finish active failure! You have to keep a page active
-     * @param {Object} active BaseActive 对象
+     * @description: screen页面退栈, router frame finish screen failure! You have to keep a page screen
+     * @param {Object} screen BaseScreen 对象
      */
-    finishActive(active) {
-        if (active == null || this.state.activeStack.length <= 1) { return }
+    finishScreen(screen) {
+        if (screen == null || this.state.screenStack.length <= 1) { return }
 
-        let _stack = this.state.activeStack
+        let _stack = this.state.screenStack
 
         let _last = _stack[_stack.length - 1]
 
-        if (active !== _last.active) { return }
+        if (screen !== _last.screen) { return }
 
-        if (_last.compref instanceof BaseActived) {
+        if (_last.compref instanceof BaseScreen) {
             _last.compref.onPause()
         }
 
@@ -203,44 +203,44 @@ class Frame extends React.Component {
 
         _last = _stack[_stack.length - 1]
 
-        if (_last.compref instanceof BaseActived) {
+        if (_last.compref instanceof BaseScreen) {
             _last.compref.onResume()
         }
 
-        this.setState({ activeStack: _stack })
+        this.setState({ screenStack: _stack })
     }
 
     /**
-     * @description: active页面路由池导航
+     * @description: screen页面路由池导航
      * @param {String} path 路径
      * @param {Object} data 跳转数据
      * @param {Function} handle 内容组件处理器
      */
-    navigationActive(path, data, handle) {
-        let _intent = this.getActiveIntent(path)
+    navigationScreen(path, data, handle) {
+        let _intent = this.getScreenIntent(path)
 
         if (_intent) {
-            this.startActive(_intent, data, handle)
+            this.startScreen(_intent, data, handle)
         } else {
-            console.error('No corresponding entry found in active routing pool!')
+            console.error('No corresponding entry found in screen routing pool!')
         }
     }
 
     /**
-     * @description: 意图启动active页面
+     * @description: 意图启动screen页面
      * @param {Object} intent 意图对象
      * @param {Object} data 跳转数据
      * @param {Function} handle 内容组件处理器
      */
-    startActive(intent = {
+    startScreen(intent = {
         component: null,
         path: null,
         opts: { props: {} }
     }, data, handle) {
         if (!intent || !intent.component
-            || Object.getPrototypeOf(intent.component) !== BaseActived
+            || Object.getPrototypeOf(intent.component) !== BaseScreen
             || Tool.isEmpty(intent.path)) {
-            console.error('router frame start active error please check the configuration parameters!')
+            console.error('router frame start screen error please check the configuration parameters!')
 
             return
         }
@@ -250,7 +250,7 @@ class Frame extends React.Component {
             return
         }
 
-        let _stack = this.state.activeStack
+        let _stack = this.state.screenStack
 
         if (_stack.length > 0) {
             let _last = _stack[_stack.length - 1]
@@ -259,13 +259,13 @@ class Frame extends React.Component {
                 return
             }
 
-            if (_last.compref instanceof BaseActived) {
+            if (_last.compref instanceof BaseScreen) {
                 _last.pauseHandle = null
 
                 _last.compref.onPause()
             } else {
                 _last.pauseHandle = function (comp) { // 消耗处理器
-                    if (comp instanceof BaseActived) {
+                    if (comp instanceof BaseScreen) {
                         comp.onPause()
                     }
                 }
@@ -275,12 +275,12 @@ class Frame extends React.Component {
         _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
 
         _stack.push(Object.assign({
-            active: null,
+            screen: null,
             compref: null,
-            zIndex: ++this._activeZIndex,
+            zIndex: ++this._screenZIndex,
             pauseHandle: null,
             compHandle: function (comp) {
-                if (comp instanceof BaseActived) {
+                if (comp instanceof BaseScreen) {
                     comp.onResume()
 
                     comp.onData(data || {})
@@ -296,18 +296,18 @@ class Frame extends React.Component {
         }, intent))
 
         // eslint-disable-next-line react/no-direct-mutation-state
-        this.state.activeStack = _stack
+        this.state.screenStack = _stack
 
-        this.setState({ activeStack: _stack })
+        this.setState({ screenStack: _stack })
     }
 
     /**
-     * @description: 获取active页面内容组件对象
+     * @description: 获取screen页面内容组件对象
      * @param {String} path 路径 
      * @return: 内容组件对象
      */
-    getActive(path) {
-        for (let it of this._param.actives) {
+    getScreen(path) {
+        for (let it of this._param.screens) {
             if (it.path === path) { return it.compref }
         }
 
@@ -315,12 +315,12 @@ class Frame extends React.Component {
     }
 
     /**
-     * @description: 在active页面路由池内获取意图
+     * @description: 在screen页面路由池内获取意图
      * @param {String} path 路径 
      * @return: 意图对象
      */
-    getActiveIntent(path) {
-        for (let item of this._param.actives) {
+    getScreenIntent(path) {
+        for (let item of this._param.screens) {
             if (item.path === path) {
                 return item
             }
@@ -329,18 +329,18 @@ class Frame extends React.Component {
     }
 
     /**
-     * @description: 判断active页面是否处于栈顶
-     * @param {Object} active BaseActive对象 或 CLASS 
+     * @description: 判断screen页面是否处于栈顶
+     * @param {Object} screen BaseScreen对象 或 CLASS 
      * @return: boole
      */
-    isActiveStackTop(active) {
-        if (this.state.activeStack.length < 1) {
+    isScreenStackTop(screen) {
+        if (this.state.screenStack.length < 1) {
             return false
         }
 
-        let _top = this.state.activeStack[this.state.activeStack.length - 1]
+        let _top = this.state.screenStack[this.state.screenStack.length - 1]
 
-        if (active instanceof _top.component || active === _top.component) {
+        if (screen instanceof _top.component || screen === _top.component) {
             return true
         }
 
@@ -348,19 +348,19 @@ class Frame extends React.Component {
     }
 
     /**
-     * @description: window视窗退栈
-     * @param {Object} window BaseWindow对象
+     * @description: modal视窗退栈
+     * @param {Object} modal BaseModal对象
      */
-    finishWindow(window) {
-        if (window == null || this.state.windowStack.length < 1) { return }
+    finishModal(modal) {
+        if (modal == null || this.state.modalStack.length < 1) { return }
 
-        let _stack = this.state.windowStack
+        let _stack = this.state.modalStack
 
         let _last = _stack[_stack.length - 1]
 
-        if (window !== _last.window) { return }
+        if (modal !== _last.modal) { return }
 
-        if (_last.compref instanceof BaseWindow) {
+        if (_last.compref instanceof BaseModal) {
             _last.compref.onPause()
         }
 
@@ -369,50 +369,50 @@ class Frame extends React.Component {
         if (_stack.length > 0) {
             _last = _stack[_stack.length - 1]
 
-            if (_last.compref instanceof BaseWindow) {
+            if (_last.compref instanceof BaseModal) {
                 _last.compref.onResume()
             }
         }
 
-        this.setState({ windowStack: _stack })
+        this.setState({ modalStack: _stack })
     }
 
     /**
-     * @description: 在window路由池内导航
+     * @description: 在modal路由池内导航
      * @param {String} path 路径
      * @param {Object} data 跳转数据
      * @param {Function} handle 内容组件处理器
      */
-    navigationWindow(path, data, handle) {
-        let _intent = this.getWindowIntent(path)
+    navigationModal(path, data, handle) {
+        let _intent = this.getModalIntent(path)
 
         if (_intent) {
-            this.startWindow(_intent, data, handle)
+            this.startModal(_intent, data, handle)
         } else {
-            console.error('No corresponding entry found in window routing pool!')
+            console.error('No corresponding entry found in modal routing pool!')
         }
     }
 
     /**
-     * @description: 意图启动window视窗
+     * @description: 意图启动modal视窗
      * @param {Object} intent 意图对象
      * @param {Object} data 跳转数据
      * @param {Function} handle 内容组件处理器
      */
-    startWindow(intent = {
+    startModal(intent = {
         component: null,
         path: null,
         opts: { props: {} }
     }, data, handle) {
         if (!intent || !intent.component
-            || Object.getPrototypeOf(intent.component) !== BaseWindow
+            || Object.getPrototypeOf(intent.component) !== BaseModal
             || Tool.isEmpty(intent.path)) {
-            console.error('router frame start window error please check the configuration parameters!')
+            console.error('router frame start modal error please check the configuration parameters!')
 
             return
         }
 
-        let _stack = this.state.windowStack
+        let _stack = this.state.modalStack
 
         if (_stack.length > 0) {
             let _last = _stack[_stack.length - 1]
@@ -421,13 +421,13 @@ class Frame extends React.Component {
                 return
             }
 
-            if (_last.compref instanceof BaseWindow) {
+            if (_last.compref instanceof BaseModal) {
                 _last.pauseHandle = null
 
                 _last.compref.onPause()
             } else {
                 _last.pauseHandle = function (comp) { // 消耗处理器
-                    if (comp instanceof BaseWindow) {
+                    if (comp instanceof BaseModal) {
                         comp.onPause()
                     }
                 }
@@ -437,12 +437,12 @@ class Frame extends React.Component {
         _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
 
         _stack.push(Object.assign({
-            window: null,
+            modal: null,
             compref: null,
-            zIndex: ++this._windowZIndex,
+            zIndex: ++this._modalZIndex,
             pauseHandle: null,
             compHandle: function (comp) {
-                if (comp instanceof BaseWindow) {
+                if (comp instanceof BaseModal) {
                     comp.onResume()
 
                     comp.onData(data || {})
@@ -458,18 +458,18 @@ class Frame extends React.Component {
         }, intent))
 
         // eslint-disable-next-line react/no-direct-mutation-state
-        this.state.windowStack = _stack
+        this.state.modalStack = _stack
 
-        this.setState({ windowStack: _stack })
+        this.setState({ modalStack: _stack })
     }
 
     /**
-     * @description: 获取window视窗内容组件对象
+     * @description: 获取modal视窗内容组件对象
      * @param {String} path 路径 
      * @return: 内容组件对象
      */
-    getWindow(path) {
-        for (let it of this._param.windows) {
+    getModal(path) {
+        for (let it of this._param.modals) {
             if (it.path === path) { return it.compref }
         }
 
@@ -477,12 +477,12 @@ class Frame extends React.Component {
     }
 
     /**
-     * @description: 在window视窗路由池内获取意图
+     * @description: 在modal视窗路由池内获取意图
      * @param {String} path 路径 
-     * @return: window视窗意图
+     * @return: modal视窗意图
      */
-    getWindowIntent(path) {
-        for (let item of this._param.windows) {
+    getModalIntent(path) {
+        for (let item of this._param.modals) {
             if (item.path === path) {
                 return item
             }
@@ -491,18 +491,18 @@ class Frame extends React.Component {
     }
 
     /**
-     * @description: 判断window视窗是否处于栈顶
-     * @param {Object} window window 视图对象 或 CLASS 
+     * @description: 判断modal视窗是否处于栈顶
+     * @param {Object} modal modal 视图对象 或 CLASS 
      * @return: boole
      */
-    isWindowStackTop(window) {
-        if (this.state.windowStack.length < 1) {
+    isModalStackTop(modal) {
+        if (this.state.modalStack.length < 1) {
             return false
         }
 
-        let _top = this.state.windowStack[this.state.windowStack.length - 1]
+        let _top = this.state.modalStack[this.state.modalStack.length - 1]
 
-        if (window instanceof _top.component || window === _top.component) {
+        if (modal instanceof _top.component || modal === _top.component) {
             return true
         }
 
@@ -516,11 +516,11 @@ class Frame extends React.Component {
     render() {
         this.updateOpts()
 
-        let actives = this.state.activeStack.filter((item) => {
+        let screens = this.state.screenStack.filter((item) => {
             return item.component ? true : false
         }).map((item, key) => {
             return (
-                <Actived key={key} router={this}
+                <ScreenFrame key={key} router={this}
                     component={item.component}
 
                     initPame={item.opts.props}
@@ -537,16 +537,16 @@ class Frame extends React.Component {
                     }}
 
                     ref={(comp) => {
-                        item.active = comp
+                        item.screen = comp
                     }} />
             )
         })
 
-        let windows = this.state.windowStack.filter((item) => {
+        let modals = this.state.modalStack.filter((item) => {
             return item.component ? true : false
         }).map((item, key) => {
             return (
-                <Window key={key} router={this}
+                <ModalFrame key={key} router={this}
                     component={item.component}
 
                     initPame={item.opts.props}
@@ -563,28 +563,28 @@ class Frame extends React.Component {
                     }}
 
                     ref={(comp) => {
-                        item.window = comp
+                        item.modal = comp
                     }} />
             )
         })
 
         return (
             <div className={'app'}>
-                {/* activity stack */}
-                <div className={'page-active-root'}>
-                    <div className={'page-active-view'}>
-                        <ActivedAnimation className={this.props.classNameActiveAnimation}>
-                            {actives}
-                        </ActivedAnimation>
+                {/* screen stack */}
+                <div className={'page-screen-root'}>
+                    <div className={'page-screen-view'}>
+                        <ScreenAnimation className={this.props.classNameScreenAnimation}>
+                            {screens}
+                        </ScreenAnimation>
                     </div>
                 </div>
 
-                {/* widget stack */}
-                <div className={'page-window-root'}>
-                    <div className={'page-window-view'}>
-                        <WindowAnimation className={this.props.classNameWindowAnimation}>
-                            {windows}
-                        </WindowAnimation>
+                {/* modal stack */}
+                <div className={'page-modal-root'}>
+                    <div className={'page-modal-view'}>
+                        <ModalAnimation className={this.props.classNameModalAnimation}>
+                            {modals}
+                        </ModalAnimation>
                     </div>
                 </div>
             </div>
