@@ -1,0 +1,486 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+html {
+  /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+  -ms-overflow-style:none;
+  /*火狐下隐藏滚动条*/
+  overflow:-moz-scrollbars-none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-user-select: none; 
+  -o-user-select:none; 
+  -khtml-user-select:none; 
+  -webkit-user-select:none; 
+  -ms-user-select:none; 
+  user-select:none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+#root{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// page screen frame
+.page-screen-root {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+
+.page-screen-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+// page screen container
+.page-screen-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  transition: opacity 3s;
+  background: $light-color-screen-background;
+  .theme-light & {
+    background: $light-color-screen-background;
+  }
+  .theme-dark & {
+    background: $dark-color-screen-background;
+  }
+  .theme-user & {
+    background: $user-color-screen-background;
+  }
+}
+
+.page-screen-container-pack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.page-screen-container-safety {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+// page screen container toolbar
+.page-screen-container-toolbar {
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  background: $light-color-toolbar-background;
+  box-shadow: $light-color-toolbar-shadow;
+  .theme-light & {
+    background: $light-color-toolbar-background;
+    box-shadow: $light-color-toolbar-shadow;
+  }
+  .theme-dark & {
+    background: $dark-color-toolbar-background;
+    box-shadow: $dark-color-toolbar-shadow;
+  }
+  .theme-user & {
+    background: $user-color-toolbar-background;
+    box-shadow: $user-color-toolbar-shadow;
+  }
+}
+
+.page-screen-container-toolbar-view {
+  width: 100%;
+  height: 100%;
+  padding-left: 3px;
+  padding-right: 3px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: $light-color-toolbar-font;
+  .theme-light & {
+    color: $light-color-toolbar-font;
+  }
+  .theme-dark & {
+    color: $dark-color-toolbar-font;
+  }
+  .theme-user & {
+    color: $user-color-toolbar-font;
+  }
+}
+
+.page-screen-container-toolbar-ele {
+  width: 45px;
+  height: 100%;
+  border-radius: 50%;
+}
+
+// page screen container view
+.page-screen-container-view {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1;
+  color: $light-color-screen-font;
+  .theme-light & {
+    color: $light-color-screen-font;
+  }
+  .theme-dark & {
+    color: $dark-color-screen-font;
+  }
+  .theme-user & {
+    color: $user-color-screen-font;
+  }
+}
+
+.page-screen-container-view-have-toolbar {
+  padding-top: 45px;
+}
+
+.page-screen-container-view-no-toolbar {
+  padding-top: 0px;
+}
+
+// page modal frame
+.page-modal-root {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.page-modal-view {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+// page modal container
+.page-modal-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
+  background: $light-color-modal-background;
+  .theme-light & {
+    background: $light-color-modal-background;
+  }
+  .theme-dark & {
+    background: $dark-color-modal-background;
+  }
+  .theme-user & {
+    background: $user-color-modal-background;
+  }
+}
+
+.page-modal-container-pack {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.page-modal-container-view {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+// 内在波纹点击效果
+.click-in-ripple {
+  position: relative;
+  overflow: hidden; /* 隐藏溢出的径向渐变背景 */
+}
+
+.click-in-ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+  .theme-light & {
+    background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+  }
+  .theme-dark & {
+    background-image: radial-gradient(circle, $dark-color-click-ripple-background 8%, transparent 8%);
+  }
+  .theme-user & {
+    background-image: radial-gradient(circle, $user-color-click-ripple-background 8%, transparent 8%);
+  }
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .4s, opacity .6s;
+}
+
+.click-in-ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s;
+}
+
+// 溢出波纹点击效果
+.click-out-ripple {
+  position: relative;
+}
+
+.click-out-ripple:focus{
+  outline: none;
+}
+
+.click-out-ripple:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -15px; /*扩大伪类元素4个方向各15px*/
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  pointer-events: none;
+  background-color: $light-color-click-ripple-background;
+  .theme-light & {
+    background-color: $light-color-click-ripple-background;
+  }
+  .theme-dark & {
+    background-color: $dark-color-click-ripple-background;
+  }
+  .theme-user & {
+    background-color: $user-color-click-ripple-background;
+  }
+  background-repeat: no-repeat;
+  background-position: 50%;
+  opacity: 0;
+  border-radius: inherit;
+  transition: all .3s;
+}
+
+.click-out-ripple:active:after {
+  opacity: .2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0s;
+}
+
+// 盒子通用样式
+.display-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.display-around {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.display-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.display-warp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display-warp-start {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  text-align: center;
+}
+
+.display-warp-around {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-end
+}
+
+.display-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.display-end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// screen切换动画样式
+.screen-router-enter {
+  transform: translateX(100%);
+}
+
+.screen-router-enter.screen-router-enter-active {
+  transform: translateX(0);
+  transition: transform 300ms ease;
+}
+
+.screen-router-leave {
+  transform: translateX(0);
+}
+
+.screen-router-leave.screen-router-leave-active {
+  transform: translateX(100%);
+  transition: transform 300ms ease;
+}
+
+.screen-router-appear {
+  opacity: 0.01;
+}
+
+.screen-router-appear.screen-router-appear-active {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+// 通用动画样式
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .2s ease-in;
+}
+
+// 布局类型样式
+.pos-relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.pos-absolute {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.pos-absolute-nosize {
+position: absolute;
+top: 0px;
+left: 0px;
+}
+
+select {
+	padding-left: 15px;
+	padding-right: 15px;
+	background: rgba(0, 0, 0, 0);
+	font-size: 12;
+	color: silver;
+	text-align: center;
+	outline: none;
+	border: 1px rgb(110, 134, 174) solid;
+	border-radius: 2px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+}
+input[type="number"]{
+    -moz-appearance:textfield;
+}

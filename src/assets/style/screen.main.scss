@@ -1,0 +1,17 @@
+@import "theme.light";
+@import "theme.dark";
+@import "theme.user";
+
+.screen-main-slide-background {
+    padding-top: 10px;
+    background: $light-color-toolbar-background !important;
+    .theme-light & {
+        background: $light-color-toolbar-background !important;
+    }
+    .theme-dark & {
+        background: $dark-color-toolbar-background !important;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background !important;
+    }
+}

@@ -1,0 +1,106 @@
+import React from 'react'
+import APPContext from '../APPContext'
+import '../assets/style/comp.message.scss'
+import BaseModal from '../router/BaseModal'
+import { ModalPage } from '../router/Page'
+
+class Toast extends BaseModal {
+    static _path = '/toast'
+
+    static LONG = 3000
+
+    static SHORT = 1500
+
+    timeout = null
+
+    constructor(props) {
+        super(props)
+        
+        this.renderContent = this.renderContent.bind(this)
+
+        this.state = {
+            showTime: 0,
+            text: 'Toast show'
+        }
+    }
+
+    onCreate() {
+        super.onCreate()
+
+        console.warn('modal toast on create!')
+    }
+
+    componentDidUpdate() {
+        clearTimeout(this.timeout)
+
+        if (this.state.showTime > 0) {
+            this.timeout = setTimeout(() => {
+                this.state.showTime = 0
+                this.close()
+            }, this.state.showTime)
+        }
+    }
+
+    onStart() {
+        console.warn('modal toast on start!')
+    }
+
+    onResume() {
+        console.warn('modal toast on resume!')
+    }
+
+    onPause() {
+        console.warn('modal toast on pause!')
+    }
+
+    onStop() {
+        clearTimeout(this.timeout)
+
+        console.warn('modal toast on stop!')
+    }
+
+    onNativeBack(data) {
+        super.onNativeBack(data)
+    }
+
+    onData(data) {
+        super.onData(data)
+
+        console.warn('modal toast on data', data)
+    }
+
+    setText(txt, showTime = 0) {
+        this.setState({
+            showTime: showTime,
+            text: txt
+        })
+    }
+
+    close() {
+        this.finish()
+    }
+
+    renderContent({ theme, language, getapp }) {
+        return (
+            <ModalPage>
+                <div className={'display-center comp-message-toast-root'} onClick={(e) => {
+                    this.close()
+                }}>
+                    <div className={'display-center comp-message-toast-cont'} dangerouslySetInnerHTML={{
+                        __html: this.state.text
+                    }} />
+                </div>
+            </ModalPage>
+        )
+    }
+
+    render() {
+        return (
+            <APPContext.Consumer>
+                {this.renderContent}
+            </APPContext.Consumer>
+        )
+    }
+}
+
+export default Toast
