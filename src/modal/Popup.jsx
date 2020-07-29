@@ -1,5 +1,4 @@
 import React from 'react'
-import APPContext from '../APPContext'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
 import Tool from '../utils/Tool'

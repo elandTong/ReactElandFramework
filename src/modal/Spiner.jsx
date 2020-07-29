@@ -1,10 +1,9 @@
 import React from 'react'
 import GridLoader from 'react-spinners/GridLoader'
-import APPContext from '../APPContext'
 import '../assets/style/comp.spiner.scss'
 import Config from '../Config'
-import { ModalPage } from '../router/Page'
 import BaseModal from '../router/BaseModal'
+import { ModalPage } from '../router/Page'
 
 class Spiner extends BaseModal {
     static _path = '/spiner'
