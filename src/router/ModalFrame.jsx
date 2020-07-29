@@ -44,7 +44,6 @@ class ModalFrame extends React.Component {
         }
     }
 
-    // comp ref
     getCompRef() {
         return this._compRef
     }
@@ -82,9 +81,7 @@ class ModalFrame extends React.Component {
     render() {
         return (
             <Root zIndex={this.props.zIndex}>
-                <Content>
-                    {this.getComp()}
-                </Content>
+                <Content> {this.getComp()} </Content>
             </Root>
         )
     }

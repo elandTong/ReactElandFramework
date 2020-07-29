@@ -1,7 +1,7 @@
 
 import React from 'react'
 import '../assets/style/comp.toolbarmenu.scss'
-import Config from '../config'
+import Config from '../Config'
 import Emit from '../utils/EventBus'
 import Tool from '../utils/Tool'
 

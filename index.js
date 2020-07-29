@@ -7,12 +7,12 @@
  * @FilePath: /ReactElandFramework/index.js
  */
 
-import Config from './src/config'
+import Config from './src/Config'
 import BaseModal from './src/router/BaseModal'
 import BaseScreen from './src/router/BaseScreen'
 import Frame from './src/router/Frame'
 import ModalFrame from './src/router/ModalFrame'
-import Page from './src/router/Page'
+import { ScreenPage, ModalPage } from './src/router/Page'
 import ScreenFrame from './src/router/ScreenFrame'
 import Emit from './src/utils/EventBus'
 import NetApi from './src/utils/NetApi'
@@ -32,7 +32,7 @@ import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
 
 
-export { Frame, ScreenFrame, BaseScreen, ModalFrame, BaseModal, Page }
+export { Frame, ScreenFrame, BaseScreen, ModalFrame, BaseModal, ScreenPage, ModalPage }
 export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
 export { Tool, Emit, NetApi }
 export { Config }

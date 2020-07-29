@@ -5,16 +5,12 @@ import BaseScreen from "../router/BaseScreen";
 import { ScreenPage } from "../router/Page";
 import Button from '../widget/Button';
 import MessageNotice from '../widget/MessageNotice';
-import APPContext from '../APPContext';
 
 class Login extends BaseScreen {
     static _path = './Login'
 
     constructor(props) {
         super(props)
-
-        this.renderContent = this.renderContent.bind(this)
-
         this.state = {
         }
     }
@@ -101,14 +97,6 @@ class Login extends BaseScreen {
                 }} />
                 <span> {'Login page'} </span>
             </ScreenPage>
-        )
-    }
-
-    render() {
-        return (
-            <APPContext.Consumer>
-                {this.renderContent}
-            </APPContext.Consumer>
         )
     }
 }

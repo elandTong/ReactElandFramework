@@ -1,5 +1,4 @@
 import React from 'react'
-import APPContext from '../APPContext'
 import '../assets/style/comp.message.scss'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
@@ -15,8 +14,6 @@ class Toast extends BaseModal {
 
     constructor(props) {
         super(props)
-        
-        this.renderContent = this.renderContent.bind(this)
 
         this.state = {
             showTime: 0,
@@ -91,14 +88,6 @@ class Toast extends BaseModal {
                     }} />
                 </div>
             </ModalPage>
-        )
-    }
-
-    render() {
-        return (
-            <APPContext.Consumer>
-                {this.renderContent}
-            </APPContext.Consumer>
         )
     }
 }

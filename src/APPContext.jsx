@@ -1,5 +1,5 @@
 import React from 'react'
-import Config from './config'
+import Config from './Config'
 
 const APPContext = React.createContext({
     theme: Config.Theme,

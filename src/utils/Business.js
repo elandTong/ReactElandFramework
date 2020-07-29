@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js'
-import Config from '../config'
+import Config from '../Config'
 import Tool from './Tool'
 
 class Business {

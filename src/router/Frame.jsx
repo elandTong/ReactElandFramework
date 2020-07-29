@@ -3,6 +3,7 @@ import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import Tool from '../utils/Tool';
 import BaseModal from './BaseModal';
 import BaseScreen from './BaseScreen';
+import BaseFrame from './BaseFrame';
 import ModalFrame from './ModalFrame';
 import ScreenFrame from './ScreenFrame';
 
@@ -61,15 +62,13 @@ class ModalAnimation extends React.Component {
     }
 }
 
-class Frame extends React.Component {
+class Frame extends BaseFrame {
     _param = {
-        screens: [],
-        modals: []
+        screens: [], modals: []
     }
 
     _keep_param = {
-        screens: [],
-        modals: []
+        screens: [], modals: []
     }
 
     _screenZIndex = 100
@@ -516,52 +515,37 @@ class Frame extends React.Component {
     render() {
         this.updateOpts()
 
-        let screens = this.state.screenStack.filter((item) => {
-            return item.component ? true : false
-        }).map((item, key) => {
+        let screens = this.state.screenStack.filter((item) => { return item.component ? true : false }).map((item, key) => {
             return (
                 <ScreenFrame key={key} router={this}
                     component={item.component}
-
                     initPame={item.opts.props}
-
                     zIndex={item.zIndex}
-
                     compHandle={(comp) => {
                         item.compref = comp
-
                         if (item.compHandle) {
                             item.compHandle(comp)
                         }
                         item.compHandle = null
                     }}
-
                     ref={(comp) => {
                         item.screen = comp
                     }} />
             )
         })
-
-        let modals = this.state.modalStack.filter((item) => {
-            return item.component ? true : false
-        }).map((item, key) => {
+        let modals = this.state.modalStack.filter((item) => { return item.component ? true : false }).map((item, key) => {
             return (
                 <ModalFrame key={key} router={this}
                     component={item.component}
-
                     initPame={item.opts.props}
-
                     zIndex={item.zIndex}
-
                     compHandle={(comp) => {
                         item.compref = comp
-
                         if (item.compHandle) {
                             item.compHandle(comp)
                         }
                         item.compHandle = null
                     }}
-
                     ref={(comp) => {
                         item.modal = comp
                     }} />

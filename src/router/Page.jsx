@@ -142,4 +142,4 @@ class ModalPage extends React.Component {
 
 export default ScreenPage
 
-export { ScreenPage, ModalPage }
+export { ScreenPage, ModalPage, Toolbar }

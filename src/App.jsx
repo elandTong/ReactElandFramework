@@ -1,6 +1,6 @@
 import React from 'react';
 import APPContext from './APPContext';
-import Config from './config';
+import Config from './Config';
 import Popup from './modal/Popup';
 import Spiner from './modal/Spiner';
 import Toast from './modal/Toast';

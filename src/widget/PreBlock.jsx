@@ -3,7 +3,7 @@ import GridLoader from 'react-spinners/GridLoader';
 import '../assets/style/comp.preblock.scss';
 import Tool from '../utils/Tool';
 import Sorry from './Sorry';
-import Config from '../config';
+import Config from '../Config';
 
 class Preblock extends React.Component {
     _opts = {

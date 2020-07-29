@@ -1,8 +1,8 @@
 import React from 'react'
+import APPContext from '../APPContext'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
 import Tool from '../utils/Tool'
-import APPContext from '../APPContext'
 
 class Popup extends BaseModal {
     static _path = '/popup'
@@ -37,8 +37,6 @@ class Popup extends BaseModal {
 
     constructor(props) {
         super(props)
-
-        this.renderContent = this.renderContent.bind(this)
 
         this.state = {
             comp: null,
@@ -252,14 +250,6 @@ class Popup extends BaseModal {
                     </div>
                 </div>
             </ModalPage>
-        )
-    }
-
-    render() {
-        return (
-            <APPContext.Consumer>
-                {this.renderContent}
-            </APPContext.Consumer>
         )
     }
 }

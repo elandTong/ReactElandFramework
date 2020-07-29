@@ -1,20 +1,19 @@
 import React from 'react';
 import '../assets/style/screen.main.scss';
-import Config from '../config';
+import Config from '../Config';
 import Spiner from '../modal/Spiner';
 import Toast from '../modal/Toast';
 import BaseScreen from '../router/BaseScreen';
 import { ScreenPage } from '../router/Page';
+import LotteryGame from '../scenes/LotteryGame';
 import NetApi from '../utils/NetApi';
 import Tool, { ModalTool } from '../utils/Tool';
-import LotteryGame from '../widget/business/LotteryGame';
 import FixedModal from '../widget/FixedModal';
 import Minirefresh from '../widget/Minirefresh';
 import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
 import Login from './Login';
-import APPContext from '../APPContext';
 
 class Main extends BaseScreen {
     static _path = '/main'
@@ -27,11 +26,7 @@ class Main extends BaseScreen {
 
     constructor(props) {
         super(props)
-
-        this.renderContent = this.renderContent.bind(this)
-
         this._jsondata = require('../assets/json/lotterys.json')
-
         this.state = {
             title: Config.LANGUAG_USE.appname,
             refresh: {
@@ -316,14 +311,6 @@ class Main extends BaseScreen {
                     </TabSwiper>
                 </div>
             </ScreenPage>
-        )
-    }
-
-    render() {
-        return (
-            <APPContext.Consumer>
-                {this.renderContent}
-            </APPContext.Consumer>
         )
     }
 }

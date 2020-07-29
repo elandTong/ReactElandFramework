@@ -1,7 +1,8 @@
 import React from 'react';
-import Config from '../config';
+import APPContext from '../APPContext';
+import Config from '../Config';
 import Emit from '../utils/EventBus';
-import Frame from './Frame';
+import BaseFrame from './BaseFrame';
 
 /**
  * @description: 基础modal视窗页面抽象类,覆盖该类方法时必须要调用父类方法
@@ -23,10 +24,11 @@ class BaseModal extends React.Component {
 
     constructor(props) {
         super(props)
+        this.renderContent = this.renderContent.bind(this)
         this.onBroadcast = this.onBroadcast.bind(this)
-        this._modalFrame = props.modal
-        this._router = props.router
-        this._initPame = props.initPame
+        this._modalFrame = this.props.modal
+        this._router = this.props.router
+        this._initPame = this.props.initPame
         Emit.on(BaseModal._BASE_GLOBAL_THEME, this.onBroadcast)
         this.onCreate()
     }
@@ -95,7 +97,6 @@ class BaseModal extends React.Component {
      */
     onBroadcast(data = {}) {
         this._broadcastData = data
-
         switch (data.type) {
             case Config.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT: { // 原生返回按钮点击广播
                 this.onNativeBack(this.isStackTop(), data)
@@ -145,7 +146,7 @@ class BaseModal extends React.Component {
      * @param {Function} handle 页面处理器
      */
     navigationScreen(name, data, handle) {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             this._router.navigationScreen(name, data, handle)
         }
     }
@@ -161,7 +162,7 @@ class BaseModal extends React.Component {
      * @param {Function} handle 页面处理器
      */
     startScreen(intent, data, handle) {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             this._router.startScreen(intent, data, handle)
         }
     }
@@ -173,7 +174,7 @@ class BaseModal extends React.Component {
      * @param {Function} handle 视窗处理器
      */
     navigationModal(name, data, handle) {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             this._router.navigationModal(name, data, handle)
         }
     }
@@ -189,7 +190,7 @@ class BaseModal extends React.Component {
      * @param {Function} handle 视窗处理器
      */
     startModal(intent, data, handle) {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             this._router.startModal(intent, data, handle)
         }
     }
@@ -200,7 +201,7 @@ class BaseModal extends React.Component {
      * @return: boole
      */
     isStackTop(modal) {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             return this._router.isModalStackTop(modal || this)
         }
         return false
@@ -210,7 +211,7 @@ class BaseModal extends React.Component {
      * @description: 关闭视窗并退栈
      */
     finish() {
-        if (this._router instanceof Frame) {
+        if (this._router instanceof BaseFrame) {
             this._router.finishModal(this._modalFrame)
         }
     }
@@ -224,6 +225,18 @@ class BaseModal extends React.Component {
         return Emit.exe(Object.assign(data, {
             theme: BaseModal._BASE_GLOBAL_THEME
         }))
+    }
+
+    renderContent({ theme, language, getapp }) {
+        return null
+    }
+
+    render() {
+        return (
+            <APPContext.Consumer>
+                {this.renderContent}
+            </APPContext.Consumer>
+        )
     }
 }
 

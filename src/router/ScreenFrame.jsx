@@ -204,16 +204,16 @@ class ScreenFrame extends React.Component {
     render() {
         return (
             <Root zIndex={this.props.zIndex}>
-                <Content>
-                    {this.getComp()}
-                </Content>
+                <Content> {this.getComp()} </Content>
 
                 <PopupAnimation>
-                    {this.state.popup.items.filter((item) => {
-                        return item.active
-                    }).map((item, key) => {
+                    {this.state.popup.items.filter((item) => { return item.active }).map((item, key) => {
                         return (
-                            <div key={key} className={`pos-absolute-nosize ${item.className || ''}`} style={Object.assign({}, item.style)}>{item.comp}</div>
+                            <div key={key}
+                                className={`pos-absolute-nosize ${item.className || ''}`}
+                                style={Object.assign({}, item.style)}>
+                                {item.comp}
+                            </div>
                         )
                     })}
                 </PopupAnimation>
