@@ -5,7 +5,7 @@ import Spiner from '../modal/Spiner';
 import Toast from '../modal/Toast';
 import BaseScreen from '../router/BaseScreen';
 import { ScreenPage } from '../router/Page';
-import LotteryGame from '../scenes/LotteryGame';
+import CategoryList from '../scenes/CategoryList';
 import NetApi from '../utils/NetApi';
 import Tool, { ModalTool } from '../utils/Tool';
 import FixedModal from '../widget/FixedModal';
@@ -26,7 +26,7 @@ class Main extends BaseScreen {
 
     constructor(props) {
         super(props)
-        this._jsondata = require('../assets/json/lotterys.json')
+        this._jsondata = require('../assets/json/games.json')
         this.state = {
             title: Config.LANGUAG_USE.appname,
             refresh: {
@@ -243,9 +243,9 @@ class Main extends BaseScreen {
                 }}>
                     <Navbar initIndex={0} opts={{
                         items: [{
-                            name: Config.LANGUAG_USE.ctcname
+                            name: language.ctcname
                         }, {
-                            name: Config.LANGUAG_USE.gfcname
+                            name: language.gfcname
                         }],
                         onSelect: (key, e) => {
                         }
@@ -281,9 +281,12 @@ class Main extends BaseScreen {
                                         return item.games && item.games.length > 0
                                     }).map((item, key) => {
                                         return (
-                                            <LotteryGame key={key} data={item} onItemClick={(subitem, subkey, e) => {
-                                                this.onTab1ItemClick(subitem, subkey, e)
-                                            }} />
+                                            <CategoryList key={key}
+                                                data={item}
+                                                icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
+                                                onItemClick={(subitem, subkey, e) => {
+                                                    this.onTab1ItemClick(subitem, subkey, e)
+                                                }} />
                                         )
                                     }))}
                                 </Minirefresh>
@@ -300,9 +303,12 @@ class Main extends BaseScreen {
                                         return item.games.length > 0
                                     }).map((item, key) => {
                                         return (
-                                            <LotteryGame key={key} data={item} onItemClick={(subitem, subkey, e) => {
-                                                this.onTab2ItemClick(subitem, subkey, e)
-                                            }} />
+                                            <CategoryList key={key}
+                                                data={item}
+                                                icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
+                                                onItemClick={(subitem, subkey, e) => {
+                                                    this.onTab2ItemClick(subitem, subkey, e)
+                                                }} />
                                         )
                                     }))}
                                 </Minirefresh>

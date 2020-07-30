@@ -159,7 +159,8 @@
                     "attrvalue": "76",
                     "levels": 3,
                     "conf_node": 1,
-                    "status": 1
+                    "status": 1,
+                    "bold": true
                 },
                 {
                     "no": 102010,
@@ -172,7 +173,8 @@
                     "id": "hk6",
                     "levels": 3,
                     "conf_node": 1,
-                    "status": 1
+                    "status": 3,
+                    "bold": true
                 }
             ],
             "id": "hk6"
