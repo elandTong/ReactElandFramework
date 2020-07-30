@@ -260,7 +260,7 @@ class Main extends BaseScreen {
                     <TabSwiper init={0}
                         allowTouchMove={true}
                         width={'100%'}
-                        height={Tool.getActContHeight() - 45}
+                        height={Tool.getScreenContHeight() - 45}
                         onSelect={(i) => {
                         }}
                         getNavbar={() => {

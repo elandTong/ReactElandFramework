@@ -6,4 +6,26 @@ const APPContext = React.createContext({
     language: Config.LANGUAG_USE
 })
 
+class UseAPPContent extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.renderContent = this.renderContent.bind(this)
+    }
+
+    renderContent({ theme, language, getapp }) {
+        return null
+    }
+
+    render() {
+        return (
+            <APPContext.Consumer>
+                {this.renderContent}
+            </APPContext.Consumer>
+        )
+    }
+}
+
 export default APPContext
+
+export { UseAPPContent }

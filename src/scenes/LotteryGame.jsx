@@ -1,9 +1,10 @@
 import React from 'react'
+import { UseAPPContent } from '../APPContext'
 import '../assets/style/busscomp.lottery.scss'
 import Config from '../Config'
 import Tool from '../utils/Tool'
 
-class LotteryGameItem extends React.Component {
+class LotteryGameItem extends UseAPPContent {
     constructor(props) {
         super(props)
 
@@ -29,7 +30,7 @@ class LotteryGameItem extends React.Component {
         return this.props.data.apicode === 'lotto' ? 'busscomp-lottery-item-name' : ''
     }
 
-    render() {
+    renderContent({ theme, language, getapp }) {
         return (
             <div className={`display-center busscomp-lottery-item-root click-out-ripple ${this.props.className || ''}`}
                 style={this.props.style}
@@ -48,7 +49,7 @@ class LotteryGameItem extends React.Component {
     }
 }
 
-class LotteryGame extends React.Component {
+class LotteryGame extends UseAPPContent {
     constructor(props) {
         super(props)
 
@@ -62,7 +63,7 @@ class LotteryGame extends React.Component {
         }
     }
 
-    render() {
+    renderContent({ theme, language, getapp }) {
         return (
             <div className={'display-space busscomp-lottery-root'}>
                 <img className={'busscomp-lottery-imag'} src={require(`../assets/res/icon/lottery/game_${this.props.data.id}.png`)} alt={'lotterygame'} />

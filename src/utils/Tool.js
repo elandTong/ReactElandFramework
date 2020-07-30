@@ -920,7 +920,7 @@ class Tool {
         return ret
     }
 
-    static getActContHeight() {
+    static getScreenContHeight() {
         return this.getScreenSize().h - Config.Theme.toolbar.height
     }
 
