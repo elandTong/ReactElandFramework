@@ -6,22 +6,17 @@ import Tool from '../utils/Tool'
 class CategoryList extends UseAPPContent {
     constructor(props) {
         super(props)
-
-        this.state = {
-        }
+        this.state = { itemwidth: '23.5%' }
     }
 
     onItemClick(item, key, e) {
-        if (this.props.onItemClick) {
-            this.props.onItemClick(item, key, e)
-        }
+        if (this.props.onItemClick) { this.props.onItemClick(item, key, e) }
     }
 
     renderContent({ theme, language, getapp }) {
         return (
             <div className={'display-space scenes-category-list-root'}>
-                <img className={'scenes-category-list-imag'} src={this.props.icon} alt={'lotterygame'} />
-
+                <img className={'scenes-category-list-imag'} src={this.props.icon} alt={'categoryList'} />
                 <div className={'display-warp scenes-category-list-cont-root'}>
                     {Tool.pushFillin(this.props.data.games.map((item, key) => {
                         return (
@@ -29,7 +24,7 @@ class CategoryList extends UseAPPContent {
                                 this.onItemClick(item, key, e)
                             }} />
                         )
-                    }), '23.5%', 4)}
+                    }), this.state.itemwidth, 4)}
                 </div>
             </div>
         )
@@ -71,7 +66,6 @@ class ListItem extends UseAPPContent {
                     <span className={`common-text-singleline ${this.getNameClassname()}`}>
                         {this.props.data.sname || 'notName'}
                     </span>
-
                     <span className={`common-text-singleline scenes-category-list-item-tips ${this.getStatusClassname()}`}>
                         {this.props.data.tips || language.enter}
                     </span>

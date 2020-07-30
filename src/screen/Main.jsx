@@ -26,6 +26,8 @@ class Main extends BaseScreen {
 
     constructor(props) {
         super(props)
+        this.onTab1ItemClick = this.onTab1ItemClick.bind(this)
+        this.onTab2ItemClick = this.onTab2ItemClick.bind(this)
         this._jsondata = require('../assets/json/games.json')
         this.state = {
             title: Config.LANGUAG_USE.appname,
@@ -284,9 +286,7 @@ class Main extends BaseScreen {
                                             <CategoryList key={key}
                                                 data={item}
                                                 icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
-                                                onItemClick={(subitem, subkey, e) => {
-                                                    this.onTab1ItemClick(subitem, subkey, e)
-                                                }} />
+                                                onItemClick={this.onTab1ItemClick} />
                                         )
                                     }))}
                                 </Minirefresh>
@@ -306,9 +306,7 @@ class Main extends BaseScreen {
                                             <CategoryList key={key}
                                                 data={item}
                                                 icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
-                                                onItemClick={(subitem, subkey, e) => {
-                                                    this.onTab2ItemClick(subitem, subkey, e)
-                                                }} />
+                                                onItemClick={this.onTab2ItemClick} />
                                         )
                                     }))}
                                 </Minirefresh>
