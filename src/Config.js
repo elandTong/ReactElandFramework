@@ -8,7 +8,7 @@ const _LANGUAG = require('./assets/json/language.json')
 
 class Config {
     static APPCONFIG = {
-        APP_ID: window._APP_ID, APP_NAME: 'RouterTest', APP_VERSION: 221004005,
+        APP_ID: window._APP_ID, APP_NAME: 'RouterTest', APP_VERSION: 222004005,
         RELEASE: false,
         RELEASE_DOMAIN: 'https://pjd.bctt.cc/',
         TEST_DOMAIN: 'https://pjd.bctt.cc/'
