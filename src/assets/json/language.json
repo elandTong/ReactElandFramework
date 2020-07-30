@@ -1,26 +1,26 @@
 {
     "cn": {
-        "appname": "IG彩票",
+        "appname": "RouterTest",
         "retry": "重试",
         "nodata": "没有数据!",
         "sorry": "很抱歉!",
         "darkmode": "黑夜模式",
         "lightmode": "高亮模式",
         "usermode": "用户模式",
-        "ctcname": "传统彩",
-        "gfcname": "官方彩",
+        "ctcname": "TAB 1",
+        "gfcname": "TAB 2",
         "enter": "进入"
     },
     "en": {
-        "appname": "IGLottery",
+        "appname": "RouterTest",
         "retry": "Retry",
         "nodata": "No data!",
         "sorry": "Sorry!",
         "darkmode": "Dark mode",
         "lightmode": "Light mode",
         "usermode": "User mode",
-        "ctcname": "tradition lottery",
-        "gfcname": "official lottery",
+        "ctcname": "TAB 1",
+        "gfcname": "TAB 2",
         "enter": "enter"
     }
 }
