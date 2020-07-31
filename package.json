@@ -4,8 +4,13 @@
   "private": false,
   "homepage": "./",
   "bin": {
-    "create-elandfk-app": "./bin/template-cli.js"
+    "create-react-eland-framework-app": "./bin/template-cli.js"
   },
+  "keywords": [
+    "react-eland-framework",
+    "cli",
+    "node"
+  ],
   "dependencies": {
     "@babel/runtime": "^7.10.5",
     "commander": "^6.0.0",
