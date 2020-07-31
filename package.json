@@ -4,7 +4,7 @@
   "private": false,
   "homepage": "./",
   "bin": {
-    "create-elandFramework-app": "./bin/template-cli.js"
+    "create-elandframework-app": "./bin/template-cli.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",

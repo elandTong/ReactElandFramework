@@ -4,7 +4,7 @@ const logUpdate = require('log-update');
 const shell = require('shelljs');
 
 program.version('1.0.1')
-    .usage('ReactElandFramework')
+    .usage('react-eland-framework')
     .description('构建 ReactElandFramework 项目')
     .parse(process.argv);
 
