@@ -6,7 +6,6 @@ import Toast from '../modal/Toast';
 import BaseScreen from '../router/BaseScreen';
 import { ScreenPage } from '../router/Page';
 import CategoryList from '../scenes/CategoryList';
-import NetApi from '../utils/NetApi';
 import Tool, { ModalTool } from '../utils/Tool';
 import FixedModal from '../widget/FixedModal';
 import Minirefresh from '../widget/Minirefresh';
@@ -22,15 +21,17 @@ class Main extends BaseScreen {
 
     _navbarCompRef = null
 
-    _jsondata = null
+    _games = null
 
     constructor(props) {
         super(props)
+
         this.onTab1ItemClick = this.onTab1ItemClick.bind(this)
         this.onTab2ItemClick = this.onTab2ItemClick.bind(this)
-        this._jsondata = require('../assets/json/games.json')
+
+        this._games = require('../assets/json/games.json')
+
         this.state = {
-            title: Config.LANGUAG_USE.appname,
             refresh: {
                 up: {
                     isLock: true,
@@ -46,9 +47,9 @@ class Main extends BaseScreen {
                     }
                 }
             },
-            data: {
-                ctc: this._jsondata.ctc,
-                gfc: this._jsondata.gfc
+            category: {
+                tab1: this._games.tab1,
+                tab2: this._games.tab2
             }
         }
     }
@@ -125,7 +126,7 @@ class Main extends BaseScreen {
         // 如果 Toast 在内置路由池内 则可以:
         // this.navigationModal(Toast._path, null, (comp) => { comp.setText('哈哈哈哈😄------') })
 
-        console.error('tab1 click item', item, ' key', key)
+        console.warn('tab1 click item', item, ' key', key)
     }
 
     onTab2ItemClick(item, key, e) {
@@ -140,95 +141,34 @@ class Main extends BaseScreen {
             message: '这是main页面传递的数据'
         })
 
-        console.error('tab2 click item', item, ' key', key)
-    }
-
-    setCtcData(games = []) {
-        let _data = this.state.data
-
-        for (let _it of _data.ctc) {
-            _it.games = games.filter((_gt) => {
-                return _it.id === _gt.class
-            })
-        }
-
-        return _data.ctc
-    }
-
-    setGfcData(games = []) {
-        let _data = this.state.data
-
-        for (let _it of _data.gfc) {
-            _it.games = games.filter((_gt) => {
-                return _it.id === _gt.class
-            })
-        }
-
-        return _data.gfc
-    }
-
-    setData(games = []) {
-        let _data = this.state.data
-
-        let _hkgs = []
-
-        for (let _it of games) {
-            switch (_it.apicode) {
-                case 'lottery': {
-                    _data.ctc = this.setCtcData(_it.games)
-                    break
-                }
-                case 'gfc': {
-                    _data.gfc = this.setGfcData(_it.games)
-                    break
-                }
-                case 'lotto': {
-                    _hkgs = _it.games
-                    break
-                }
-                default: {
-                    break
-                }
-            }
-        }
-
-        for (let _it of _data.ctc) {
-            if (_it.id === 'hk6') {
-                _it.games = _it.games.concat(_hkgs)
-            }
-        }
-
-        this.setState({ data: _data })
-
-        console.error('main update setdata', _data)
+        console.warn('tab2 click item', item, ' key', key)
     }
 
     update(comp) {
-        NetApi.call('game/getGames', {}, (data) => {
-            if (data.code === 0) {
-                for (let _item of data.result) {
-                    if (_item.no === 10) {
-                        this.setData(_item.games)
-                        break
-                    }
-                }
+        setTimeout(() => {
+            let _category = this.state.category
 
-                if (comp instanceof Minirefresh) {
-                    comp.endDownLoading(true)
-                }
-            }
-        }, (err) => {
+            _category.tab1.sort(() => {
+                return .5 - Math.random()
+            })
+
+            _category.tab2.sort(() => {
+                return .5 - Math.random()
+            })
+
+            this.setState({ category: _category })
+
             if (comp instanceof Minirefresh) {
-                comp.endDownLoading(false)
+                comp.endDownLoading(true)
             }
-        })
+        }, 2000)
     }
 
     renderContent({ theme, language, getapp }) {
         return (
             <ScreenPage opts={{
                 toolbar: {
-                    title: this.state.title,
+                    title: language.appname,
                     hideBack: true,
                     hideMenu: false,
                     onBack: (e) => {
@@ -279,7 +219,7 @@ class Main extends BaseScreen {
                                     pullDown={(comp) => {
                                         this.update(comp)
                                     }}>
-                                    {Tool.insertSplitline(this.state.data.ctc.filter((item) => {
+                                    {Tool.insertSplitline(this.state.category.tab1.filter((item) => {
                                         return item.games && item.games.length > 0
                                     }).map((item, key) => {
                                         return (
@@ -299,7 +239,7 @@ class Main extends BaseScreen {
                                     pullDown={(comp) => {
                                         this.update(comp)
                                     }}>
-                                    {Tool.insertSplitline(this.state.data.gfc.filter((item) => {
+                                    {Tool.insertSplitline(this.state.category.tab2.filter((item) => {
                                         return item.games.length > 0
                                     }).map((item, key) => {
                                         return (

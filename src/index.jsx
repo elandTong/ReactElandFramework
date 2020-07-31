@@ -30,17 +30,14 @@ function bindPrototype() {
             'q+': Math.floor((this.getMonth() + 3) / 3), //季度
             'S': this.getMilliseconds() //毫秒
         }
-
         if (/(y+)/.test(fmt)) {
             fmt = fmt.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length))
         }
-
         for (let k in o) {
             if (new RegExp('(' + k + ')').test(fmt)) {
                 fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)))
             }
         }
-
         return fmt
     }
 }
@@ -49,42 +46,39 @@ bindPrototype()
 
 Config.setAppConfig()
 
-document.title = Config.APPCONFIG.APP_NAME
-
-// 绑定属性到 window 对象
 Config.bindWindow()
-// 主题设置
+
 Config.setAppTheme(Tool.getParameForURL('theme', window.location.href))
-// 语言设置
+
 Config.setLanguage()
+
+document.title = Config.APPCONFIG.APP_NAME
 
 NetApi.create({
     onhttppre: (carr) => {
-        console.error('onhttppre', carr)
+        console.warn('onhttppre', carr)
         return null
     },
     onhttpresult: (carr, data) => {
-        console.error('onhttpresult carr', carr, ' data', data)
+        console.warn('onhttpresult carr', carr, ' data', data)
         return null
     },
     onwsspre: (carr) => {
-        console.error('onwsspre', carr)
+        console.warn('onwsspre', carr)
         return null
     },
     onwssresult: (data) => {
-        console.error('onwssresult', data)
+        console.warn('onwssresult', data)
         return null
     }
 }).httpmode()
 
 NetApi.call('i18n/getMapKeyLangs', {}, (data) => {
-    if (data.code === 0) {
-        Config.setApiTips(data.result)
-    }
+    if (data.code === 0) { Config.setApiTips(data.result) }
 
-    console.error('getMapKeyLangs succ', data)
+    console.warn('getMapKeyLangs succ', data)
 }, (err) => {
-    console.error('getMapKeyLangs err', err)
+    console.warn('getMapKeyLangs err', err)
 })
 
 ReactDOM.render(<Application />, document.getElementById('root'))

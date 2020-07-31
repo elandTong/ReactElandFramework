@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-05-19 15:40:02
- * @LastEditTime: 2020-05-27 14:40:57
+ * @LastEditTime: 2020-07-31 15:16:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ReactElandFramework/index.js
@@ -12,7 +12,7 @@ import BaseModal from './src/router/BaseModal'
 import BaseScreen from './src/router/BaseScreen'
 import Frame from './src/router/Frame'
 import ModalFrame from './src/router/ModalFrame'
-import { ScreenPage, ModalPage } from './src/router/Page'
+import { ModalPage, ScreenPage } from './src/router/Page'
 import ScreenFrame from './src/router/ScreenFrame'
 import Emit from './src/utils/EventBus'
 import NetApi from './src/utils/NetApi'
@@ -30,7 +30,6 @@ import SearchBar from './src/widget/SearchBar'
 import Sorry from './src/widget/Sorry'
 import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
-
 
 export { Frame, ScreenFrame, BaseScreen, ModalFrame, BaseModal, ScreenPage, ModalPage }
 export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
