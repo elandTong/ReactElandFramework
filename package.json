@@ -4,7 +4,7 @@
   "private": false,
   "homepage": "./",
   "bin": {
-    "create-react-eland-framework-app": "./bin/template-cli.js"
+    "create-react-eland-framework-app": "bin/template-cli.js"
   },
   "keywords": [
     "react-eland-framework",
