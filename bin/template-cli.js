@@ -1,32 +1,27 @@
 #!/usr/bin/env node
-const program = require('commander');
-const logUpdate = require('log-update');
+
+const clone = require('git-clone')
+const program = require('commander')
 const shell = require('shelljs');
+const log = require('tracer').colorConsole()
 
-program.version('1.0.1')
-    .usage('react-eland-framework')
-    .description('构建 ReactElandFramework 项目')
-    .parse(process.argv);
-
-if (!program.args.length) {
-    program.help();
-}
-if (program.args.length === 1) {
-    shell.mkdir('-p', program.args[0]);
-    shell.cd(program.args[0]);
-    shell.exec('git init');
-    let i = 0;
-    const frames = ['-', '\\', '|', '/'];
-    const interval = setInterval(() => {
-        const frame = frames[i = ++i % frames.length];
-        logUpdate(`👉 👉 ${frame} initializing ${frame} 👈 👈`);
-    }, 50)
-    shell.exec('git pull git@github.com:elandTong/ReactElandFramework.git', (code) => {
-        clearInterval(interval);
-        if (code !== 0) {
-            console.log('Error! Try again');
-            shell.exit(1);
+program
+    .version('1.0.0')
+    .description('xserver中间件应用模板工程的cli')
+program
+    .command('* <tpl> <project>')
+    .action(function(tpl, project) {
+        log.info('目前xserver-cli支持以下模板：')
+        log.info('使用例子：x-cli x-express myproject')
+        if (tpl && project) {
+            let pwd = shell.pwd()
+            log.info(`正在拉取模板代码，下载位置：${pwd}/${project}/ ...`)
+            clone(`https://github.com/elandTong/ReactElandFramework.git`, pwd + `/${project}`, null, function() {
+                shell.rm('-rf', pwd + `/${project}/.git`)
+                log.info('模板工程建立完成')
+            })
+        } else {
+            log.error('正确命令例子：x-cli x-express myproject')
         }
-        console.log('👏 👏 Completed! You are  good to go! 👏 👏');
     })
-}
+program.parse(process.argv)

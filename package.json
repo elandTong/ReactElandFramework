@@ -4,7 +4,7 @@
   "private": false,
   "homepage": "./",
   "bin": {
-    "create-elandframework-app": "./bin/template-cli.js"
+    "create-elandfk-app": "./bin/template-cli.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.10.5",
@@ -12,6 +12,7 @@
     "compression-webpack-plugin": "^3.1.0",
     "crypto-js": "^3.2.0",
     "css-vars-ponyfill": "^2.3.2",
+    "git-clone": "^0.1.0",
     "less": "^3.12.2",
     "less-loader": "^6.2.0",
     "log-update": "^4.0.0",
@@ -27,7 +28,8 @@
     "react-scripts": "3.2.0",
     "react-spinners": "^0.6.1",
     "shelljs": "^0.8.4",
-    "swiper": "^5.4.5"
+    "swiper": "^5.4.5",
+    "tracer": "^1.1.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
