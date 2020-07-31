@@ -1,11 +1,4 @@
-/*
- * @Author: Eland.Tong
- * @Date: 2020-07-31 09:54:22
- * @LastEditTime: 2020-07-31 10:13:46
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /ReactElandFramework/bin/index.js
- */
+#!/usr/bin/env node
 const program = require('commander');
 const logUpdate = require('log-update');
 const shell = require('shelljs');
