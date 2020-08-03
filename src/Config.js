@@ -181,7 +181,7 @@ class Config {
     }
 }
 
-import('./testing').then(data => {
+import('./Testing').then(data => {
     window._ReactTesting = data.default
 })
 
