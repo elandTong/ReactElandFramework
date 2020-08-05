@@ -36,9 +36,7 @@ class Sorry extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
-
-        this._opts.button = Tool.structureAssignment(Object.assign({}, this._keep_opts.button), this.props.opts.button)
+        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {}, false, true)
 
         return (
             <div className={`display-center common-boxsize-full ${this.props.className || ''}`} style={this.props.style}>

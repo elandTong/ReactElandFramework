@@ -578,26 +578,36 @@ class Tool {
      * _opts : 属性接收对象
      * _newopts : 属性赋值对象
      */
-    static structureAssignment(_opts, _newopts, identical = false) {
+    static structureAssignment(_opts, _newopts, identical = false, deeploop = false) {
         if (_newopts === null) { return _opts }
 
-        if (_newopts instanceof Array) { return _opts } else if (_newopts instanceof Object) {
+        if (_newopts instanceof Array) {
+            return _opts
+        } else if (_newopts instanceof Object) {
+            _opts = Object.assign({}, _opts)
+
             Object.keys(_newopts).forEach((key) => {
                 if (key in _opts) { // 判断是否存在该属性
-                    if (identical) {
-                        if (_opts[key] === null) {
-                            _opts[key] = _newopts[key]
-                        } else if (typeof (_opts[key]) === typeof (_newopts[key])) {
+                    if (deeploop && _opts[key] instanceof Object && _newopts[key] instanceof Object) {
+                        _opts[key] = this.structureAssignment(_opts[key], _newopts[key], identical, deeploop)
+                    } else {
+                        if (identical) {
+                            if (_opts[key] === null) {
+                                _opts[key] = _newopts[key]
+                            } else if (typeof (_opts[key]) === typeof (_newopts[key])) {
+                                _opts[key] = _newopts[key]
+                            }
+                        } else {
                             _opts[key] = _newopts[key]
                         }
-                    } else {
-                        _opts[key] = _newopts[key]
                     }
                 }
             })
 
             return _opts
-        } else { return _opts }
+        } else {
+            return _opts
+        }
     }
 
     static numberAdd(i, num) {

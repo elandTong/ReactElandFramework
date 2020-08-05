@@ -1,9 +1,9 @@
 import React from 'react'
-import { UseAPPContent } from '../APPContext'
 import '../assets/style/scenes.category.list.scss'
+import BaseContext from '../BaseContext'
 import Tool from '../utils/Tool'
 
-class CategoryList extends UseAPPContent {
+class CategoryList extends BaseContext {
     constructor(props) {
         super(props)
         this.state = { itemwidth: '23.5%' }
@@ -31,7 +31,7 @@ class CategoryList extends UseAPPContent {
     }
 }
 
-class ListItem extends UseAPPContent {
+class ListItem extends BaseContext {
     constructor(props) {
         super(props)
 

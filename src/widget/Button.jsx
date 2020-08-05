@@ -51,9 +51,7 @@ class Button extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
-
-        this._opts.copy = Tool.structureAssignment(Object.assign({}, this._keep_opts.copy), this.props.opts.copy)
+        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {}, false, true)
 
         let _classname = this._opts.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
 

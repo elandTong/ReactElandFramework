@@ -25,7 +25,7 @@ class MessageNotice extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
+        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
 
         return (
             <div className={'display-column comp-message-notice-root'}>

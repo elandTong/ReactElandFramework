@@ -31,7 +31,7 @@ class Preblock extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
+        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
 
         return (
             <div className={`pos-relative common-boxsize-full`}>

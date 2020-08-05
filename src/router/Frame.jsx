@@ -1,9 +1,9 @@
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import Tool from '../utils/Tool';
+import BaseFrame from './BaseFrame';
 import BaseModal from './BaseModal';
 import BaseScreen from './BaseScreen';
-import BaseFrame from './BaseFrame';
 import ModalFrame from './ModalFrame';
 import ScreenFrame from './ScreenFrame';
 
@@ -126,7 +126,7 @@ class Frame extends BaseFrame {
      * @description: 更新 props 参数到本地 _param 对象 并过滤非法项
      */
     updateOpts() {
-        this._param = Tool.structureAssignment(Object.assign({}, this._keep_param), this.props.param)
+        this._param = Tool.structureAssignment(this._keep_param, this.props.param)
 
         // 过滤非法项
         this._param.screens = this._param.screens.filter((item) => {

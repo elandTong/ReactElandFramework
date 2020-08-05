@@ -65,7 +65,7 @@ class Popup extends BaseModal {
     }
 
     getPosition(_pame = {}) {
-        _pame = Tool.structureAssignment(Object.assign({}, this._keep_opts.pos), _pame)
+        _pame = Tool.structureAssignment(this._keep_opts.pos, _pame)
 
         let _result = {
             top: 0,
@@ -123,11 +123,7 @@ class Popup extends BaseModal {
 
     onComp(comp, pame = {}) {
         this._isshow = true
-
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), pame)
-
-        this._opts.pos = Tool.structureAssignment(Object.assign({}, this._keep_opts.pos), pame.pos)
-
+        this._opts = Tool.structureAssignment(this._keep_opts, pame, false, true)
         this.setState({
             comp: comp,
             width: this._opts.width,
@@ -140,11 +136,7 @@ class Popup extends BaseModal {
 
     onImg(src, pame = {}) {
         this._isshow = true
-
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), pame)
-
-        this._opts.pos = Tool.structureAssignment(Object.assign({}, this._keep_opts.pos), pame.pos)
-
+        this._opts = Tool.structureAssignment(this._keep_opts, pame, false, true)
         this.setState({
             comp: (<img src={src} width={'100%'} alt={''} />),
             width: this._opts.width,

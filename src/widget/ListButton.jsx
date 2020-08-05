@@ -30,7 +30,7 @@ class ListButton extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(Object.assign({}, this._keep_opts), this.props.opts)
+        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
 
         let _items_jsx = this._opts.items.map((item, key) => {
             let _classname_outer = ''
