@@ -2,16 +2,14 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import BaseContext from '../BaseContext'
 
-class FixedModal extends BaseContext {
+class Mask extends BaseContext {
     static propTypes = {
-        visible: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
         onClick: PropTypes.func
     }
 
     static defaultProps = {
-        visible: false,
         className: ''
     }
 
@@ -21,14 +19,14 @@ class FixedModal extends BaseContext {
     }
 
     render() {
-        return this.props.visible ? (
-            <div className={`common-fixed-modal ${this.props.className}`}
+        return (
+            <div className={`pos-relative ${this.props.className}`}
                 style={this.props.style}
                 onClick={this.props.onClick}>
                 {this.props.children}
             </div>
-        ) : (null)
+        )
     }
 }
 
-export default FixedModal
+export default Mask

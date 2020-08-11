@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-05-19 15:40:02
- * @LastEditTime: 2020-07-31 15:16:53
+ * @LastEditTime: 2020-08-11 09:19:02
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ReactElandFramework/index.js
@@ -22,6 +22,7 @@ import Button from './src/widget/Button'
 import FixedModal from './src/widget/FixedModal'
 import ListButton from './src/widget/ListButton'
 import MarqueeBar from './src/widget/MarqueeBar'
+import Mask from './src/widget/Mask'
 import MessageNotice from './src/widget/MessageNotice'
 import Minirefresh from './src/widget/Minirefresh'
 import Navbar from './src/widget/Navbar'
@@ -32,6 +33,6 @@ import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
 
 export { Frame, ScreenFrame, BaseScreen, ModalFrame, BaseModal, ScreenPage, ModalPage }
-export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
+export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, Mask, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu }
 export { Tool, Emit, NetApi }
 export { Config }
