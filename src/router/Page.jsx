@@ -1,7 +1,8 @@
 import React from 'react'
 import Tool from '../utils/Tool'
+import BaseContext from '../BaseContext'
 
-class Toolbar extends React.Component {
+class Toolbar extends BaseContext {
     _opts = {
         title: null,
         hideBack: false,
@@ -61,14 +62,14 @@ class Toolbar extends React.Component {
         }
     }
 
-    render() {
+    renderContent({ theme, language }) {
         this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {})
 
         return (
             <div className={'display-space page-screen-container-toolbar-view'}>
                 <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
                     {this._opts.hideBack ? (null) : (
-                        <img src={require('../assets/res/icon/ic_back.png')} height={this.state.icon.height} alt={'ic_back'} />
+                        <img src={require(`../${theme.resources.iconPath}/ic_back.png`)} height={this.state.icon.height} alt={'ic_back'} />
                     )}
                 </div>
 
@@ -76,7 +77,7 @@ class Toolbar extends React.Component {
 
                 <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
                     {this._opts.hideMenu ? (null) : (
-                        <img src={require('../assets/res/icon/ic_menu.png')} height={this.state.icon.height} alt={'ic_menu'} />
+                        <img src={require(`../${theme.resources.iconPath}/ic_menu.png`)} height={this.state.icon.height} alt={'ic_menu'} />
                     )}
                 </div>
             </div>

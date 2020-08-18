@@ -1,10 +1,10 @@
 import React from 'react';
 import '../assets/style/comp.sorry.scss';
-import Config from '../Config';
+import BaseContext from '../BaseContext';
 import Tool from '../utils/Tool';
 import Button from './Button';
 
-class Sorry extends React.Component {
+class Sorry extends BaseContext {
     _opts = {
         icon: null,
         title: null,
@@ -17,26 +17,22 @@ class Sorry extends React.Component {
         }
     }
 
-    _keep_opts = {
-        icon: require('../assets/res/icon/ic_sorry.png'),
-        title: Config.LANGUAG_USE.sorry,
-        tips: Config.LANGUAG_USE.nodata,
-        button: {
-            active: false,
-            width: 100, height: 34,
-            name: Config.LANGUAG_USE.retry,
-            onClick: null
-        }
-    }
-
     constructor(props) {
         super(props)
-
         this.state = {}
     }
 
-    render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {}, false, true)
+    renderContent({ theme, language }) {
+        this._opts = Tool.structureAssignment({
+            icon: require(`../${theme.resources.iconPath}/ic_sorry.png`),
+            title: language.sorry,
+            tips: language.nodata,
+            button: {
+                active: false,
+                width: 100, height: 34,
+                name: language.retry
+            }
+        }, this.props.opts || {}, false, true)
 
         return (
             <div className={`display-center common-boxsize-full ${this.props.className || ''}`} style={this.props.style}>

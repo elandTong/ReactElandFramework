@@ -10,8 +10,6 @@ import BaseFrame from './BaseFrame';
  */
 
 class BaseModal extends React.Component {
-    static _BASE_GLOBAL_THEME = Config.GLOBAL_EVENT
-
     _modalFrame = null
 
     _router = null
@@ -29,7 +27,7 @@ class BaseModal extends React.Component {
         this._modalFrame = this.props.modal
         this._router = this.props.router
         this._initPame = this.props.initPame
-        Emit.on(BaseModal._BASE_GLOBAL_THEME, this.onBroadcast)
+        Emit.on(Config.GLOBAL_EVENT, this.onBroadcast)
         this.onCreate()
     }
 
@@ -223,7 +221,7 @@ class BaseModal extends React.Component {
      */
     sendBroadcast(data) {
         return Emit.exe(Object.assign(data, {
-            theme: BaseModal._BASE_GLOBAL_THEME
+            theme: Config.GLOBAL_EVENT
         }))
     }
 

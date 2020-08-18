@@ -1,4 +1,5 @@
 import Emit from './utils/EventBus'
+import Tool from './utils/Tool'
 
 window._APP_ID = 'elandAppId'
 
@@ -8,7 +9,7 @@ const _LANGUAG = require('./assets/json/language.json')
 
 class Config {
     static APPCONFIG = {
-        APP_ID: window._APP_ID, APP_NAME: 'ElandFramework', APP_VERSION: 226004002,
+        APP_ID: window._APP_ID, APP_NAME: 'ElandFramework', APP_VERSION: 228004002,
         RELEASE: false,
         RELEASE_DOMAIN: 'https://127.0.0.1/',
         TEST_DOMAIN: 'https://127.0.0.1/'
@@ -50,6 +51,12 @@ class Config {
             theme: 'rgb(204,163,82)',
             font: 'rgb(0,0,0)',
             font_anti: 'rgb(205,205,205)'
+        },
+        resources: {
+            iconPath: 'assets/res/icon',
+            picPath: 'assets/res/pic',
+            channelIconPath: 'assets/res/channel/use/icon',
+            channelPicPath: 'assets/res/channel/use/pic'
         }
     }
 
@@ -76,9 +83,11 @@ class Config {
     static setAppTheme(name) {
         let _currname = this.getAppTheme()
 
-        if (_currname === name) {
-            return
-        }
+        let _data = require('./assets/json/theme.json')[this.APPCONFIG.APP_ID]
+
+        if (_data) { this.Theme = Tool.structureAssignment(this.Theme, _data, false, true) }
+
+        if (_currname === name) { return }
 
         let _broadcast = () => {
             Emit.exe({

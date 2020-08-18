@@ -11,8 +11,6 @@ import ScreenFrame from './ScreenFrame';
  */
 
 class BaseScreen extends React.Component {
-    static _BASE_GLOBAL_THEME = Config.GLOBAL_EVENT
-
     _screenFrame = null
 
     _router = null
@@ -30,7 +28,7 @@ class BaseScreen extends React.Component {
         this._screenFrame = this.props.screen
         this._router = this.props.router
         this._initPame = this.props.initPame
-        Emit.on(BaseScreen._BASE_GLOBAL_THEME, this.onBroadcast)
+        Emit.on(Config.GLOBAL_EVENT, this.onBroadcast)
         this.onCreate()
     }
 
@@ -224,7 +222,7 @@ class BaseScreen extends React.Component {
      */
     sendBroadcast(data) {
         return Emit.exe(Object.assign(data, {
-            theme: BaseScreen._BASE_GLOBAL_THEME
+            theme: Config.GLOBAL_EVENT
         }))
     }
 

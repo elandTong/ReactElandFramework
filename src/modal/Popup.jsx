@@ -234,7 +234,7 @@ class Popup extends BaseModal {
                                 }} onClick={(e) => {
                                     this.close(e)
                                 }}>
-                                    <img src={require('../assets/res/icon/ic_close.png')} width={this.state.close.height} alt={''} />
+                                    <img src={require(`../${theme.resources.iconPath}/ic_close.png`)} width={this.state.close.height} alt={''} />
                                 </div>
                             ) : (null)}
                         </div>

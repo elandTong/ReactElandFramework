@@ -1,8 +1,9 @@
 import React from 'react';
 import '../assets/style/comp.search.scss';
+import BaseContext from '../BaseContext';
 import Tool from '../utils/Tool';
 
-class SearchBar extends React.Component {
+class SearchBar extends BaseContext {
     _props = {
         onSearch: null, onChange: null
     }
@@ -46,23 +47,23 @@ class SearchBar extends React.Component {
         }
     }
 
-    getIcon() {
+    renderIcon({ theme, language }) {
         if (this.state.currMode === 0) {
             return (
                 <img className={'comp-search-submit-icon'}
-                    src={require('../assets/res/icon/ic_serch_start.png')}
+                    src={require(`../${theme.resources.iconPath}/ic_serch_start.png`)}
                     alt={'search'} />
             )
         } else {
             return (
                 <img className={'comp-search-submit-icon'}
-                    src={require('../assets/res/icon/ic_serch_clear.png')}
+                    src={require(`../${theme.resources.iconPath}/ic_serch_clear.png`)}
                     alt={'search'} />
             )
         }
     }
 
-    render() {
+    renderContent({ theme, language }) {
         return (
             <div className={`display-space comp-search-root ${this.props.className || ''}`} style={this.props.style}>
                 <input className={'comp-search-input'}
@@ -73,7 +74,9 @@ class SearchBar extends React.Component {
 
                 <div className={'click-out-ripple comp-search-submit-root'} onClick={(e) => {
                     this.onSearchClick(e)
-                }}> {this.getIcon()} </div>
+                }}>
+                    {this.renderIcon({ theme, language })}
+                </div>
             </div>
         )
     }

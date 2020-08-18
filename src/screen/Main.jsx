@@ -233,7 +233,7 @@ class Main extends BaseScreen {
                                             return (
                                                 <CategoryList key={key}
                                                     data={item}
-                                                    icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
+                                                    icon={require(`../${theme.resources.iconPath}/games/game_${item.id}.png`)}
                                                     onItemClick={this.onTab1ItemClick} />
                                             )
                                         }))}
@@ -253,7 +253,7 @@ class Main extends BaseScreen {
                                             return (
                                                 <CategoryList key={key}
                                                     data={item}
-                                                    icon={require(`../assets/res/icon/games/game_${item.id}.png`)}
+                                                    icon={require(`../${theme.resources.iconPath}/games/game_${item.id}.png`)}
                                                     onItemClick={this.onTab2ItemClick} />
                                             )
                                         }))}
