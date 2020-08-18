@@ -55,8 +55,8 @@ class Config {
         resources: {
             iconPath: 'assets/res/icon',
             picPath: 'assets/res/pic',
-            channelIconPath: 'assets/res/channel/use/icon',
-            channelPicPath: 'assets/res/channel/use/pic'
+            channelIconPath: 'assets/res/channel/main/icon',
+            channelPicPath: 'assets/res/channel/main/pic'
         }
     }
 
