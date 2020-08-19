@@ -579,7 +579,7 @@ class Tool {
      * _newopts : 属性赋值对象
      */
     static structureAssignment(_opts, _newopts, identical = false, deeploop = false) {
-        if (_newopts === null) { return _opts }
+        if (_newopts == null) { return _opts }
 
         if (_newopts instanceof Array) {
             return _opts
@@ -588,23 +588,31 @@ class Tool {
 
             Object.keys(_newopts).forEach((key) => {
                 if (key in _opts) { // 判断是否存在该属性
-                    if (deeploop && _opts[key] instanceof Object && _newopts[key] instanceof Object) {
-                        _opts[key] = this.structureAssignment(_opts[key], _newopts[key], identical, deeploop)
-                    } else {
+                    if (_opts[key] instanceof Array) {
                         if (identical) {
-                            if (_opts[key] === null) {
-                                _opts[key] = _newopts[key]
-                            } else if (typeof (_opts[key]) === typeof (_newopts[key])) {
+                            if (_opts[key] == null || typeof (_opts[key]) == typeof (_newopts[key])) {
                                 _opts[key] = _newopts[key]
                             }
                         } else {
                             _opts[key] = _newopts[key]
                         }
+                    } else {
+                        if (_opts[key] instanceof Object && deeploop) {
+                            _opts[key] = this.structureAssignment(_opts[key], _newopts[key], identical, deeploop)
+                        } else {
+                            if (identical) {
+                                if (_opts[key] == null || typeof (_opts[key]) == typeof (_newopts[key])) {
+                                    _opts[key] = _newopts[key]
+                                }
+                            } else {
+                                _opts[key] = _newopts[key]
+                            }
+                        }
                     }
                 }
             })
 
-            return _opts
+            return Object.assign(Object.assign({}, _newopts), _opts)
         } else {
             return _opts
         }
