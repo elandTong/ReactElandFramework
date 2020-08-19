@@ -69,62 +69,6 @@ class RouterTool {
 class Tool {
     static _apiMiddlewareHandle = null
 
-    static LoadHTML(opts) {
-        let _con_dom = null
-
-        let _opts = {
-            url: null,
-            conId: null,
-            succHandle: null,
-            errHandle: null,
-            renum: 3
-        }
-
-        let _keep_opts = {
-            url: null,
-            conId: null,
-            succHandle: null,
-            errHandle: null,
-            renum: 3
-        }
-
-        let init = function () {
-            if (!opts || !opts.link || !opts.conId) {
-                return
-            }
-
-            _opts = this.structureAssignment(Object.assign({}, _keep_opts), opts, true)
-
-            _con_dom = this.o(_opts.conId)
-
-            load(_opts.renum)
-
-            console.log('tool load html', _opts)
-        }
-
-        let load = function (resize) { // 加载 html 页面, resize 重试次数
-            this.getRequest(_opts.url, (data) => {
-                _con_dom.innerHTML = data
-
-                if (_opts.succHandle) {
-                    _opts.succHandle()
-                }
-            }, (error) => {
-                if (resize > 0) {
-                    resize = resize - 1
-
-                    load(resize)
-                } else {
-                    if (_opts.errHandle) {
-                        _opts.errHandle()
-                    }
-                }
-            })
-        }
-
-        init()
-    }
-
     static isMobile() {
         return /Android|webOS|iPhone|iPad|iPod|SymbianOS|BlackBerry/i.test(window.navigator.userAgent)
     }

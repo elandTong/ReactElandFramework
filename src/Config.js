@@ -9,7 +9,7 @@ const _LANGUAG = require('./assets/json/language.json')
 
 class Config {
     static APPCONFIG = {
-        APP_ID: window._APP_ID, APP_NAME: 'ElandFramework', APP_VERSION: 240002002,
+        APP_ID: window._APP_ID, APP_NAME: 'ElandFramework', APP_VERSION: 242002002,
         RELEASE: false,
         RELEASE_DOMAIN: 'https://127.0.0.1/',
         TEST_DOMAIN: 'https://127.0.0.1/'
