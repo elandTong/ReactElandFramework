@@ -154,7 +154,7 @@ class BaseModal extends React.Component {
      * @param {Object} intent 意图对象 {
           component: null,
           path: null,
-          opts: {props:{}}
+          options: {props:{}}
      * }
      * @param {Object} data 跳转数据
      * @param {Function} handle 页面处理器
@@ -182,7 +182,7 @@ class BaseModal extends React.Component {
      * @param {Object} intent 意图对象 {
           component: null,
           path: null,
-          opts: {props:{}}
+          options: {props:{}}
      * } 
      * @param {Object} data 跳转数据
      * @param {Function} handle 视窗处理器

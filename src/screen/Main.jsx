@@ -112,7 +112,7 @@ class Main extends BaseScreen {
         this.startModal({ // 意图跳转 不会改变 内置路由池
             component: Spiner,
             path: Spiner._path,
-            opts: {
+            options: {
                 props: {
                 }
             }
@@ -140,7 +140,7 @@ class Main extends BaseScreen {
         this.startScreen({
             component: Login,
             path: Login._path,
-            opts: {
+            options: {
                 props: {
                 }
             }
@@ -174,7 +174,7 @@ class Main extends BaseScreen {
     renderContent({ theme, language, getapp }) {
         return (
             <React.Fragment>
-                <ScreenPage opts={{
+                <ScreenPage options={{
                     toolbar: {
                         title: language.appname,
                         hideBack: true,
@@ -191,7 +191,7 @@ class Main extends BaseScreen {
                         width: '100%',
                         height: '100%'
                     }}>
-                        <Navbar initIndex={0} opts={{
+                        <Navbar initIndex={0} options={{
                             items: [{
                                 name: language.ctcname
                             }, {

@@ -90,7 +90,7 @@ class Frame extends BaseFrame {
     constructor(props) {
         super(props)
 
-        this.updateOpts()
+        this.updateOptions()
 
         this.state = {
             index: {
@@ -125,7 +125,7 @@ class Frame extends BaseFrame {
     /**
      * @description: 更新 props 参数到本地 _param 对象 并过滤非法项
      */
-    updateOpts() {
+    updateOptions() {
         this._param = Tool.structureAssignment(this._keep_param, this.props.param)
 
         // 过滤非法项
@@ -234,7 +234,7 @@ class Frame extends BaseFrame {
     startScreen(intent = {
         component: null,
         path: null,
-        opts: { props: {} }
+        options: { props: {} }
     }, data, handle) {
         if (!intent || !intent.component
             || Object.getPrototypeOf(intent.component) !== BaseScreen
@@ -401,7 +401,7 @@ class Frame extends BaseFrame {
     startModal(intent = {
         component: null,
         path: null,
-        opts: { props: {} }
+        options: { props: {} }
     }, data, handle) {
         if (!intent || !intent.component
             || Object.getPrototypeOf(intent.component) !== BaseModal
@@ -513,13 +513,13 @@ class Frame extends BaseFrame {
      * @return: JSX
      */
     render() {
-        this.updateOpts()
+        this.updateOptions()
 
         let screens = this.state.screenStack.filter((item) => { return item.component ? true : false }).map((item, key) => {
             return (
                 <ScreenFrame key={key} router={this}
                     component={item.component}
-                    initPame={item.opts.props}
+                    initPame={item.options.props}
                     zIndex={item.zIndex}
                     compHandle={(comp) => {
                         item.compref = comp
@@ -537,7 +537,7 @@ class Frame extends BaseFrame {
             return (
                 <ModalFrame key={key} router={this}
                     component={item.component}
-                    initPame={item.opts.props}
+                    initPame={item.options.props}
                     zIndex={item.zIndex}
                     compHandle={(comp) => {
                         item.compref = comp

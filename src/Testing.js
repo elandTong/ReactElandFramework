@@ -19,7 +19,7 @@ class Testing {
     static Test2() {
         RouterTool.navigationModal(Popup._path, {}, (comp) => {
             comp.onComp((
-                <MessageNotice opts={{
+                <MessageNotice options={{
                     title: '标题',
                     content: '你好我是SPA框架',
                     onSure: (e) => {

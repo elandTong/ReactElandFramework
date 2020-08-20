@@ -3,7 +3,7 @@ import Tool from '../utils/Tool'
 import BaseContext from '../BaseContext'
 
 class Toolbar extends BaseContext {
-    _opts = {
+    _options = {
         title: null,
         hideBack: false,
         hideMenu: false,
@@ -11,7 +11,7 @@ class Toolbar extends BaseContext {
         onMenu: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         title: null,
         hideBack: false,
         hideMenu: false,
@@ -37,13 +37,13 @@ class Toolbar extends BaseContext {
     onMenuClick(e) {
         if (e instanceof Event) { e.stopPropagation() }
 
-        if (this._opts.hideMenu) { return }
+        if (this._options.hideMenu) { return }
 
         if (this.state.timeoutclick <= 0) {
-            if (this._opts.onMenu) { this._opts.onMenu(e) }
+            if (this._options.onMenu) { this._options.onMenu(e) }
         } else {
             setTimeout(() => {
-                if (this._opts.onMenu) { this._opts.onMenu(e) }
+                if (this._options.onMenu) { this._options.onMenu(e) }
             }, this.state.timeoutclick)
         }
     }
@@ -51,32 +51,32 @@ class Toolbar extends BaseContext {
     onFinishClick(e) {
         if (e instanceof Event) { e.stopPropagation() }
 
-        if (this._opts.hideBack) { return }
+        if (this._options.hideBack) { return }
 
         if (this.state.timeoutclick <= 0) {
-            if (this._opts.onBack) { this._opts.onBack(e) }
+            if (this._options.onBack) { this._options.onBack(e) }
         } else {
             setTimeout(() => {
-                if (this._opts.onBack) { this._opts.onBack(e) }
+                if (this._options.onBack) { this._options.onBack(e) }
             }, this.state.timeoutclick)
         }
     }
 
     renderContent({ theme, language }) {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {})
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {})
 
         return (
             <div className={'display-space page-screen-container-toolbar-view'}>
-                <div className={`${this._opts.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
-                    {this._opts.hideBack ? (null) : (
+                <div className={`${this._options.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
+                    {this._options.hideBack ? (null) : (
                         <img src={require(`../${theme.resources.iconPath}/ic_back.png`)} height={this.state.icon.height} alt={'ic_back'} />
                     )}
                 </div>
 
-                <span> {this._opts.title} </span>
+                <span> {this._options.title} </span>
 
-                <div className={`${this._opts.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
-                    {this._opts.hideMenu ? (null) : (
+                <div className={`${this._options.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
+                    {this._options.hideMenu ? (null) : (
                         <img src={require(`../${theme.resources.iconPath}/ic_menu.png`)} height={this.state.icon.height} alt={'ic_menu'} />
                     )}
                 </div>
@@ -86,13 +86,13 @@ class Toolbar extends BaseContext {
 }
 
 class ScreenPage extends React.Component {
-    _opts = {
+    _options = {
         toolbar: null,
         toolbarComp: null,
         hideToolbar: false
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         toolbar: null,
         toolbarComp: null,
         hideToolbar: false
@@ -105,15 +105,15 @@ class ScreenPage extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {})
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {})
 
-        let _view_classname = this._opts.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
+        let _view_classname = this._options.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
 
         return (
             <div className={'page-screen-container-pack'}>
-                {this._opts.hideToolbar ? (null) : (
+                {this._options.hideToolbar ? (null) : (
                     <div className={'page-screen-container-toolbar'}>
-                        {this._opts.toolbarComp || (<Toolbar opts={this._opts.toolbar} />)}
+                        {this._options.toolbarComp || (<Toolbar options={this._options.toolbar} />)}
                     </div>
                 )}
 

@@ -3,12 +3,12 @@ import '../assets/style/comp.button.scss'
 import Tool from '../utils/Tool'
 
 class ListButton extends React.Component {
-    _opts = {
+    _options = {
         items: [],
         onChange: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         items: [],
         onChange: null
     }
@@ -24,20 +24,20 @@ class ListButton extends React.Component {
     onSelect(item, key, e) {
         this.setState({ currIndex: key })
 
-        if (this._opts.onChange) {
-            this._opts.onChange(item, key, e)
+        if (this._options.onChange) {
+            this._options.onChange(item, key, e)
         }
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
 
-        let _items_jsx = this._opts.items.map((item, key) => {
+        let _items_jsx = this._options.items.map((item, key) => {
             let _classname_outer = ''
 
             if (key === 0) {
                 _classname_outer = 'comp-list-button-start'
-            } else if (key === this._opts.items.length - 1) {
+            } else if (key === this._options.items.length - 1) {
                 _classname_outer = 'comp-list-button-end'
             }
 
@@ -45,7 +45,7 @@ class ListButton extends React.Component {
 
             return (
                 <div key={key} className={`click-out-ripple display-center ${_classname_outer} ${_classname_sele}`} style={{
-                    width: `${100 / this._opts.items.length}%`
+                    width: `${100 / this._options.items.length}%`
                 }} onClick={(e) => {
                     e.stopPropagation()
 

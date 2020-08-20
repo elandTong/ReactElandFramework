@@ -7,7 +7,7 @@ import Tool from '../utils/Tool'
 class Popup extends BaseModal {
     static _path = '/popup'
 
-    _opts = {
+    _options = {
         width: '50%', height: '50%',
         angleClose: true, outClose: false,
         pos: { align: 'center', top: 0, left: 0 },
@@ -37,7 +37,7 @@ class Popup extends BaseModal {
     }
 
     updateOptions(pame) {
-        this._opts = Tool.structureAssignment({
+        this._options = Tool.structureAssignment({
             width: '50%', height: '50%',
             angleClose: true, outClose: false,
             pos: { align: 'center', top: 0, left: 0 },
@@ -95,9 +95,9 @@ class Popup extends BaseModal {
 
         this.setState({
             comp: comp,
-            width: this._opts.width, height: this._opts.height,
-            angleClose: this._opts.angleClose, outClose: this._opts.outClose,
-            pos: this.getPosition(this._opts.pos)
+            width: this._options.width, height: this._options.height,
+            angleClose: this._options.angleClose, outClose: this._options.outClose,
+            pos: this.getPosition(this._options.pos)
         })
     }
 
@@ -108,9 +108,9 @@ class Popup extends BaseModal {
 
         this.setState({
             comp: (<img src={src} width={'100%'} alt={''} />),
-            width: this._opts.width, height: this._opts.height,
-            angleClose: this._opts.angleClose, outClose: this._opts.outClose,
-            pos: this.getPosition(this._opts.pos)
+            width: this._options.width, height: this._options.height,
+            angleClose: this._options.angleClose, outClose: this._options.outClose,
+            pos: this.getPosition(this._options.pos)
         })
     }
 
@@ -141,8 +141,8 @@ class Popup extends BaseModal {
     close() {
         this.finish()
 
-        if (this._opts.onClose) {
-            this._opts.onClose()
+        if (this._options.onClose) {
+            this._options.onClose()
         }
 
         Popup._isshow = false

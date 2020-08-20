@@ -7,7 +7,7 @@ class BaseFrame extends React.Component {
 
     navigationScreen(path, data, handle) { }
 
-    startScreen(intent = { component: null, path: null, opts: { props: {} } }, data, handle) { }
+    startScreen(intent = { component: null, path: null, options: { props: {} } }, data, handle) { }
 
     getScreen(path) { return null }
 
@@ -19,7 +19,7 @@ class BaseFrame extends React.Component {
 
     navigationModal(path, data, handle) { }
 
-    startModal(intent = { component: null, path: null, opts: { props: {} } }, data, handle) { }
+    startModal(intent = { component: null, path: null, options: { props: {} } }, data, handle) { }
 
     getModal(path) { return null }
 

@@ -4,7 +4,7 @@ import '../assets/style/comp.button.scss';
 import Tool from '../utils/Tool';
 
 class Button extends React.Component {
-    _opts = {
+    _options = {
         width: '100%', height: 40,
         solid: true,
         name: null,
@@ -16,7 +16,7 @@ class Button extends React.Component {
         onClick: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         width: '100%', height: 40,
         solid: true,
         name: null,
@@ -42,32 +42,32 @@ class Button extends React.Component {
         if (e instanceof Event) { e.stopPropagation() }
 
         if (this.state.timeoutclick <= 0) {
-            if (this._opts.onClick) { this._opts.onClick(e) }
+            if (this._options.onClick) { this._options.onClick(e) }
         } else {
             setTimeout(() => {
-                if (this._opts.onClick) { this._opts.onClick(e) }
+                if (this._options.onClick) { this._options.onClick(e) }
             }, this.state.timeoutclick)
         }
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts || {}, false, true)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {}, false, true)
 
-        let _classname = this._opts.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
+        let _classname = this._options.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
 
         let _jsx = (
             <div className={`click-in-ripple display-center ${_classname} ${this.props.className || ''}`} style={Object.assign({
-                width: this._opts.width, height: this._opts.height
+                width: this._options.width, height: this._options.height
             }, this.props.style || {})} onClick={this.onClick}>
-                {this._opts.name || this.props.children}
+                {this._options.name || this.props.children}
             </div>
         )
 
-        if (this._opts.copy.active === true) {
+        if (this._options.copy.active === true) {
             return (
-                <CopyToClipboard text={this._opts.copy.text} onCopy={(text, result) => {
-                    if (this._opts.copy.onCopy) {
-                        this._opts.copy.onCopy(text, result)
+                <CopyToClipboard text={this._options.copy.text} onCopy={(text, result) => {
+                    if (this._options.copy.onCopy) {
+                        this._options.copy.onCopy(text, result)
                     }
                 }}>
                     {_jsx}

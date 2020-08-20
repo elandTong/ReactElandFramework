@@ -50,7 +50,7 @@ class Login extends BaseScreen {
     onMenu() {
         this.navigationModal(Popup._path, null, (comp) => {
             comp.onComp((
-                <MessageNotice opts={{
+                <MessageNotice options={{
                     title: '标题',
                     content: this._indata.message,
                     onSure: (e) => {
@@ -83,7 +83,7 @@ class Login extends BaseScreen {
 
     renderContent({ theme, language, getapp }) {
         return (
-            <ScreenPage opts={{
+            <ScreenPage options={{
                 toolbar: {
                     title: 'LoginScreenTitle',
                     hideBack: false,
@@ -94,14 +94,14 @@ class Login extends BaseScreen {
                 hideToolbar: false
             }}>
                 <div style={{ width: '100%', padding: 20 }}>
-                    <Button opts={{
+                    <Button options={{
                         width: '100%', name: '按钮1号',
                         onClick: (e) => {
                             ModalTool.showToast('button 1 tag')
                         }
                     }} />
 
-                    <Button style={{ marginTop: 10 }} opts={{
+                    <Button style={{ marginTop: 10 }} options={{
                         width: '100%', name: '按钮2号',
                         solid: false,
                         onClick: (e) => {

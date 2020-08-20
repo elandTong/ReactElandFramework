@@ -73,14 +73,6 @@ NetApi.create({
     }
 }).httpmode()
 
-NetApi.call('i18n/getMapKeyLangs', {}, (data) => {
-    if (data.code === 0) { Config.setApiTips(data.result) }
-
-    console.warn('getMapKeyLangs succ', data)
-}, (err) => {
-    console.warn('getMapKeyLangs err', err)
-})
-
 ReactDOM.render(<Application />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change

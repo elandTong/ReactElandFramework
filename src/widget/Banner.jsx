@@ -4,7 +4,7 @@ import '../assets/style/comp.swiper.scss';
 import Tool from '../utils/Tool';
 
 class Banner extends React.Component {
-    _opts = {
+    _options = {
         items: [],
         effect: 'slide',
         nested: false,
@@ -14,7 +14,7 @@ class Banner extends React.Component {
         onItemClick: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         items: [],
         effect: 'slide', // cube
         nested: false,
@@ -40,8 +40,8 @@ class Banner extends React.Component {
     componentDidMount() {
         this._swiper = new Swiper(this._swiper_dom, {
             observer: true,
-            effect: this._opts.effect,
-            nested: this._opts.nested,
+            effect: this._options.effect,
+            nested: this._options.nested,
             autoplay: {
                 disableOnInteraction: false
             },
@@ -61,8 +61,8 @@ class Banner extends React.Component {
     }
 
     onChange() {
-        if (this._opts.onActiveIndex) {
-            this._opts.onActiveIndex(this._swiper.activeIndex)
+        if (this._options.onActiveIndex) {
+            this._options.onActiveIndex(this._swiper.activeIndex)
         }
     }
 
@@ -77,18 +77,18 @@ class Banner extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
 
         return (
             <div className={`swiper-container comp-swiper-banner-root ${this.props.className || ''}`} style={this.props.style} ref={(comp) => {
                 this._swiper_dom = comp
             }}>
                 <div className={'swiper-wrapper'}>
-                    {this._opts.items.map((item, key) => {
+                    {this._options.items.map((item, key) => {
                         return (
                             <div key={key} className={'swiper-slide display-center'} onClick={(e) => {
-                                if (this._opts.onItemClick) {
-                                    this._opts.onItemClick(item, key, e)
+                                if (this._options.onItemClick) {
+                                    this._options.onItemClick(item, key, e)
                                 }
                             }}>
                                 <img className={'comp-swiper-banner-image'} src={item.src} alt={'banner'} />
@@ -97,19 +97,19 @@ class Banner extends React.Component {
                     })}
                 </div>
 
-                {this._opts.navActive ? (
+                {this._options.navActive ? (
                     <div className={'swiper-button-prev comp-swiper-banner-button'} ref={(comp) => {
                         this._swiper_pre_dom = comp
                     }} />
                 ) : (null)}
 
-                {this._opts.navActive ? (
+                {this._options.navActive ? (
                     <div className={'swiper-button-next comp-swiper-banner-button'} ref={(comp) => {
                         this._swiper_nex_dom = comp
                     }} />
                 ) : (null)}
 
-                {this._opts.pagActive ? (
+                {this._options.pagActive ? (
                     <div className={'swiper-pagination'} ref={(comp) => {
                         this._swiper_pag_dom = comp
                     }} />

@@ -6,20 +6,20 @@ import Sorry from './Sorry';
 import Config from '../Config';
 
 class Preblock extends React.Component {
-    _opts = {
+    _options = {
         loadStatus: true,
         loadComp: null,
         sorryStatus: false,
         sorryComp: null,
-        sorryOpts: null
+        sorryCompOptions: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         loadStatus: true,
         loadComp: null,
         sorryStatus: false,
         sorryComp: null,
-        sorryOpts: null
+        sorryCompOptions: null
     }
 
     constructor(props) {
@@ -31,7 +31,7 @@ class Preblock extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
 
         return (
             <div className={`pos-relative common-boxsize-full`}>
@@ -40,19 +40,19 @@ class Preblock extends React.Component {
                 </div>
 
                 {/* sorry视图 */}
-                {this._opts.sorryStatus ? (
+                {this._options.sorryStatus ? (
                     <div className={'pos-absolute comp-preblock-mid'}>
-                        {this._opts.sorryComp ? (this._opts.sorryComp) : (
-                            <Sorry opts={this._opts.sorryOpts} />
+                        {this._options.sorryComp ? (this._options.sorryComp) : (
+                            <Sorry options={this._options.sorryCompOptions} />
                         )}
                     </div>
                 ) : (null)}
 
                 {/* loading视图 */}
-                {this._opts.loadStatus ? (
+                {this._options.loadStatus ? (
                     <div className={'pos-absolute display-center comp-preblock-fast'}>
-                        {this._opts.loadComp ? (this._opts.loadComp) : (
-                            <GridLoader size={22} margin={0} loading={this._opts.loadStatus} color={this.state.color} />
+                        {this._options.loadComp ? (this._options.loadComp) : (
+                            <GridLoader size={22} margin={0} loading={this._options.loadStatus} color={this.state.color} />
                         )}
                     </div>
                 ) : (null)}

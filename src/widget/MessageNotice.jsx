@@ -3,13 +3,13 @@ import '../assets/style/comp.message.scss'
 import Tool from '../utils/Tool'
 
 class MessageNotice extends React.Component {
-    _opts = {
+    _options = {
         title: null,
         content: null,
         onSure: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         title: null,
         content: null,
         onSure: null
@@ -25,23 +25,23 @@ class MessageNotice extends React.Component {
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
 
         return (
             <div className={'display-column comp-message-notice-root'}>
                 <div className={'display-center comp-message-notice-head'}>
-                    <span> {this._opts.title} </span>
+                    <span> {this._options.title} </span>
                 </div>
 
                 <div className={'display-center comp-message-notice-cont'}>
-                    {this._opts.content ? (<span>{this._opts.content}</span>) : (this.props.children)}
+                    {this._options.content ? (<span>{this._options.content}</span>) : (this.props.children)}
                 </div>
 
                 <div className={'common-spline-x'} />
 
                 <div className={'display-center click-out-ripple comp-message-notice-bottom'} onClick={(e) => {
-                    if (this._opts.onSure) {
-                        this._opts.onSure(e)
+                    if (this._options.onSure) {
+                        this._options.onSure(e)
                     }
                 }}>
                     <span>{'确认'}</span>

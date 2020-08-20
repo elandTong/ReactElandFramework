@@ -3,11 +3,11 @@ import Tool from '../utils/Tool'
 import '../assets/style/comp.navbar.scss'
 
 class Navbar extends React.Component {
-    _opts = {
+    _options = {
         items: [], onSelect: null
     }
 
-    _keep_opts = {
+    _defaultOptions = {
         items: [], onSelect: null
     }
 
@@ -28,19 +28,19 @@ class Navbar extends React.Component {
             this.props.getSwiper().slideTo(index)
         }
 
-        if (this._opts.onSelect) {
-            this._opts.onSelect(index, e)
+        if (this._options.onSelect) {
+            this._options.onSelect(index, e)
         }
     }
 
     render() {
-        this._opts = Tool.structureAssignment(this._keep_opts, this.props.opts)
+        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
 
-        let _items_jsx = this._opts.items.map((item, key) => {
+        let _items_jsx = this._options.items.map((item, key) => {
             let _classname = this.state.currIndex === key ? 'comp-navbar-select' : 'comp-navbar-unsele'
             return (
                 <div key={key} className={`display-center click-out-ripple ${_classname}`} style={{
-                    width: `${100 / this._opts.items.length}%`
+                    width: `${100 / this._options.items.length}%`
                 }} onClick={(e) => {
                     this.onSelect(key, e)
                 }}>

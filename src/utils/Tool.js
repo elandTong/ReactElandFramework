@@ -123,7 +123,7 @@ class Tool {
         return window.self === window.top // 是否处于主框架
     }
 
-    static postRequest(api, params, succHandle, errHandle, opts) {
+    static postRequest(api, params, succHandle, errHandle, options) {
         if (!api) { return }
 
         let url
@@ -177,7 +177,7 @@ class Tool {
         })
     }
 
-    static postRequestXML(api, params, succHandle, errHandle, opts = {}) {
+    static postRequestXML(api, params, succHandle, errHandle, options = {}) {
         let url
 
         if (this.checkURL(api)) {
@@ -188,7 +188,7 @@ class Tool {
 
         let _htp = new XMLHttpRequest()
 
-        _htp.withCredentials = opts.withCredenIs ? opts.withCredenIs : true
+        _htp.withCredentials = options.withCredenIs ? options.withCredenIs : true
 
         _htp.onreadystatechange = (state) => {
             let _unsent = () => {
@@ -276,9 +276,9 @@ class Tool {
             console.log('XMLHttpRequest post error', err)
         }
 
-        _htp.open('POST', url, opts.asyn ? opts.asyn : true)
+        _htp.open('POST', url, options.asyn ? options.asyn : true)
 
-        _htp.timeout = opts.outTime ? opts.outTime : 5000
+        _htp.timeout = options.outTime ? options.outTime : 5000
 
         _htp.setRequestHeader('Accept', '*/*')
 
@@ -519,46 +519,46 @@ class Tool {
 
     /**
      * 对象赋值
-     * _opts : 属性接收对象
-     * _newopts : 属性赋值对象
+     * _target : 属性接收对象
+     * _source : 属性赋值对象
      */
-    static structureAssignment(_opts, _newopts, identical = false, deeploop = false) {
-        if (_newopts == null) { return _opts }
+    static structureAssignment(_target, _source, identical = false, deeploop = false) {
+        if (_source == null) { return _target }
 
-        if (_newopts instanceof Array) {
-            return _opts
-        } else if (_newopts instanceof Object) {
-            _opts = Object.assign({}, _opts)
+        if (_source instanceof Array) {
+            return _target
+        } else if (_source instanceof Object) {
+            _target = Object.assign({}, _target)
 
-            Object.keys(_newopts).forEach((key) => {
-                if (key in _opts) { // 判断是否存在该属性
-                    if (_opts[key] instanceof Array) {
+            Object.keys(_source).forEach((key) => {
+                if (key in _target) { // 判断是否存在该属性
+                    if (_target[key] instanceof Array) {
                         if (identical) {
-                            if (_opts[key] == null || typeof (_opts[key]) == typeof (_newopts[key])) {
-                                _opts[key] = _newopts[key]
+                            if (_target[key] == null || typeof (_target[key]) == typeof (_source[key])) {
+                                _target[key] = _source[key]
                             }
                         } else {
-                            _opts[key] = _newopts[key]
+                            _target[key] = _source[key]
                         }
                     } else {
-                        if (_opts[key] instanceof Object && deeploop) {
-                            _opts[key] = this.structureAssignment(_opts[key], _newopts[key], identical, deeploop)
+                        if (_target[key] instanceof Object && deeploop) {
+                            _target[key] = this.structureAssignment(_target[key], _source[key], identical, deeploop)
                         } else {
                             if (identical) {
-                                if (_opts[key] == null || typeof (_opts[key]) == typeof (_newopts[key])) {
-                                    _opts[key] = _newopts[key]
+                                if (_target[key] == null || typeof (_target[key]) == typeof (_source[key])) {
+                                    _target[key] = _source[key]
                                 }
                             } else {
-                                _opts[key] = _newopts[key]
+                                _target[key] = _source[key]
                             }
                         }
                     }
                 }
             })
 
-            return Object.assign(Object.assign({}, _newopts), _opts)
+            return Object.assign(Object.assign({}, _source), _target)
         } else {
-            return _opts
+            return _target
         }
     }
 
@@ -642,14 +642,14 @@ class Tool {
         }
     }
 
-    static insertSplitline(items = [], opts = {}) {
+    static insertSplitline(items = [], options = {}) {
         let {
             select = -1,
             selectClassName = 'common-spline-select',
             side = false,
             orientation = 'x',
             className = null
-        } = opts
+        } = options
 
         let _classname = orientation === 'x' ? 'common-spline-x' : 'common-spline-y'
 

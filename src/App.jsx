@@ -20,14 +20,14 @@ class Application extends React.Component {
         screens: [{
           component: Main,
           path: Main._path,
-          opts: {
+          options: {
             props: {
             }
           }
         }, {
           component: Login,
           path: Login._path,
-          opts: {
+          options: {
             props: {
             }
           }
@@ -35,21 +35,21 @@ class Application extends React.Component {
         modals: [{
           component: Toast,
           path: Toast._path,
-          opts: {
+          options: {
             props: {
             }
           }
         }, {
           component: Spiner,
           path: Spiner._path,
-          opts: {
+          options: {
             props: {
             }
           }
         }, {
           component: Popup,
           path: Popup._path,
-          opts: {
+          options: {
             props: {
             }
           }

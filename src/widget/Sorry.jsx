@@ -5,7 +5,7 @@ import Tool from '../utils/Tool';
 import Button from './Button';
 
 class Sorry extends BaseContext {
-    _opts = {
+    _options = {
         icon: null,
         title: null,
         tips: null,
@@ -23,7 +23,7 @@ class Sorry extends BaseContext {
     }
 
     renderContent({ theme, language }) {
-        this._opts = Tool.structureAssignment({
+        this._options = Tool.structureAssignment({
             icon: require(`../${theme.resources.iconPath}/ic_sorry.png`),
             title: language.sorry,
             tips: language.nodata,
@@ -32,27 +32,27 @@ class Sorry extends BaseContext {
                 width: 100, height: 34,
                 name: language.retry
             }
-        }, this.props.opts || {}, false, true)
+        }, this.props.options || {}, false, true)
 
         return (
             <div className={`display-center common-boxsize-full ${this.props.className || ''}`} style={this.props.style}>
                 <div className={'display-column'}>
-                    <img className={'comp-sorry-imag'} src={this._opts.icon} alt={'sorry'} />
+                    <img className={'comp-sorry-imag'} src={this._options.icon} alt={'sorry'} />
 
                     <span className={'comp-sorry-title'}>
-                        {this._opts.title}
+                        {this._options.title}
                     </span>
 
                     <span className={'comp-sorry-tips'}>
-                        {this._opts.tips}
+                        {this._options.tips}
                     </span>
 
-                    {this._opts.button.active === true ? (
-                        <Button className={'comp-sorry-retry-button'} opts={{
-                            width: this._opts.button.width,
-                            height: this._opts.button.height,
-                            name: this._opts.button.name,
-                            onClick: this._opts.button.onClick
+                    {this._options.button.active === true ? (
+                        <Button className={'comp-sorry-retry-button'} options={{
+                            width: this._options.button.width,
+                            height: this._options.button.height,
+                            name: this._options.button.name,
+                            onClick: this._options.button.onClick
                         }} />
                     ) : (null)}
                 </div>
