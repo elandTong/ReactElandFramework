@@ -8,6 +8,7 @@ import { ScreenPage } from '../router/Page';
 import CategoryList from '../scenes/CategoryList';
 import Tool, { ModalTool } from '../utils/Tool';
 import FixedModal from '../widget/FixedModal';
+import FixedModalGroup from '../widget/FixedModalGroup';
 import Mask from '../widget/Mask';
 import Minirefresh from '../widget/Minirefresh';
 import Navbar from '../widget/Navbar';
@@ -27,11 +28,15 @@ class Main extends BaseScreen {
     constructor(props) {
         super(props)
         this.renderMenu = this.renderMenu.bind(this)
+        this.onMenu = this.onMenu.bind(this)
+        this.onBack = this.onBack.bind(this)
+        this.onMenuItemClick = this.onMenuItemClick.bind(this)
         this.onTab1ItemClick = this.onTab1ItemClick.bind(this)
         this.onTab2ItemClick = this.onTab2ItemClick.bind(this)
+
         this._games = require('../assets/json/games.json')
+
         this.state = {
-            modalVisible: false,
             refresh: {
                 up: {
                     isLock: true,
@@ -50,36 +55,15 @@ class Main extends BaseScreen {
             category: {
                 tab1: this._games.tab1,
                 tab2: this._games.tab2
+            },
+            menuFixedModal: {
+                visible: false,
+                style: { width: '100%', height: '100%' }
+            },
+            testFixedModal: {
+                visible: false
             }
         }
-    }
-
-    renderMenu() {
-        return (
-            <Mask className={'common-boxsize-full-number common-boxsize-background'} onClick={(e) => {
-                this.closePopup('toolbarmenu')
-            }}>
-                <ToolbarMenu className={'pos-absolute-nosize'} style={{
-                    left: Tool.getScreenSize().w - 101, top: 46
-                }} onItemClick={(item, key, e) => {
-                    Config.setAppTheme(item.key)
-                }} />
-            </Mask>
-        )
-    }
-
-    onCreate() {
-        super.onCreate()
-
-        this.pushPopups([{
-            pame: {
-                id: 'toolbarmenu',
-                // x: 0, y: 0, className: '' // 作用于弹出壳
-            },
-            comp: this.renderMenu()
-        }])
-
-        console.warn('screen main on create!')
     }
 
     onStart() {
@@ -126,10 +110,6 @@ class Main extends BaseScreen {
             comp.setText('你好,SpaRouter世界', Toast.LONG)
         })
 
-        this.setState({
-            modalVisible: true
-        })
-
         // 如果 Toast 在内置路由池内 则可以:
         // this.navigationModal(Toast._path, null, (comp) => { comp.setText('哈哈哈哈😄------') })
 
@@ -171,6 +151,39 @@ class Main extends BaseScreen {
         }, 2000)
     }
 
+    onMenu(e) {
+        let _menu = this.state.menuFixedModal
+        _menu.visible = true
+        this.setState({ menuFixedModal: _menu })
+    }
+
+    onBack(e) {
+    }
+
+    onMenuItemClick(item, key, e) {
+        e.stopPropagation()
+
+        let _test = this.state.testFixedModal
+        _test.visible = true
+        this.setState({ testFixedModal: _test })
+
+        Config.setAppTheme(item.key)
+    }
+
+    renderMenu() {
+        return (
+            <Mask className={'common-boxsize-full-number common-boxsize-background'} onClick={(e) => {
+                let _menu = this.state.menuFixedModal
+                _menu.visible = false
+                this.setState({ menuFixedModal: _menu })
+            }}>
+                <ToolbarMenu className={'pos-absolute-nosize'} style={{
+                    left: Tool.getScreenSize().w - 101, top: 46
+                }} onItemClick={this.onMenuItemClick} />
+            </Mask>
+        )
+    }
+
     renderContent({ theme, language, getapp }) {
         return (
             <React.Fragment>
@@ -179,11 +192,8 @@ class Main extends BaseScreen {
                         title: language.appname,
                         hideBack: true,
                         hideMenu: false,
-                        onBack: (e) => {
-                        },
-                        onMenu: (e) => {
-                            this.showPopup('toolbarmenu')
-                        }
+                        onBack: this.onBack,
+                        onMenu: this.onMenu
                     },
                     hideToolbar: false
                 }}>
@@ -191,36 +201,21 @@ class Main extends BaseScreen {
                         width: '100%',
                         height: '100%'
                     }}>
-                        <Navbar initIndex={0} options={{
-                            items: [{
-                                name: language.ctcname
-                            }, {
-                                name: language.gfcname
-                            }],
-                            onSelect: (key, e) => {
-                            }
-                        }} getSwiper={() => {
-                            return this._swiperCompRef
-                        }} ref={(comp) => {
-                            if (comp) {
-                                this._navbarCompRef = comp
-                            }
-                        }} />
+                        <Navbar initIndex={0}
+                            options={{
+                                items: [{ name: language.ctcname }, { name: language.gfcname }],
+                                onSelect: (key, e) => { }
+                            }}
+                            getSwiper={() => { return this._swiperCompRef }}
+                            ref={(comp) => { this._navbarCompRef = comp }} />
 
                         <TabSwiper init={0}
                             allowTouchMove={true}
                             width={'100%'}
                             height={Tool.getScreenContHeight() - 45}
-                            onSelect={(i) => {
-                            }}
-                            getNavbar={() => {
-                                return this._navbarCompRef
-                            }}
-                            ref={(comp) => {
-                                if (comp) {
-                                    this._swiperCompRef = comp
-                                }
-                            }}>
+                            onSelect={(i) => { }}
+                            getNavbar={() => { return this._navbarCompRef }}
+                            ref={(comp) => { this._swiperCompRef = comp }}>
                             <TabSlide>
                                 <div className={'common-boxsize-full'}>
                                     <Minirefresh className={'screen-main-slide-background'} options={this.state.refresh}
@@ -264,19 +259,27 @@ class Main extends BaseScreen {
                     </div>
                 </ScreenPage>
 
-                <FixedModal visible={this.state.modalVisible} onClick={(e) => {
-                    this.setState({ modalVisible: false })
-                }}>
-                    <div style={{
-                        width: 200,
-                        height: 200,
-                        fontSize: 20,
-                        color: 'yellow',
-                        background: 'red'
-                    }} >
-                        <span>{'这是模态组件!'}</span>
-                    </div>
-                </FixedModal>
+                <FixedModalGroup>
+                    <FixedModal {...this.state.menuFixedModal}>
+                        {this.renderMenu()}
+                    </FixedModal>
+
+                    <FixedModal {...this.state.testFixedModal} onClick={(e) => {
+                        let _test = this.state.testFixedModal
+                        _test.visible = false
+                        this.setState({ testFixedModal: _test })
+                    }}>
+                        <div style={{
+                            width: 200,
+                            height: 200,
+                            fontSize: 20,
+                            color: 'yellow',
+                            background: 'red'
+                        }} >
+                            <span>{'这是模态组件!'}</span>
+                        </div>
+                    </FixedModal>
+                </FixedModalGroup>
             </React.Fragment>
         )
     }
