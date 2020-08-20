@@ -110,7 +110,7 @@ class ScreenPage extends React.Component {
         let _view_classname = this._options.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
 
         return (
-            <div className={'page-screen-container-pack'}>
+            <div className={'page-screen-container-wrapper'}>
                 {this._options.hideToolbar ? (null) : (
                     <div className={'page-screen-container-toolbar'}>
                         {this._options.toolbarComp || (<Toolbar options={this._options.toolbar} />)}

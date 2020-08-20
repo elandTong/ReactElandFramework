@@ -37,7 +37,7 @@ class Root extends React.Component {
     render() {
         return (
             <div className={'page-screen-container color-screen-background'} style={{ zIndex: this.props.zIndex }}>
-                <div className={'page-screen-container-pack'}>
+                <div className={'page-screen-container-wrapper'}>
                     {this.props.children}
                 </div>
             </div>
@@ -55,7 +55,7 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className={'page-screen-container-safety'}>
+            <div className={'page-screen-container-locator'}>
                 {this.props.children}
             </div>
         )

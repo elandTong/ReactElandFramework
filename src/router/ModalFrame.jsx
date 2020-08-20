@@ -27,7 +27,7 @@ class Content extends React.Component {
 
     render() {
         return (
-            <div className={'page-modal-container-pack'}>
+            <div className={'page-modal-container-wrapper'}>
                 {this.props.children}
             </div>
         )

@@ -99,13 +99,13 @@ div {
   }
 }
 
-.page-screen-container-pack {
+.page-screen-container-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.page-screen-container-safety {
+.page-screen-container-locator {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -232,7 +232,7 @@ div {
   }
 }
 
-.page-modal-container-pack {
+.page-modal-container-wrapper {
   position: relative;
   width: 100%;
   height: 100%;
