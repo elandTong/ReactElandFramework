@@ -27,6 +27,7 @@ class Main extends BaseScreen {
 
     constructor(props) {
         super(props)
+        this.renderToolbar = this.renderToolbar.bind(this)
         this.renderMenu = this.renderMenu.bind(this)
         this.onMenu = this.onMenu.bind(this)
         this.onBack = this.onBack.bind(this)
@@ -170,6 +171,14 @@ class Main extends BaseScreen {
         Config.setAppTheme(item.key)
     }
 
+    renderToolbar(screen) {
+        return (
+            <div style={{
+                width: '100%', height: '100%', background: 'red'
+            }}></div>
+        )
+    }
+
     renderMenu() {
         return (
             <Mask className={'common-boxsize-full-number common-boxsize-background'} onClick={(e) => {
@@ -188,13 +197,14 @@ class Main extends BaseScreen {
         return (
             <React.Fragment>
                 <ScreenPage options={{
-                    toolbar: {
+                    toolbarOptions: {
                         title: language.appname,
                         hideBack: true,
                         hideMenu: false,
                         onBack: this.onBack,
                         onMenu: this.onMenu
                     },
+                    // renderToolbar: this.renderToolbar,
                     hideToolbar: false
                 }}>
                     <div style={{

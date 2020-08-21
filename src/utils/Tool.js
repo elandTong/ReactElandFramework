@@ -530,7 +530,9 @@ class Tool {
         } else if (_source instanceof Object) {
             _target = Object.assign({}, _target)
 
-            Object.keys(_source).forEach((key) => {
+            Object.keys(_source).filter((key) => {
+                return _source[key] != null
+            }).forEach((key) => {
                 if (key in _target) { // 判断是否存在该属性
                     if (_target[key] instanceof Array) {
                         if (identical) {

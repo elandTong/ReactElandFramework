@@ -1,6 +1,6 @@
 import React from 'react'
-import Tool from '../utils/Tool'
 import BaseContext from '../BaseContext'
+import Tool from '../utils/Tool'
 
 class Toolbar extends BaseContext {
     _options = {
@@ -87,36 +87,44 @@ class Toolbar extends BaseContext {
 
 class ScreenPage extends React.Component {
     _options = {
-        toolbar: null,
-        toolbarComp: null,
+        toolbarOptions: null,
+        renderToolbar: null,
         hideToolbar: false
     }
 
     _defaultOptions = {
-        toolbar: null,
-        toolbarComp: null,
+        toolbarOptions: null,
+        renderToolbar: (screen) => {
+            return (<Toolbar options={this._options.toolbarOptions} />)
+        },
         hideToolbar: false
     }
 
     constructor(props) {
         super(props)
 
+        this.renderToolbar = this.renderToolbar.bind(this)
+
         this.state = {}
+    }
+
+    renderToolbar() {
+        return Boolean(this._options.hideToolbar) ? (null) : (
+            <div className={'page-screen-container-toolbar'}>
+                {this._options.renderToolbar && this._options.renderToolbar(this)}
+            </div>
+        )
     }
 
     render() {
         this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {})
 
-        let _view_classname = this._options.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
+        let _view_classname = Boolean(this._options.hideToolbar) ?
+            'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
 
         return (
             <div className={'page-screen-container-wrapper'}>
-                {this._options.hideToolbar ? (null) : (
-                    <div className={'page-screen-container-toolbar'}>
-                        {this._options.toolbarComp || (<Toolbar options={this._options.toolbar} />)}
-                    </div>
-                )}
-
+                {this.renderToolbar()}
                 <div className={`page-screen-container-view ${_view_classname}`}>
                     {this.props.children}
                 </div>
