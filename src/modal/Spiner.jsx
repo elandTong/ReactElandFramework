@@ -1,7 +1,6 @@
 import React from 'react'
 import GridLoader from 'react-spinners/GridLoader'
 import '../assets/style/comp.spiner.scss'
-import Config from '../Config'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
 
@@ -14,7 +13,6 @@ class Spiner extends BaseModal {
         super(props)
         this.state = {
             loading: true,
-            theme: Config.Theme.color.theme,
             text: 'hello spiner!'
         }
     }
@@ -47,14 +45,6 @@ class Spiner extends BaseModal {
         console.warn('modal spiner on stop!')
     }
 
-    onAppThemeChange(name, data) {
-        super.onAppThemeChange(name, data)
-
-        this.setState({
-            theme: Config.Theme.color.theme
-        })
-    }
-
     setText(text, touchclose = false) {
         this.touchclose = touchclose
 
@@ -65,7 +55,7 @@ class Spiner extends BaseModal {
         this.finish()
     }
 
-    renderContent({ theme, language, getapp }) {
+    renderContent({ theme, language }) {
         return (
             <ModalPage>
                 <div className={'display-center comp-spiner-root'} onClick={(e) => {
@@ -77,7 +67,7 @@ class Spiner extends BaseModal {
                         <GridLoader
                             size={20}
                             margin={0}
-                            color={this.state.theme}
+                            color={theme.color.theme}
                             loading={this.state.loading}
                         />
 

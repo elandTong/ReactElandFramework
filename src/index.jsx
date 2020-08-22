@@ -50,7 +50,7 @@ Config.bindWindow()
 
 Config.setAppTheme(Tool.getParameForURL('theme', window.location.href))
 
-Config.setLanguage()
+Config.setLanguage(Tool.getParameForURL('language', window.location.href))
 
 document.title = Config.APPCONFIG.APP_NAME
 

@@ -15,6 +15,7 @@ import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
 import Login from './Login';
+import ResUtil from '../utils/ResUtil';
 
 class Main extends BaseScreen {
     static _path = '/main'
@@ -238,7 +239,7 @@ class Main extends BaseScreen {
                                             return (
                                                 <CategoryList key={key}
                                                     data={item}
-                                                    icon={require(`../${theme.resources.iconPath}/games/game_${item.id}.png`)}
+                                                    icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
                                                     onItemClick={this.onTab1ItemClick} />
                                             )
                                         }))}
@@ -258,7 +259,7 @@ class Main extends BaseScreen {
                                             return (
                                                 <CategoryList key={key}
                                                     data={item}
-                                                    icon={require(`../${theme.resources.iconPath}/games/game_${item.id}.png`)}
+                                                    icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
                                                     onItemClick={this.onTab2ItemClick} />
                                             )
                                         }))}

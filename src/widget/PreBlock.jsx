@@ -1,20 +1,12 @@
 import React from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 import '../assets/style/comp.preblock.scss';
+import BaseContext from '../BaseContext';
 import Tool from '../utils/Tool';
 import Sorry from './Sorry';
-import Config from '../Config';
 
-class Preblock extends React.Component {
+class Preblock extends BaseContext {
     _options = {
-        loadStatus: true,
-        loadComp: null,
-        sorryStatus: false,
-        sorryComp: null,
-        sorryCompOptions: null
-    }
-
-    _defaultOptions = {
         loadStatus: true,
         loadComp: null,
         sorryStatus: false,
@@ -24,14 +16,17 @@ class Preblock extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
-            color: Config.Theme.color.theme
-        }
+        this.state = {}
     }
 
-    render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
+    renderContent({ theme, language }) {
+        this._options = Tool.structureAssignment({
+            loadStatus: true,
+            loadComp: null,
+            sorryStatus: false,
+            sorryComp: null,
+            sorryCompOptions: null
+        }, this.props.options)
 
         return (
             <div className={`pos-relative common-boxsize-full`}>
@@ -52,7 +47,7 @@ class Preblock extends React.Component {
                 {this._options.loadStatus ? (
                     <div className={'pos-absolute display-center comp-preblock-fast'}>
                         {this._options.loadComp ? (this._options.loadComp) : (
-                            <GridLoader size={22} margin={0} loading={this._options.loadStatus} color={this.state.color} />
+                            <GridLoader size={22} margin={0} loading={this._options.loadStatus} color={theme.color.theme} />
                         )}
                     </div>
                 ) : (null)}

@@ -8,11 +8,6 @@ class ListButton extends React.Component {
         onChange: null
     }
 
-    _defaultOptions = {
-        items: [],
-        onChange: null
-    }
-
     constructor(props) {
         super(props)
 
@@ -30,7 +25,10 @@ class ListButton extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
+        this._options = Tool.structureAssignment({
+            items: [],
+            onChange: null
+        }, this.props.options)
 
         let _items_jsx = this._options.items.map((item, key) => {
             let _classname_outer = ''

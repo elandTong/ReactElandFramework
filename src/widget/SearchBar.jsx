@@ -2,6 +2,7 @@ import React from 'react';
 import '../assets/style/comp.search.scss';
 import BaseContext from '../BaseContext';
 import Tool from '../utils/Tool';
+import ResUtil from '../utils/ResUtil';
 
 class SearchBar extends BaseContext {
     _props = {
@@ -51,13 +52,13 @@ class SearchBar extends BaseContext {
         if (this.state.currMode === 0) {
             return (
                 <img className={'comp-search-submit-icon'}
-                    src={require(`../${theme.resources.iconPath}/ic_serch_start.png`)}
+                    src={ResUtil.requireIcon('ic_serch_start.png', theme)}
                     alt={'search'} />
             )
         } else {
             return (
                 <img className={'comp-search-submit-icon'}
-                    src={require(`../${theme.resources.iconPath}/ic_serch_clear.png`)}
+                    src={ResUtil.requireIcon('ic_serch_clear.png', theme)}
                     alt={'search'} />
             )
         }

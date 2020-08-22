@@ -9,12 +9,6 @@ class MessageNotice extends React.Component {
         onSure: null
     }
 
-    _defaultOptions = {
-        title: null,
-        content: null,
-        onSure: null
-    }
-
     static _size = { w: window.document.body.clientWidth * 0.84, h: window.document.body.clientHeight * 0.4 }
 
     constructor(props) {
@@ -25,7 +19,11 @@ class MessageNotice extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
+        this._options = Tool.structureAssignment({
+            title: null,
+            content: null,
+            onSure: null
+        }, this.props.options)
 
         return (
             <div className={'display-column comp-message-notice-root'}>

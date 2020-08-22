@@ -3,6 +3,7 @@ import '../assets/style/comp.sorry.scss';
 import BaseContext from '../BaseContext';
 import Tool from '../utils/Tool';
 import Button from './Button';
+import ResUtil from '../utils/ResUtil';
 
 class Sorry extends BaseContext {
     _options = {
@@ -24,7 +25,7 @@ class Sorry extends BaseContext {
 
     renderContent({ theme, language }) {
         this._options = Tool.structureAssignment({
-            icon: require(`../${theme.resources.iconPath}/ic_sorry.png`),
+            icon: ResUtil.requireIcon('ic_sorry.png', theme),
             title: language.sorry,
             tips: language.nodata,
             button: {

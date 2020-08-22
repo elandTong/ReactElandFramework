@@ -10,10 +10,14 @@ import Main from './screen/Main';
 import { RouterTool } from './utils/Tool';
 
 class Application extends React.Component {
+  static _APP = null
+
   _frame = null
 
   constructor(props) {
     super(props)
+
+    this.onFrameCompRef = this.onFrameCompRef.bind(this)
 
     this.state = {
       param: {
@@ -57,7 +61,7 @@ class Application extends React.Component {
       },
       appcontext: {
         theme: Config.Theme,
-        language: Config.LANGUAG_USE,
+        language: Config.LANGUAG,
         getapp: () => {
           return this
         }
@@ -66,6 +70,7 @@ class Application extends React.Component {
   }
 
   componentDidMount() {
+    Application._APP = this
   }
 
   componentWillUnmount() {
@@ -91,7 +96,7 @@ class Application extends React.Component {
     })
   }
 
-  onCompRef(comp) {
+  onFrameCompRef(comp) {
     this._frame = comp
 
     RouterTool.MountFrame(comp)
@@ -106,9 +111,7 @@ class Application extends React.Component {
           index={Main._path}
           classNameScreenAnimation={null}
           classNameModalAnimation={null}
-          ref={(comp) => {
-            this.onCompRef(comp)
-          }} />
+          ref={this.onFrameCompRef} />
       </APPContext.Provider>
     )
   }

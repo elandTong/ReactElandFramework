@@ -14,16 +14,6 @@ class Banner extends React.Component {
         onItemClick: null
     }
 
-    _defaultOptions = {
-        items: [],
-        effect: 'slide', // cube
-        nested: false,
-        navActive: true,
-        pagActive: true,
-        onActiveIndex: null,
-        onItemClick: null
-    }
-
     _swiper = null
 
     _swiper_dom = null
@@ -77,7 +67,15 @@ class Banner extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
+        this._options = Tool.structureAssignment({
+            items: [],
+            effect: 'slide',
+            nested: false,
+            navActive: true,
+            pagActive: true,
+            onActiveIndex: null,
+            onItemClick: null
+        }, this.props.options)
 
         return (
             <div className={`swiper-container comp-swiper-banner-root ${this.props.className || ''}`} style={this.props.style} ref={(comp) => {

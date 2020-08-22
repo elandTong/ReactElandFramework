@@ -1,1 +1,23 @@
-{}
+{
+    "light": {
+        "color": {
+            "theme": "rgb(218,128,88)",
+            "font": "rgb(0,0,0)",
+            "font_anti": "rgb(205,205,205)"
+        }
+    },
+    "dark": {
+        "color": {
+            "theme": "rgb(204,163,82)",
+            "font": "rgb(245,245,245)",
+            "font_anti": "rgb(0,0,0)"
+        }
+    },
+    "user": {
+        "color": {
+            "theme": "rgb(204,163,82)",
+            "font": "rgb(0,0,0)",
+            "font_anti": "rgb(205,205,205)"
+        }
+    }
+}

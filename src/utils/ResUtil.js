@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-08-18 17:15:30
- * @LastEditTime: 2020-08-18 17:51:50
+ * @LastEditTime: 2020-08-22 10:05:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * 
@@ -31,19 +31,30 @@ export default class ResUtil {
 
             console.warn('resources require for new path = ', _newPath, ' old path = ', path)
 
-            let _channelPath = null
             if (_paths.indexOf('channel') >= 0 && _paths.indexOf('icon') >= 0) {
-                _channelPath = context.resources.channelIconPath
+                try {
+                    return require(`../${context.resources.channelIconPath}/${_newPath}`)
+                } catch (e) {
+                    return require(`../${context.resources.defaultChannelIconPath}/${_newPath}`)
+                }
             } else if (_paths.indexOf('channel') >= 0 && _paths.indexOf('pic') >= 0) {
-                _channelPath = context.resources.channelPicPath
+                try {
+                    return require(`../${context.resources.channelPicPath}/${_newPath}`)
+                } catch (e) {
+                    return require(`../${context.resources.defaultChannelPicPath}/${_newPath}`)
+                }
             } else if (_paths.indexOf('icon') >= 0) {
-                _channelPath = context.resources.iconPath
+                try {
+                    return require(`../${context.resources.iconPath}/${_newPath}`)
+                } catch (e) {
+                    return require(`../${context.resources.defaultIconPath}/${_newPath}`)
+                }
             } else if (_paths.indexOf('pic') >= 0) {
-                _channelPath = context.resources.picPath
-            }
-
-            if (_channelPath) {
-                return require(`../${_channelPath}/${_newPath}`)
+                try {
+                    return require(`../${context.resources.picPath}/${_newPath}`)
+                } catch (e) {
+                    return require(`../${context.resources.defaultPicPath}/${_newPath}`)
+                }
             }
         }
         return null
@@ -63,5 +74,9 @@ export default class ResUtil {
 
     static requirePic(name, context) {
         return this.require(`pic/${name}`, context)
+    }
+
+    static requireRes(path) {
+        return require(`../assets/res/${path}`)
     }
 }

@@ -16,18 +16,6 @@ class Button extends React.Component {
         onClick: null
     }
 
-    _defaultOptions = {
-        width: '100%', height: 40,
-        solid: true,
-        name: null,
-        copy: {
-            active: false,
-            text: null,
-            onCopy: null
-        },
-        onClick: null
-    }
-
     constructor(porps) {
         super(porps)
 
@@ -51,7 +39,17 @@ class Button extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {}, false, true)
+        this._options = Tool.structureAssignment({
+            width: '100%', height: 40,
+            solid: true,
+            name: null,
+            copy: {
+                active: false,
+                text: null,
+                onCopy: null
+            },
+            onClick: null
+        }, this.props.options || {}, false, true)
 
         let _classname = this._options.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
 

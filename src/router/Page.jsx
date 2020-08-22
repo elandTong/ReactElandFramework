@@ -1,17 +1,10 @@
 import React from 'react'
 import BaseContext from '../BaseContext'
+import ResUtil from '../utils/ResUtil'
 import Tool from '../utils/Tool'
 
 class Toolbar extends BaseContext {
     _options = {
-        title: null,
-        hideBack: false,
-        hideMenu: false,
-        onBack: null,
-        onMenu: null
-    }
-
-    _defaultOptions = {
         title: null,
         hideBack: false,
         hideMenu: false,
@@ -63,13 +56,19 @@ class Toolbar extends BaseContext {
     }
 
     renderContent({ theme, language }) {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {})
+        this._options = Tool.structureAssignment({
+            title: null,
+            hideBack: false,
+            hideMenu: false,
+            onBack: null,
+            onMenu: null
+        }, this.props.options || {})
 
         return (
             <div className={'display-space page-screen-container-toolbar-view'}>
                 <div className={`${this._options.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
                     {this._options.hideBack ? (null) : (
-                        <img src={require(`../${theme.resources.iconPath}/ic_back.png`)} height={this.state.icon.height} alt={'ic_back'} />
+                        <img src={ResUtil.requireIcon('ic_back.png', theme)} height={this.state.icon.height} alt={'ic_back'} />
                     )}
                 </div>
 
@@ -77,7 +76,7 @@ class Toolbar extends BaseContext {
 
                 <div className={`${this._options.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
                     {this._options.hideMenu ? (null) : (
-                        <img src={require(`../${theme.resources.iconPath}/ic_menu.png`)} height={this.state.icon.height} alt={'ic_menu'} />
+                        <img src={ResUtil.requireIcon('ic_menu.png', theme)} height={this.state.icon.height} alt={'ic_menu'} />
                     )}
                 </div>
             </div>
@@ -92,20 +91,15 @@ class ScreenPage extends React.Component {
         hideToolbar: false
     }
 
-    _defaultOptions = {
-        toolbarOptions: null,
-        renderToolbar: (screen) => {
-            return (<Toolbar options={this._options.toolbarOptions} />)
-        },
-        hideToolbar: false
-    }
-
     constructor(props) {
         super(props)
-
+        this.renderDefaultToolbar = this.renderDefaultToolbar.bind(this)
         this.renderToolbar = this.renderToolbar.bind(this)
-
         this.state = {}
+    }
+
+    renderDefaultToolbar(screen) {
+        return (<Toolbar options={this._options.toolbarOptions} />)
     }
 
     renderToolbar() {
@@ -117,7 +111,11 @@ class ScreenPage extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options || {})
+        this._options = Tool.structureAssignment({
+            toolbarOptions: null,
+            renderToolbar: this.renderDefaultToolbar,
+            hideToolbar: false
+        }, this.props.options || {})
 
         let _view_classname = Boolean(this._options.hideToolbar) ?
             'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'

@@ -7,10 +7,6 @@ class Navbar extends React.Component {
         items: [], onSelect: null
     }
 
-    _defaultOptions = {
-        items: [], onSelect: null
-    }
-
     constructor(props) {
         super(props)
 
@@ -34,7 +30,9 @@ class Navbar extends React.Component {
     }
 
     render() {
-        this._options = Tool.structureAssignment(this._defaultOptions, this.props.options)
+        this._options = Tool.structureAssignment({
+            items: [], onSelect: null
+        }, this.props.options)
 
         let _items_jsx = this._options.items.map((item, key) => {
             let _classname = this.state.currIndex === key ? 'comp-navbar-select' : 'comp-navbar-unsele'
