@@ -121,12 +121,12 @@ class ScreenPage extends React.Component {
             'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
 
         return (
-            <div className={'page-screen-container-wrapper'}>
+            <React.Fragment>
                 {this.renderToolbar()}
                 <div className={`page-screen-container-view ${_view_classname}`}>
                     {this.props.children}
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

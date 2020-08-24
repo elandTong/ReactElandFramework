@@ -1,88 +1,50 @@
+import PropType from 'prop-types';
 import React from 'react';
+import BaseContext from '../BaseContext';
 
-class Root extends React.Component {
+class ModalFrame extends BaseContext {
+    static propTypes = {
+        zIndex: PropType.number,
+        component: PropType.any,
+        router: PropType.object,
+        initPame: PropType.object,
+        compHandle: PropType.func
+    }
+
+    static defaultProps = {
+        zIndex: null,
+        component: null,
+        router: null,
+        initPame: null,
+        compHandle: null
+    }
+
     constructor(props) {
         super(props)
+        this.onComponentRef = this.onComponentRef.bind(this)
+        this.state = {}
+    }
 
-        this.state = {
+    onComponentRef(comp) {
+        if (comp && this.props.compHandle) {
+            this.props.compHandle(comp)
         }
     }
 
     render() {
         return (
-            <div className={'page-modal-container'} style={{ zIndex: this.props.zIndex }}>
-                {this.props.children}
+            <div className={'page-modal-container'}
+                style={{ zIndex: this.props.zIndex }}>
+                <div className={'page-modal-container-wrapper'}>
+                    {this.props.component && (
+                        <this.props.component
+                            modal={this}
+                            router={this.props.router}
+                            initPame={this.props.initPame}
+                            ref={this.onComponentRef} />
+                    )}
+                </div>
             </div>
-        )
-    }
-}
-
-class Content extends React.Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-        }
-    }
-
-    render() {
-        return (
-            <div className={'page-modal-container-wrapper'}>
-                {this.props.children}
-            </div>
-        )
-    }
-}
-
-class ModalFrame extends React.Component {
-    _compRef = null
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-        }
-    }
-
-    getCompRef() {
-        return this._compRef
-    }
-
-    getComp() {
-        if (this.props.component) {
-            return (
-                <this.props.component modal={this} router={this.props.router} initPame={this.props.initPame} ref={(comp) => {
-                    if (comp) {
-                        this._compRef = comp
-
-                        if (this.props.compHandle) {
-                            this.props.compHandle(comp)
-                        }
-                    }
-                }} />
-            )
-        } else {
-            return (
-                <span ref={(comp) => {
-                    if (comp) {
-                        this._compRef = comp
-
-                        if (this.props.compHandle) {
-                            this.props.compHandle(comp)
-                        }
-                    }
-                }}>
-                    {'This activity has no content components'}
-                </span>
-            )
-        }
-    }
-
-    render() {
-        return (
-            <Root zIndex={this.props.zIndex}>
-                <Content> {this.getComp()} </Content>
-            </Root>
         )
     }
 }

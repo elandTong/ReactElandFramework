@@ -67,11 +67,6 @@ class Login extends BaseScreen {
                     left: 10, top: 10
                 },
                 onClose: (e) => {
-                    this.showPopup('popupId1')
-
-                    setTimeout(() => {
-                        this.closePopup('popupId1')
-                    }, 3000)
                 }
             })
         })

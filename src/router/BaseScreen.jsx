@@ -3,7 +3,6 @@ import APPContext from '../APPContext';
 import Config from '../Config';
 import Emit from '../utils/EventBus';
 import BaseFrame from './BaseFrame';
-import ScreenFrame from './ScreenFrame';
 
 /**
  * @description: 基础screen活动页面抽象类,覆盖该类方法时必须要调用父类方法
@@ -224,60 +223,6 @@ class BaseScreen extends React.Component {
         return Emit.exe(Object.assign(data, {
             theme: Config.GLOBAL_EVENT
         }))
-    }
-
-    /**
-     * @description: 在当前页面弹出一个已推送的窗口
-     * @param {String} id 窗口ID 
-     * @param {Object} pos 位置对象 
-     */
-    showPopup(id, pos) {
-        if (this._screenFrame instanceof ScreenFrame) {
-            this._screenFrame.showPopup(id, pos)
-        }
-    }
-
-    /**
-     * @description: 关闭当前页面已弹出的窗口
-     * @param {String} id 窗口ID
-     */
-    closePopup(id) {
-        if (this._screenFrame instanceof ScreenFrame) {
-            this._screenFrame.closePopup(id)
-        }
-    }
-
-    /**
-     * @description: 从当前页面中移除已推送窗口
-     * @param {String} id 窗口ID
-     */
-    removePopup(id) {
-        if (this._screenFrame instanceof ScreenFrame) {
-            this._screenFrame.removePopup(id)
-        }
-    }
-
-    /**
-     * @description: 推送多个窗口到当前页面中
-     * @param {Array} list 多个窗口列表
-     */
-    pushPopups(list) {
-        if (this._screenFrame instanceof ScreenFrame) {
-            this._screenFrame.pushPopups(list)
-        }
-    }
-
-    /**
-     * @description: 推送一个窗口到当前页面中
-     * @param {Object} pame 指定窗口位置 
-     * @param {React} comp 窗口组件
-     */
-    pushPopup(pame, comp) {
-        if (this._screenFrame instanceof ScreenFrame) {
-            return this._screenFrame.pushPopup(pame, comp)
-        }
-
-        return pame ? pame.id : null
     }
 
     renderContent({ theme, language, getapp }) {
