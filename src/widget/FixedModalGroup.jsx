@@ -1,6 +1,4 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import BaseContext from '../BaseContext';
 
 class FixedModalGroup extends BaseContext {
@@ -20,15 +18,7 @@ class FixedModalGroup extends BaseContext {
     }
 
     render() {
-        return (
-            <CSSTransitionGroup transitionName={this.props.transitionName}
-                transitionAppear={true}
-                transitionAppearTimeout={200}
-                transitionEnterTimeout={200}
-                transitionLeaveTimeout={200}>
-                {this.props.children}
-            </CSSTransitionGroup>
-        )
+        return this.props.children
     }
 }
 
