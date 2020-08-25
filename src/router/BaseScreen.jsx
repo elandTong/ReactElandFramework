@@ -101,7 +101,11 @@ class BaseScreen extends React.Component {
                 break
             }
             case Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE: { // 主题变更广播
-                this.onAppThemeChange(data.name, data)
+                this.onThemeChange(data)
+                break
+            }
+            case Config.GLOBAL_EVENT_TYPE.LANGUAG_CHANGE: { // 语言切换广播
+                this.onLanguagChange(data)
                 break
             }
             default: { // 普通广播
@@ -120,12 +124,19 @@ class BaseScreen extends React.Component {
     }
 
     /**
-     * @description: app主题变更回调
-     * @param {String} name 主题名称
+     * @description: 主题变更
      * @param {Object} event 广播事件对象
      */
-    onAppThemeChange(name, event) {
+    onThemeChange(event) {
         console.warn('base screen app theme change event!')
+    }
+
+    /**
+     * @description: 语言变更
+     * @param {Object} event 广播事件对象
+     */
+    onLanguagChange(event) {
+        console.warn('base screen app languag change event!')
     }
 
     /**
