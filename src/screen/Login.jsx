@@ -3,7 +3,6 @@ import Popup from '../modal/Popup';
 import Toast from '../modal/Toast';
 import BaseScreen from "../router/BaseScreen";
 import { ScreenPage } from "../router/Page";
-import { ModalTool } from '../utils/Tool';
 import Button from '../widget/Button';
 import MessageNotice from '../widget/MessageNotice';
 
@@ -14,6 +13,8 @@ class Login extends BaseScreen {
         super(props)
 
         this.onMenu = this.onMenu.bind(this)
+        this.onSettingGesture = this.onSettingGesture.bind(this)
+        this.onVerifyGesture = this.onVerifyGesture.bind(this)
 
         this.state = {
         }
@@ -76,6 +77,32 @@ class Login extends BaseScreen {
         })
     }
 
+    onSettingGesture(e) {
+        import('./GestureLockSetting').then((data) => {
+            this.startScreen({
+                component: data.default,
+                path: data.default._path,
+                options: { props: {} }
+            }, {
+                name: 'login'
+            }, (comp) => {
+            })
+        })
+    }
+
+    onVerifyGesture(e) {
+        import('../modal/GestureLockVerify').then((data) => {
+            this.startModal({
+                component: data.default,
+                path: data.default._path,
+                options: { props: {} }
+            }, {
+                name: 'login'
+            }, (comp) => {
+            })
+        })
+    }
+
     renderContent({ theme, language, getapp }) {
         return (
             <ScreenPage options={{
@@ -90,18 +117,14 @@ class Login extends BaseScreen {
             }}>
                 <div style={{ width: '100%', padding: 20 }}>
                     <Button options={{
-                        width: '100%', name: '按钮1号',
-                        onClick: (e) => {
-                            ModalTool.showToast('button 1 tag')
-                        }
+                        width: '100%', name: '设置手势密码',
+                        onClick: this.onSettingGesture
                     }} />
 
                     <Button style={{ marginTop: 10 }} options={{
-                        width: '100%', name: '按钮2号',
+                        width: '100%', name: '验证手势密码',
                         solid: false,
-                        onClick: (e) => {
-                            ModalTool.showToast('button 2 tag')
-                        }
+                        onClick: this.onVerifyGesture
                     }} />
                 </div>
             </ScreenPage>

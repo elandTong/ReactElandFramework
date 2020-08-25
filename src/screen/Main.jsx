@@ -11,6 +11,7 @@ import Tool, { ModalTool } from '../utils/Tool';
 import DrawerMenu from '../widget/DrawerMenu';
 import FixedModal from '../widget/FixedModal';
 import FixedModalGroup from '../widget/FixedModalGroup';
+import GestureLock from '../widget/GestureLock';
 import Mask from '../widget/Mask';
 import Minirefresh from '../widget/Minirefresh';
 import Navbar from '../widget/Navbar';
@@ -45,9 +46,9 @@ class Main extends BaseScreen {
             drawerMenu: {
                 open: false,
                 position: 'right',
-                style:{
+                style: {
                 },
-                maskStyle:{
+                maskStyle: {
                 },
                 render: this.renderDrawerMenu,
                 closeHandle: this.closeDrawerHandle
@@ -82,6 +83,17 @@ class Main extends BaseScreen {
     }
 
     onStart() {
+        if (!Tool.isEmpty(Tool.getLocalStorage(GestureLock._STORAGE_KEY))) {
+            import('../modal/GestureLockVerify').then((data) => {
+                this.startModal({
+                    component: data.default,
+                    path: data.default._path,
+                    options: { props: {} }
+                }, {}, (comp) => {
+                })
+            })
+        }
+
         console.warn('screen main on start!')
     }
 

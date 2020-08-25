@@ -9,7 +9,20 @@
         "usermode": "用户模式",
         "ctcname": "TAB 1",
         "gfcname": "TAB 2",
-        "enter": "进入"
+        "enter": "进入",
+        "reset": "重置",
+        "settingGesture": "设置手势密码",
+        "verifyGesture": "验证手势密码",
+        "gestureTips": [
+            "您需要连接至少5个点",
+            "请重复一次输入的手势密码",
+            "重复手势密码错误,请重新输入!",
+            "手势密码太短,至少需要5个点",
+            "密码设置成功",
+            "您还没有设置手势密码,请先设置手势密码!",
+            "手势密码正确!",
+            "输入的手势密码不正确!"
+        ]
     },
     "en": {
         "appname": "ElandFramework",
@@ -21,6 +34,19 @@
         "usermode": "User mode",
         "ctcname": "TAB 1",
         "gfcname": "TAB 2",
-        "enter": "enter"
+        "enter": "enter",
+        "reset": "reset",
+        "settingGesture": "设置手势密码",
+        "verifyGesture": "验证手势密码",
+        "gestureTips": [
+            "您需要连接至少5个点",
+            "请重复一次输入的手势密码",
+            "重复手势密码错误,请重新输入!",
+            "手势密码太短,至少需要5个点",
+            "密码设置成功",
+            "您还没有设置手势密码,请先设置手势密码!",
+            "手势密码正确!",
+            "输入的手势密码不正确!"
+        ]
     }
 }
