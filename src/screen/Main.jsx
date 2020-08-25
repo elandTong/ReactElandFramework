@@ -6,7 +6,9 @@ import Toast from '../modal/Toast';
 import BaseScreen from '../router/BaseScreen';
 import { ScreenPage } from '../router/Page';
 import CategoryList from '../scenes/CategoryList';
+import ResUtil from '../utils/ResUtil';
 import Tool, { ModalTool } from '../utils/Tool';
+import DrawerMenu from '../widget/DrawerMenu';
 import FixedModal from '../widget/FixedModal';
 import FixedModalGroup from '../widget/FixedModalGroup';
 import Mask from '../widget/Mask';
@@ -15,7 +17,6 @@ import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
 import Login from './Login';
-import ResUtil from '../utils/ResUtil';
 
 class Main extends BaseScreen {
     static _path = '/main'
@@ -30,8 +31,10 @@ class Main extends BaseScreen {
         super(props)
         this.renderToolbar = this.renderToolbar.bind(this)
         this.renderMenu = this.renderMenu.bind(this)
+        this.renderDrawerMenu = this.renderDrawerMenu.bind(this)
         this.onMenu = this.onMenu.bind(this)
         this.onBack = this.onBack.bind(this)
+        this.closeDrawerHandle = this.closeDrawerHandle.bind(this)
         this.onMenuItemClick = this.onMenuItemClick.bind(this)
         this.onTab1ItemClick = this.onTab1ItemClick.bind(this)
         this.onTab2ItemClick = this.onTab2ItemClick.bind(this)
@@ -39,6 +42,16 @@ class Main extends BaseScreen {
         this._games = require('../assets/json/games.json')
 
         this.state = {
+            drawerMenu: {
+                open: false,
+                position: 'right',
+                style:{
+                },
+                maskStyle:{
+                },
+                render: this.renderDrawerMenu,
+                closeHandle: this.closeDrawerHandle
+            },
             refresh: {
                 up: {
                     isLock: true,
@@ -157,6 +170,10 @@ class Main extends BaseScreen {
         let _menu = this.state.menuFixedModal
         _menu.visible = true
         this.setState({ menuFixedModal: _menu })
+
+        let _drawer = this.state.drawerMenu
+        _drawer.open = !_drawer.open
+        this.setState({ drawerMenu: _drawer })
     }
 
     onBack(e) {
@@ -170,6 +187,18 @@ class Main extends BaseScreen {
         this.setState({ testFixedModal: _test })
 
         Config.setAppTheme(item.key)
+    }
+
+    closeDrawerHandle(e) {
+        let _drawer = this.state.drawerMenu
+        _drawer.open = !_drawer.open
+        this.setState({ drawerMenu: _drawer })
+    }
+
+    renderDrawerMenu() {
+        return (
+            <div></div>
+        )
     }
 
     renderToolbar(screen) {
@@ -197,78 +226,80 @@ class Main extends BaseScreen {
     renderContent({ theme, language, getapp }) {
         return (
             <React.Fragment>
-                <ScreenPage options={{
-                    toolbarOptions: {
-                        title: language.appname,
-                        hideBack: true,
-                        hideMenu: false,
-                        onBack: this.onBack,
-                        onMenu: this.onMenu
-                    },
-                    // renderToolbar: this.renderToolbar,
-                    hideToolbar: false
-                }}>
-                    <div style={{
-                        width: '100%',
-                        height: '100%'
+                <DrawerMenu {...this.state.drawerMenu}>
+                    <ScreenPage options={{
+                        toolbarOptions: {
+                            title: language.appname,
+                            hideBack: true,
+                            hideMenu: false,
+                            onBack: this.onBack,
+                            onMenu: this.onMenu
+                        },
+                        // renderToolbar: this.renderToolbar,
+                        hideToolbar: false
                     }}>
-                        <Navbar initIndex={0}
-                            options={{
-                                items: [{ name: language.ctcname }, { name: language.gfcname }],
-                                onSelect: (key, e) => { }
-                            }}
-                            getSwiper={() => { return this._swiperCompRef }}
-                            ref={(comp) => { this._navbarCompRef = comp }} />
+                        <div style={{
+                            width: '100%',
+                            height: '100%'
+                        }}>
+                            <Navbar initIndex={0}
+                                options={{
+                                    items: [{ name: language.ctcname }, { name: language.gfcname }],
+                                    onSelect: (key, e) => { }
+                                }}
+                                getSwiper={() => { return this._swiperCompRef }}
+                                ref={(comp) => { this._navbarCompRef = comp }} />
 
-                        <TabSwiper init={0}
-                            allowTouchMove={true}
-                            width={'100%'}
-                            height={Tool.getScreenContHeight() - 45}
-                            onSelect={(i) => { }}
-                            getNavbar={() => { return this._navbarCompRef }}
-                            ref={(comp) => { this._swiperCompRef = comp }}>
-                            <TabSlide>
-                                <div className={'common-boxsize-full'}>
-                                    <Minirefresh className={'screen-main-slide-background'} options={this.state.refresh}
-                                        pullDown={(comp) => {
-                                            this.update(comp)
-                                        }}>
-                                        {Tool.insertSplitline(this.state.category.tab1.filter((item) => {
-                                            return item.games && item.games.length > 0
-                                        }).map((item, key) => {
-                                            return (
-                                                <CategoryList key={key}
-                                                    data={item}
-                                                    icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
-                                                    onItemClick={this.onTab1ItemClick} />
-                                            )
-                                        }))}
-                                    </Minirefresh>
-                                </div>
-                            </TabSlide>
+                            <TabSwiper init={0}
+                                allowTouchMove={true}
+                                width={'100%'}
+                                height={Tool.getScreenContHeight() - 45}
+                                onSelect={(i) => { }}
+                                getNavbar={() => { return this._navbarCompRef }}
+                                ref={(comp) => { this._swiperCompRef = comp }}>
+                                <TabSlide>
+                                    <div className={'common-boxsize-full'}>
+                                        <Minirefresh className={'screen-main-slide-background'} options={this.state.refresh}
+                                            pullDown={(comp) => {
+                                                this.update(comp)
+                                            }}>
+                                            {Tool.insertSplitline(this.state.category.tab1.filter((item) => {
+                                                return item.games && item.games.length > 0
+                                            }).map((item, key) => {
+                                                return (
+                                                    <CategoryList key={key}
+                                                        data={item}
+                                                        icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
+                                                        onItemClick={this.onTab1ItemClick} />
+                                                )
+                                            }))}
+                                        </Minirefresh>
+                                    </div>
+                                </TabSlide>
 
-                            <TabSlide>
-                                <div className={'common-boxsize-full'}>
-                                    <Minirefresh className={'screen-main-slide-background'} options={this.state.refresh}
-                                        pullDown={(comp) => {
-                                            this.update(comp)
-                                        }}>
-                                        {Tool.insertSplitline(this.state.category.tab2.filter((item) => {
-                                            return item.games.length > 0
-                                        }).map((item, key) => {
-                                            return (
-                                                <CategoryList key={key}
-                                                    data={item}
-                                                    icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
-                                                    onItemClick={this.onTab2ItemClick} />
-                                            )
-                                        }))}
-                                    </Minirefresh>
-                                </div>
-                            </TabSlide>
-                        </TabSwiper>
-                    </div>
-                </ScreenPage>
+                                <TabSlide>
+                                    <div className={'common-boxsize-full'}>
+                                        <Minirefresh className={'screen-main-slide-background'} options={this.state.refresh}
+                                            pullDown={(comp) => {
+                                                this.update(comp)
+                                            }}>
+                                            {Tool.insertSplitline(this.state.category.tab2.filter((item) => {
+                                                return item.games.length > 0
+                                            }).map((item, key) => {
+                                                return (
+                                                    <CategoryList key={key}
+                                                        data={item}
+                                                        icon={ResUtil.requireIcon(`games/game_${item.id}.png`, theme)}
+                                                        onItemClick={this.onTab2ItemClick} />
+                                                )
+                                            }))}
+                                        </Minirefresh>
+                                    </div>
+                                </TabSlide>
+                            </TabSwiper>
+                        </div>
+                    </ScreenPage>
+                </DrawerMenu>
 
                 <FixedModalGroup>
                     <FixedModal {...this.state.menuFixedModal}>

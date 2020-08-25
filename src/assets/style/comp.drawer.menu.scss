@@ -1,0 +1,201 @@
+@import './theme.light.scss';
+@import './theme.dark.scss';
+@import './theme.user.scss';
+
+.comp-drawer-menu-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.comp-drawer-menu-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+    width: 75vw;
+    height: 100%;
+    background: $light-color-toolbar-background;
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+    }
+}
+
+.comp-drawer-menu-right {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    z-index: 1001;
+    width: 75vw;
+    height: 100%;
+    background: $light-color-toolbar-background;
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+    }
+}
+
+.comp-drawer-menu-bottom {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: 1001;
+    width: 100%;
+    height: 50vh;
+    background: $light-color-toolbar-background;
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+    }
+}
+
+.comp-drawer-menu-top {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+    width: 100%;
+    height: 50vh;
+    background: $light-color-toolbar-background;
+    .theme-dark & {
+        background: $dark-color-toolbar-background;
+    }
+    .theme-user & {
+        background: $user-color-toolbar-background;
+    }
+}
+
+.comp-drawer-menu-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    background: $light-color-drawer-mask-background;
+    .theme-dark & {
+        background: $dark-color-drawer-mask-background;
+    }
+    .theme-user & {
+        background: $user-color-drawer-mask-background;
+    }
+}
+
+// 动画效果 left
+.comp-drawer-menu-left-enter {
+transform: translateX(-75vw);
+}
+
+.comp-drawer-menu-left-enter.comp-drawer-menu-left-enter-active {
+transform: translateX(0);
+transition: transform 300ms ease;
+}
+
+.comp-drawer-menu-left-leave {
+transform: translateX(0);
+}
+
+.comp-drawer-menu-left-leave.comp-drawer-menu-left-leave-active {
+transform: translateX(-75vw);
+transition: transform 300ms ease;
+}
+
+.comp-drawer-menu-left-appear {
+transform: translateX(-75vw);
+}
+
+.comp-drawer-menu-left-appear.comp-drawer-menu-left-appear-active {
+transform: translateX(0);
+transition: transform 300ms ease;
+}
+
+// right
+.comp-drawer-menu-right-enter {
+right: -75vw;
+}
+
+.comp-drawer-menu-right-enter.comp-drawer-menu-right-enter-active {
+right: 0px;
+transition: right 300ms ease;
+}
+
+.comp-drawer-menu-right-leave {
+right: 0px
+}
+
+.comp-drawer-menu-right-leave.comp-drawer-menu-right-leave-active {
+right: -75vw;
+transition: right 300ms ease;
+}
+
+.comp-drawer-menu-right-appear {
+right: -75vw;
+}
+
+.comp-drawer-menu-right-appear.comp-drawer-menu-right-appear-active {
+right: 0px;
+transition: right 300ms ease;
+}
+
+// bottom
+.comp-drawer-menu-bottom-enter {
+bottom: -50vh;
+}
+
+.comp-drawer-menu-bottom-enter.comp-drawer-menu-bottom-enter-active {
+bottom: 0px;
+transition: bottom 300ms ease;
+}
+
+.comp-drawer-menu-bottom-leave {
+bottom: 0px;
+}
+
+.comp-drawer-menu-bottom-leave.comp-drawer-menu-bottom-leave-active {
+bottom: -50vh;
+transition: bottom 300ms ease;
+}
+
+.comp-drawer-menu-bottom-appear {
+bottom: -50vh;
+}
+
+.comp-drawer-menu-bottom-appear.comp-drawer-menu-bottom-appear-active {
+bottom: 0px;
+transition: bottom 300ms ease;
+}
+
+// top
+.comp-drawer-menu-top-enter {
+transform: translateY(-50vh);
+}
+
+.comp-drawer-menu-top-enter.comp-drawer-menu-top-enter-active {
+transform: translateY(0);
+transition: transform 300ms ease;
+}
+
+.comp-drawer-menu-top-leave {
+transform: translateY(0);
+}
+
+.comp-drawer-menu-top-leave.comp-drawer-menu-top-leave-active {
+transform: translateY(-50vh);
+transition: transform 300ms ease;
+}
+
+.comp-drawer-menu-top-appear {
+transform: translateY(-50vh);
+}
+
+.comp-drawer-menu-top-appear.comp-drawer-menu-top-appear-active {
+transform: translateY(0);
+transition: transform 300ms ease;
+}
