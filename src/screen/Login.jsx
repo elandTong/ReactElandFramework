@@ -57,7 +57,7 @@ class Login extends BaseScreen {
                         comp.close()
                     }
                 }} />
-            ), MessageNotice._popupPame)
+            ), MessageNotice.PopupParam)
         })
 
         this.navigationModal(Toast._path, null, (comp) => {

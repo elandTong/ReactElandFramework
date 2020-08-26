@@ -26,7 +26,7 @@ class Testing {
                         comp.close()
                     }
                 }} />
-            ), MessageNotice._popupPame)
+            ), MessageNotice.PopupParam)
         })
     }
 }

@@ -43,7 +43,7 @@ class MessageNotice extends BaseContext {
     }
 }
 
-MessageNotice._popupPame = {
+MessageNotice.PopupParam = {
     width: MessageNotice._size.w,
     height: MessageNotice._size.h,
     angleClose: false,
