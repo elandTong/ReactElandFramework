@@ -9,20 +9,13 @@ class GestureLockSetting extends BaseScreen {
 
     constructor(props) {
         super(props)
-
-        this.onMenu = this.onMenu.bind(this)
         this.onSettingResult = this.onSettingResult.bind(this)
-
         this.state = {}
     }
 
     onData(data) {
         super.onData(data)
-
         console.warn('gestureLockSetting ondata', data)
-    }
-
-    onMenu() {
     }
 
     onSettingResult(val) {
@@ -39,9 +32,9 @@ class GestureLockSetting extends BaseScreen {
                 toolbarOptions: {
                     title: 'GestureSettingScreenTitle',
                     hideBack: false,
-                    hideMenu: false,
+                    hideMenu: true,
                     onBack: (e) => { this.finish() },
-                    onMenu: this.onMenu
+                    onMenu: null
                 },
                 hideToolbar: false
             }}>

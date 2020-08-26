@@ -1,11 +1,11 @@
 import React from 'react'
 import '../assets/style/comp.message.scss'
+import BaseContext from '../BaseContext'
 import Tool from '../utils/Tool'
 
-class MessageNotice extends React.Component {
+class MessageNotice extends BaseContext {
     _options = {
-        title: null,
-        content: null,
+        title: null, content: null,
         onSure: null
     }
 
@@ -13,15 +13,12 @@ class MessageNotice extends React.Component {
 
     constructor(props) {
         super(props)
-
-        this.state = {
-        }
+        this.state = {}
     }
 
-    render() {
+    renderContent({ language }) {
         this._options = Tool.structureAssignment({
-            title: null,
-            content: null,
+            title: null, content: null,
             onSure: null
         }, this.props.options)
 
@@ -32,21 +29,27 @@ class MessageNotice extends React.Component {
                 </div>
 
                 <div className={'display-center comp-message-notice-cont'}>
-                    {this._options.content ? (<span>{this._options.content}</span>) : (this.props.children)}
+                    {this._options.content || this.props.children}
                 </div>
 
                 <div className={'common-spline-x'} />
 
-                <div className={'display-center click-out-ripple comp-message-notice-bottom'} onClick={(e) => {
-                    if (this._options.onSure) {
-                        this._options.onSure(e)
-                    }
-                }}>
-                    <span>{'确认'}</span>
+                <div className={'display-center click-out-ripple comp-message-notice-bottom'}
+                    onClick={this._options.onSure}>
+                    <span> {language.sure} </span>
                 </div>
             </div>
         )
     }
+}
+
+MessageNotice._popupPame = {
+    width: MessageNotice._size.w,
+    height: MessageNotice._size.h,
+    angleClose: false,
+    outClose: true,
+    pos: { align: 'center' },
+    onClose: (e) => { }
 }
 
 export default MessageNotice

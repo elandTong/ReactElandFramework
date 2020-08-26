@@ -52,24 +52,12 @@ class Login extends BaseScreen {
         this.navigationModal(Popup._path, null, (comp) => {
             comp.onComp((
                 <MessageNotice options={{
-                    title: '标题',
-                    content: this._indata.message,
+                    title: '标题', content: this._indata.message,
                     onSure: (e) => {
                         comp.close()
                     }
                 }} />
-            ), {
-                width: MessageNotice._size.w,
-                height: MessageNotice._size.h,
-                angleClose: false,
-                outClose: false,
-                pos: {
-                    align: 'center',
-                    left: 10, top: 10
-                },
-                onClose: (e) => {
-                }
-            })
+            ), MessageNotice._popupPame)
         })
 
         this.navigationModal(Toast._path, null, (comp) => {

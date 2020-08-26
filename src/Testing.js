@@ -26,18 +26,7 @@ class Testing {
                         comp.close()
                     }
                 }} />
-            ), {
-                width: MessageNotice._size.w,
-                height: MessageNotice._size.h,
-                angleClose: false,
-                outClose: false,
-                pos: {
-                    align: 'center',
-                    left: 10, top: 10
-                },
-                onClose: (e) => {
-                }
-            })
+            ), MessageNotice._popupPame)
         })
     }
 }
