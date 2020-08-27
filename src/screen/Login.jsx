@@ -3,7 +3,9 @@ import Popup from '../modal/Popup';
 import Toast from '../modal/Toast';
 import BaseScreen from "../router/BaseScreen";
 import { ScreenPage } from "../router/Page";
+import Tool from '../utils/Tool';
 import Button from '../widget/Button';
+import GestureLock from '../widget/GestureLock';
 import MessageNotice from '../widget/MessageNotice';
 
 class Login extends BaseScreen {
@@ -21,8 +23,6 @@ class Login extends BaseScreen {
     }
 
     onCreate() {
-        super.onCreate()
-
         console.warn('screen login on create!')
     }
 
@@ -42,17 +42,11 @@ class Login extends BaseScreen {
         console.warn('screen login on stop!')
     }
 
-    onData(data) {
-        super.onData(data)
-
-        console.warn('screen login on data', data)
-    }
-
     onMenu() {
         this.navigationModal(Popup._path, null, (comp) => {
             comp.onComp((
                 <MessageNotice options={{
-                    title: '标题', content: this._indata.message,
+                    title: '标题', content: this._ondata.message,
                     onSure: (e) => {
                         comp.close()
                     }
@@ -61,7 +55,7 @@ class Login extends BaseScreen {
         })
 
         this.navigationModal(Toast._path, null, (comp) => {
-            comp.setText(this._indata.message)
+            comp.setText(this._ondata.message)
         })
     }
 
@@ -79,16 +73,20 @@ class Login extends BaseScreen {
     }
 
     onVerifyGesture(e) {
-        import('../modal/GestureLockVerify').then((data) => {
-            this.startModal({
-                component: data.default,
-                path: data.default._path,
-                options: { props: {} }
-            }, {
-                name: 'login'
-            }, (comp) => {
+        if (Tool.isEmpty(Tool.getLocalStorage(GestureLock._STORAGE_KEY))) {
+            this.onSettingGesture()
+        } else {
+            import('../modal/GestureLockVerify').then((data) => {
+                this.startModal({
+                    component: data.default,
+                    path: data.default._path,
+                    options: { props: {} }
+                }, {
+                    name: 'login'
+                }, (comp) => {
+                })
             })
-        })
+        }
     }
 
     renderContent({ theme, language, getapp }) {

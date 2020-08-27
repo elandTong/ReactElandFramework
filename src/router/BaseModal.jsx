@@ -11,14 +11,10 @@ import BaseFrame from './BaseFrame';
 
 class BaseModal extends React.Component {
     _modalFrame = null
-
     _router = null
 
     _initPame = {}
-
-    _indata = {}
-
-    _broadcastData = {}
+    _ondata = {}
 
     constructor(props) {
         super(props)
@@ -46,37 +42,27 @@ class BaseModal extends React.Component {
     /**
      * @description: 组件创建回调
      */
-    onCreate() {
-        console.warn('base modal on create!')
-    }
+    onCreate() { }
 
     /**
      * @description: 组件安装回调
      */
-    onStart() {
-        console.warn('base modal on start!')
-    }
+    onStart() { }
 
     /**
      * @description: 组件恢复回调
      */
-    onResume() {
-        console.warn('base modal on resume!')
-    }
+    onResume() { }
 
     /**
      * @description: 组件暂停回调
      */
-    onPause() {
-        console.warn('base modal on pause!')
-    }
+    onPause() { }
 
     /**
      * @description: 组件卸载回调
      */
-    onStop() {
-        console.warn('base modal on stop!')
-    }
+    onStop() { }
 
     // ------ 生命周期回调方法 ------
 
@@ -85,7 +71,7 @@ class BaseModal extends React.Component {
      * @param {Object} data 数据对象
      */
     onData(data) {
-        this._indata = data
+        this._ondata = data
     }
 
     /**
@@ -94,17 +80,16 @@ class BaseModal extends React.Component {
      * @param {Object} data 事件对象
      */
     onBroadcast(data = {}) {
-        this._broadcastData = data
         switch (data.type) {
-            case Config.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT: { // 原生返回按钮点击广播
+            case Config.GLOBAL_EVENT_TYPE.NATIVE_BACK: { // 原生返回按钮点击
                 this.onNativeBack(this.isStackTop(), data)
                 break
             }
-            case Config.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE: { // 主题变更广播
+            case Config.GLOBAL_EVENT_TYPE.THEME_CHANGE: { // 主题变更
                 this.onThemeChange(data)
                 break
             }
-            case Config.GLOBAL_EVENT_TYPE.LANGUAG_CHANGE: {
+            case Config.GLOBAL_EVENT_TYPE.LANGUAG_CHANGE: { // 语言变更
                 this.onLanguagChange(data)
                 break
             }
@@ -117,35 +102,29 @@ class BaseModal extends React.Component {
 
     /**
      * @description: 普通全局事件通知
-     * @param {Object} event 广播事件对象
+     * @param {Object} data 广播事件对象
      */
-    onNotice(event) {
-        console.warn('base modal notice event!')
-    }
+    onNotice(data) { }
 
     /**
      * @description: 主题变更
-     * @param {Object} event 广播事件对象
+     * @param {Object} data 广播事件对象
      */
-    onThemeChange(event) {
-        console.warn('base modal app theme change event!')
-    }
+    onThemeChange(data) { }
 
     /**
      * @description: 语言变更
-     * @param {Object} event 广播事件对象
+     * @param {Object} data 广播事件对象
      */
-    onLanguagChange(event) {
-        console.warn('base modal app language change event!')
-    }
+    onLanguagChange(data) { }
 
     /**
      * @description: 原生返回事件,需要原生提供支持
      * @param {Boolean} isStacktop 当前modal页面是否处于路由栈顶
-     * @param {Object} event 广播事件对象
+     * @param {Object} data 广播事件对象
      */
-    onNativeBack(isStacktop, event) {
-        console.warn('base modal native back event!')
+    onNativeBack(isStacktop, data) {
+        if (isStacktop) { this.finish() }
     }
 
     /**
@@ -230,7 +209,7 @@ class BaseModal extends React.Component {
      * @param {Object} data 广播对象
      * @return: bool 是否发送成功
      */
-    sendBroadcast(data) {
+    sendBroadcast(data = {}) {
         return Emit.exe(Object.assign(data, {
             theme: Config.GLOBAL_EVENT
         }))

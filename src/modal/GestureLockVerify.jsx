@@ -15,18 +15,18 @@ class GestureLockVerify extends BaseModal {
         this.state = {}
     }
 
-    onData(data) {
-        super.onData(data)
-
-        console.warn('gestureLockVerify ondata', data)
+    finish(isverify = false) {
+        if (isverify) { super.finish() }
     }
 
     onVerifyResult(val) {
         if (val) {
-            this.finish()
-        }
+            this.finish(true)
 
-        console.warn('gestureLockVerify result', val)
+            if (this._ondata.resultHandle) {
+                this._ondata.resultHandle(val)
+            }
+        }
     }
 
     renderContent({ theme, language, getapp }) {

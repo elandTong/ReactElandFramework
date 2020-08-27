@@ -19,7 +19,34 @@ class BaseContext extends React.Component {
         Emit.remove(this.onBroadcast)
     }
 
-    onBroadcast(data) { }
+    onBroadcast(data = {}) {
+        switch (data.type) {
+            case Config.GLOBAL_EVENT_TYPE.THEME_CHANGE: {
+                this.onThemeChange(data)
+                break
+            }
+            case Config.GLOBAL_EVENT_TYPE.LANGUAG_CHANGE: {
+                this.onLanguagChange(data)
+                break
+            }
+            default: {
+                this.onNotice(data)
+                break
+            }
+        }
+    }
+
+    onNotice(data) { }
+
+    onThemeChange(data) { }
+
+    onLanguagChange(data) { }
+
+    sendBroadcast(data = {}) {
+        Emit.exe(Object.assign(data, {
+            theme: Config.GLOBAL_EVENT
+        }))
+    }
 
     renderContent({ theme, language, getapp }) {
         return null

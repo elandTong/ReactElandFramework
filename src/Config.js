@@ -28,9 +28,9 @@ class Config {
 
     static GLOBAL_EVENT = './_BASE_GLOBAL_THEME/'
     static GLOBAL_EVENT_TYPE = {
-        STYLE_THEME_CHANGE: 'STYLE_THEME_CHANGE',
+        THEME_CHANGE: 'THEME_CHANGE',
         LANGUAG_CHANGE: 'LANGUAG_CHANGE',
-        NATIVE_BACK_EVENT: 'NATIVE_BACK_EVENT'
+        NATIVE_BACK: 'NATIVE_BACK'
     }
 
     static Theme = {
@@ -94,7 +94,7 @@ class Config {
 
                 Emit.exe({
                     theme: this.GLOBAL_EVENT,
-                    type: this.GLOBAL_EVENT_TYPE.STYLE_THEME_CHANGE,
+                    type: this.GLOBAL_EVENT_TYPE.THEME_CHANGE,
                     name: name
                 })
             }
@@ -141,7 +141,7 @@ class Config {
         window._NativeBackEventHandle = () => {
             Emit.exe({
                 theme: this.GLOBAL_EVENT,
-                type: this.GLOBAL_EVENT_TYPE.NATIVE_BACK_EVENT
+                type: this.GLOBAL_EVENT_TYPE.NATIVE_BACK
             })
         }
 

@@ -21,12 +21,6 @@ class Toast extends BaseModal {
         }
     }
 
-    onCreate() {
-        super.onCreate()
-
-        console.warn('modal toast on create!')
-    }
-
     componentDidUpdate() {
         clearTimeout(this.timeout)
 
@@ -54,10 +48,6 @@ class Toast extends BaseModal {
         clearTimeout(this.timeout)
 
         console.warn('modal toast on stop!')
-    }
-
-    onNativeBack(data) {
-        super.onNativeBack(data)
     }
 
     onData(data) {

@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-08-18 17:15:30
- * @LastEditTime: 2020-08-22 10:05:55
+ * @LastEditTime: 2020-08-27 09:02:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * 
@@ -28,8 +28,6 @@ export default class ResUtil {
                     item === 'icon' ||
                     item === 'pic')
             }).join('/')
-
-            console.warn('resources require for new path = ', _newPath, ' old path = ', path)
 
             if (_paths.indexOf('channel') >= 0 && _paths.indexOf('icon') >= 0) {
                 try {
