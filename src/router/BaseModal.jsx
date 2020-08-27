@@ -20,6 +20,8 @@ class BaseModal extends React.Component {
         router: {}, intentData: {}
     }
 
+    static _path = null
+
     constructor(props) {
         super(props)
         this.renderContent = this.renderContent.bind(this)
