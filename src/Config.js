@@ -89,8 +89,8 @@ class Config {
 
             window.document.body.className = `theme-${name}`
 
-            if (Application._APP instanceof Application) {
-                Application._APP.updateContextForTheme(this.Theme)
+            if (Application._Self instanceof Application) {
+                Application._Self.updateContextForTheme(this.Theme)
 
                 Emit.exe({
                     theme: this.GLOBAL_EVENT,
@@ -115,8 +115,8 @@ class Config {
 
             this.USE_LANGUAG_TYPE = name
 
-            if (Application._APP instanceof Application) {
-                Application._APP.updateContextForLanguage(this.LANGUAG)
+            if (Application._Self instanceof Application) {
+                Application._Self.updateContextForLanguage(this.LANGUAG)
 
                 Emit.exe({
                     theme: this.GLOBAL_EVENT,

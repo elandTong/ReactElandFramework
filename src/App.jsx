@@ -10,7 +10,7 @@ import Main from './screen/Main';
 import { RouterTool } from './utils/Tool';
 
 class Application extends React.Component {
-  static _APP = null
+  static _Self = null
 
   _frame = null
 
@@ -20,43 +20,29 @@ class Application extends React.Component {
     this.onFrameCompRef = this.onFrameCompRef.bind(this)
 
     this.state = {
-      param: {
+      frame: {
+        index: Main._path,
         screens: [{
           component: Main,
           path: Main._path,
-          options: {
-            props: {
-            }
-          }
+          props: {}
         }, {
           component: Login,
           path: Login._path,
-          options: {
-            props: {
-            }
-          }
+          props: {}
         }],
         modals: [{
           component: Toast,
           path: Toast._path,
-          options: {
-            props: {
-            }
-          }
+          props: {}
         }, {
           component: Spiner,
           path: Spiner._path,
-          options: {
-            props: {
-            }
-          }
+          props: {}
         }, {
           component: Popup,
           path: Popup._path,
-          options: {
-            props: {
-            }
-          }
+          props: {}
         }]
       },
       appcontext: {
@@ -70,7 +56,7 @@ class Application extends React.Component {
   }
 
   componentDidMount() {
-    Application._APP = this
+    Application._Self = this
   }
 
   componentWillUnmount() {
@@ -107,11 +93,7 @@ class Application extends React.Component {
   render() {
     return (
       <APPContext.Provider value={this.state.appcontext}>
-        <Frame param={this.state.param}
-          index={Main._path}
-          classNameScreenAnimation={null}
-          classNameModalAnimation={null}
-          ref={this.onFrameCompRef} />
+        <Frame {...this.state.frame} ref={this.onFrameCompRef} />
       </APPContext.Provider>
     )
   }

@@ -109,12 +109,6 @@ class Main extends BaseScreen {
         console.warn('screen main on stop!')
     }
 
-    onData(data) {
-        super.onData(data)
-
-        console.warn('screen main on data', data)
-    }
-
     onTab1ItemClick(item, key, e) {
         this.startModal({ // 意图跳转 不会改变 内置路由池
             component: Spiner,

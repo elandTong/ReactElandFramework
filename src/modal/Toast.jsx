@@ -16,8 +16,7 @@ class Toast extends BaseModal {
         super(props)
 
         this.state = {
-            showTime: 0,
-            text: 'Toast show'
+            showTime: 0, text: 'Toast show'
         }
     }
 
@@ -50,16 +49,9 @@ class Toast extends BaseModal {
         console.warn('modal toast on stop!')
     }
 
-    onData(data) {
-        super.onData(data)
-
-        console.warn('modal toast on data', data)
-    }
-
-    setText(txt, showTime = 0) {
+    setText(text, showTime = 0) {
         this.setState({
-            showTime: showTime,
-            text: txt
+            showTime: showTime, text: text
         })
     }
 

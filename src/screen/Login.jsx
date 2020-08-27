@@ -22,10 +22,6 @@ class Login extends BaseScreen {
         }
     }
 
-    onCreate() {
-        console.warn('screen login on create!')
-    }
-
     onStart() {
         console.warn('screen login on start!')
     }
@@ -46,7 +42,7 @@ class Login extends BaseScreen {
         this.navigationModal(Popup._path, null, (comp) => {
             comp.onComp((
                 <MessageNotice options={{
-                    title: '标题', content: this._ondata.message,
+                    title: '标题', content: this.props.intentData.message,
                     onSure: (e) => {
                         comp.close()
                     }
@@ -55,7 +51,7 @@ class Login extends BaseScreen {
         })
 
         this.navigationModal(Toast._path, null, (comp) => {
-            comp.setText(this._ondata.message)
+            comp.setText(this.props.intentData.message)
         })
     }
 

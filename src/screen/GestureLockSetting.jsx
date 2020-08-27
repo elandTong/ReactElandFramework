@@ -13,14 +13,15 @@ class GestureLockSetting extends BaseScreen {
         this.state = {}
     }
 
-    onData(data) {
-        super.onData(data)
-        console.warn('gestureLockSetting ondata', data)
-    }
-
     onSettingResult(val) {
         if (val) {
             Tool.saveLocalStorage(GestureLock._STORAGE_KEY, val)
+
+            if (this.props.intentData.resultHandle) {
+                this.props.intentData.resultHandle(val)
+            }
+
+            this.finish()
         }
 
         console.warn('gestureLockSetting result', val)
@@ -42,8 +43,7 @@ class GestureLockSetting extends BaseScreen {
                     width: '100%',
                     height: '100%'
                 }}>
-                    <GestureLock type={GestureLock.TYPE_SETTING}
-                        resultHandle={this.onSettingResult} />
+                    <GestureLock type={GestureLock.TYPE_SETTING} resultHandle={this.onSettingResult} />
                 </div>
             </ScreenPage>
         )

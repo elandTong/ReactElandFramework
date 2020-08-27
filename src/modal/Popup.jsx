@@ -14,7 +14,7 @@ class Popup extends BaseModal {
         onClose: null
     }
 
-    static _pames = []
+    static _params = []
 
     static _isshow = false
 
@@ -31,23 +31,18 @@ class Popup extends BaseModal {
         }
     }
 
-    onData(data) {
-        super.onData(data)
-        console.warn('modal popup on data', data)
-    }
-
-    updateOptions(pame) {
+    updateOptions(param) {
         this._options = Tool.structureAssignment({
             width: '50%', height: '50%',
             angleClose: true, outClose: false,
             pos: { align: 'center', top: 0, left: 0 },
             onClose: null
-        }, pame, false, true)
+        }, param, false, true)
     }
 
-    getPosition(_pame = { align: 'center', top: 0, left: 0 }) {
+    getPosition(param = { align: 'center', top: 0, left: 0 }) {
         let _result = { top: 0, left: 0, translate: '' }
-        switch (_pame.align) {
+        switch (param.align) {
             case 'bottom-center': {
                 _result.top = '100%'
                 _result.left = '50%'
@@ -73,8 +68,8 @@ class Popup extends BaseModal {
                 break
             }
             case 'none': {
-                _result.top = _pame.top
-                _result.left = _pame.left
+                _result.top = param.top
+                _result.left = param.left
                 _result.translate = ''
                 break
             }
@@ -88,10 +83,10 @@ class Popup extends BaseModal {
         return _result
     }
 
-    onComp(comp, pame = {}) {
+    onComp(comp, param = {}) {
         Popup._isshow = true
 
-        this.updateOptions(pame)
+        this.updateOptions(param)
 
         this.setState({
             comp: comp,
@@ -101,10 +96,10 @@ class Popup extends BaseModal {
         })
     }
 
-    onImg(src, pame = {}) {
+    onImg(src, param = {}) {
         Popup._isshow = true
 
-        this.updateOptions(pame)
+        this.updateOptions(param)
 
         this.setState({
             comp: (<img src={src} width={'100%'} alt={''} />),
@@ -114,27 +109,27 @@ class Popup extends BaseModal {
         })
     }
 
-    pushComp(comp, pame = {}) {
+    pushComp(comp, param = {}) {
         if (Popup._isshow === true) {
-            Popup._pames.push({
+            Popup._params.push({
                 type: 'comp',
                 target: comp,
-                pame: pame
+                param: param
             })
         } else {
-            this.onComp(comp, pame)
+            this.onComp(comp, param)
         }
     }
 
-    pushImg(src, pame = {}) {
+    pushImg(src, param = {}) {
         if (Popup._isshow === true) {
-            Popup._pames.push({
+            Popup._params.push({
                 type: 'img',
                 target: src,
-                pame: pame
+                param: param
             })
         } else {
-            this.onImg(src, pame)
+            this.onImg(src, param)
         }
     }
 
@@ -147,18 +142,18 @@ class Popup extends BaseModal {
 
         Popup._isshow = false
 
-        if (Popup._pames.length > 0) {
+        if (Popup._params.length > 0) {
             setTimeout(() => {
-                let _fast = Object.assign({}, Popup._pames[0])
+                let _fast = Object.assign({}, Popup._params[0])
 
-                Popup._pames.splice(0, 1)
+                Popup._params.splice(0, 1)
 
                 this.navigationModal(Popup._path, null, (comp) => {
                     if (comp instanceof Popup) {
                         if (_fast.type === 'comp') {
-                            comp.onComp(_fast.target, _fast.pame)
+                            comp.onComp(_fast.target, _fast.param)
                         } else {
-                            comp.onImg(_fast.target, _fast.pame)
+                            comp.onImg(_fast.target, _fast.param)
                         }
                     }
                 })

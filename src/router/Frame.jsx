@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import Tool from '../utils/Tool';
@@ -8,7 +9,7 @@ import ModalFrame from './ModalFrame';
 import ScreenFrame from './ScreenFrame';
 
 /**
- * @description: 基础SPA路由框架,该框架是基于DOM结构的实时渲染控制路由!
+ * @description: 基础SPA路由框架,该框架是基于DOM结构的实时渲染控制路由,
  * @author: Eland.Tong
  */
 
@@ -63,102 +64,76 @@ class ModalAnimation extends React.Component {
 }
 
 class Frame extends BaseFrame {
-    _param = {
-        screens: [], modals: []
+    static propTypes = {
+        index: PropTypes.string,
+        screens: PropTypes.array,
+        modals: PropTypes.array,
+        classNameScreenAnimation: PropTypes.string,
+        classNameModalAnimation: PropTypes.string
     }
 
-    _keep_param = {
-        screens: [], modals: []
+    static defaultProps = {
+        index: null,
+        screens: [],
+        modals: [],
+        classNameScreenAnimation: null,
+        classNameModalAnimation: null
     }
 
     _screenZIndex = 100
-
     _modalZIndex = 100
 
-    __stack_temp = {
-        screen: null,
-        modal: null,
-        compref: null,
-        zIndex: 0,
-        compHandle: null
-    }
-
-    /**
-     * @description: 初始化框架基础
-     * @param {Object} props 外部入口参数
-     */
     constructor(props) {
         super(props)
 
-        this.updateOptions()
+        this.filterScreenHandle = this.filterScreenHandle.bind(this)
+        this.filterModalHandle = this.filterModalHandle.bind(this)
 
         this.state = {
-            index: {
-                path: props.index
-            },
-            screenStack: [],
-            modalStack: []
+            screenStack: [], modalStack: []
         }
 
-        let _index = this.getScreenIntent(this.props.index)
+        let _intent = this.getScreenIntent(this.props.index)
 
-        if (_index) { // 初始化页面
-            this.state.screenStack.push(Object.assign({
-                screen: null,
-                compref: null,
-                zIndex: ++this._screenZIndex,
-                compHandle: (comp) => {
+        if (_intent) { // 初始化页面
+            this.state.screenStack.push({
+                component: _intent.component,
+                path: _intent.path,
+                intentData: {},
+                props: _intent.props,
+
+                compref: null, zIndex: ++this._screenZIndex,
+                compHandle: function (comp) {
                     if (comp instanceof BaseScreen) {
                         comp.onResume()
-                        comp.onData({
-                            message: 'This data is constructed by the routing framework',
-                            date: new Date().getTime()
-                        })
+                        comp.onComplete()
                     }
                 }
-            }, _index))
+            })
         } else {
             console.error('Serious error! The homepage path you specified is not in the routing pool!')
         }
     }
 
-    /**
-     * @description: 更新 props 参数到本地 _param 对象 并过滤非法项
-     */
-    updateOptions() {
-        this._param = Tool.structureAssignment(this._keep_param, this.props.param)
-
-        // 过滤非法项
-        this._param.screens = this._param.screens.filter((item) => {
-            return Object.getPrototypeOf(item.component) === BaseScreen && !Tool.isEmpty(item.path)
-        })
-
-        this._param.modals = this._param.modals.filter((item) => {
-            return Object.getPrototypeOf(item.component) === BaseModal && !Tool.isEmpty(item.path)
-        })
+    filterScreenHandle(item) {
+        return Object.getPrototypeOf(item.component) === BaseScreen && !Tool.isEmpty(item.path)
     }
 
-    /**
-     * @description: 框架安装
-     */
-    componentDidMount() {
-    }
-
-    /**
-     * @description: 框架卸载
-     */
-    componentWillUnmount() {
+    filterModalHandle(item) {
+        return Object.getPrototypeOf(item.component) === BaseModal && !Tool.isEmpty(item.path)
     }
 
     /**
      * @description: 退回首页
      * @param {Function} 内容组件回调
      */
-    gohome(handle) {
+    gohome(handle, data) {
         let _stack = this.state.screenStack
 
         _stack = _stack.filter((item) => {
             if (item.path === this.props.index) {
+                item.intentData = data || item.intentData
+
                 item.compHandle = (comp) => {
                     if (comp instanceof BaseScreen) {
                         comp.onResume()
@@ -192,7 +167,7 @@ class Frame extends BaseFrame {
 
         let _last = _stack[_stack.length - 1]
 
-        if (screen !== _last.screen) { return }
+        if (screen !== _last.compref) { return }
 
         if (_last.compref instanceof BaseScreen) {
             _last.compref.onPause()
@@ -232,9 +207,7 @@ class Frame extends BaseFrame {
      * @param {Function} handle 内容组件处理器
      */
     startScreen(intent = {
-        component: null,
-        path: null,
-        options: { props: {} }
+        component: null, path: null, props: {}
     }, data, handle) {
         if (!intent || !intent.component
             || Object.getPrototypeOf(intent.component) !== BaseScreen
@@ -245,7 +218,7 @@ class Frame extends BaseFrame {
         }
 
         if (intent.path === this.props.index) { // 如果导航到首页则退栈
-            this.gohome(handle)
+            this.gohome(handle, data)
             return
         }
 
@@ -260,7 +233,6 @@ class Frame extends BaseFrame {
 
             if (_last.compref instanceof BaseScreen) {
                 _last.pauseHandle = null
-
                 _last.compref.onPause()
             } else {
                 _last.pauseHandle = function (comp) { // 消耗处理器
@@ -273,8 +245,12 @@ class Frame extends BaseFrame {
 
         _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
 
-        _stack.push(Object.assign({
-            screen: null,
+        _stack.push({
+            component: intent.component,
+            path: intent.path,
+            intentData: data,
+            props: intent.props || {},
+
             compref: null,
             zIndex: ++this._screenZIndex,
             pauseHandle: null,
@@ -282,17 +258,15 @@ class Frame extends BaseFrame {
                 if (comp instanceof BaseScreen) {
                     comp.onResume()
 
-                    comp.onData(data || {})
-                }
+                    setTimeout(() => { comp.onComplete() }, 300)
 
-                if (this.pauseHandle) {
-                    this.pauseHandle(comp) // 执行暂停处理器
-                }
-                this.pauseHandle = null
+                    if (this.pauseHandle) { this.pauseHandle(comp) } // 执行暂停处理器
+                    this.pauseHandle = null
 
-                if (handle) { handle(comp) }
+                    if (handle) { handle(comp) }
+                }
             }
-        }, intent))
+        })
 
         // eslint-disable-next-line react/no-direct-mutation-state
         this.state.screenStack = _stack
@@ -300,17 +274,15 @@ class Frame extends BaseFrame {
         this.setState({ screenStack: _stack })
     }
 
-    /**
-     * @description: 获取screen页面内容组件对象
-     * @param {String} path 路径 
-     * @return: 内容组件对象
-     */
-    getScreen(path) {
-        for (let it of this._param.screens) {
-            if (it.path === path) { return it.compref }
-        }
-
-        return null
+    updataScreenIntentData(screen, data) {
+        if (!data) { return }
+        let _stack = this.state.screenStack
+        _stack.forEach((item) => {
+            if (item.compref === screen) {
+                item.intentData = data
+            }
+        })
+        this.setState({ screenStack: _stack })
     }
 
     /**
@@ -319,10 +291,8 @@ class Frame extends BaseFrame {
      * @return: 意图对象
      */
     getScreenIntent(path) {
-        for (let item of this._param.screens) {
-            if (item.path === path) {
-                return item
-            }
+        for (let item of this.props.screens.filter(this.filterScreenHandle)) {
+            if (item.path === path) { return item }
         }
         return null
     }
@@ -357,7 +327,7 @@ class Frame extends BaseFrame {
 
         let _last = _stack[_stack.length - 1]
 
-        if (modal !== _last.modal) { return }
+        if (modal !== _last.compref) { return }
 
         if (_last.compref instanceof BaseModal) {
             _last.compref.onPause()
@@ -399,9 +369,7 @@ class Frame extends BaseFrame {
      * @param {Function} handle 内容组件处理器
      */
     startModal(intent = {
-        component: null,
-        path: null,
-        options: { props: {} }
+        component: null, path: null, props: {}
     }, data, handle) {
         if (!intent || !intent.component
             || Object.getPrototypeOf(intent.component) !== BaseModal
@@ -422,7 +390,6 @@ class Frame extends BaseFrame {
 
             if (_last.compref instanceof BaseModal) {
                 _last.pauseHandle = null
-
                 _last.compref.onPause()
             } else {
                 _last.pauseHandle = function (comp) { // 消耗处理器
@@ -435,8 +402,12 @@ class Frame extends BaseFrame {
 
         _stack = _stack.filter((_it) => { return !(_it.path === intent.path) }) // 过滤重复项
 
-        _stack.push(Object.assign({
-            modal: null,
+        _stack.push({
+            component: intent.component,
+            path: intent.path,
+            intentData: data,
+            props: intent.props || {},
+
             compref: null,
             zIndex: ++this._modalZIndex,
             pauseHandle: null,
@@ -444,17 +415,15 @@ class Frame extends BaseFrame {
                 if (comp instanceof BaseModal) {
                     comp.onResume()
 
-                    comp.onData(data || {})
-                }
+                    setTimeout(() => { comp.onComplete() }, 300)
 
-                if (this.pauseHandle) {
-                    this.pauseHandle(comp) // 执行暂停处理器
-                }
-                this.pauseHandle = null
+                    if (this.pauseHandle) { this.pauseHandle(comp) }
+                    this.pauseHandle = null
 
-                if (handle) { handle(comp) }
+                    if (handle) { handle(comp) }
+                }
             }
-        }, intent))
+        })
 
         // eslint-disable-next-line react/no-direct-mutation-state
         this.state.modalStack = _stack
@@ -462,17 +431,15 @@ class Frame extends BaseFrame {
         this.setState({ modalStack: _stack })
     }
 
-    /**
-     * @description: 获取modal视窗内容组件对象
-     * @param {String} path 路径 
-     * @return: 内容组件对象
-     */
-    getModal(path) {
-        for (let it of this._param.modals) {
-            if (it.path === path) { return it.compref }
-        }
-
-        return null
+    updataModalIntentData(modal, data) {
+        if (!data) { return }
+        let _stack = this.state.modalStack
+        _stack.forEach((item) => {
+            if (item.compref === modal) {
+                item.intentData = data
+            }
+        })
+        this.setState({ modalStack: _stack })
     }
 
     /**
@@ -481,10 +448,8 @@ class Frame extends BaseFrame {
      * @return: modal视窗意图
      */
     getModalIntent(path) {
-        for (let item of this._param.modals) {
-            if (item.path === path) {
-                return item
-            }
+        for (let item of this.props.modals.filter(this.filterModalHandle)) {
+            if (item.path === path) { return item }
         }
         return null
     }
@@ -513,48 +478,43 @@ class Frame extends BaseFrame {
      * @return: JSX
      */
     render() {
-        this.updateOptions()
-
-        let screens = this.state.screenStack.filter((item) => { return item.component ? true : false }).map((item, key) => {
+        let screens = this.state.screenStack.filter((item) => {
+            return Boolean(item.component)
+        }).map((item, key) => {
+            let Screen = item.component
             return (
-                <ScreenFrame key={key} router={this}
-                    component={item.component}
-                    initPame={item.options.props}
-                    zIndex={item.zIndex}
-                    compHandle={(comp) => {
-                        item.compref = comp
-                        if (item.compHandle) {
-                            item.compHandle(comp)
+                <ScreenFrame key={key} zIndex={item.zIndex}>
+                    <Screen {...item.props} router={this} intentData={item.intentData} ref={(comp) => {
+                        if (comp) {
+                            item.compref = comp
+                            if (item.compHandle) { item.compHandle(comp) }
+                            item.compHandle = null
                         }
-                        item.compHandle = null
-                    }}
-                    ref={(comp) => {
-                        item.screen = comp
                     }} />
+                </ScreenFrame>
             )
         })
-        let modals = this.state.modalStack.filter((item) => { return item.component ? true : false }).map((item, key) => {
+
+        let modals = this.state.modalStack.filter((item) => {
+            return Boolean(item.component)
+        }).map((item, key) => {
+            let Modal = item.component
             return (
-                <ModalFrame key={key} router={this}
-                    component={item.component}
-                    initPame={item.options.props}
-                    zIndex={item.zIndex}
-                    compHandle={(comp) => {
-                        item.compref = comp
-                        if (item.compHandle) {
-                            item.compHandle(comp)
+                <ModalFrame key={key} zIndex={item.zIndex}>
+                    <Modal {...item.props} router={this} intentData={item.intentData} ref={(comp) => {
+                        if (comp) {
+                            item.compref = comp
+                            if (item.compHandle) { item.compHandle(comp) }
+                            item.compHandle = null
                         }
-                        item.compHandle = null
-                    }}
-                    ref={(comp) => {
-                        item.modal = comp
                     }} />
+                </ModalFrame>
             )
         })
 
         return (
             <div className={'app'}>
-                {/* screen stack */}
+                {/* activity stack */}
                 <div className={'page-screen-root'}>
                     <div className={'page-screen-view'}>
                         <ScreenAnimation className={this.props.classNameScreenAnimation}>
@@ -563,7 +523,7 @@ class Frame extends BaseFrame {
                     </div>
                 </div>
 
-                {/* modal stack */}
+                {/* widget stack */}
                 <div className={'page-modal-root'}>
                     <div className={'page-modal-view'}>
                         <ModalAnimation className={this.props.classNameModalAnimation}>

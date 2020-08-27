@@ -12,21 +12,8 @@ class Spiner extends BaseModal {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
-            text: 'hello spiner!'
+            loading: true, text: 'hello spiner!'
         }
-    }
-
-    onData(data) {
-        super.onData(data)
-
-        console.warn('modal spiner on data', data)
-    }
-
-    onCreate() {
-        super.onCreate()
-
-        console.warn('modal spiner on create!')
     }
 
     onStart() {

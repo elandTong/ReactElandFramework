@@ -23,8 +23,8 @@ class GestureLockVerify extends BaseModal {
         if (val) {
             this.finish(true)
 
-            if (this._ondata.resultHandle) {
-                this._ondata.resultHandle(val)
+            if (this.props.intentData.resultHandle) {
+                this.props.intentData.resultHandle(val)
             }
         }
     }

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import APPContext from '../APPContext';
 import Config from '../Config';
@@ -10,20 +11,23 @@ import BaseFrame from './BaseFrame';
  */
 
 class BaseModal extends React.Component {
-    _modalFrame = null
-    _router = null
+    static propTypes = {
+        router: PropTypes.object,
+        intentData: PropTypes.object
+    }
 
-    _initPame = {}
-    _ondata = {}
+    static defaultProps = {
+        router: {}, intentData: {}
+    }
 
     constructor(props) {
         super(props)
         this.renderContent = this.renderContent.bind(this)
         this.onBroadcast = this.onBroadcast.bind(this)
-        this._modalFrame = this.props.modal
-        this._router = this.props.router
-        this._initPame = this.props.initPame
         Emit.on(Config.GLOBAL_EVENT, this.onBroadcast)
+    }
+
+    componentWillMount() {
         this.onCreate()
     }
 
@@ -37,10 +41,17 @@ class BaseModal extends React.Component {
         this.onStop()
     }
 
+    updateIntentData(data) {
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.updataModalIntentData(this, data)
+        }
+    }
+
     // ------ 生命周期回调方法 ------
 
     /**
      * @description: 组件创建回调
+     * @param {Object} props 外部入口参数
      */
     onCreate() { }
 
@@ -67,16 +78,13 @@ class BaseModal extends React.Component {
     // ------ 生命周期回调方法 ------
 
     /**
-     * @description: 用于路由时数据传递,启动方调用,接收方覆盖
-     * @param {Object} data 数据对象
+     * @description: 完整的界面呈现
      */
-    onData(data) {
-        this._ondata = data
-    }
+    onComplete() { }
 
     /**
      * @description: 全局广播接收回调
-     * 覆盖警告<!不建议子类覆盖该方法,请覆盖广播分支方法!>: 子类覆盖该方法 必须调用 父类该方法 以保证广播接收正常
+     * 覆盖警告<!!不建议覆盖该方法 请覆盖它的分支方法!!>: 子类覆盖该方法 必须调用 父类该方法以保证基础广播正常接收
      * @param {Object} data 事件对象
      */
     onBroadcast(data = {}) {
@@ -134,8 +142,8 @@ class BaseModal extends React.Component {
      * @param {Function} handle 页面处理器
      */
     navigationScreen(name, data, handle) {
-        if (this._router instanceof BaseFrame) {
-            this._router.navigationScreen(name, data, handle)
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.navigationScreen(name, data, handle)
         }
     }
 
@@ -150,8 +158,8 @@ class BaseModal extends React.Component {
      * @param {Function} handle 页面处理器
      */
     startScreen(intent, data, handle) {
-        if (this._router instanceof BaseFrame) {
-            this._router.startScreen(intent, data, handle)
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.startScreen(intent, data, handle)
         }
     }
 
@@ -162,8 +170,8 @@ class BaseModal extends React.Component {
      * @param {Function} handle 视窗处理器
      */
     navigationModal(name, data, handle) {
-        if (this._router instanceof BaseFrame) {
-            this._router.navigationModal(name, data, handle)
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.navigationModal(name, data, handle)
         }
     }
 
@@ -178,8 +186,8 @@ class BaseModal extends React.Component {
      * @param {Function} handle 视窗处理器
      */
     startModal(intent, data, handle) {
-        if (this._router instanceof BaseFrame) {
-            this._router.startModal(intent, data, handle)
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.startModal(intent, data, handle)
         }
     }
 
@@ -189,8 +197,8 @@ class BaseModal extends React.Component {
      * @return: boole
      */
     isStackTop(modal) {
-        if (this._router instanceof BaseFrame) {
-            return this._router.isModalStackTop(modal || this)
+        if (this.props.router instanceof BaseFrame) {
+            return this.props.router.isModalStackTop(modal || this)
         }
         return false
     }
@@ -199,17 +207,17 @@ class BaseModal extends React.Component {
      * @description: 关闭视窗并退栈
      */
     finish() {
-        if (this._router instanceof BaseFrame) {
-            this._router.finishModal(this._modalFrame)
+        if (this.props.router instanceof BaseFrame) {
+            this.props.router.finishModal(this)
         }
     }
 
     /**
-     * @description: 发送广播
-     * @param {Object} data 广播对象
-     * @return: bool 是否发送成功
+     * @description: 发送全局广播
+     * @param {Object} data 广播事件对象
+     * @return: bool 是否成功
      */
-    sendBroadcast(data = {}) {
+    sendBroadcast(data) {
         return Emit.exe(Object.assign(data, {
             theme: Config.GLOBAL_EVENT
         }))
