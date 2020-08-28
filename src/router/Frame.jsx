@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group/index';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Tool from '../utils/Tool';
 import BaseFrame from './BaseFrame';
 import BaseModal from './BaseModal';
@@ -26,13 +26,13 @@ class ScreenAnimation extends React.Component {
             return (this.props.children)
         } else {
             return (
-                <CSSTransitionGroup transitionName={`${this.props.className || 'screen-router'}`}
+                <ReactCSSTransitionGroup transitionName={`${this.props.className || 'screen-router'}`}
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}
                     transitionAppear={true}
                     transitionAppearTimeout={200}>
                     {this.props.children}
-                </CSSTransitionGroup>
+                </ReactCSSTransitionGroup>
             )
         }
     }
@@ -51,13 +51,13 @@ class ModalAnimation extends React.Component {
             return (this.props.children)
         } else {
             return (
-                <CSSTransitionGroup transitionName={`${this.props.className || 'example'}`}
+                <ReactCSSTransitionGroup transitionName={`${this.props.className || 'example'}`}
                     transitionEnterTimeout={200}
                     transitionLeaveTimeout={200}
                     transitionAppear={true}
                     transitionAppearTimeout={200}>
                     {this.props.children}
-                </CSSTransitionGroup>
+                </ReactCSSTransitionGroup>
             )
         }
     }
