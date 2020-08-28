@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import CSSTransitionGroup from 'react-addons-css-transition-group/index';
 import BaseContext from '../BaseContext';
 
 class FixedModal extends BaseContext {
@@ -8,14 +7,12 @@ class FixedModal extends BaseContext {
         visible: PropTypes.bool,
         className: PropTypes.string,
         style: PropTypes.object,
-        transitionName: PropTypes.string,
         onClick: PropTypes.func
     }
 
     static defaultProps = {
         visible: false,
-        className: '',
-        transitionName: 'example'
+        className: ''
     }
 
     constructor(props) {
@@ -24,21 +21,13 @@ class FixedModal extends BaseContext {
     }
 
     render() {
-        return (
-            <CSSTransitionGroup transitionName={this.props.transitionName}
-                transitionAppear={true}
-                transitionAppearTimeout={200}
-                transitionEnterTimeout={200}
-                transitionLeaveTimeout={200}>
-                {this.props.visible ? (
-                    <div className={`common-fixed-modal ${this.props.className}`}
-                        style={this.props.style}
-                        onClick={this.props.onClick}>
-                        {this.props.children}
-                    </div>
-                ) : (null)}
-            </CSSTransitionGroup>
-        )
+        return this.props.visible ? (
+            <div className={`common-fixed-modal ${this.props.className}`}
+                style={this.props.style}
+                onClick={this.props.onClick}>
+                {this.props.children}
+            </div>
+        ) : (null)
     }
 }
 
