@@ -170,3 +170,166 @@ background: transparent
     left: 0px;
     z-index: 100;
 }
+
+// 盒子通用样式
+.display-center {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.display-around {
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.display-space {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.display-column {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+}
+
+.display-warp {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+}
+
+.display-warp-start {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-content: flex-start;
+text-align: center;
+}
+
+.display-warp-around {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+align-items: flex-end
+}
+
+.display-start {
+display: flex;
+justify-content: flex-start;
+align-items: center;
+}
+
+.display-end {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+}
+
+// 内部波纹点击效果
+.click-in-ripple {
+position: relative;
+overflow: hidden; /* 隐藏溢出的径向渐变背景 */
+}
+
+.click-in-ripple:after {
+content: "";
+display: block;
+position: absolute;
+width: 100%;
+height: 100%;
+top: 0;
+left: 0;
+pointer-events: none;
+background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+.theme-light & {
+background-image: radial-gradient(circle, $light-color-click-ripple-background 8%, transparent 8%);
+}
+.theme-dark & {
+background-image: radial-gradient(circle, $dark-color-click-ripple-background 8%, transparent 8%);
+}
+.theme-user & {
+background-image: radial-gradient(circle, $user-color-click-ripple-background 8%, transparent 8%);
+}
+background-repeat: no-repeat;
+background-position: 50%;
+transform: scale(10, 10);
+opacity: 0;
+transition: transform .4s, opacity .6s;
+}
+
+.click-in-ripple:active:after {
+transform: scale(0, 0);
+opacity: .3;
+transition: 0s;
+}
+
+// 溢出波纹点击效果
+.click-out-ripple {
+position: relative;
+}
+
+.click-out-ripple:focus{
+outline: none;
+}
+
+.click-out-ripple:after {
+content: '';
+display: block;
+position: absolute;
+top: -15px; /*扩大伪类元素4个方向各15px*/
+left: -15px;
+right: -15px;
+bottom: -15px;
+pointer-events: none;
+background-color: $light-color-click-ripple-background;
+.theme-light & {
+background-color: $light-color-click-ripple-background;
+}
+.theme-dark & {
+background-color: $dark-color-click-ripple-background;
+}
+.theme-user & {
+background-color: $user-color-click-ripple-background;
+}
+background-repeat: no-repeat;
+background-position: 50%;
+opacity: 0;
+border-radius: inherit;
+transition: all .3s;
+}
+
+.click-out-ripple:active:after {
+opacity: .2;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+transition: 0s;
+}
+
+// 布局类型样式
+.pos-relative {
+position: relative;
+width: 100%;
+height: 100%;
+}
+
+.pos-absolute {
+position: absolute;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+}
+
+.pos-absolute-nosize {
+position: absolute;
+top: 0px;
+left: 0px;
+}
