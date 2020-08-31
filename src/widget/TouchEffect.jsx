@@ -6,13 +6,16 @@ class TouchEffect extends BaseContext {
     static propTypes = {
         className: PropTypes.string,
         style: PropTypes.object,
-        mode: PropTypes.string
+        mode: PropTypes.string,
+        onClick: PropTypes.func
     }
 
     static defaultProps = {
         className: '',
         style: null,
-        mode: 'out'
+        mode: 'out',
+        onClick: function (e) {
+        }
     }
 
     constructor(props) {
@@ -35,7 +38,9 @@ class TouchEffect extends BaseContext {
 
     render() {
         return (
-            <div className={`${this.selectEffect()} ${this.props.className}`} style={Object.assign({}, this.props.style)}>
+            <div className={`${this.selectEffect()} ${this.props.className}`}
+                style={Object.assign({}, this.props.style)}
+                onClick={this.props.onClick}>
                 {this.props.children}
             </div>
         )
