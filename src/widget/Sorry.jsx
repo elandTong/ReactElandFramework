@@ -1,9 +1,9 @@
 import React from 'react';
 import '../assets/style/comp.sorry.scss';
 import BaseContext from '../BaseContext';
+import ResUtil from '../utils/ResUtil';
 import Tool from '../utils/Tool';
 import Button from './Button';
-import ResUtil from '../utils/ResUtil';
 
 class Sorry extends BaseContext {
     _options = {
@@ -48,13 +48,8 @@ class Sorry extends BaseContext {
                         {this._options.tips}
                     </span>
 
-                    {this._options.button.active === true ? (
-                        <Button className={'comp-sorry-retry-button'} options={{
-                            width: this._options.button.width,
-                            height: this._options.button.height,
-                            name: this._options.button.name,
-                            onClick: this._options.button.onClick
-                        }} />
+                    {Boolean(this._options.button.active) ? (
+                        <Button {...this._options.button} className={'comp-sorry-retry-button'} />
                     ) : (null)}
                 </div>
             </div>

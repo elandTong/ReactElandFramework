@@ -1,79 +1,74 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import '../assets/style/comp.button.scss';
-import Tool from '../utils/Tool';
+import BaseContext from '../BaseContext';
 
-class Button extends React.Component {
-    _options = {
-        width: '100%', height: 40,
+class Button extends BaseContext {
+    static propTypes = {
+        className: PropTypes.string,
+        style: PropTypes.object,
+        width: PropTypes.any,
+        height: PropTypes.any,
+        solid: PropTypes.bool,
+        name: PropTypes.string,
+        copyText: PropTypes.string,
+        onCopy: PropTypes.func,
+        onClick: PropTypes.func
+    }
+
+    static defaultProps = {
+        className: '',
+        style: null,
+        width: '100%',
+        height: 40,
         solid: true,
         name: null,
-        copy: {
-            active: false,
-            text: null,
-            onCopy: null
+        copyText: null,
+        onCopy: function (text, result) {
         },
-        onClick: null
+        onClick: function (e) {
+        }
     }
 
     constructor(porps) {
         super(porps)
-
-        this.state = {
-            timeoutclick: 160
-        }
-
         this.onClick = this.onClick.bind(this)
+        this.onCopy = this.onCopy.bind(this)
+
+        this.state = {}
     }
 
     onClick(e) {
-        if (e instanceof Event) { e.stopPropagation() }
+        if (e instanceof Event) {
+            e.stopPropagation()
+        }
 
-        if (this.state.timeoutclick <= 0) {
-            if (this._options.onClick) { this._options.onClick(e) }
-        } else {
-            setTimeout(() => {
-                if (this._options.onClick) { this._options.onClick(e) }
-            }, this.state.timeoutclick)
+        if (this.props.onClick) {
+            this.props.onClick(e)
+        }
+    }
+
+    onCopy(text, result) {
+        if (this.props.onCopy) {
+            this.props.onCopy(text, result)
         }
     }
 
     render() {
-        this._options = Tool.structureAssignment({
-            width: '100%', height: 40,
-            solid: true,
-            name: null,
-            copy: {
-                active: false,
-                text: null,
-                onCopy: null
-            },
-            onClick: null
-        }, this.props.options || {}, false, true)
+        let _classname = this.props.solid ? 'comp-button-solid' : 'comp-button-hollow'
 
-        let _classname = this._options.solid === true ? 'comp-button-solid' : 'comp-button-hollow'
-
-        let _jsx = (
-            <div className={`click-in-ripple display-center ${_classname} ${this.props.className || ''}`} style={Object.assign({
-                width: this._options.width, height: this._options.height
-            }, this.props.style || {})} onClick={this.onClick}>
-                {this._options.name || this.props.children}
-            </div>
+        return (
+            <CopyToClipboard text={this.props.copyText} onCopy={this.onCopy}>
+                <div className={`comp-button-root click-in-ripple display-center ${_classname} ${this.props.className}`}
+                    style={Object.assign({
+                        width: this.props.width, height: this.props.height
+                    }, this.props.style)}
+                    onClick={this.onClick}>
+                    {this.props.name || this.props.children}
+                </div>
+            </CopyToClipboard>
         )
-
-        if (this._options.copy.active === true) {
-            return (
-                <CopyToClipboard text={this._options.copy.text} onCopy={(text, result) => {
-                    if (this._options.copy.onCopy) {
-                        this._options.copy.onCopy(text, result)
-                    }
-                }}>
-                    {_jsx}
-                </CopyToClipboard>
-            )
-        } else {
-            return (_jsx)
-        }
     }
 }
 

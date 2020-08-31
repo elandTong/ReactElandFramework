@@ -373,13 +373,12 @@ class GestureLock extends BaseContext {
                 </span>
 
                 {this.props.type === GestureLock.TYPE_SETTING ? (
-                    <Button style={{ marginTop: 20 }}
-                        options={{
-                            width: '40%', height: 36,
-                            name: language.reset,
-                            solid: true,
-                            onClick: this.onResetClick
-                        }} />
+                    <Button {...{
+                        width: '40%', height: 36,
+                        name: language.reset,
+                        solid: true,
+                        onClick: this.onResetClick
+                    }} style={{ marginTop: 20 }} />
                 ) : (null)}
             </div>
         )

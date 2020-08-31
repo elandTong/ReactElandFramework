@@ -98,16 +98,16 @@ class Login extends BaseScreen {
                 hideToolbar: false
             }}>
                 <div style={{ width: '100%', padding: 20 }}>
-                    <Button options={{
+                    <Button {...{
                         width: '100%', name: '设置手势密码',
                         onClick: this.onSettingGesture
                     }} />
 
-                    <Button style={{ marginTop: 10 }} options={{
+                    <Button {...{
                         width: '100%', name: '验证手势密码',
                         solid: false,
                         onClick: this.onVerifyGesture
-                    }} />
+                    }} style={{ marginTop: 10 }} />
                 </div>
             </ScreenPage>
         )

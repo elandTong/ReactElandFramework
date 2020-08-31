@@ -249,6 +249,7 @@ div {
 // screen切换动画样式
 .screen-router-enter {
   transform: translateX(100%);
+  box-shadow: 0 0 100vw rgba(0,0,0,0.3);
 }
 
 .screen-router-enter.screen-router-enter-active {
@@ -258,6 +259,7 @@ div {
 
 .screen-router-leave {
   transform: translateX(0);
+  box-shadow: 0 0 100vw rgba(0,0,0,0.3);
 }
 
 .screen-router-leave.screen-router-leave-active {
@@ -300,23 +302,4 @@ div {
 .example-appear.example-appear-active {
   opacity: 1;
   transition: opacity .2s ease-in;
-}
-
-select {
-padding-left: 15px;
-padding-right: 15px;
-background: rgba(0, 0, 0, 0);
-font-size: 12;
-color: silver;
-text-align: center;
-outline: none;
-border: 1px rgb(110, 134, 174) solid;
-border-radius: 2px;
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button{
--webkit-appearance: none !important;
-}
-input[type="number"]{
--moz-appearance:textfield;
 }

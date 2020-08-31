@@ -2,6 +2,26 @@
 @import "theme.dark";
 @import "theme.user";
 
+select {
+padding-left: 15px;
+padding-right: 15px;
+background: rgba(0, 0, 0, 0);
+font-size: 12px;
+color: silver;
+text-align: center;
+outline: none;
+border: 1px rgb(110, 134, 174) solid;
+border-radius: 2px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+-webkit-appearance: none !important;
+}
+input[type="number"]{
+-moz-appearance: textfield;
+}
+
 .common-boxsize-full {
     width: 100%; height: 100%;
 }
@@ -122,21 +142,21 @@ transform: rotate(-90deg);
 -o-transform: rotate(-90deg);
 }
 
-@-webkit-keyframes commonRotate{
+@-webkit-keyframes rotate{
 0%{ -webkit-transform: rotate(0deg);}
 50%{ -webkit-transform: rotate(180deg);}
 100%{ -webkit-transform: rotate(360deg);}
 }
 
-@keyframes commonRotate{
+@keyframes rotate{
 0%{ -webkit-transform: rotate(0deg);}
 50%{ -webkit-transform: rotate(180deg);}
 100%{ -webkit-transform: rotate(360deg);}
 }
 
 .common-rotate {
--webkit-animation:commonRotate 0.5s linear infinite;
-animation:commonRotate 0.5s linear infinite;
+-webkit-animation: rotate 0.5s linear infinite;
+animation: rotate 0.5s linear infinite;
 }
 
 // 阴影效果
