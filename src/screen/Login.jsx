@@ -13,13 +13,10 @@ class Login extends BaseScreen {
 
     constructor(props) {
         super(props)
-
         this.onMenu = this.onMenu.bind(this)
         this.onSettingGesture = this.onSettingGesture.bind(this)
         this.onVerifyGesture = this.onVerifyGesture.bind(this)
-
-        this.state = {
-        }
+        this.state = {}
     }
 
     onStart() {

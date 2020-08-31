@@ -23,7 +23,9 @@
             "手势密码正确!",
             "输入的手势密码不正确!"
         ],
-        "sure": "确认"
+        "sure": "确认",
+        "revoke": "撤回",
+        "close": "关闭"
     },
     "en": {
         "appname": "ElandFramework",
@@ -35,10 +37,10 @@
         "usermode": "User mode",
         "ctcname": "TAB 1",
         "gfcname": "TAB 2",
-        "enter": "enter",
-        "reset": "reset",
-        "settingGesture": "设置手势密码",
-        "verifyGesture": "验证手势密码",
+        "enter": "Enter",
+        "reset": "Reset",
+        "settingGesture": "Setting gesture",
+        "verifyGesture": "Verify gesture",
         "gestureTips": [
             "您需要连接至少5个点",
             "请重复一次输入的手势密码",
@@ -49,6 +51,8 @@
             "手势密码正确!",
             "输入的手势密码不正确!"
         ],
-        "sure": "Sure"
+        "sure": "Sure",
+        "revoke": "Revoke",
+        "close": "Close"
     }
 }

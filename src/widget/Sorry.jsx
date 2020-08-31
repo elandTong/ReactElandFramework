@@ -1,20 +1,30 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import '../assets/style/comp.sorry.scss';
 import BaseContext from '../BaseContext';
 import ResUtil from '../utils/ResUtil';
-import Tool from '../utils/Tool';
 import Button from './Button';
 
 class Sorry extends BaseContext {
-    _options = {
-        icon: null,
-        title: null,
-        tips: null,
-        button: {
-            active: false,
-            width: null, height: null,
-            name: null,
-            onClick: null
+    static propTypes = {
+        className: PropTypes.string,
+        style: PropTypes.object,
+        iconSrc: PropTypes.string,
+        title: PropTypes.string,
+        tips: PropTypes.string,
+        hideRetry: PropTypes.bool,
+        retryClassName: PropTypes.string,
+        retryName: PropTypes.string,
+        onRetry: PropTypes.func
+    }
+
+    static defaultProps = {
+        className: '', style: null,
+        iconSrc: null, title: null, tips: null,
+        hideRetry: false,
+        retryClassName: '',
+        retryName: null,
+        onRetry: function (e) {
         }
     }
 
@@ -24,33 +34,28 @@ class Sorry extends BaseContext {
     }
 
     renderContent({ theme, language }) {
-        this._options = Tool.structureAssignment({
-            icon: ResUtil.requireIcon('ic_sorry.png', theme),
-            title: language.sorry,
-            tips: language.nodata,
-            button: {
-                active: false,
-                width: 100, height: 34,
-                name: language.retry
-            }
-        }, this.props.options || {}, false, true)
-
         return (
-            <div className={`display-center common-boxsize-full ${this.props.className || ''}`} style={this.props.style}>
+            <div className={`display-center common-boxsize-full ${this.props.className}`} style={Object.assign({}, this.props.style)}>
                 <div className={'display-column'}>
-                    <img className={'comp-sorry-imag'} src={this._options.icon} alt={'sorry'} />
+                    <img className={'comp-sorry-imag'}
+                        src={this.props.iconSrc || ResUtil.requireIcon('ic_sorry.png', theme)}
+                        alt={'sorry'} />
 
                     <span className={'comp-sorry-title'}>
-                        {this._options.title}
+                        {this.props.title || language.sorry}
                     </span>
 
                     <span className={'comp-sorry-tips'}>
-                        {this._options.tips}
+                        {this.props.tips || language.nodata}
                     </span>
 
-                    {Boolean(this._options.button.active) ? (
-                        <Button {...this._options.button} className={'comp-sorry-retry-button'} />
-                    ) : (null)}
+                    {this.props.hideRetry ? (null) : (
+                        <Button className={`comp-sorry-retry-button ${this.props.retryClassName}`}
+                            width={100} height={34}
+                            name={this.props.retryName || language.retry}
+                            onClick={this.props.onRetry}
+                        />
+                    )}
                 </div>
             </div>
         )

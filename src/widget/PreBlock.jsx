@@ -1,17 +1,24 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import GridLoader from 'react-spinners/GridLoader';
 import '../assets/style/comp.preblock.scss';
 import BaseContext from '../BaseContext';
-import Tool from '../utils/Tool';
 import Sorry from './Sorry';
 
 class Preblock extends BaseContext {
-    _options = {
-        loadStatus: true,
-        loadComp: null,
+    static propTypes = {
+        className: PropTypes.string,
+        style: PropTypes.object,
+        loadStatus: PropTypes.bool,
+        sorryStatus: PropTypes.bool,
+        sorryProps: PropTypes.object,
+    }
+
+    static defaultProps = {
+        className: '', style: null,
+        loadStatus: false,
         sorryStatus: false,
-        sorryComp: null,
-        sorryCompOptions: null
+        sorryProps: {}
     }
 
     constructor(props) {
@@ -20,35 +27,21 @@ class Preblock extends BaseContext {
     }
 
     renderContent({ theme, language }) {
-        this._options = Tool.structureAssignment({
-            loadStatus: true,
-            loadComp: null,
-            sorryStatus: false,
-            sorryComp: null,
-            sorryCompOptions: null
-        }, this.props.options)
-
         return (
             <div className={`pos-relative common-boxsize-full`}>
-                <div className={`pos-absolute comp-preblock-last ${this.props.className || ''}`} style={this.props.style}>
+                <div className={`pos-absolute comp-preblock-last ${this.props.className}`} style={Object.assign({}, this.props.style)}>
                     {this.props.children}
                 </div>
 
-                {/* sorry视图 */}
-                {this._options.sorryStatus ? (
+                {this.props.sorryStatus ? (
                     <div className={'pos-absolute comp-preblock-mid'}>
-                        {this._options.sorryComp ? (this._options.sorryComp) : (
-                            <Sorry options={this._options.sorryCompOptions} />
-                        )}
+                        <Sorry {...this.props.sorryProps} />
                     </div>
                 ) : (null)}
 
-                {/* loading视图 */}
-                {this._options.loadStatus ? (
+                {this.props.loadStatus ? (
                     <div className={'pos-absolute display-center comp-preblock-fast'}>
-                        {this._options.loadComp ? (this._options.loadComp) : (
-                            <GridLoader size={22} margin={0} loading={this._options.loadStatus} color={theme.color.theme} />
-                        )}
+                        <GridLoader size={22} margin={0} loading={true} color={theme.color.theme} />
                     </div>
                 ) : (null)}
             </div>

@@ -1,0 +1,119 @@
+@import './theme.light.scss';
+@import './theme.dark.scss';
+@import './theme.user.scss';
+
+$-keyboard-button-width: calc((100vw - 4px) / 5);
+$-keyboard-button-height: calc((100vh * 0.3 - 3px) / 4);
+$-keyboard-mid-button-height: calc((100vh * 0.3 - 1px) / 2);
+$-keyboard-max-button-height: calc(((100vh * 0.3 - 3px) / 4 * 3) + 2px);
+$-keyboard-numberzone-width: calc(((100vw - 4px) / 5) * 3 + 2px);
+$-keyboard-zero-button-width: calc(((100vw - 4px) / 5) * 2 + 1px);
+
+.comp-number-keyboard-root {
+    position: absolute;
+    bottom: 0px; left: 0px;
+    width: 100vw;
+    height: 30vh;
+    background: $light-color-number-keyboard-background;
+    box-shadow: $light-color-number-keyboard-shadow;
+    font-size: 20px;
+    color: $light-color-number-keyboard-font;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-background;
+        box-shadow: $dark-color-number-keyboard-shadow;
+        color: $dark-color-number-keyboard-font;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-background;
+        box-shadow: $user-color-number-keyboard-shadow;
+        color: $user-color-number-keyboard-font;
+    }
+}
+
+.comp-number-keyboard-close-button {
+    width: $-keyboard-button-width;
+    height: 100%;
+    background: $light-color-number-keyboard-button;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-button;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-button;
+    }
+}
+
+.comp-number-keyboard-min-button {
+    width: $-keyboard-button-width;
+    height: $-keyboard-button-height;
+    background: $light-color-number-keyboard-button;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-button;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-button;
+    }
+}
+
+.comp-number-keyboard-mid-button {
+    width: $-keyboard-button-width;
+    height: $-keyboard-mid-button-height;
+    background: $light-color-number-keyboard-button;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-button;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-button;
+    }
+}
+
+.comp-number-keyboard-max-button {
+    width: $-keyboard-button-width;
+    height: $-keyboard-max-button-height;
+    background: $light-color-number-keyboard-button;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-button;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-button;
+    }
+}
+
+.comp-number-keyboard-zero-button {
+    width: $-keyboard-zero-button-width;
+    height: $-keyboard-button-height;
+    background: $light-color-number-keyboard-button;
+    .theme-dark & {
+        background: $dark-color-number-keyboard-button;
+    }
+    .theme-user & {
+        background: $user-color-number-keyboard-button;
+    }
+}
+
+.comp-number-keyboard-maxzero {
+    width: 100%;
+}
+
+.comp-number-keyboard-numberzone {
+    width: $-keyboard-numberzone-width;
+    height: 100%;
+}
+
+.comp-number-keyboard-tool-zone {
+    width: $-keyboard-button-width;
+    height: 100%;
+}
+
+.comp-number-keyboard-button-margin {
+    margin-top: 1px;
+}
+
+.comp-number-keyboard-fixed-modal {
+    width: 100%;
+    height: 100%;
+}
+
+.comp-number-keyboard-target-revision {
+    position: fixed;
+    bottom: 30vh;
+}
