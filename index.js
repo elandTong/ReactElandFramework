@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-05-19 15:40:02
- * @LastEditTime: 2020-08-31 17:22:56
+ * @LastEditTime: 2020-08-31 17:42:47
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ReactElandFramework/index.js
@@ -33,8 +33,9 @@ import SearchBar from './src/widget/SearchBar'
 import Sorry from './src/widget/Sorry'
 import { TabSlide, TabSwiper } from './src/widget/Swiper'
 import ToolbarMenu from './src/widget/ToolbarMenu'
+import TouchEffect from './src/widget/TouchEffect'
 
 export { Frame, BaseScreen, BaseModal, ScreenPage, ModalPage }
-export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, FixedModalGroup, Mask, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu, NumberKeyboardController, DrawerMenu, GestureLock }
+export { Banner, Button, ListButton, Minirefresh, MarqueeBar, MessageNotice, FixedModal, FixedModalGroup, Mask, Navbar, Preblock, SearchBar, Sorry, TabSwiper, TabSlide, ToolbarMenu, NumberKeyboardController, DrawerMenu, GestureLock, TouchEffect }
 export { Tool, Emit, NetApi }
 export { Config }
