@@ -29,8 +29,8 @@ class GestureLockSetting extends BaseScreen {
 
     renderContent({ theme, language }) {
         return (
-            <ScreenPage options={{
-                toolbarOptions: {
+            <ScreenPage {...{
+                toolbarProps: {
                     title: 'GestureSettingScreenTitle',
                     hideBack: false,
                     hideMenu: true,

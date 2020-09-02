@@ -84,8 +84,8 @@ class Login extends BaseScreen {
 
     renderContent({ theme, language, getapp }) {
         return (
-            <ScreenPage options={{
-                toolbarOptions: {
+            <ScreenPage {...{
+                toolbarProps: {
                     title: 'LoginScreenTitle',
                     hideBack: false,
                     hideMenu: false,

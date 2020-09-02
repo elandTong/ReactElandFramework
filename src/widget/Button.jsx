@@ -60,7 +60,7 @@ class Button extends BaseContext {
 
         return (
             <CopyToClipboard text={this.props.copyText} onCopy={this.onCopy}>
-                <div className={`comp-button-root click-in-ripple display-center ${_classname} ${this.props.className}`}
+                <div className={`comp-button-root click-out-ripple display-center ${_classname} ${this.props.className}`}
                     style={Object.assign({
                         width: this.props.width, height: this.props.height
                     }, this.props.style)}

@@ -2,6 +2,8 @@ import React from 'react'
 import '../assets/style/scenes.category.list.scss'
 import BaseContext from '../BaseContext'
 import Tool from '../utils/Tool'
+import PropTypes from 'prop-types'
+import TouchEffect from '../widget/TouchEffect'
 
 class CategoryList extends BaseContext {
     constructor(props) {
@@ -32,11 +34,24 @@ class CategoryList extends BaseContext {
 }
 
 class ListItem extends BaseContext {
+    static propTypes = {
+        className: PropTypes.string,
+        style: PropTypes.object,
+        data: PropTypes.object,
+        onClick: PropTypes.func
+    }
+
+    static defaultProps = {
+        className: '',
+        style: null,
+        data: {},
+        onClick: function (e) {
+        }
+    }
+
     constructor(props) {
         super(props)
-
-        this.state = {
-        }
+        this.state = {}
     }
 
     getStatusClassname() {
@@ -57,10 +72,10 @@ class ListItem extends BaseContext {
         return Boolean(this.props.data.bold) ? 'scenes-category-list-item-name' : ''
     }
 
-    renderContent({ theme, language, getapp }) {
+    renderContent({ theme, language }) {
         return (
-            <div className={`display-center scenes-category-list-item-root click-out-ripple ${this.props.className || ''}`}
-                style={this.props.style}
+            <TouchEffect className={`scenes-category-list-item-root ${this.props.className} display-center`}
+                style={Object.assign({}, this.props.style)}
                 onClick={this.props.onClick}>
                 <div className={'display-column'}>
                     <span className={`common-text-singleline ${this.getNameClassname()}`}>
@@ -70,7 +85,7 @@ class ListItem extends BaseContext {
                         {this.props.data.tips || language.enter}
                     </span>
                 </div>
-            </div>
+            </TouchEffect>
         )
     }
 }

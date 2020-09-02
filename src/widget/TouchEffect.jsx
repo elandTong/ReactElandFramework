@@ -30,6 +30,9 @@ class TouchEffect extends BaseContext {
             case 'in': {
                 return 'click-in-ripple'
             }
+            case 'disable': {
+                return ''
+            }
             default: {
                 return 'click-out-ripple'
             }

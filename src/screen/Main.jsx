@@ -229,15 +229,14 @@ class Main extends BaseScreen {
         return (
             <React.Fragment>
                 <DrawerMenu {...this.state.drawerMenu}>
-                    <ScreenPage options={{
-                        toolbarOptions: {
+                    <ScreenPage {...{
+                        toolbarProps: {
                             title: language.appname,
                             hideBack: true,
                             hideMenu: false,
                             onBack: this.onBack,
                             onMenu: this.onMenu
                         },
-                        // renderToolbar: this.renderToolbar,
                         hideToolbar: false
                     }}>
                         <div style={{

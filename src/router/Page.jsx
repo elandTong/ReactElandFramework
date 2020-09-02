@@ -1,92 +1,85 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import BaseContext from '../BaseContext'
 import ResUtil from '../utils/ResUtil'
-import Tool from '../utils/Tool'
+import TouchEffect from '../widget/TouchEffect'
 
 class Toolbar extends BaseContext {
-    _options = {
-        title: null,
+    static propTypes = {
+        title: PropTypes.string,
+        hideBack: PropTypes.bool,
+        hideMenu: PropTypes.bool,
+        onBack: PropTypes.func,
+        onMenu: PropTypes.func
+    }
+
+    static defaultProps = {
+        title: 'ScreenTitle',
         hideBack: false,
         hideMenu: false,
-        onBack: null,
-        onMenu: null
+        onBack: function (e) {
+        },
+        onMenu: function (e) {
+        }
     }
 
     constructor(props) {
         super(props)
-
-        this.state = {
-            timeoutclick: 160,
-            icon: {
-                height: '55%'
-            }
-        }
-
         this.onMenuClick = this.onMenuClick.bind(this)
-
         this.onFinishClick = this.onFinishClick.bind(this)
+        this.state = {}
     }
 
     onMenuClick(e) {
         if (e instanceof Event) { e.stopPropagation() }
-
-        if (this._options.hideMenu) { return }
-
-        if (this.state.timeoutclick <= 0) {
-            if (this._options.onMenu) { this._options.onMenu(e) }
-        } else {
-            setTimeout(() => {
-                if (this._options.onMenu) { this._options.onMenu(e) }
-            }, this.state.timeoutclick)
-        }
+        if (this.props.hideMenu) { return }
+        setTimeout(() => { if (this.props.onMenu) { this.props.onMenu(e) } }, 160)
     }
 
     onFinishClick(e) {
         if (e instanceof Event) { e.stopPropagation() }
-
-        if (this._options.hideBack) { return }
-
-        if (this.state.timeoutclick <= 0) {
-            if (this._options.onBack) { this._options.onBack(e) }
-        } else {
-            setTimeout(() => {
-                if (this._options.onBack) { this._options.onBack(e) }
-            }, this.state.timeoutclick)
-        }
+        if (this.props.hideBack) { return }
+        setTimeout(() => { if (this.props.onBack) { this.props.onBack(e) } }, 160)
     }
 
     renderContent({ theme, language }) {
-        this._options = Tool.structureAssignment({
-            title: null,
-            hideBack: false,
-            hideMenu: false,
-            onBack: null,
-            onMenu: null
-        }, this.props.options || {})
-
         return (
             <div className={'display-space page-screen-container-toolbar-view'}>
-                <div className={`${this._options.hideBack ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onFinishClick}>
-                    {this._options.hideBack ? (null) : (
-                        <img src={ResUtil.requireIcon('ic_back.png', theme)} height={this.state.icon.height} alt={'ic_back'} />
+                <TouchEffect mode={this.props.hideBack ? 'disable' : 'out'}
+                    className={'page-screen-container-toolbar-ele display-center'}
+                    onClick={this.onFinishClick}>
+                    {this.props.hideBack ? (null) : (
+                        <img src={ResUtil.requireIcon('ic_back.png', theme)}
+                            height={'55%'}
+                            alt={'toolbar_icon_back'} />
                     )}
-                </div>
+                </TouchEffect>
 
-                <span> {this._options.title} </span>
+                <span>{this.props.title}</span>
 
-                <div className={`${this._options.hideMenu ? '' : 'click-out-ripple'} display-center page-screen-container-toolbar-ele`} onClick={this.onMenuClick}>
-                    {this._options.hideMenu ? (null) : (
-                        <img src={ResUtil.requireIcon('ic_menu.png', theme)} height={this.state.icon.height} alt={'ic_menu'} />
+                <TouchEffect mode={this.props.hideMenu ? 'disable' : 'out'}
+                    className={'page-screen-container-toolbar-ele display-center'}
+                    onClick={this.onMenuClick}>
+                    {this.props.hideMenu ? (null) : (
+                        <img src={ResUtil.requireIcon('ic_menu.png', theme)}
+                            height={'55%'}
+                            alt={'toolbar_icon_menu'} />
                     )}
-                </div>
+                </TouchEffect>
             </div>
         )
     }
 }
 
-class ScreenPage extends React.Component {
-    _options = {
-        toolbarOptions: null,
+class ScreenPage extends BaseContext {
+    static propTypes = {
+        toolbarProps: PropTypes.object,
+        renderToolbar: PropTypes.func,
+        hideToolbar: PropTypes.bool
+    }
+
+    static defaultProps = {
+        toolbarProps: {},
         renderToolbar: null,
         hideToolbar: false
     }
@@ -98,32 +91,24 @@ class ScreenPage extends React.Component {
         this.state = {}
     }
 
-    renderDefaultToolbar(screen) {
-        return (<Toolbar options={this._options.toolbarOptions} />)
+    renderDefaultToolbar() {
+        return (<Toolbar {...this.props.toolbarProps} />)
     }
 
     renderToolbar() {
-        return Boolean(this._options.hideToolbar) ? (null) : (
+        return this.props.hideToolbar ? (null) : (
             <div className={'page-screen-container-toolbar'}>
-                {this._options.renderToolbar && this._options.renderToolbar(this)}
+                {this.props.renderToolbar ? this.props.renderToolbar(this) : this.renderDefaultToolbar()}
             </div>
         )
     }
 
     render() {
-        this._options = Tool.structureAssignment({
-            toolbarOptions: null,
-            renderToolbar: this.renderDefaultToolbar,
-            hideToolbar: false
-        }, this.props.options || {})
-
-        let _view_classname = Boolean(this._options.hideToolbar) ?
-            'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'
-
         return (
             <React.Fragment>
                 {this.renderToolbar()}
-                <div className={`page-screen-container-view ${_view_classname}`}>
+
+                <div className={`page-screen-container-view ${this.props.hideToolbar ? 'page-screen-container-view-no-toolbar' : 'page-screen-container-view-have-toolbar'}`}>
                     {this.props.children}
                 </div>
             </React.Fragment>
@@ -131,16 +116,23 @@ class ScreenPage extends React.Component {
     }
 }
 
-class ModalPage extends React.Component {
+class ModalPage extends BaseContext {
+    static propTypes = {
+        style: PropTypes.object
+    }
+
+    static defaultProps = {
+        style: null
+    }
+
     constructor(props) {
         super(props)
-
         this.state = {}
     }
 
     render() {
         return (
-            <div className={'page-modal-container-view'} style={this.props.style}>
+            <div className={'page-modal-container-view'} style={Object.assign({}, this.props.style)}>
                 {this.props.children}
             </div>
         )
