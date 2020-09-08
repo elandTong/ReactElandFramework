@@ -79,7 +79,7 @@ class ScreenPage extends BaseContext {
     }
 
     static defaultProps = {
-        toolbarProps: Toolbar.defaultProps,
+        toolbarProps: {},
         renderToolbar: null,
         hideToolbar: false
     }

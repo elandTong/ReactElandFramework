@@ -244,10 +244,8 @@ class Main extends BaseScreen {
                             height: '100%'
                         }}>
                             <Navbar initIndex={0}
-                                options={{
-                                    items: [{ name: language.ctcname }, { name: language.gfcname }],
-                                    onSelect: (key, e) => { }
-                                }}
+                                items={[{ name: language.ctcname }, { name: language.gfcname }]}
+                                onSelect={(key, e) => { }}
                                 getSwiper={() => { return this._swiperCompRef }}
                                 ref={(comp) => { this._navbarCompRef = comp }} />
 
