@@ -894,6 +894,13 @@ class Tool {
             h: window.document.body.clientHeight
         }
     }
+
+    static getStencilLanguageText(language, text) {
+        if (text && language && text.indexOf('key:') === 0) {
+            return language[text.replace('key:', '')] || text
+        }
+        return text
+    }
 }
 
 export default Tool
