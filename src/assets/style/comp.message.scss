@@ -35,9 +35,21 @@
     border-bottom-right-radius: 12px;
 }
 
-.comp-message-notice-cont {
+.comp-message-notice-bottom-button-left {
+    width: 50%;
+    height: 100%;
+    border-bottom-left-radius: 12px;
+}
+
+.comp-message-notice-bottom-button-right {
+    width: 50%;
+    height: 100%;
+    border-bottom-right-radius: 12px;
+}
+
+.comp-message-notice-content {
     width: 100%;
-    height: calc(40vh - 91px);
+    height: calc(40vh - 45px - 45px - 2px);
     padding: 12px;
     line-height: 1.5;
 }

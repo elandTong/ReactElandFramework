@@ -5,11 +5,11 @@ import Toast from '../modal/Toast'
 import Frame from '../router/Frame'
 
 class ModalTool {
-    static showToast(txt, handle) {
+    static showToast(txt, handle, showTime) {
         RouterTool.navigationModal(Toast._path, null, (comp) => {
-            comp.setText(txt)
-            if (handle) {
-                handle(comp)
+            if (comp instanceof Toast) {
+                comp.setText(txt, showTime)
+                if (handle) { handle(comp) }
             }
         })
     }

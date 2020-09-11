@@ -18,15 +18,17 @@ class Testing {
 
     static Test2() {
         RouterTool.navigationModal(Popup._path, {}, (comp) => {
-            comp.onComp((
-                <MessageNotice options={{
-                    title: '标题',
-                    content: '你好我是SPA框架',
-                    onSure: (e) => {
-                        comp.close()
-                    }
-                }} />
-            ), MessageNotice.PopupParam)
+            comp.callComp(() => {
+                return (
+                    <MessageNotice {...{
+                        title: '标题',
+                        content: '你好我是SPA框架',
+                        onSure: (e) => {
+                            comp.close()
+                        }
+                    }} />
+                )
+            }, MessageNotice.PopupParam)
         })
     }
 }

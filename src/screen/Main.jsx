@@ -117,15 +117,11 @@ class Main extends BaseScreen {
                 props: {
                 }
             }
-        }, {
-            message: '这是main页面传递的Spiner数据'
-        }, (comp) => {
-            comp.setText('你好,SpaRouter世界!', true)
+        }, {}, (comp) => {
+            comp.setText('key:appname', true)
         })
 
-        ModalTool.showToast(null, (comp) => {
-            comp.setText('你好,SpaRouter世界', Toast.LONG)
-        })
+        ModalTool.showToast('key:helloWorld', null, Toast.SHORT)
 
         // 如果 Toast 在内置路由池内 则可以:
         // this.navigationModal(Toast._path, null, (comp) => { comp.setText('哈哈哈哈😄------') })

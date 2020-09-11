@@ -37,14 +37,19 @@ class Login extends BaseScreen {
 
     onMenu() {
         this.navigationModal(Popup._path, null, (comp) => {
-            comp.onComp((
-                <MessageNotice options={{
-                    title: '标题', content: this.props.intentData.message,
-                    onSure: (e) => {
-                        comp.close()
-                    }
-                }} />
-            ), MessageNotice.PopupParam)
+            comp.callComp(() => {
+                return (
+                    <MessageNotice {...{
+                        content: this.props.intentData.message,
+                        onSure: (e) => {
+                            comp.close()
+                        },
+                        onCancel: (e) => {
+                            comp.close()
+                        }
+                    }} />
+                )
+            }, MessageNotice.PopupParam)
         })
 
         this.navigationModal(Toast._path, null, (comp) => {

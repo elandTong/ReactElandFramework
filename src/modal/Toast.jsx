@@ -50,23 +50,29 @@ class Toast extends BaseModal {
     }
 
     setText(text, showTime = 0) {
-        this.setState({
-            showTime: showTime, text: text
-        })
+        this.setState({ text: text, showTime: showTime })
+    }
+
+    getText(language) {
+        if (this.state.text.indexOf('key:') === 0) {
+            return language[this.state.text.replace('key:', '')] || this.state.text
+        } else {
+            return this.state.text
+        }
     }
 
     close() {
         this.finish()
     }
 
-    renderContent({ theme, language, getapp }) {
+    renderContent({ theme, language }) {
         return (
             <ModalPage>
                 <div className={'display-center comp-message-toast-root'} onClick={(e) => {
                     this.close()
                 }}>
                     <div className={'display-center comp-message-toast-cont'} dangerouslySetInnerHTML={{
-                        __html: this.state.text
+                        __html: this.getText(language)
                     }} />
                 </div>
             </ModalPage>

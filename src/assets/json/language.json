@@ -1,6 +1,7 @@
 {
     "cn": {
         "appname": "ElandFramework",
+        "helloWorld":"你好,SpaRouter世界!",
         "retry": "重试",
         "nodata": "没有数据!",
         "sorry": "很抱歉!",
@@ -24,11 +25,14 @@
             "输入的手势密码不正确!"
         ],
         "sure": "确认",
+        "cancel": "取消",
         "revoke": "撤回",
-        "close": "关闭"
+        "close": "关闭",
+        "prompt": "标题"
     },
     "en": {
         "appname": "ElandFramework",
+        "helloWorld":"Hello world!",
         "retry": "Retry",
         "nodata": "No data!",
         "sorry": "Sorry!",
@@ -52,7 +56,9 @@
             "输入的手势密码不正确!"
         ],
         "sure": "Sure",
+        "cancel": "Cancel",
         "revoke": "Revoke",
-        "close": "Close"
+        "close": "Close",
+        "prompt": "Prompt"
     }
 }

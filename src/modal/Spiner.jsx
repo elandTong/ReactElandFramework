@@ -38,6 +38,14 @@ class Spiner extends BaseModal {
         this.setState({ text: text || this.state.text })
     }
 
+    getText(language) {
+        if (this.state.text.indexOf('key:') === 0) {
+            return language[this.state.text.replace('key:', '')] || this.state.text
+        } else {
+            return this.state.text
+        }
+    }
+
     close() {
         this.finish()
     }
@@ -59,7 +67,7 @@ class Spiner extends BaseModal {
                         />
 
                         <span className={'comp-spiner-text'}>
-                            {this.state.text}
+                            {this.getText(language)}
                         </span>
                     </div>
                 </div>
