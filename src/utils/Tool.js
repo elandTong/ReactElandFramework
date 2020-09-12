@@ -1,5 +1,6 @@
 import React from 'react'
 import Config from '../Config'
+import DialogBox from '../modal/DialogBox'
 import Spiner from '../modal/Spiner'
 import Toast from '../modal/Toast'
 import Frame from '../router/Frame'
@@ -16,6 +17,12 @@ class ModalTool {
 
     static showLoading(handle) {
         RouterTool.navigationModal(Spiner._path, null, (comp) => {
+            if (handle) { handle(comp) }
+        })
+    }
+
+    static showDialogBox(intentData, handle) {
+        RouterTool.navigationModal(DialogBox._path, intentData, (comp) => {
             if (handle) { handle(comp) }
         })
     }
