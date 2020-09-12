@@ -1,12 +1,11 @@
 import React from 'react';
-import Popup from '../modal/Popup';
+import DialogBox from '../modal/DialogBox';
 import Toast from '../modal/Toast';
 import BaseScreen from "../router/BaseScreen";
 import { ScreenPage } from "../router/Page";
 import Tool from '../utils/Tool';
 import Button from '../widget/Button';
 import GestureLock from '../widget/GestureLock';
-import MessageNotice from '../widget/MessageNotice';
 
 class Login extends BaseScreen {
     static _path = './Login'
@@ -36,20 +35,12 @@ class Login extends BaseScreen {
     }
 
     onMenu() {
-        this.navigationModal(Popup._path, null, (comp) => {
-            comp.callComp(() => {
-                return (
-                    <MessageNotice {...{
-                        content: this.props.intentData.message,
-                        onSure: (e) => {
-                            comp.close()
-                        },
-                        onCancel: (e) => {
-                            comp.close()
-                        }
-                    }} />
-                )
-            }, MessageNotice.PopupParam)
+        this.navigationModal(DialogBox._path, {
+            content: this.props.intentData.message,
+            onSure: (e) => {
+            },
+            onCancel: (e) => {
+            }
         })
 
         this.navigationModal(Toast._path, null, (comp) => {

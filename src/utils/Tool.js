@@ -534,9 +534,9 @@ class Tool {
                 return _source[key] != null
             }).forEach((key) => {
                 if (key in _target) { // 判断是否存在该属性
-                    if (_target[key] instanceof Array) {
+                    if (_target[key] instanceof Array || _target[key] instanceof Function) {
                         if (identical) {
-                            if (_target[key] == null || typeof (_target[key]) == typeof (_source[key])) {
+                            if (typeof (_target[key]) == typeof (_source[key])) {
                                 _target[key] = _source[key]
                             }
                         } else {

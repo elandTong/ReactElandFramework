@@ -4,6 +4,7 @@ import Config from './Config';
 import Popup from './modal/Popup';
 import Spiner from './modal/Spiner';
 import Toast from './modal/Toast';
+import DialogBox from './modal/DialogBox';
 import Frame from './router/Frame';
 import Login from './screen/Login';
 import Main from './screen/Main';
@@ -42,6 +43,10 @@ class Application extends React.Component {
         }, {
           component: Popup,
           path: Popup._path,
+          props: {}
+        }, {
+          component: DialogBox,
+          path: DialogBox._path,
           props: {}
         }]
       },

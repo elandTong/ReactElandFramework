@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import '../assets/style/comp.message.scss'
 import BaseContext from '../BaseContext'
+import { PopupConstructor } from '../modal/Popup'
 import TouchEffect from './TouchEffect'
 
 class MessageNotice extends BaseContext {
@@ -44,7 +45,9 @@ class MessageNotice extends BaseContext {
 
     renderContent({ language }) {
         return (
-            <div className={'comp-message-notice-root display-column'}>
+            <div className={'comp-message-notice-root display-column'} onClick={(e) => {
+                e.stopPropagation()
+            }}>
                 <div className={'comp-message-notice-head display-center'}>
                     <span> {this.getText(language, this.props.title)} </span>
                 </div>
@@ -80,10 +83,8 @@ class MessageNotice extends BaseContext {
 MessageNotice.PopupParam = {
     width: MessageNotice._size.w,
     height: MessageNotice._size.h,
-    angleClose: false,
-    outClose: true,
-    pos: { align: 'center' },
-    onClose: (e) => { }
+    closemode: PopupConstructor.Closemode.out,
+    onClose: function (e) { }
 }
 
 export default MessageNotice

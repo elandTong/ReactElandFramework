@@ -113,9 +113,7 @@ class Main extends BaseScreen {
         this.startModal({ // 意图跳转 不会改变 内置路由池
             component: Spiner,
             path: Spiner._path,
-            options: {
-                props: {
-                }
+            props: {
             }
         }, {}, (comp) => {
             comp.setText('key:appname', true)
@@ -133,9 +131,7 @@ class Main extends BaseScreen {
         this.startScreen({
             component: Login,
             path: Login._path,
-            options: {
-                props: {
-                }
+            props: {
             }
         }, {
             message: '这是main页面传递的数据'
