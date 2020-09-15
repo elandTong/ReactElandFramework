@@ -9,6 +9,7 @@ import CategoryList from '../scenes/CategoryList';
 import ResUtil from '../utils/ResUtil';
 import Tool, { ModalTool } from '../utils/Tool';
 import DrawerMenu from '../widget/DrawerMenu';
+import DrawerMenuContent, { DrawerMenuBottom, DrawerMenuHeader, DrawerMenuItem } from '../widget/DrawerMenuContent';
 import FixedModal from '../widget/FixedModal';
 import FixedModalGroup from '../widget/FixedModalGroup';
 import GestureLock from '../widget/GestureLock';
@@ -18,6 +19,29 @@ import Navbar from '../widget/Navbar';
 import { TabSlide, TabSwiper } from '../widget/Swiper';
 import ToolbarMenu from '../widget/ToolbarMenu';
 import Login from './Login';
+
+const DrawerMenuContentHook = function (props) {
+    return (
+        <DrawerMenuContent>
+            <DrawerMenuBottom>
+                <span>{'left'}</span>
+                <span>{'center'}</span>
+                <span>{'right'}</span>
+            </DrawerMenuBottom>
+
+            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, key) => {
+                return (
+                    <DrawerMenuItem key={key} onClick={(e) => { }}>
+                        {`DrawerMenuItem-${item}`}
+                    </DrawerMenuItem>
+                )
+            })}
+
+            <DrawerMenuHeader>
+            </DrawerMenuHeader>
+        </DrawerMenuContent>
+    )
+}
 
 class Main extends BaseScreen {
     static _path = '/main'
@@ -35,7 +59,7 @@ class Main extends BaseScreen {
         this.renderDrawerMenu = this.renderDrawerMenu.bind(this)
         this.onMenu = this.onMenu.bind(this)
         this.onBack = this.onBack.bind(this)
-        this.closeDrawerHandle = this.closeDrawerHandle.bind(this)
+        this.changedDrawerStatus = this.changedDrawerStatus.bind(this)
         this.onMenuItemClick = this.onMenuItemClick.bind(this)
         this.onTab1ItemClick = this.onTab1ItemClick.bind(this)
         this.onTab2ItemClick = this.onTab2ItemClick.bind(this)
@@ -51,7 +75,7 @@ class Main extends BaseScreen {
                 maskStyle: {
                 },
                 render: this.renderDrawerMenu,
-                closeHandle: this.closeDrawerHandle
+                closeHandle: this.changedDrawerStatus
             },
             refresh: {
                 up: {
@@ -165,9 +189,7 @@ class Main extends BaseScreen {
         _menu.visible = true
         this.setState({ menuFixedModal: _menu })
 
-        let _drawer = this.state.drawerMenu
-        _drawer.open = !_drawer.open
-        this.setState({ drawerMenu: _drawer })
+        this.changedDrawerStatus()
     }
 
     onBack(e) {
@@ -183,7 +205,7 @@ class Main extends BaseScreen {
         Config.setAppTheme(item.key)
     }
 
-    closeDrawerHandle(e) {
+    changedDrawerStatus(e) {
         let _drawer = this.state.drawerMenu
         _drawer.open = !_drawer.open
         this.setState({ drawerMenu: _drawer })
@@ -191,7 +213,7 @@ class Main extends BaseScreen {
 
     renderDrawerMenu() {
         return (
-            <div></div>
+            <DrawerMenuContentHook />
         )
     }
 

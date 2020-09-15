@@ -1,0 +1,100 @@
+@import './theme.light.scss';
+@import './theme.dark.scss';
+@import './theme.user.scss';
+
+.comp-drawer-menu-content-root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.comp-drawer-menu-content-scroll {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    .exist-bottom & {
+        height: calc(100% - 45px);
+    }
+}
+
+.comp-drawer-menu-content-head {
+    width: 100%;
+    height: 180px;
+    padding: 20px;
+    background: linear-gradient(316deg, rgb(252, 207, 26) 0%, rgb(3, 154, 124) 100%);;
+}
+
+.comp-drawer-menu-content-head-user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border-color: $light-color-theme;
+    border-width: 1px;
+    border-style: solid;
+    box-sizing: border-box;
+    .theme-light & {
+        border-color: $light-color-theme;
+    }
+    .theme-dark & {
+        border-color: $dark-color-theme;
+    }
+    .theme-user & {
+        border-color: $user-color-theme;
+    }
+}
+
+.comp-drawer-menu-content-head-user-describe {
+    margin-top: 20px;
+    font-size: 16px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        color: $user-color-theme-font;
+    }
+}
+
+.comp-drawer-menu-content-item {
+    width: 100%;
+    height: 45px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 16px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        color: $user-color-theme-font;
+    }
+}
+
+.comp-drawer-menu-content-bottom {
+    width: 100%;
+    height: 45px;
+    padding-left: 14px;
+    padding-right: 14px;
+    background: $light-color-translucent;
+    font-size: 14px;
+    color: $light-color-theme-font;
+    .theme-light & {
+        background: $light-color-translucent;
+        color: $light-color-theme-font;
+    }
+    .theme-dark & {
+        background: $dark-color-translucent;
+        color: $dark-color-theme-font;
+    }
+    .theme-user & {
+        background: $user-color-translucent;
+        color: $user-color-theme-font;
+    }
+}
