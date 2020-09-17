@@ -23,11 +23,13 @@ input[type="number"]{
 }
 
 .common-boxsize-full {
-    width: 100%; height: 100%;
+width: 100%; 
+height: 100%;
 }
 
 .common-boxsize-full-number {
-width: calc(100vw);height: calc(100vh);
+width: calc(100vw); 
+height: calc(100vh - var(--vh-offset, 0px));
 }
 
 .common-boxsize-fit {

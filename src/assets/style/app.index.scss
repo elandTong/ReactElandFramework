@@ -3,15 +3,13 @@
 @import "theme.user";
 
 html {
+  width: 100%;
+  height: 100%;
+  
   /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
   -ms-overflow-style:none;
   /*火狐下隐藏滚动条*/
   overflow:-moz-scrollbars-none;
-}
-
-html {
-  width: 100%;
-  height: 100%;
 }
 
 body {
@@ -19,18 +17,16 @@ body {
   height: 100%;
   margin: 0;
   overflow: hidden;
-
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -moz-user-select: none; 
-  -o-user-select:none; 
-  -khtml-user-select:none; 
-  -webkit-user-select:none; 
-  -ms-user-select:none; 
+  -moz-user-select: none;
+  -o-user-select:none;
+  -khtml-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
   user-select:none;
 }
 

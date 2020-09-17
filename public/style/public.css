@@ -1,3 +1,7 @@
+:root{
+	--vh-offset: 0px;
+}
+
 .button_solid_sub {
 	width: 100%;
 	height: 40px;

@@ -3,11 +3,11 @@
 @import './theme.user.scss';
 
 $-keyboard-button-width: calc((100vw - 4px) / 5);
-$-keyboard-button-height: calc((100vh * 0.3 - 3px) / 4);
-$-keyboard-mid-button-height: calc((100vh * 0.3 - 1px) / 2);
-$-keyboard-max-button-height: calc(((100vh * 0.3 - 3px) / 4 * 3) + 2px);
-$-keyboard-numberzone-width: calc(((100vw - 4px) / 5) * 3 + 2px);
-$-keyboard-zero-button-width: calc(((100vw - 4px) / 5) * 2 + 1px);
+$-keyboard-button-height: calc((30vh - 3px) / 4);
+$-keyboard-mid-button-height: calc((30vh - 1px) / 2);
+$-keyboard-max-button-height: calc((30vh - 3px) / 4 * 3 + 2px);
+$-keyboard-numberzone-width: calc((100vw - 4px) / 5 * 3 + 2px);
+$-keyboard-zero-button-width: calc((100vw - 4px) / 5 * 2 + 1px);
 
 .comp-number-keyboard-root {
     position: absolute;

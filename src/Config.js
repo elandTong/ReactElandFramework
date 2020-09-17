@@ -12,7 +12,7 @@ class Config {
     static APPCONFIG = {
         APP_ID: window._APP_ID,
         APP_NAME: 'ElandFramework',
-        APP_VERSION: 340020090,
+        APP_VERSION: 340040090,
         RELEASE: false,
         RELEASE_DOMAIN: 'https://127.0.0.1/',
         TEST_DOMAIN: 'https://127.0.0.1/'

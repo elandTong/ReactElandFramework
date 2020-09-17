@@ -2,6 +2,7 @@
 import cssVars from 'css-vars-ponyfill';
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import vhCheck from 'vh-check';
 
 import './assets/style/app.normalize.scss';
 import './assets/style/app.index.scss';
@@ -15,6 +16,8 @@ import Config from './Config';
 import NetApi from './utils/NetApi';
 import Tool from './utils/Tool';
 import * as serviceWorker from './serviceWorker';
+
+vhCheck()
 
 cssVars()
 
