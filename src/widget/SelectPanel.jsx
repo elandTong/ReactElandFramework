@@ -64,7 +64,7 @@ class SelectPanel extends BaseContext {
     renderContent({ theme, language }) {
         return (
             <React.Fragment>
-                <TouchEffect className={'comp-select-panel-root display-center'} onClick={this.onClick.bind(this)}>
+                <TouchEffect className={'comp-select-panel-root common-display-center'} onClick={this.onClick.bind(this)}>
                     <span>{this.props.format(this.props.items[this.props.currIndex])}</span>
                     <img height={'40%'}
                         style={{ marginLeft: 10 }}
@@ -82,7 +82,7 @@ class SelectPanel extends BaseContext {
 
                                     return (
                                         <TouchEffect key={key}
-                                            className={`comp-select-panel-item display-space ${_deepClass} ${_selectClass}`}
+                                            className={`comp-select-panel-item common-display-space-between ${_deepClass} ${_selectClass}`}
                                             onClick={this.onItemClick.bind(this, item, key)}>
                                             <span>
                                                 {this.props.format(item)}

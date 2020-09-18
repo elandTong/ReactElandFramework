@@ -36,7 +36,7 @@ class MessageNotice extends BaseContext {
 
     renderSingleBottom(language) {
         return (
-            <TouchEffect className={'comp-message-notice-bottom display-center'}
+            <TouchEffect className={'comp-message-notice-bottom common-display-center'}
                 onClick={this.props.onSure}>
                 <span>{language.sure}</span>
             </TouchEffect>
@@ -45,31 +45,31 @@ class MessageNotice extends BaseContext {
 
     renderContent({ language }) {
         return (
-            <div className={'comp-message-notice-root display-column'} onClick={(e) => {
+            <div className={'comp-message-notice-root common-display-column'} onClick={(e) => {
                 e.stopPropagation()
             }}>
-                <div className={'comp-message-notice-head display-center'}>
+                <div className={'comp-message-notice-head common-display-center'}>
                     <span> {this.getText(language, this.props.title)} </span>
                 </div>
 
                 <div className={'common-spline-x'} />
 
-                <div className={'comp-message-notice-content display-center'}>
+                <div className={'comp-message-notice-content common-display-center'}>
                     {this.getText(language, this.props.content) || this.props.children}
                 </div>
 
                 <div className={'common-spline-x'} />
 
                 {this.props.dialogMode ? (
-                    <div className={'comp-message-notice-bottom display-space'}>
-                        <TouchEffect className={'comp-message-notice-bottom-button-left display-center'}
+                    <div className={'comp-message-notice-bottom common-display-space-between'}>
+                        <TouchEffect className={'comp-message-notice-bottom-button-left common-display-center'}
                             onClick={this.props.onSure}>
                             <span> {language.sure} </span>
                         </TouchEffect>
 
                         <div className={'common-spline-y'} />
 
-                        <TouchEffect className={'comp-message-notice-bottom-button-right display-center'}
+                        <TouchEffect className={'comp-message-notice-bottom-button-right common-display-center'}
                             onClick={this.props.onCancel}>
                             <span> {language.cancel} </span>
                         </TouchEffect>

@@ -232,7 +232,7 @@ class Main extends BaseScreen {
                 _menu.visible = false
                 this.setState({ menuFixedModal: _menu })
             }}>
-                <ToolbarMenu className={'pos-absolute-nosize'} style={{
+                <ToolbarMenu className={'common-pos-absolute-nosize'} style={{
                     left: Tool.getScreenSize().w - 101, top: 46
                 }} onItemClick={this.onMenuItemClick} />
             </Mask>

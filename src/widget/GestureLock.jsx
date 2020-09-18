@@ -358,7 +358,7 @@ class GestureLock extends BaseContext {
         this._theme = theme
 
         return (
-            <div className={'display-column comp-gesture-lock-root'}>
+            <div className={'common-display-column comp-gesture-lock-root'}>
                 <span>
                     {this.props.type === GestureLock.TYPE_VERIFY ? (language.verifyGesture) : (language.settingGesture)}
                 </span>

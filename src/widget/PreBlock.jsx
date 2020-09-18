@@ -28,19 +28,19 @@ class Preblock extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={`pos-relative common-boxsize-full`}>
-                <div className={`pos-absolute comp-preblock-last ${this.props.className}`} style={Object.assign({}, this.props.style)}>
+            <div className={`common-pos-relative common-boxsize-full`}>
+                <div className={`common-pos-absolute comp-preblock-last ${this.props.className}`} style={Object.assign({}, this.props.style)}>
                     {this.props.children}
                 </div>
 
                 {this.props.sorryStatus ? (
-                    <div className={'pos-absolute comp-preblock-mid'}>
+                    <div className={'common-pos-absolute comp-preblock-mid'}>
                         <Sorry {...this.props.sorryProps} />
                     </div>
                 ) : (null)}
 
                 {this.props.loadStatus ? (
-                    <div className={'pos-absolute display-center comp-preblock-fast'}>
+                    <div className={'common-pos-absolute common-display-center comp-preblock-fast'}>
                         <GridLoader size={22} margin={0} loading={true} color={theme.color.theme} />
                     </div>
                 ) : (null)}

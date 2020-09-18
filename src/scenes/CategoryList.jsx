@@ -17,9 +17,9 @@ class CategoryList extends BaseContext {
 
     renderContent({ theme, language, getapp }) {
         return (
-            <div className={'display-space scenes-category-list-root'}>
+            <div className={'common-display-space-between scenes-category-list-root'}>
                 <img className={'scenes-category-list-imag'} src={this.props.icon} alt={'categoryList'} />
-                <div className={'display-warp scenes-category-list-cont-root'}>
+                <div className={'common-display-warp-space-between scenes-category-list-cont-root'}>
                     {Tool.pushFillin(this.props.data.games.map((item, key) => {
                         return (
                             <ListItem key={key} className={`${key > 3 ? 'scenes-category-list-item-margin' : ''}`} data={item} onClick={(e) => {
@@ -74,10 +74,10 @@ class ListItem extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <TouchEffect className={`scenes-category-list-item-root ${this.props.className} display-center`}
+            <TouchEffect className={`scenes-category-list-item-root ${this.props.className} common-display-center`}
                 style={Object.assign({}, this.props.style)}
                 onClick={this.props.onClick}>
-                <div className={'display-column'}>
+                <div className={'common-display-column'}>
                     <span className={`common-text-singleline ${this.getNameClassname()}`}>
                         {this.props.data.sname || 'notName'}
                     </span>

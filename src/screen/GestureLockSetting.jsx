@@ -39,7 +39,7 @@ class GestureLockSetting extends BaseScreen {
                 },
                 hideToolbar: false
             }}>
-                <div className={'display-center'} style={{
+                <div className={'common-display-center'} style={{
                     width: '100%',
                     height: '100%'
                 }}>

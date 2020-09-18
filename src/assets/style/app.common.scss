@@ -22,6 +22,7 @@ input[type="number"]{
 -moz-appearance: textfield;
 }
 
+// classname
 .common-boxsize-full {
 width: 100%; 
 height: 100%;
@@ -144,21 +145,21 @@ transform: rotate(-90deg);
 -o-transform: rotate(-90deg);
 }
 
-@-webkit-keyframes rotate{
+@-webkit-keyframes commonRotate {
 0%{ -webkit-transform: rotate(0deg);}
 50%{ -webkit-transform: rotate(180deg);}
 100%{ -webkit-transform: rotate(360deg);}
 }
 
-@keyframes rotate{
+@keyframes commonRotate {
 0%{ -webkit-transform: rotate(0deg);}
 50%{ -webkit-transform: rotate(180deg);}
 100%{ -webkit-transform: rotate(360deg);}
 }
 
 .common-rotate {
--webkit-animation: rotate 0.5s linear infinite;
-animation: rotate 0.5s linear infinite;
+-webkit-animation: commonRotate 0.5s linear infinite;
+animation: commonRotate 0.5s linear infinite;
 }
 
 // 阴影效果
@@ -194,72 +195,87 @@ background: transparent
 }
 
 // 盒子通用样式
-.display-center {
+.common-display-center {
 display: flex;
 justify-content: center;
 align-items: center;
 }
 
-.display-around {
-display: flex;
-justify-content: space-around;
-align-items: center;
-}
-
-.display-space {
+.common-display-space-between {
 display: flex;
 justify-content: space-between;
 align-items: center;
 }
 
-.display-column {
+.common-display-space-around {
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.common-display-column {
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: center;
 }
 
-.display-warp {
+.common-display-warp-space-between {
 display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
 align-items: center;
 }
 
-.display-warp-start {
+.common-display-warp-center {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+}
+
+.common-display-warp-center-start {
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
 align-content: flex-start;
+text-align: center;    
+}
+
+.common-display-warp-center-space-evenly {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-content: space-evenly;
 text-align: center;
 }
 
-.display-warp-around {
+.common-display-warp-space-around {
 display: flex;
 flex-wrap: wrap;
 justify-content: space-around;
-align-items: flex-end
+align-items: flex-end;
 }
 
-.display-start {
+.common-display-start {
 display: flex;
 justify-content: flex-start;
 align-items: center;
 }
 
-.display-end {
+.common-display-end {
 display: flex;
 justify-content: flex-end;
 align-items: center;
 }
 
 // 内部波纹点击效果
-.click-in-ripple {
+.common-click-in-ripple {
 position: relative;
 overflow: hidden; /* 隐藏溢出的径向渐变背景 */
 }
 
-.click-in-ripple:after {
+.common-click-in-ripple:after {
 content: "";
 display: block;
 position: absolute;
@@ -285,22 +301,22 @@ opacity: 0;
 transition: transform .4s, opacity .6s;
 }
 
-.click-in-ripple:active:after {
+.common-click-in-ripple:active:after {
 transform: scale(0, 0);
 opacity: .3;
 transition: 0s;
 }
 
 // 溢出波纹点击效果
-.click-out-ripple {
+.common-click-out-ripple {
 position: relative;
 }
 
-.click-out-ripple:focus{
+.common-click-out-ripple:focus{
 outline: none;
 }
 
-.click-out-ripple:after {
+.common-click-out-ripple:after {
 content: '';
 display: block;
 position: absolute;
@@ -326,7 +342,7 @@ border-radius: inherit;
 transition: all .3s;
 }
 
-.click-out-ripple:active:after {
+.common-click-out-ripple:active:after {
 opacity: .2;
 top: 0;
 left: 0;
@@ -336,13 +352,13 @@ transition: 0s;
 }
 
 // 布局类型样式
-.pos-relative {
+.common-pos-relative {
 position: relative;
 width: 100%;
 height: 100%;
 }
 
-.pos-absolute {
+.common-pos-absolute {
 position: absolute;
 top: 0px;
 left: 0px;
@@ -350,7 +366,7 @@ width: 100%;
 height: 100%;
 }
 
-.pos-absolute-nosize {
+.common-pos-absolute-nosize {
 position: absolute;
 top: 0px;
 left: 0px;

@@ -2,6 +2,7 @@ import React from 'react'
 import '../assets/style/comp.message.scss'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
+import { DisplayCenter } from '../widget/Display'
 
 class Toast extends BaseModal {
     static _path = '/toast'
@@ -68,13 +69,13 @@ class Toast extends BaseModal {
     renderContent({ theme, language }) {
         return (
             <ModalPage>
-                <div className={'display-center comp-message-toast-root'} onClick={(e) => {
+                <DisplayCenter className={'comp-message-toast-root'} onClick={(e) => {
                     this.close()
                 }}>
-                    <div className={'display-center comp-message-toast-cont'} dangerouslySetInnerHTML={{
+                    <DisplayCenter className={'comp-message-toast-cont'} dangerouslySetInnerHTML={{
                         __html: this.getText(language)
                     }} />
-                </div>
+                </DisplayCenter>
             </ModalPage>
         )
     }

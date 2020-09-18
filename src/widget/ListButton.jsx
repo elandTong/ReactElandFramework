@@ -42,7 +42,7 @@ class ListButton extends React.Component {
             let _classname_sele = this.state.currIndex === key ? 'comp-list-button-select' : 'comp-list-button-unsele'
 
             return (
-                <div key={key} className={`click-out-ripple display-center ${_classname_outer} ${_classname_sele}`} style={{
+                <div key={key} className={`common-click-out-ripple common-display-center ${_classname_outer} ${_classname_sele}`} style={{
                     width: `${100 / this._options.items.length}%`
                 }} onClick={(e) => {
                     e.stopPropagation()
@@ -60,7 +60,7 @@ class ListButton extends React.Component {
         })
 
         return (
-            <div className={'display-center comp-list-button-root'}>
+            <div className={'common-display-center comp-list-button-root'}>
                 {_items_jsx}
             </div>
         )

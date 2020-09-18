@@ -38,7 +38,7 @@ class ToolbarMenu extends BaseContext {
             let _classname = item.key === Config.getAppTheme() ?
                 'comp-toolbarmenu-item-select' : 'comp-toolbarmenu-item-unsele'
             return (
-                <div key={key} className={`display-center comp-toolbarmenu-item ${_classname}`} onClick={(e) => {
+                <div key={key} className={`common-display-center comp-toolbarmenu-item ${_classname}`} onClick={(e) => {
                     this.onItemClick(item, key, e)
                 }}>
                     <span> {item.name && item.name(language)} </span>
@@ -47,7 +47,7 @@ class ToolbarMenu extends BaseContext {
         })
 
         return (
-            <div className={`display-column comp-toolbarmenu-root ${this.props.className || ''}`} style={this.props.style}>
+            <div className={`common-display-column comp-toolbarmenu-root ${this.props.className || ''}`} style={this.props.style}>
                 {Tool.insertSplitline(_items_jsx)}
             </div>
         )

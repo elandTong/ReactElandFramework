@@ -35,8 +35,8 @@ class Sorry extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={`display-center common-boxsize-full ${this.props.className}`} style={Object.assign({}, this.props.style)}>
-                <div className={'display-column'}>
+            <div className={`common-display-center common-boxsize-full ${this.props.className}`} style={Object.assign({}, this.props.style)}>
+                <div className={'common-display-column'}>
                     <img className={'comp-sorry-imag'}
                         src={this.props.iconSrc || ResUtil.requireIcon('ic_sorry.png', theme)}
                         alt={'sorry'} />

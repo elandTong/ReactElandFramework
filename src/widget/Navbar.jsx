@@ -45,11 +45,11 @@ class Navbar extends BaseContext {
 
     render() {
         return (
-            <div className={'display-space comp-navbar-root'}>
+            <div className={'common-display-space-between comp-navbar-root'}>
                 {this.props.items.map((item, key) => {
                     let _classname = this.state.currIndex === key ? 'comp-navbar-select' : 'comp-navbar-unsele'
                     return (
-                        <div key={key} className={`display-center click-out-ripple ${_classname}`} style={{
+                        <div key={key} className={`common-display-center common-click-out-ripple ${_classname}`} style={{
                             width: `${100 / this.props.items.length}%`
                         }} onClick={(e) => {
                             this.onSelect(key, e)

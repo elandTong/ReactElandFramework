@@ -3,6 +3,7 @@ import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
 import Tool from '../utils/Tool'
 import GestureLock from '../widget/GestureLock'
+import { DisplayCenter } from '../widget/Display'
 
 class GestureLockVerify extends BaseModal {
     static _path = '/gestureLockVerify'
@@ -32,7 +33,7 @@ class GestureLockVerify extends BaseModal {
     renderContent({ theme, language, getapp }) {
         return (
             <ModalPage>
-                <div className={'display-center'} style={{
+                <DisplayCenter style={{
                     width: '100%',
                     height: '100%',
                     background: 'rgba(80,80,80,0.6)'
@@ -40,7 +41,7 @@ class GestureLockVerify extends BaseModal {
                     <GestureLock type={GestureLock.TYPE_VERIFY}
                         verifyPassword={Tool.getLocalStorage(GestureLock._STORAGE_KEY)}
                         resultHandle={this.onVerifyResult} />
-                </div>
+                </DisplayCenter>
             </ModalPage>
         )
     }

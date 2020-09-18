@@ -28,13 +28,13 @@ class TouchEffect extends BaseContext {
     selectEffect() {
         switch (this.props.mode) {
             case 'in': {
-                return 'click-in-ripple'
+                return 'common-click-in-ripple'
             }
             case 'disable': {
                 return ''
             }
             default: {
-                return 'click-out-ripple'
+                return 'common-click-out-ripple'
             }
         }
     }

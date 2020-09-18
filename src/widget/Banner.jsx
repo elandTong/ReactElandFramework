@@ -84,7 +84,7 @@ class Banner extends React.Component {
                 <div className={'swiper-wrapper'}>
                     {this._options.items.map((item, key) => {
                         return (
-                            <div key={key} className={'swiper-slide display-center'} onClick={(e) => {
+                            <div key={key} className={'swiper-slide common-display-center'} onClick={(e) => {
                                 if (this._options.onItemClick) {
                                     this._options.onItemClick(item, key, e)
                                 }

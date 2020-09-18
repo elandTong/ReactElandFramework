@@ -28,7 +28,7 @@ class DrawerMenuHeader extends BaseContext {
 
     renderUser({ theme, language }) {
         return (
-            <div className={'display-column'}>
+            <div className={'common-display-column'}>
                 <img className={'comp-drawer-menu-content-head-user-avatar'}
                     src={this.props.avatar || ResUtil.requirePic('pic_avatar.jpg', theme)}
                     alt={'avatar'} />
@@ -42,7 +42,7 @@ class DrawerMenuHeader extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={`comp-drawer-menu-content-head display-center ${this.props.className}`}
+            <div className={`comp-drawer-menu-content-head common-display-center ${this.props.className}`}
                 style={Object.assign({}, this.props.style)}>
                 {this.props.children || this.renderUser({ theme, language })}
             </div>
@@ -71,7 +71,7 @@ class DrawerMenuItem extends BaseContext {
 
     render() {
         return (
-            <TouchEffect className={`comp-drawer-menu-content-item display-start ${this.props.className}`}
+            <TouchEffect className={`comp-drawer-menu-content-item common-display-start ${this.props.className}`}
                 style={Object.assign({}, this.props.style)}
                 onClick={this.props.onClick}>
                 {this.props.children}
@@ -98,7 +98,7 @@ class DrawerMenuBottom extends BaseContext {
 
     render() {
         return (
-            <div className={`comp-drawer-menu-content-bottom display-space ${this.props.className}`}
+            <div className={`comp-drawer-menu-content-bottom common-display-space-between ${this.props.className}`}
                 style={Object.assign({}, this.props.style)}>
                 {this.props.children}
             </div>

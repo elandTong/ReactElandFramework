@@ -66,14 +66,14 @@ class SearchBar extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={`display-space comp-search-root ${this.props.className || ''}`} style={this.props.style}>
+            <div className={`common-display-space-between comp-search-root ${this.props.className || ''}`} style={this.props.style}>
                 <input className={'comp-search-input'}
                     placeholder={this.props.placeholder}
                     value={this.state.val} onChange={(e) => {
                         this.onSearchChanged(e.target.value)
                     }} />
 
-                <div className={'click-out-ripple comp-search-submit-root'} onClick={(e) => {
+                <div className={'common-click-out-ripple comp-search-submit-root'} onClick={(e) => {
                     this.onSearchClick(e)
                 }}>
                     {this.renderIcon({ theme, language })}

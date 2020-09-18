@@ -20,7 +20,7 @@ class Mask extends BaseContext {
 
     render() {
         return (
-            <div className={`pos-relative ${this.props.className}`}
+            <div className={`common-pos-relative ${this.props.className}`}
                 style={this.props.style}
                 onClick={this.props.onClick}>
                 {this.props.children}

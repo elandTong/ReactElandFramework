@@ -138,12 +138,12 @@ class NumberKeyboard extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={`comp-number-keyboard-root display-space ${this.props.className}`} style={Object.assign({}, this.props.style)}>
-                <div className={'comp-number-keyboard-close-button click-out-ripple display-center'} onClick={this.onClose.bind(this)}>
+            <div className={`comp-number-keyboard-root common-display-space-between ${this.props.className}`} style={Object.assign({}, this.props.style)}>
+                <div className={'comp-number-keyboard-close-button common-click-out-ripple common-display-center'} onClick={this.onClose.bind(this)}>
                     {language.close}
                 </div>
 
-                <div className={'comp-number-keyboard-numberzone display-warp'}>
+                <div className={'comp-number-keyboard-numberzone common-display-warp-space-between'}>
                     {this.state.number.filter((item) => {
                         if (item.key === 'point' && this.props.disablePoint) {
                             return false
@@ -156,7 +156,7 @@ class NumberKeyboard extends BaseContext {
                         }
                         let _class = `${_buttonClass} ${key > 2 ? 'comp-number-keyboard-button-margin' : ''}`
                         return (
-                            <div key={key} className={`${_class} click-out-ripple display-center`} onClick={(e) => {
+                            <div key={key} className={`${_class} common-click-out-ripple common-display-center`} onClick={(e) => {
                                 this.onNumber(item, key, e)
                             }}>
                                 {item.val}
@@ -166,11 +166,11 @@ class NumberKeyboard extends BaseContext {
                 </div>
 
                 <div className={'comp-number-keyboard-tool-zone'}>
-                    <div className={'comp-number-keyboard-min-button click-out-ripple display-center'}
+                    <div className={'comp-number-keyboard-min-button common-click-out-ripple common-display-center'}
                         onClick={this.onRevoke.bind(this)}>{language.revoke}</div>
-                    <div className={'comp-number-keyboard-min-button comp-number-keyboard-button-margin click-out-ripple display-center'}
+                    <div className={'comp-number-keyboard-min-button comp-number-keyboard-button-margin common-click-out-ripple common-display-center'}
                         onClick={this.onReset.bind(this)}>{language.reset}</div>
-                    <div className={'comp-number-keyboard-mid-button comp-number-keyboard-button-margin click-out-ripple display-center'}
+                    <div className={'comp-number-keyboard-mid-button comp-number-keyboard-button-margin common-click-out-ripple common-display-center'}
                         onClick={this.onSure.bind(this)}>{language.sure}</div>
                 </div>
             </div>

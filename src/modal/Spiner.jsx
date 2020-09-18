@@ -3,6 +3,7 @@ import GridLoader from 'react-spinners/GridLoader'
 import '../assets/style/comp.spiner.scss'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
+import { DisplayCenter, DisplayColumn } from '../widget/Display'
 
 class Spiner extends BaseModal {
     static _path = '/spiner'
@@ -53,12 +54,12 @@ class Spiner extends BaseModal {
     renderContent({ theme, language }) {
         return (
             <ModalPage>
-                <div className={'display-center comp-spiner-root'} onClick={(e) => {
+                <DisplayCenter className={'comp-spiner-root'} onClick={(e) => {
                     if (this.touchclose) {
                         this.close()
                     }
                 }}>
-                    <div className={'display-column comp-spiner-cont'}>
+                    <DisplayColumn className={'comp-spiner-cont'}>
                         <GridLoader
                             size={20}
                             margin={0}
@@ -69,8 +70,8 @@ class Spiner extends BaseModal {
                         <span className={'comp-spiner-text'}>
                             {this.getText(language)}
                         </span>
-                    </div>
-                </div>
+                    </DisplayColumn>
+                </DisplayCenter>
             </ModalPage>
         )
     }

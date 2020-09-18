@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import BaseContext from '../BaseContext'
 import ResUtil from '../utils/ResUtil'
+import { DisplaySpaceBetween } from '../widget/Display'
 import TouchEffect from '../widget/TouchEffect'
 
 class Toolbar extends BaseContext {
@@ -44,9 +45,9 @@ class Toolbar extends BaseContext {
 
     renderContent({ theme, language }) {
         return (
-            <div className={'display-space page-screen-container-toolbar-view'}>
+            <DisplaySpaceBetween className={'page-screen-container-toolbar-view'}>
                 <TouchEffect mode={this.props.hideBack ? 'disable' : 'out'}
-                    className={'page-screen-container-toolbar-ele display-center'}
+                    className={'page-screen-container-toolbar-ele common-display-center'}
                     onClick={this.onFinishClick}>
                     {this.props.hideBack ? (null) : (
                         <img src={ResUtil.requireIcon('ic_back.png', theme)}
@@ -58,7 +59,7 @@ class Toolbar extends BaseContext {
                 <span>{this.props.title}</span>
 
                 <TouchEffect mode={this.props.hideMenu ? 'disable' : 'out'}
-                    className={'page-screen-container-toolbar-ele display-center'}
+                    className={'page-screen-container-toolbar-ele common-display-center'}
                     onClick={this.onMenuClick}>
                     {this.props.hideMenu ? (null) : (
                         <img src={ResUtil.requireIcon('ic_menu.png', theme)}
@@ -66,7 +67,7 @@ class Toolbar extends BaseContext {
                             alt={'toolbar_icon_menu'} />
                     )}
                 </TouchEffect>
-            </div>
+            </DisplaySpaceBetween>
         )
     }
 }

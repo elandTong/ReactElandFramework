@@ -2,6 +2,7 @@ import React from 'react'
 import '../assets/style/modal.dialogbox.scss'
 import BaseModal from '../router/BaseModal'
 import { ModalPage } from '../router/Page'
+import { DisplayCenter } from '../widget/Display'
 import MessageNotice from '../widget/MessageNotice'
 
 class DialogBox extends BaseModal {
@@ -40,11 +41,11 @@ class DialogBox extends BaseModal {
     render() {
         return (
             <ModalPage>
-                <div className={'modal-dialogbox-root display-center'} onClick={this.onMaskClick.bind(this)}>
+                <DisplayCenter className={'modal-dialogbox-root'} onClick={this.onMaskClick.bind(this)}>
                     <MessageNotice {...this.props.intentData}
                         onSure={this.onSure.bind(this)}
                         onCancel={this.onCancel.bind(this)} />
-                </div>
+                </DisplayCenter>
             </ModalPage>
         )
     }
