@@ -220,6 +220,11 @@ justify-content: flex-start;
 align-items: center;
 }
 
+.common-display-warp {
+display: flex;
+flex-wrap: wrap;
+}
+
 .common-display-warp-space-between {
 display: flex;
 flex-wrap: wrap;

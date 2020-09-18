@@ -7,6 +7,7 @@ const DisplayClassNames = {
     displaySpaceBetween: 'common-display-space-between',
     displaySpaceAround: 'common-display-space-around',
     displayColumn: 'common-display-column',
+    displayWarp: 'common-display-warp',
     displaySpaceBetweenWarp: 'common-display-warp-space-between',
     displaySpaceAroundWarp: 'common-display-warp-space-around',
     displayCenterWarp: 'common-display-warp-center',
@@ -110,6 +111,31 @@ class DisplayColumn extends BaseContext {
     render() {
         return (
             <div {...this.props} className={`${this.props.className} ${DisplayClassNames.displayColumn}`} style={Object.assign({}, this.props.style)}>
+                {this.props.children}
+            </div>
+        )
+    }
+}
+
+class DisplayWarp extends BaseContext {
+    static propTypes = {
+        className: PropTypes.string,
+        style: PropTypes.object
+    }
+
+    static defaultProps = {
+        className: '',
+        style: null
+    }
+
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        return (
+            <div {...this.props} className={`${this.props.className} ${DisplayClassNames.displayWarp}`} style={Object.assign({}, this.props.style)}>
                 {this.props.children}
             </div>
         )
@@ -296,6 +322,7 @@ export {
     DisplaySpaceBetween,
     DisplaySpaceAround,
     DisplayColumn,
+    DisplayWarp,
     DisplaySpaceBetweenWarp,
     DisplaySpaceAroundWarp,
     DisplayCenterWarp,
