@@ -1,7 +1,7 @@
 /*
  * @Author: Eland.Tong
  * @Date: 2020-05-19 15:40:02
- * @LastEditTime: 2020-09-15 17:29:39
+ * @LastEditTime: 2020-09-18 17:58:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ReactElandFramework/index.js
@@ -19,6 +19,20 @@ import ResUtil from './src/utils/ResUtil'
 import Tool, { ModalTool, RouterTool } from './src/utils/Tool'
 import Banner from './src/widget/Banner'
 import Button from './src/widget/Button'
+import {
+    DisplayCenter,
+    DisplayCenterSpaceEvenlyWarp,
+    DisplayCenterStartWarp,
+    DisplayCenterWarp,
+    DisplayClassNames, DisplayColumn,
+    DisplayEnd,
+    DisplaySpaceAround,
+    DisplaySpaceAroundWarp,
+    DisplaySpaceBetween,
+    DisplaySpaceBetweenWarp,
+    DisplayStart,
+    DisplayWarp
+} from './src/widget/Display'
 import DrawerMenu from './src/widget/DrawerMenu'
 import DrawerMenuContent, { DrawerMenuBottom, DrawerMenuHeader, DrawerMenuItem } from './src/widget/DrawerMenuContent'
 import FixedModal from './src/widget/FixedModal'
@@ -67,7 +81,20 @@ export {
     DrawerMenuBottom,
     DrawerMenuItem,
     VirtualBufferList,
-    SelectPanel
+    SelectPanel,
+    DisplayCenter,
+    DisplayColumn,
+    DisplaySpaceBetween,
+    DisplaySpaceAround,
+    DisplayWarp,
+    DisplaySpaceBetweenWarp,
+    DisplaySpaceAroundWarp,
+    DisplayCenterWarp,
+    DisplayCenterStartWarp,
+    DisplayCenterSpaceEvenlyWarp,
+    DisplayStart,
+    DisplayEnd,
+    DisplayClassNames
 }
 export { Tool, RouterTool, ModalTool, Business, ResUtil, Emit, NetApi }
 export { Config }
